@@ -1,0 +1,14 @@
+(version 1)
+(rule "vibepcb rule profile: min_pad_hole_to_hole (jlcpcb-4l)"
+  (condition "A.Pad_Type == 'Through-hole' && B.Pad_Type == 'Through-hole'")
+  (constraint hole_to_hole (min 0.45mm)))
+(rule "vibepcb rule profile: min_pth_annular_ring (jlcpcb-4l)"
+  (condition "A.Pad_Type == 'Through-hole'")
+  (constraint annular_width (min 0.15mm)))
+(rule "zone pads: one thermal spoke is enough"
+  (constraint min_resolved_spokes 1))
+(rule "router clearance: float tolerance"
+  (condition "A.NetClass == 'Default' && B.NetClass == 'Default'")
+  (constraint clearance (min 0.095mm)))
+(rule "no acute track angles"
+  (constraint track_angle (min 89)))

@@ -1,0 +1,114 @@
+(footprint "resistor_res2512"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 0)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 53ff4800-38a9-c681-3aad-2afe51fbe383)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "resistor_res2512"
+    (at 0 3 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 6931ea40-0337-037f-62c3-e342374135fd)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 6d1328c0-1f95-e5c1-53c1-0bbe38e802c3)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 4bd9b6e0-5279-2541-5918-93a25fb80203)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C500724"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 11f8959a-5677-6866-4118-999a27576466)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "R101"
+    (at 0 -2.5749999999999993 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.4 0.4)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_line
+    (start -2.177064 -1.7100000000000009)
+    (end 2.177064 -1.7100000000000009)
+    (stroke
+      (width 0.12)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -2.177064 1.7100000000000009)
+    (end 2.177064 1.7100000000000009)
+    (stroke
+      (width 0.12)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_rect
+    (start -3.83 -1.93)
+    (end 3.83 1.93)
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+  )
+  (pad "1" smd rect
+    (at -2.9625 0 0)
+    (size 1.225 3.35)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 6f71803c-281e-81c4-4051-7c3c573e85c4)
+  )
+  (pad "2" smd rect
+    (at 2.9625 0 0)
+    (size 1.225 3.35)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 3502f9c0-4a6a-b7c1-5fd2-75c2753a33c3)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/res2512.step")
+)

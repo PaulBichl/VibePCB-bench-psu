@@ -1,0 +1,268 @@
+(footprint "TYPE-C_16PIN_2MD_073"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 180)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 76011660-48dd-4d01-1bb9-83a2116a45bd)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "TYPE-C_16PIN_2MD_073"
+    (at 0 3 180)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 467a4a20-61c1-6901-7d08-87e267b0593d)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 180)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 6c9dd7e0-663e-5ec1-391a-95620bf6cc03)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 180)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 16c4bcc0-75e4-51c1-028d-604270c9913d)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C2765186"
+    (at 0 0 180)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 004a928c-621d-6f94-3b7a-8e4c26ed73d4)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "MPN" "TYPE-C 16PIN 2MD(073)"
+    (at 0 0 180)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 69672ee0-38e4-4fdf-0861-70de28216e23)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "J1"
+    (at 0.03136899999999748 -4.058826750000005 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_line
+    (start 4.5720761999999695 1.2719494500000075)
+    (end 4.5720761999999695 -0.722001349999872)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 4.57207619999997 4.700974850000008)
+    (end 4.5720761999999695 3.2280034500000023)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -4.499914800000056 1.2688252500001203)
+    (end -4.499914800000056 -0.7189025500000094)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -4.499914800000055 4.84997125000011)
+    (end -4.499914800000056 3.2311276500000052)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 4.50006719999999 4.849971250000109)
+    (end -4.499914800000055 4.84997125000011)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_poly
+    (pts
+      (xy -5.174983800000067 -3.300025649999906)
+      (xy 5.174983800000064 -3.300025649999906)
+      (xy 5.174983800000064 5.114982649999931)
+      (xy -5.174983800000067 5.114982649999931)
+      (xy -5.174983800000067 -3.300025649999906)
+    )
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+    (uuid 49fa15e0-42ae-f8a1-30a7-f8de5c0115a3)
+  )
+  (pad "15" smd rect
+    (at -3.2000190000000046 -2.50002675 180)
+    (size 0.5500116 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 2000b612-6892-2a8e-0eda-f4d279b7ebce)
+  )
+  (pad "16" smd rect
+    (at -2.399918999999997 -2.50002675 180)
+    (size 0.5500116 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 6e04dde0-0ec6-5281-5078-38de50493bc3)
+  )
+  (pad "17" smd rect
+    (at -1.7499329999999986 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 79697726-0f29-697a-6843-b5e6204f2aba)
+  )
+  (pad "18" smd rect
+    (at -1.249806999999997 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 78630e00-285e-66a1-36e0-24be69e14fe3)
+  )
+  (pad "19" smd rect
+    (at -0.7499350000000007 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 4f9c29f8-27d0-f568-60c1-eb3816ab3428)
+  )
+  (pad "20" smd rect
+    (at -0.25006299999999726 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 00d1d880-7708-a501-12c0-8e7e63763e03)
+  )
+  (pad "21" smd rect
+    (at 0.25006299999999726 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 4f0c4dc0-3986-92e0-3de6-8c804aac5420)
+  )
+  (pad "22" smd rect
+    (at 0.7499350000000007 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 0734ef20-6673-7a7f-3a4d-fa2224f0913d)
+  )
+  (pad "23" smd rect
+    (at 1.2500610000000023 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 09c65080-5578-3adf-4b49-39c213f5519d)
+  )
+  (pad "24" smd rect
+    (at 1.7501869999999968 -2.50002675 180)
+    (size 0.2999994 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 000178e0-5f40-043f-4181-70621dbd1afd)
+  )
+  (pad "25" smd rect
+    (at 2.4001730000000023 -2.50002675 180)
+    (size 0.5500116 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 0092cd80-5eab-bddf-4215-b6c21d28d49d)
+  )
+  (pad "26" smd rect
+    (at 3.2000189999999975 -2.50002675 180)
+    (size 0.5500116 1.0999978)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 75071b20-15c8-8fc1-4975-fb9e574b7903)
+  )
+  (pad "13" thru_hole oval
+    (at -4.324984999999998 -1.950116750000006 0)
+    (size 1.0999978 1.8999962)
+    (drill oval 0.5999988 1.2999974)
+    (layers *.Cu *.Mask)
+    (uuid 4847a1c0-13df-25df-2089-560254f1d1e3)
+  )
+  (pad "14" thru_hole oval
+    (at 4.324984999999998 -1.9501167500000034 0)
+    (size 1.0999978 1.8999962)
+    (drill oval 0.5999988 1.2999974)
+    (layers *.Cu *.Mask)
+    (uuid 543268a0-1fc9-ecbf-149e-8f2249070b03)
+  )
+  (pad "27" thru_hole oval
+    (at -4.324984999999998 2.2500272499999956 0)
+    (size 1.1999976 1.5999968)
+    (drill oval 0.5999988 0.999998)
+    (layers *.Cu *.Mask)
+    (uuid 73c9d280-57cd-b19f-2365-35be11034623)
+  )
+  (pad "28" thru_hole oval
+    (at 4.324984999999998 2.2500272499999947 0)
+    (size 1.1999976 1.5999968)
+    (drill oval 0.5999988 0.999998)
+    (layers *.Cu *.Mask)
+    (uuid 3e7106a8-22f6-f558-7ba1-0ea81a3912a8)
+  )
+  (pad "" np_thru_hole circle
+    (at -2.8898849999999996 -1.4299247500000045 180)
+    (size 0.700024 0.700024)
+    (drill 0.700024)
+    (layers *.Cu *.Mask)
+    (uuid 42335cdc-2ecd-4317-a379-98ec4c86d1ad)
+  )
+  (pad "" np_thru_hole circle
+    (at 2.890138999999998 -1.4299247500000054 180)
+    (size 0.700024 0.700024)
+    (drill 0.700024)
+    (layers *.Cu *.Mask)
+    (uuid d1e20a00-e433-477a-8f8c-25a31b20e447)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C2765186.step"
+    (offset
+      (xyz 0.000012699999956566899 -1.5749970500000927 1.6800018)
+    )
+    (rotate
+      (xyz 0 0 0)
+    )
+  )
+)

@@ -12,6 +12,22 @@ ESP32 PWM -> RC filter -> buck feedback node = output voltage setpoint
 header J3: SSD1306 OLED (I2C)   header J4: rotary encoder module (KY-040)
 ```
 
+## Look at it (`boards/bench-psu/hardware/`)
+
+| What | File |
+|------|------|
+| Schematic | [bench-psu-schematic.pdf](boards/bench-psu/hardware/bench-psu-schematic.pdf) |
+| Top view (3D) | [bench-psu-top.png](boards/bench-psu/hardware/bench-psu-top.png) |
+| Bottom view (3D) | [bench-psu-bottom.png](boards/bench-psu/hardware/bench-psu-bottom.png) |
+| Layout | [front](boards/bench-psu/hardware/bench-psu-layout-front.svg), [back](boards/bench-psu/hardware/bench-psu-layout-back.svg), [PDF](boards/bench-psu/hardware/bench-psu-layout.pdf) |
+| KiCad project (open the `.kicad_pro`) | [kicad/](boards/bench-psu/hardware/kicad/) |
+| BOM (JLCPCB format, LCSC + MPN) | [bench-psu-bom.csv](boards/bench-psu/hardware/bench-psu-bom.csv) |
+| Gerbers + drill | [fab/bench-psu-gerbers.zip](boards/bench-psu/hardware/fab/bench-psu-gerbers.zip) |
+| Pick-and-place (CPL) | [fab/bench-psu-cpl.csv](boards/bench-psu/hardware/fab/bench-psu-cpl.csv) |
+
+![top](boards/bench-psu/hardware/bench-psu-top.png)
+![bottom](boards/bench-psu/hardware/bench-psu-bottom.png)
+
 ## Design decisions
 
 - **Plain buck, not buck-boost:** the PD input (20 V) is always above the output (max 16 V). The only
@@ -46,10 +62,10 @@ header J3: SSD1306 OLED (I2C)   header J4: rotary encoder module (KY-040)
 
 ## Status / open items
 
-- `hatch run pcb check bench-psu` passes (0 errors, warnings only); `pcb fab` not run yet.
+- `hatch run pcb check bench-psu` passes (0 errors, warnings only); `pcb fab` has been run (files above). It prints "may not have availability" for most parts, including common ones: the parts engine is not a reliable stock check, so verify stock in JLCPCB's BOM upload before ordering.
 - Buck output stability at 16 V is unverified (3 x 4.7 uF/100 V ceramic, heavily derated at 16 V, plus 100 uF
   electrolytic): simulate or test on the first prototype.
-- LCSC number of the 4-pin header (C492403) is unverified; `pcb fab` checks availability.
+- LCSC number of the 4-pin header (C492403) is unverified.
 - `check` still warns about unlabelled connector pins (J1, J2) and has ERC/DRC symbol-library and unconnected-pin
   warnings (unused ESP32 pins).
 - Placement was tuned by nudging parts (J1, Q1, INA219 positions) until the router left no sharp bends; routing

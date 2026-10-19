@@ -1,0 +1,10 @@
+(fp_lib_table
+  (version 7)
+  (lib
+    (name "tscircuit")
+    (type "KiCad")
+    (uri "${KIPRJMOD}/lib/footprints/tscircuit_builtin.pretty")
+    (options "")
+    (descr "Footprints exported by tscircuit")
+  )
+)

@@ -1,0 +1,123 @@
+(footprint "capacitor_cap1206"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 270)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 48683880-1b44-6f21-11df-5a3e3f03239d)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "capacitor_cap1206"
+    (at 0 3 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 157be240-05cb-3ca1-2112-5b823c597a63)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 65c94a40-38a5-80e1-0b81-b78221a211dd)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 3bf464a0-3762-8cdf-5546-81a21e106fdd)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C170101"
+    (at 0 0 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 2d04540e-7093-a9d2-0e2b-a7b2543c5a6e)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "C7"
+    (at -1.0868740342432751e-16 -1.7749999999999986 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.4 0.4)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_line
+    (start 1.4624999999999986 -1.2750000000000004)
+    (end -2.2250000000000014 -1.2750000000000001)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -2.2250000000000014 -1.2750000000000001)
+    (end -2.2250000000000014 1.2750000000000006)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -2.2250000000000014 1.2750000000000006)
+    (end 1.4624999999999986 1.2750000000000004)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_rect
+    (start -2.28 -1.13)
+    (end 2.28 1.13)
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+  )
+  (pad "1" smd rect
+    (at -1.4624999999999986 0 270)
+    (size 1.75 1.125)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 35355f92-21ca-6cd2-0e5f-7a12050b78ae)
+  )
+  (pad "2" smd rect
+    (at 1.4624999999999986 0 270)
+    (size 1.75 1.125)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 088b9fa0-4968-ab1f-64a3-0a2212aebf63)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/cap1206.step")
+)

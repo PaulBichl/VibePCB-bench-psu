@@ -1,0 +1,181 @@
+(footprint "PZ254V-11-05P"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 270)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 193b1240-13e8-b71f-410c-807e6e3049dd)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "PZ254V-11-05P"
+    (at 0 3 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 283d7c80-4384-9b61-5ecb-ba427a12d923)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 369c2400-0978-5aa1-23ab-6ebe50cf381d)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 7a383420-1270-da61-60e6-171e2bc2f763)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C492404"
+    (at 0 0 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 52397ec6-102e-835a-7296-857a2b017866)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "MPN" "PZ254V-11-05P"
+    (at 0 0 270)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 750fc6c0-5a6d-5a3f-29ea-7b3e069863c3)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "CLK"
+    (at -5.079999999999998 -1.3500000000000012 180)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.5 0.5)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "DT"
+    (at -2.539999999999999 -1.3500000000000012 180)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.5 0.5)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "SW"
+    (at -8.266365894244643e-17 -1.3500000000000014 180)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.5 0.5)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "VCC"
+    (at 2.539999999999999 -1.3500000000000016 180)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.5 0.5)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "GND"
+    (at 5.08 -1.3500000000000016 180)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.5 0.5)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "J4"
+    (at -1.555301434917138e-16 -2.539999999999999 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.7 0.7)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_rect
+    (start -6.85 -1.77)
+    (end 6.85 1.77)
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+  )
+  (pad "1" thru_hole rect
+    (at -5.079999999999998 3.110602869834276e-16 0)
+    (size 1.5 1.5)
+    (drill 1)
+    (layers *.Cu *.Mask)
+    (uuid 69c0ec68-34a8-60a8-0070-2b183588b6d8)
+  )
+  (pad "2" thru_hole circle
+    (at -2.539999999999999 1.555301434917138e-16 270)
+    (size 1.5 1.5)
+    (drill 1)
+    (layers *.Cu *.Mask)
+    (uuid 3939b6a4-6e52-4264-5c95-31dc277ca61c)
+  )
+  (pad "3" thru_hole circle
+    (at 0 0 270)
+    (size 1.5 1.5)
+    (drill 1)
+    (layers *.Cu *.Mask)
+    (uuid 171dd8c0-2c85-96c1-41ed-54c2575512c3)
+  )
+  (pad "4" thru_hole circle
+    (at 2.539999999999999 -1.555301434917138e-16 270)
+    (size 1.5 1.5)
+    (drill 1)
+    (layers *.Cu *.Mask)
+    (uuid 4667c994-7b80-5554-4f67-1eec1a4e932c)
+  )
+  (pad "5" thru_hole circle
+    (at 5.08 -3.110602869834277e-16 270)
+    (size 1.5 1.5)
+    (drill 1)
+    (layers *.Cu *.Mask)
+    (uuid 13288200-630e-4a81-26ba-e8fe4f7be383)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/pinrow5_p2.54.step")
+)

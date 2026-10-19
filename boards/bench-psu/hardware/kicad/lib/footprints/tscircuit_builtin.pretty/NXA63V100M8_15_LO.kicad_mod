@@ -1,0 +1,164 @@
+(footprint "NXA63V100M8_15_LO"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 0)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 4355c620-7079-8f7f-6262-a722353eddc3)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "NXA63V100M8_15_LO"
+    (at 0 3 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 49edb7a0-6534-d681-7f84-0a9e643cebbd)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 25f4b460-5318-7dbf-7fc3-b8e2529fef83)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 5d1ae1c0-163c-0fbf-766c-fec203160d43)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C3002361"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 0d015d34-5566-a4ec-4831-58f41a36a92c)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "MPN" "NXA63V100M8*15 LO"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 2792fc60-08ef-e2a1-3972-c1a269f5a0a3)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "pin1"
+    (at -1.75 -1.3999999999999986 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.52 0.52)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text user "pin2"
+    (at 1.75 -1.3999999999999986 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.52 0.52)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "C6"
+    (at 0 -3.5 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.7 0.7)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_line
+    (start -1.1750000000000007 0)
+    (end -0.5749999999999993 0)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_line
+    (start -0.875 0.3000000000000007)
+    (end -0.875 -0.3000000000000007)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_line
+    (start 0.5749999999999993 0)
+    (end 1.1749999999999998 0)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_rect
+    (start -4 -2.25)
+    (end 4 2.25)
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+  )
+  (pad "1" thru_hole circle
+    (at -1.75 0 0)
+    (size 1.6 1.6)
+    (drill 1)
+    (layers *.Cu *.Mask)
+    (uuid 7e71d400-0235-e63f-7d22-5f8203855abd)
+  )
+  (pad "2" thru_hole circle
+    (at 1.75 0 0)
+    (size 1.6 1.6)
+    (drill 1)
+    (layers *.Cu *.Mask)
+    (uuid 1893a2d4-24fc-24b4-3164-a6943dcd2874)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C3002361.step"
+    (offset
+      (xyz -0.005148500000113465 0 -0.009989999999999277)
+    )
+    (rotate
+      (xyz 0 0 0)
+    )
+  )
+)

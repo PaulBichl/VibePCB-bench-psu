@@ -1,0 +1,258 @@
+(footprint "INA219AIDCNR"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 0)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 10601ad4-784a-828c-00f5-1fec766042b4)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "INA219AIDCNR"
+    (at 0 3 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 2c222a60-79be-e780-38a4-5b6014f861c0)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 74b2b0a8-13f7-ecb8-635d-75e8254d2778)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 5b3b18ca-63b3-da4a-6c2c-9bca74a55d4a)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C87469"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 155a5ee0-000d-5f21-1575-1d222adcdb23)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "MPN" "INA219AIDCNR"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 05125094-2539-4f94-4560-4e9465874d94)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "U12"
+    (at 0 1.7175000000000011 180)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.41958333333333336 0.41958333333333336)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_line
+    (start 1.3625000000000003 1.317499999999999)
+    (end 2.0125 1.317499999999999)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 2.0125 1.317499999999999)
+    (end 2.0125 0.6675000000000004)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -1.3625000000000003 1.317499999999999)
+    (end -2.0125 1.317499999999999)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -2.0125 1.317499999999999)
+    (end -2.0125 0.6675000000000004)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 1.3625000000000003 -1.317499999999999)
+    (end 2.0125 -1.317499999999999)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 2.0125 -1.317499999999999)
+    (end 2.0125 -0.6675000000000004)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -1.3625000000000003 -1.317499999999999)
+    (end -2.0125 -1.317499999999999)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -2.0125 -1.317499999999999)
+    (end -2.0125 -0.6675000000000004)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 2.09375 0.9924999999999997)
+    (end 2.25625 1.1550000000000011)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 2.25625 1.1550000000000011)
+    (end 2.25625 0.8300000000000018)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start 2.25625 0.8300000000000018)
+    (end 2.09375 0.9924999999999997)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_rect
+    (start -2.1 -1.6500000000000001)
+    (end 2.1 1.6500000000000001)
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+  )
+  (pad "1" smd roundrect
+    (at 1.225 0.9750000000000014 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 08dfb780-4c71-ab7f-5e3c-f18208eb8e83)
+  )
+  (pad "2" smd roundrect
+    (at 1.225 0.3249999999999993 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 741da660-3690-f6a1-1ec0-6c5e7411cf5d)
+  )
+  (pad "3" smd roundrect
+    (at 1.225 -0.3249999999999993 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 1e895dd2-7364-5ad2-37c0-a82e1d1a54d2)
+  )
+  (pad "4" smd roundrect
+    (at 1.225 -0.9750000000000014 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 0bb58cb0-4925-7050-61ff-92b00d2495b0)
+  )
+  (pad "5" smd roundrect
+    (at -1.225 -0.9750000000000014 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 727f6e00-46fb-eee1-0077-4bc2460d575d)
+  )
+  (pad "6" smd roundrect
+    (at -1.225 -0.3249999999999993 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 7cf76020-3c83-fcc1-0a00-a65e5085497d)
+  )
+  (pad "7" smd roundrect
+    (at -1.225 0.3249999999999993 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 6c68112a-3ebc-f1d6-161e-0b2a6af9082a)
+  )
+  (pad "8" smd roundrect
+    (at -1.225 0.9750000000000014 180)
+    (size 1.25 0.36)
+    (layers F.Cu F.Paste F.Mask)
+    (roundrect_rratio 0.5)
+    (uuid 422926a8-68fb-dc58-1420-df5840ba1da8)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C87469.step"
+    (offset
+      (xyz -1.5553014295981178e-21 -0.000012699999956566899 0.049083)
+    )
+    (rotate
+      (xyz 0 0 -180)
+    )
+  )
+)
