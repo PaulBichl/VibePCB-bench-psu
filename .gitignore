@@ -1,0 +1,35 @@
+# A VibePCB project repo keeps only what can't be regenerated:
+#   boards/<name>/ (TSX, imports, vibepcb.toml, sim decks), boards/<name>/hardware/ (`pcb publish`: the
+#   review set for GitHub), README.md, CLAUDE.md, package.json + package-lock.json (pins the tscircuit
+#   version: routing differs between versions), pyproject.toml, tsconfig.json.
+
+# generated - `hatch run pcb all <board>` / `pcb fab` / `hatch run setup` make them again
+out/
+dist/
+.tscircuit/
+boards/**/*.circuit.json
+boards/**/build.log
+node_modules/
+.hatch/
+.venv/
+__pycache__/
+
+# third-party files fetched by scripts (their own licences)
+boards/*/sim/vendor/
+
+# the tscircuit skill lives in the VibePCB checkout
+.claude/skills/tscircuit
+
+# KiCad local state
+*.kicad_prl
+*-backups/
+~*.lck
+fp-info-cache
+_autosave-*
+
+# editors / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store

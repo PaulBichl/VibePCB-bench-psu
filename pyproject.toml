@@ -1,0 +1,26 @@
+# A VibePCB *project*: boards only. The tooling (build/fix/check/fab) lives in ../VibePCB
+# and runs from that checkout (PYTHONPATH), so improvements there apply here immediately.
+[project]
+name = "vibepcb-bench-psu"
+version = "0.0.0"
+description = "USB-C PD powered 2-channel programmable bench supply (ESP32-S3), designed with VibePCB"
+requires-python = ">=3.12"
+
+[tool.hatch.envs.default]
+detached = true
+installer = "uv"
+python = "3.12"
+dependencies = [
+    "nodeenv",
+]
+# the tooling (stdlib only) runs straight from the sibling checkout: hatch would install a
+# path dependency as a frozen copy, so fixes made in ../VibePCB would not apply here
+env-vars = { PYTHONPATH = "{root}/../VibePCB/src" }
+
+[tool.hatch.envs.default.scripts]
+setup = [
+    "python -c \"import shutil,sys; sys.exit(0 if shutil.which('node') else 1)\" || nodeenv --python-virtualenv --node=lts",
+    "npm install",
+]
+pcb = "python -c 'import sys; from vibepcb.cli import main; sys.exit(main())' {args}"
+tsci = "npx --no-install tsci {args}"

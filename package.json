@@ -1,0 +1,11 @@
+{
+  "name": "vibepcb-boards",
+  "private": true,
+  "type": "module",
+  "description": "tscircuit boards (boards/<name>/index.circuit.tsx), built via `hatch run pcb build <name>`",
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "bun": "^1.4.2",
+    "tscircuit": "^0.0.2786"
+  }
+}

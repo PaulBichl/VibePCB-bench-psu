@@ -1,0 +1,8 @@
+[rules]
+profiles = ["jlcpcb-4l", "ipc-class2"]
+
+
+# ESP32-S3-MINI-1 antenna end at the board edge: no GND pour under it. KiCad mm = (100 + x, 100 - y).
+[keepout.antenna]
+area = [118.5, 62.0, 135.5, 68.5]
+block = ["pour"]
