@@ -248,14 +248,14 @@
     (size 0.700024 0.700024)
     (drill 0.700024)
     (layers *.Cu *.Mask)
-    (uuid 42335cdc-2ecd-4317-a379-98ec4c86d1ad)
+    (uuid f071852a-8891-4fca-8417-a347e4086fef)
   )
   (pad "" np_thru_hole circle
     (at 2.890138999999998 -1.4299247500000054 180)
     (size 0.700024 0.700024)
     (drill 0.700024)
     (layers *.Cu *.Mask)
-    (uuid d1e20a00-e433-477a-8f8c-25a31b20e447)
+    (uuid 27b70b26-d0f0-4255-bac8-a88d68f20caa)
   )
   (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C2765186.step"
     (offset

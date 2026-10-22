@@ -119,25 +119,25 @@
     (at -3 -1.875 0)
     (size 1 0.75)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 6d40b52e-04d0-b72e-639f-46d233f0bb2e)
+    (uuid 2e2aa5d8-6965-5c28-00f5-5e28677a9fd8)
   )
   (pad "1" smd rect
     (at 3 -1.875 0)
     (size 1 0.75)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 793875c0-715f-cc3f-5bf8-0e3e4690503d)
+    (uuid 4da0c6a0-3839-089f-22d1-4a9e0d698c9d)
   )
   (pad "2" smd rect
     (at -3 1.875 0)
     (size 1 0.75)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 176a7760-2cd2-3561-4239-f36257a1b163)
+    (uuid 50913b00-65f8-f901-7b60-b7026f378afd)
   )
   (pad "2" smd rect
     (at 3 1.875 0)
     (size 1 0.75)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 4d66b370-5031-4a70-1236-b7b0749eb9d0)
+    (uuid 4e0ab34a-145d-4ed6-76c5-50f626d2acea)
   )
   (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C318884.step"
     (offset

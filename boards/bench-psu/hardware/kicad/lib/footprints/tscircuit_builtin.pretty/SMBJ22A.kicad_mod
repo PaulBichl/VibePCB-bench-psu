@@ -1,10 +1,10 @@
-(footprint "SWPA6045S100MT"
+(footprint "SMBJ22A"
   (layer F.Cu)
   (property "Reference" "REF**"
     (at 0 -3 0)
     (layer F.SilkS)
     (hide yes)
-    (uuid 4e04c120-20e0-f7c1-0c42-d19e39669afd)
+    (uuid 1209e9e0-3f2d-b33f-6c51-7c9e668aba03)
     (effects
       (font
         (size 1.27 1.27)
@@ -12,11 +12,11 @@
       )
     )
   )
-  (property "Value" "SWPA6045S100MT"
+  (property "Value" "SMBJ22A"
     (at 0 3 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 2ae705e0-462e-24c1-6175-43a27cbc6283)
+    (uuid 66cbe920-4b84-ca3f-303d-ab5e14f68c7d)
     (effects
       (font
         (size 1.27 1.27)
@@ -28,7 +28,7 @@
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 6b65d2e0-3e42-0981-111e-40221c05893d)
+    (uuid 0b5727e0-21cc-a17f-4ef0-6ade7c14343d)
     (effects
       (font
         (size 1.27 1.27)
@@ -40,7 +40,7 @@
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 1e170a80-6e92-0401-04c4-ed7e781bdefd)
+    (uuid 00cdd380-7424-c4ff-1884-49825ad2a7fd)
     (effects
       (font
         (size 1.27 1.27)
@@ -48,11 +48,11 @@
       )
     )
   )
-  (property "Supplier Part Number" "C79272"
+  (property "Supplier Part Number" "C151920"
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 0d165b70-6f7e-5d90-2e19-a050344e61d0)
+    (uuid 286d5c80-39fa-a5a0-639d-584001355620)
     (effects
       (font
         (size 1.27 1.27)
@@ -60,11 +60,11 @@
       )
     )
   )
-  (property "MPN" "SWPA6045S100MT"
+  (property "MPN" "SMBJ22A"
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 1e775aa0-120b-8461-428e-636273114263)
+    (uuid 4a36aba0-19b3-cc9f-16cf-12624751f163)
     (effects
       (font
         (size 1.27 1.27)
@@ -72,8 +72,8 @@
       )
     )
   )
-  (fp_text reference "L1"
-    (at 0 -3.3099999999999987 0)
+  (fp_text reference "D1"
+    (at 0 -1.8962000000000003 0)
     (layer F.SilkS)
     (effects
       (font
@@ -83,8 +83,8 @@
     )
   )
   (fp_rect
-    (start -4.09 -3.25)
-    (end 4.09 3.25)
+    (start -3.6344 -2.05)
+    (end 3.6344 2.05)
     (layer F.CrtYd)
     (stroke
       (width 0.05)
@@ -93,23 +93,23 @@
     (fill no)
   )
   (pad "1" smd rect
-    (at -2.6030000000000015 0 0)
-    (size 2.474 5.02)
+    (at -2.3606999999999996 0 0)
+    (size 2.0475 2.1924)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 4a9fa808-3734-b548-23c9-c288105ecfc8)
+    (uuid 7dd5e628-6ebf-2718-5b54-345847e94198)
   )
   (pad "2" smd rect
-    (at 2.6030000000000015 0 0)
-    (size 2.474 5.02)
+    (at 2.3606999999999996 0 0)
+    (size 2.0475 2.1924)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 502b0540-5de0-b001-0bec-65424607e57d)
+    (uuid 4de57f80-040e-cb3f-5603-15fe58089f43)
   )
-  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C79272.step"
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C151920.step"
     (offset
-      (xyz -0.000025399999913133797 0.000025400000026820635 0.01)
+      (xyz 0 0 0.1)
     )
     (rotate
-      (xyz 0 0 -90)
+      (xyz 0 0 0)
     )
   )
 )

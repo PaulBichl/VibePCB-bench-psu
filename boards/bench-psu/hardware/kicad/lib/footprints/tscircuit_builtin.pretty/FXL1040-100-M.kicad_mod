@@ -1,0 +1,115 @@
+(footprint "FXL1040-100-M"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 0)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 73aa3498-03ab-2e08-7b00-90a80daa0cb8)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "FXL1040-100-M"
+    (at 0 3 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 4a2dbacc-6835-8814-1a98-caf43303f22c)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 0f579ec4-67fd-c3dc-20ac-d98456a8891c)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 7f6617b6-7821-26ca-6fa8-654a672fa3ca)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C475915"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 0c5a47e0-21c2-05e1-3729-c3e24c9181e3)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "MPN" "FXL1040-100-M"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 6ab4cfa8-7524-3158-54fd-325834d63358)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "L11"
+    (at 0 -2.55 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.6000000000000001 0.6000000000000001)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_rect
+    (start -6.75 -5.25)
+    (end 6.75 5.25)
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+  )
+  (pad "1" smd rect
+    (at -5 0 0)
+    (size 3 3.5)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 4a7ef560-6e01-9f1f-6e7b-b7224af90d63)
+  )
+  (pad "2" smd rect
+    (at 5 0 0)
+    (size 3 3.5)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 2c9d422a-5f4e-e48a-6dff-79163b4dd6b6)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C475915.step"
+    (offset
+      (xyz 0.000012699999956566899 0 0.01)
+    )
+    (rotate
+      (xyz 0 0 0)
+    )
+  )
+)

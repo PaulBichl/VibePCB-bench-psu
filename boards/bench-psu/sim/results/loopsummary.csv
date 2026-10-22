@@ -1,0 +1,11 @@
+vout,fb_network,crossover_khz,phase_margin_deg,min_phase_below_fc_deg,undershoot_mv,overshoot_mv,tail_after_390us_mv,stable
+1.6,divider only,125.2,-8.0,-3.4,,,,no
+1.6,with lag network,14.0,74.8,37.0,241.9,250.4,8.6,yes
+3.3,divider only,143.0,-21.8,-20.7,,,,no
+3.3,with lag network,17.5,71.8,36.0,261.2,269.6,8.5,yes
+5,divider only,160.3,-34.5,-33.4,,,,no
+5,with lag network,21.7,69.8,35.4,274.9,283.3,8.5,yes
+12,divider only,209.9,-67.1,-61.2,,,,no
+12,with lag network,40.0,59.8,34.5,324.1,332.5,8.4,yes
+16,divider only,232.8,-80.1,-75.6,,,,no
+16,with lag network,52.5,52.1,34.5,363.2,371.6,8.4,yes

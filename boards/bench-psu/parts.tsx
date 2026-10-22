@@ -4,8 +4,8 @@
 // 0603 1 % thick film unless noted
 const RES: Record<string, string> = {
   "0": "C21189", "1": "C174300", "10": "C22859", "49.9": "C23185", "100": "C22775", "330": "C23138", "680": "C23228",
-  "1k": "C21190", "2.4k": "C22940", "3.3k": "C22978", "4.3k": "C23159", "4.7k": "C23162", "9.1k": "C23260",
-  "10k": "C25804", "12k": "C22790", "12.4k": "C2930060", "20k": "C4184", "27k": "C22967", "49.9k": "C23184",
+  "1k": "C21190", "2.4k": "C22940", "3.3k": "C22978", "4.3k": "C23159", "4.7k": "C23162", "6.8k": "C23212", "9.1k": "C23260",
+  "10k": "C25804", "12k": "C22790", "12.4k": "C2930060", "20k": "C4184", "24k": "C23352", "47k": "C25819", "200k": "C25811", "27k": "C22967", "49.9k": "C23184",
   "75k": "C23242", "100k": "C25803", "120k": "C25808", "150k": "C22807", "390k": "C23150", "1M": "C22935",
 }
 // 0603 0.1 % 25 ppm thin film (gain-setting networks)
@@ -33,6 +33,8 @@ const CAP: Record<string, [string, string]> = {
   "4.7uF": ["0603", "C19666"],
   "4.7uF 100V": ["1210", "C337978"],
   "10uF": ["0805", "C15850"],
+  "10uF 50V": ["1206", "C13585"],
+  "22uF 25V": ["1206", "C12891"],
   "22uF": ["0805", "C45783"],
 }
 
@@ -49,12 +51,13 @@ export const C = ({ v, ...p }: P & { v: string }) => {
   const [fp, lcsc] = CAP[v]
   return <capacitor capacitance={v.split(" ")[0]} footprint={fp} supplierPartNumbers={{ jlcpcb: [lcsc] }} {...p} />
 }
-/** 15 mOhm / 100 mOhm current-sense resistors, 2512 */
-export const RSENSE = ({ v, ...p }: P & { v: "15m" | "100m" }) => (
+/** current-sense resistors, 2512, 1 % */
+const SHUNT: Record<string, string> = { "15m": "C154674", "20m": "C105360", "100m": "C500724" }
+export const RSENSE = ({ v, ...p }: P & { v: "15m" | "20m" | "100m" }) => (
   <resistor
     resistance={v}
     footprint="2512"
-    supplierPartNumbers={{ jlcpcb: [v === "15m" ? "C154674" : "C500724"] }}
+    supplierPartNumbers={{ jlcpcb: [SHUNT[v]] }}
     {...p}
   />
 )

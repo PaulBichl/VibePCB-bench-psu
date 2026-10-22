@@ -4,8 +4,8 @@
     "generator": "circuit-json-to-kicad",
     "generator_version": "0.0.1",
     "project_name": "bench-psu",
-    "created": "2026-10-19T19:43:36.025Z",
-    "modified": "2026-10-19T19:43:36.025Z"
+    "created": "2026-10-21T12:09:58.284Z",
+    "modified": "2026-10-21T12:09:58.284Z"
   },
   "meta": {
     "version": 1
@@ -81,7 +81,7 @@
   },
   "sheets": [
     [
-      "f5307154-c509-4587-b4db-390b67308afc",
+      "47e15194-9095-4210-ba77-87c0d51d46cb",
       "Root"
     ]
   ]

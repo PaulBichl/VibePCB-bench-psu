@@ -48,7 +48,7 @@
       )
     )
   )
-  (property "Supplier Part Number" "C500724"
+  (property "Supplier Part Number" "C105360"
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
@@ -61,7 +61,7 @@
     )
   )
   (fp_text reference "R101"
-    (at 0 -2.5749999999999993 0)
+    (at 0 -2.575 0)
     (layer F.SilkS)
     (effects
       (font
@@ -102,13 +102,13 @@
     (at -2.9625 0 0)
     (size 1.225 3.35)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 6f71803c-281e-81c4-4051-7c3c573e85c4)
+    (uuid 6bff5bbc-038f-5dbc-64e0-a04432af61bc)
   )
   (pad "2" smd rect
     (at 2.9625 0 0)
     (size 1.225 3.35)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 3502f9c0-4a6a-b7c1-5fd2-75c2753a33c3)
+    (uuid 7ec956c0-6961-98bf-53f9-dabe3e921cbd)
   )
   (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/res2512.step")
 )

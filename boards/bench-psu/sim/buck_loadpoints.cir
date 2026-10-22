@@ -1,0 +1,115 @@
+* bench-psu: one output channel (LMR33630A DDA, 400 kHz) at load points - efficiency, losses, ripple, Tj
+* run: ngspice -b boards/bench-psu/sim/buck_loadpoints.cir      (~1-2 min, 20 load points)
+*
+* Switching-level power stage, steady state. What is modelled and from where:
+*  - LMR33630 DDA (datasheet SNVSAN3F): Rds_on HS 95 mOhm / LS 66 mOhm typ at 25 C, x1.3 for a hot die
+*    (124 / 86 mOhm); diode emulation (LS FET off below 0 A, body diode) as in the part's light-load mode,
+*    PFM burst mode not modelled (real light-load efficiency is a bit better than shown).
+*    Losses not in the switch model, added in .control: switching 0.5*Vin*I*(tr+tf)*fsw with tr+tf = 8 ns,
+*    dead time 2 x 20 ns x 0.7 V body diode, gate drive / VCC 2.5 mA from VIN, Iq negligible (24 uA).
+*    tr/tf, dead time and gate current are assumptions (not in the datasheet).
+*  - FXL1040-100-M: 10 uH, DCR 30 mOhm (+20 % hot). Core loss not modelled.
+*  - Output 4 x 22 uF 25 V X5R 1206 (CL31A226KAHNNNE) at DC bias, estimated from the DC-bias curve:
+*    1.6 V 70 uF, 3.3 V 56 uF, 5 V 45 uF, 12 V 24 uF, 16 V 18 uF total; ESR 3 mOhm each.
+*  - Input 2 x 10 uF 50 V X5R 1206 at 20 V ~ 2 x 4.5 uF; source 20 V behind 30 mOhm / 50 nH (VIN plane, bulk cap).
+*  - 20 mOhm shunt, regulation point at the terminal (after the shunt), as on the board.
+*  - Control: ideal duty controller (feed-forward + integrator) instead of the part's peak-current loop:
+*    plus an inductor-current damping term; steady-state results do not depend on it. Loop dynamics: buck_loop.cir.
+* Thermal: Tj = 25 C + P_ic * RthJA, RthJA 43 C/W (JEDEC 4-layer with thermal vias, datasheet table)
+*          and 75 C/W (estimate: exposed pad on top copper only, no thermal vias - the current board state).
+
+.param vin=20 vout=5 iout=1
+.param fsw=400k tper={1/fsw}
+.param cout={vout < 2 ? 70u : vout < 4 ? 56u : vout < 6 ? 45u : vout < 13 ? 24u : 18u}
+.param rload={vout/iout}
+.param rhs=124m rls=86m dcr=36m rsh=20m
+
+* --- input: source, VIN plane, 2 x 10 uF at the converter ---
+Vin src 0 {vin}
+Rsrc src n1 30m
+Lsrc n1 vin_ic 50n
+Cin vin_ic cin_e 9u
+Rcin cin_e 0 1.5m
+
+* --- power switches (ammeters for loss bookkeeping) ---
+Vmh vin_ic hs_in 0
+S1 hs_in sw g 0 swh
+Vml ls_in 0 0
+S2 sw ls_in gl 0 swl
+Dbody 0 sw dbody
+.model swh sw(vt=0.5 vh=0 ron={rhs} roff=1e7)
+.model swl sw(vt=0.5 vh=0 ron={rls} roff=1e7)
+.model dbody d(is=1e-9 n=1.5 rs=20m cjo=100p)
+* switch-node capacitance (Coss HS + LS, estimate): rings when both FETs are off in DCM
+Csw sw 0 300p
+
+* --- PWM: sawtooth carrier, duty from the controller; LS on in the off time while iL > 0 (diode emulation) ---
+Vsaw saw 0 pulse(0 1 0 {tper-2n} 1n 0 {tper})
+Bg g 0 v = v(d) > v(saw) ? 1 : 0
+Bgl gl 0 v = (v(d) <= v(saw)) && (i(ViL) > 0.02) ? 1 : 0
+
+* --- inductor, output caps, shunt, load ---
+ViL sw lx 0
+L1 lx lr 10u ic={iout}
+Rdcr lr outb {dcr}
+Cout outb co_e {cout} ic={vout + iout*rsh}
+Rcout co_e 0 0.75m
+Rsh outb out {rsh}
+Rload out 0 {rload}
+
+* --- duty controller: feed-forward + integrator on the terminal voltage + current damping ---
+Bdff dff 0 v = (vout + iout*(rsh + dcr + 0.1)) / vin
+Gint 0 integ value = {2*3.1416*1.5k/vin} * (vout - v(out))
+Cint integ 0 1 ic=0
+Rint integ 0 1e9
+* inductor-current damping term (what the real part's current loop does): ~1 ohm virtual series resistance
+Bil ilraw 0 v = i(ViL)
+Ril ilraw ilf 1k
+Cil ilf 0 4n
+Bd d 0 v = min(0.97, max(0.0, v(dff) + v(integ) - (1 / vin) * (v(ilf) - iout)))
+
+.options method=gear reltol=1e-3 abstol=1e-9 vntol=1e-5
+.control
+  set noaskquit
+  echo "Vout_set  Iout | Vout   eff_tot  P_loss  P_ic   P_L    P_sh | iL_pk  iL_val | ripple_out | Tj@43  Tj@75"
+  echo "   V       A   |  V       %       W       W      W      W  |   A      A    |   mVpp     |  C      C"
+  foreach vo 1.6 3.3 5 12 16
+    foreach io 0.3 1 2 3
+      alterparam vout = $vo
+      alterparam iout = $io
+      reset
+      tran 5n 1.6m 1.2m 5n uic
+      let t1 = 1.2m + 2.5u
+      let t2 = 1.6m - 0u
+      let pin_v = v(src) * (-i(vin))
+      let pout_v = v(out) * v(out) / ($vo / $io)
+      let phs_v = (v(hs_in) - v(sw)) * i(vmh)
+      let pls_v = v(sw) * i(vml)
+      let pl_v = i(vil) * i(vil) * 36m
+      let psh_v = (v(outb) - v(out)) * (v(outb) - v(out)) / 20m
+      meas tran pin avg pin_v from=1.2025m to=1.6m
+      meas tran pout avg pout_v from=1.2025m to=1.6m
+      meas tran phs avg phs_v from=1.2025m to=1.6m
+      meas tran pls avg pls_v from=1.2025m to=1.6m
+      meas tran pl avg pl_v from=1.2025m to=1.6m
+      meas tran psh avg psh_v from=1.2025m to=1.6m
+      meas tran voavg avg v(out) from=1.2025m to=1.6m
+      meas tran ilpk max i(vil) from=1.4m to=1.6m
+      meas tran ilval min i(vil) from=1.4m to=1.6m
+      meas tran vpp pp v(out) from=1.575m to=1.6m
+      * losses outside the switch model (see header)
+      let iavg = $io
+      let psw = 0.5 * 20 * iavg * 8n * 400k + 2 * 20n * 0.7 * iavg * 400k + 20 * 2.5m
+      let pic = phs + pls + psw
+      let ptot = pin - pout + psw
+      let eff = 100 * pout / (pin + psw)
+      let tj43 = 25 + pic * 43
+      let tj75 = 25 + pic * 75
+      let vpp_mv = vpp * 1000
+      echo "$vo  $io | $&voavg $&eff $&ptot $&pic $&pl $&psh | $&ilpk $&ilval | $&vpp_mv | $&tj43 $&tj75"
+      destroy all
+    end
+  end
+  echo "limits: HS current limit ISC 3.85 A min / 4.5 typ (peak); LS valley limit ILIMIT 2.9 A min / 3.5 typ (valley)"
+.endc
+.end

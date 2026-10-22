@@ -1,22 +1,39 @@
-// VibePCB bench-psu: USB-C PD powered 2-channel programmable bench supply, 1.6..16 V / 3 A per channel.
+// VibePCB bench-psu: USB-C PD powered 2-channel programmable bench supply, 1.6..16.5 V / 3 A per channel.
 // 90 x 76 mm, 4 layers. Top edge (+y): USB-C. Bottom edge (-y): 4-pole output terminal (CH1+ CH1- CH2+ CH2-).
 // Right edge (x = +45): 4-pin header for a 0.96" SSD1306 I2C OLED module, 5-pin header for a KY-040 style encoder module.
 // Build with: hatch run pcb all bench-psu
 //
 // Architecture (design decisions)
+// - Parts: all in JLCPCB stock (checked 2026-10-21); basic-library passives wherever a value exists; no through-hole
+//   parts except the screw terminal and the module headers.
 // - Input: USB-C PD sink (STUSB4500, NVM requests 20 V; written once by the ESP32 over I2C, see README) -> P-FET -> VIN.
-// - Converter: the input is never below the output (PD fixes 20 V, output <= 16 V), so a plain step-down is enough
-//   (no buck-boost: it would need a part JLCPCB does not stock). One LMR51635 buck (1.1 MHz, 3.5 A) per channel.
-//   Output voltage is set by the ESP32: a 14-bit PWM, RC filtered (2 x 10k/1uF), injects current into the feedback node:
-//   Vout = 0.8 V * (1 + Rt/Rb) - Rt/Ri * (Vpwm - 0.8 V) -> 18.1 V at 0 V PWM, 1.6 V at 3.3 V PWM, ~1 mV per PWM step.
-//   The firmware closes the loop with the INA219 bus-voltage reading and caps the setpoint at 16 V.
-// - Enable: the ESP32 drives the buck EN pin (100k pull-down: outputs off at reset).
-// - Measure: INA219 per channel (0x40 / 0x41) on a 0.1 R high-side shunt (3.2 A full scale, +-320 mV range);
-//   the firmware turns the channel off above the set current limit (the buck's own limit is 3.5 A peak).
-// - Control: ESP32-S3-MINI-1 (native USB for flashing/CDC, Bluetooth LE for load curves), 3.3 V from a 5 V buck + LDO.
+//   The STUSB4500 pulls the gate through 47k against the 100k gate-source resistor: Vgs = -0.68 * VBUS (-13.6 V at 20 V,
+//   -24 V at the SMBJ22A clamp voltage), inside the AO4407A's +-25 V; 100 nF gate-source slows the turn-on (~3 ms).
+//   SMBJ22A (35.5 V clamp) stays below the LMR33630's 38 V absolute maximum.
+// - Converter: the input is never below the output (PD fixes 20 V, output <= 16.5 V), so a step-down is enough.
+//   One LMR33630A (synchronous, 3 A, 400 kHz, HSOIC-8 with exposed pad) per channel; 10 uH / 7.8 A FXL1040 inductor
+//   (saturation above the converter's current limit). The 400 kHz part reaches 1.6 V from 20 V (68 ns min on-time).
+// - Voltage set, fail-safe: Vout = 1 V * (1 + 120k/200k) + 120k * Ic, Ic sunk from the FB node by an op-amp + NPN
+//   current sink, Ic = Vc / 2.4k with Vc = PWM (14-bit, RC filtered) * 10k/110k. PWM 0 V, pin floating or ESP32 in reset
+//   -> 1.6 V; PWM 3.3 V -> 16.6 V, which is also the hardware maximum (Vc cannot exceed the 3.3 V rail).
+//   ~0.9 mV per PWM step; the firmware closes the loop on the INA226 bus voltage.
+// - Loop: that FB network has a feedback gain of 0.625 at every output voltage, while the LMR33630's internal
+//   compensation expects 1 V / Vout: without help the loop crosses above fsw/2 at 12-16 V (simulated phase margin
+//   -8..-80 deg). 6.8k + 220 nF from FB to GND (lag network, doublet 9 Hz / 106 Hz) cut the gain to 0.054 above
+//   ~100 Hz: phase margin 52..75 deg, crossover 14..53 kHz over 1.6..16 V, and the phase stays above -146 deg below
+//   crossover (10 nF made the loop conditionally stable around 1 kHz). Cost: an 8 mV tail after a 2 A step that
+//   decays with ~18 ms (boards/bench-psu/sim/buck_loop.cir; buck_loadpoints.cir: efficiency).
+// - Feedback is taken after the 20 mOhm shunt (at the terminal), so the shunt drop is regulated out.
+// - Measure / protect: INA226 per channel (0x40 / 0x41), 20 mOhm shunt (4.096 A full scale, 125 uA LSB, 0.18 W at 3 A).
+//   Its ALERT (shunt over-limit, latched) pulls the converter's EN low directly: hardware current trip within one
+//   conversion, independent of the firmware. The ESP32 drives EN through 10k (no contention), 100k pull-down: off at reset.
+// - No output electrolytic: the output capacitance (4 x 22 uF ceramic) is what a short sees before the trip.
+// - Control: ESP32-S3-MINI-1 (native USB for flashing/CDC, Bluetooth LE for load curves), 3.3 V from a 5 V
+//   LMR33630 (same part as the channels) + LDO.
 import {
-  AO4407A, AP2112K_3_3TRG1, DG301_5_0_04P_14_1000A_H_, ESP32_S3_MINI_1_N8, INA219AIDCNR, LMR51635XDDCR,
-  NXA63V100M8_15_LO as ELCAP, SMBJ24A, STUSB4500QTR, SWPA6045S100MT, TS_1187A_B_A_B, TYPE_C_16PIN_2MD_073_, USBLC6_2SC6,
+  AO4407A, AP2112K_3_3TRG1, DG301_5_0_04P_14_1000A_H_, ESP32_S3_MINI_1_N8, FXL1040_100_M, INA226AIDGSR, LMR33630ADDAR,
+  MMBT3904_RANGE_100_300_ as NPN, RVT1V101M0607_100UF_35V as ELCAP, SMBJ22A, STUSB4500QTR, SWPA4030S150MT, TLV9062IDR,
+  TS_1187A_B_A_B, TYPE_C_16PIN_2MD_073_, USBLC6_2SC6,
 } from "./imports"
 import { C, R, RSENSE, TRACE_MAX, net } from "./parts"
 
@@ -26,66 +43,77 @@ const MID = "0.4mm" // 5 V, 3.3 V, switch-node-adjacent
 // USB / supply blocks are placed in the coordinates of a 90 x 76 board: (x, y) relative to the board centre
 const at = (x: number, y: number) => ({ pcbX: x, pcbY: y })
 
-/** One output channel n (1 or 2) at (ox, oy): buck + feedback/PWM injection + shunt + INA219. */
+/** One output channel n (1 or 2) at (ox, oy): buck + FB current sink + shunt + INA226. Op-amp half `opa` of U6. */
 const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
   const p = (x: number, y: number) => at(ox + x, oy + y)
   const id = (s: string, i: number) => `${s}${n}${String(i).padStart(2, "0")}`
-  const U = `U${n}1`
-  const L = `L${n}1`
-  const INA = `U${n}2`
-  const SH = id("R", 1)
-  const SW = `SW${n}`
-  const OUTB = `OUT${n}_B`
-  const OUT = `OUT${n}`
-  const FB = `FB${n}`
+  const c = (i: number) => `.${id("C", i)}`
+  const r = (i: number) => `.${id("R", i)}`
+  const U = `.U${n}1`
+  const L = `.L${n}1`
+  const INA = `.U${n}2`
+  const Q = `.Q${n}1`
+  const OPA = n === 1 ? { out: ".U6 > .OUTA", neg: ".U6 > .INA_NEG", pos: ".U6 > .INA_POS" }
+    : { out: ".U6 > .OUTB", neg: ".U6 > .INB_NEG", pos: ".U6 > .INB_POS" }
   return (
     <>
-      <LMR51635XDDCR name={U} {...p(0, 0)} />
-      <SWPA6045S100MT name={L} {...p(9, 0)} />
-      <C name={id("C", 1)} {...p(-5.5, 0)} pcbRotation={90} v="2.2uF 100V" />
-      <C name={id("C", 2)} {...p(-5.5, -5.5)} pcbRotation={90} v="2.2uF 100V" />
-      <C name={id("C", 3)} {...p(-3, 3.5)} v="100nF 100V" />
-      <C name={id("C", 4)} {...p(3, 3.5)} v="100nF" />
-      <C name={id("C", 5)} {...p(15, 0)} pcbRotation={90} v="4.7uF 100V" />
-      <C name={id("C", 6)} {...p(18.5, 0)} pcbRotation={90} v="4.7uF 100V" />
-      <C name={id("C", 7)} {...p(22, 0)} pcbRotation={90} v="4.7uF 100V" />
-      <ELCAP name={id("C", 9)} {...p(29, 0)} />
-      <RSENSE name={SH} {...p(37, 0)} v="100m" />
-      <INA219AIDCNR name={INA} {...p(37, -7.5)} />
-      <C name={id("C", 8)} {...p(41, -6.5)} v="100nF" />
-      {/* Vout = 0.8 V * (1 + 100k / 6k) - 5 * (Vpwm - 0.8 V): 18.1 V .. 1.6 V */}
-      <R name={id("R", 2)} {...p(2, -6)} v="100k" />
-      <R name={id("R", 3)} {...p(5, -6)} v="12k" />
-      <R name={id("R", 4)} {...p(8, -6)} v="12k" />
-      <R name={id("R", 5)} {...p(11, -6)} v="20k" />
-      <R name={id("R", 6)} {...p(14, -6)} v="10k" />
-      <R name={id("R", 7)} {...p(17, -6)} v="10k" />
-      <C name={id("C", 10)} {...p(14, -8.5)} v="1uF" />
-      <C name={id("C", 11)} {...p(17, -8.5)} v="1uF" />
-      <R name={id("R", 8)} {...p(-1, -9.5)} v="100k" />
+      <LMR33630ADDAR name={`U${n}1`} {...p(0, 0)} />
+      <C name={id("C", 1)} {...p(-5.5, 1.5)} pcbRotation={90} v="10uF 50V" />
+      <C name={id("C", 2)} {...p(-7.8, 1.5)} pcbRotation={90} v="10uF 50V" />
+      <C name={id("C", 3)} {...p(-5, -2.5)} pcbRotation={90} v="100nF" />
+      <C name={id("C", 4)} {...p(3.5, 4)} v="100nF" />
+      <C name={id("C", 5)} {...p(4.4, -2.5)} pcbRotation={90} v="1uF" />
+      <FXL1040_100_M name={`L${n}1`} {...p(12, 0)} />
+      <C name={id("C", 6)} {...p(20.5, 0)} pcbRotation={90} v="22uF 25V" />
+      <C name={id("C", 7)} {...p(23, 0)} pcbRotation={90} v="22uF 25V" />
+      <C name={id("C", 8)} {...p(25.5, 0)} pcbRotation={90} v="22uF 25V" />
+      <C name={id("C", 9)} {...p(28, 0)} pcbRotation={90} v="22uF 25V" />
+      <RSENSE name={id("R", 1)} {...p(34, 0)} v="20m" />
+      <INA226AIDGSR name={`U${n}2`} {...p(34, -6.5)} />
+      <C name={id("C", 12)} {...p(38.4, -6.5)} pcbRotation={90} v="100nF" />
+      {/* Vout = 1 V * (1 + 120k / 200k) + 120k * Vc / 2.4k, Vc = Vpwm * 10k / 110k: 1.6 V .. 16.6 V */}
+      <R name={id("R", 2)} {...p(-0.5, -5)} v="120k" />
+      <R name={id("R", 3)} {...p(2.7, -5)} v="200k" />
+      {/* lag network: loop gain of a ~14 V design above 2 kHz instead of a 1.6 V one (sim/buck_loop.cir) */}
+      <R name={id("R", 11)} {...p(-0.5, -7.5)} v="6.8k" />
+      <C name={id("C", 13)} {...p(2.7, -7.5)} v="220nF" />
+      <NPN name={`Q${n}1`} {...p(6.5, -7.5)} />
+      <R name={id("R", 4)} {...p(10.3, -7.5)} v="2.4k" />
+      <R name={id("R", 5)} {...p(6.5, -10)} v="1k" />
+      <R name={id("R", 6)} {...p(13.3, -7.5)} v="10k" />
+      <C name={id("C", 10)} {...p(16.3, -7.5)} v="1uF" />
+      <R name={id("R", 7)} {...p(19.3, -7.5)} v="100k" />
+      <R name={id("R", 8)} {...p(22.3, -7.5)} v="10k" />
+      <C name={id("C", 11)} {...p(25.3, -7.5)} v="1uF" />
+      {/* EN: ESP32 through 10k, 100k pull-down, INA226 ALERT (open drain) overrides */}
+      <R name={id("R", 9)} {...p(-5, -6)} v="100k" />
+      <R name={id("R", 10)} {...p(-8, -6)} v="10k" />
 
-      {net("VIN", [`.${U} > .VIN`, `.${id("C", 1)} > .pin1`, `.${id("C", 2)} > .pin1`, `.${id("C", 3)} > .pin1`], { thickness: PWR })}
-      {net("GND", [`.${U} > .GND`, `.${id("C", 1)} > .pin2`, `.${id("C", 2)} > .pin2`, `.${id("C", 3)} > .pin2`,
-        `.${id("C", 5)} > .pin2`, `.${id("C", 6)} > .pin2`, `.${id("C", 7)} > .pin2`, `.${id("C", 9)} > .pin2`,
-        `.${id("R", 3)} > .pin2`, `.${id("R", 4)} > .pin2`, `.${id("C", 10)} > .pin2`, `.${id("C", 11)} > .pin2`,
-        `.${id("R", 8)} > .pin2`, `.${INA} > .GND`, `.${id("C", 8)} > .pin2`])}
-      {net(SW, [`.${U} > .SW`, `.${L} > .pin1`, `.${id("C", 4)} > .pin2`], { thickness: MID })}
-      <trace from={`.${U} > .CB`} to={`.${id("C", 4)} > .pin1`} maxLength={TRACE_MAX} />
-      {net(OUTB, [`.${L} > .pin2`, `.${id("C", 5)} > .pin1`, `.${id("C", 6)} > .pin1`, `.${id("C", 7)} > .pin1`,
-        `.${id("C", 9)} > .pin1`, `.${SH} > .pin1`, `.${INA} > .IN_POS`, `.${id("R", 2)} > .pin1`], { thickness: PWR })}
-      {net(OUT, [`.${SH} > .pin2`, `.${INA} > .IN_NEG`], { thickness: PWR })}
-      {net(FB, [`.${U} > .FB`, `.${id("R", 2)} > .pin2`, `.${id("R", 3)} > .pin1`, `.${id("R", 4)} > .pin1`, `.${id("R", 5)} > .pin1`])}
-      <trace from={`.${id("R", 5)} > .pin2`} to={`.${id("R", 6)} > .pin1`} maxLength={TRACE_MAX} />
-      <trace from={`.${id("R", 6)} > .pin2`} to={`.${id("R", 7)} > .pin1`} maxLength={TRACE_MAX} />
-      <trace from={`.${id("R", 5)} > .pin2`} to={`.${id("C", 10)} > .pin1`} maxLength={TRACE_MAX} />
-      <trace from={`.${id("R", 7)} > .pin2`} to={`.${id("C", 11)} > .pin1`} maxLength={TRACE_MAX} />
-      {net(`PWM${n}`, [`.${id("R", 6)} > .pin1`])}
-      {net(`EN${n}`, [`.${U} > .EN`, `.${id("R", 8)} > .pin1`])}
-      {net("V3V3", [`.${INA} > .VS`, `.${id("C", 8)} > .pin1`])}
-      {net("I2C_SCL", [`.${INA} > .SCL`])}
-      {net("I2C_SDA", [`.${INA} > .SDA`])}
-      {net(n === 1 ? "GND" : "V3V3", [`.${INA} > .A0`])}
-      {net("GND", [`.${INA} > .A1`])}
+      {net("VIN", [`${U} > .VIN`, `${c(1)} > .pin1`, `${c(2)} > .pin1`, `${c(3)} > .pin1`], { thickness: PWR })}
+      {net("GND", [`${U} > .PGND`, `${U} > .EP`, `${c(1)} > .pin2`, `${c(2)} > .pin2`, `${c(3)} > .pin2`, `${c(5)} > .pin2`,
+        `${c(6)} > .pin2`, `${c(7)} > .pin2`, `${c(8)} > .pin2`, `${c(9)} > .pin2`, `${c(10)} > .pin2`, `${c(11)} > .pin2`,
+        `${c(12)} > .pin2`, `${c(13)} > .pin2`, `${r(3)} > .pin2`, `${r(4)} > .pin2`, `${r(8)} > .pin2`, `${r(9)} > .pin2`, `${INA} > .GND`,
+        `${INA} > .A1`])}
+      {net(`SW_CH${n}`, [`${U} > .SW`, `${L} > .pin1`, `${c(4)} > .pin2`], { thickness: PWR })}
+      <trace from={`${U} > .BOOT`} to={`${c(4)} > .pin1`} maxLength={TRACE_MAX} />
+      <trace from={`${U} > .VCC`} to={`${c(5)} > .pin1`} maxLength={TRACE_MAX} />
+      {net(`OUT${n}_B`, [`${L} > .pin2`, `${c(6)} > .pin1`, `${c(7)} > .pin1`, `${c(8)} > .pin1`, `${c(9)} > .pin1`,
+        `${r(1)} > .pin1`, `${INA} > .VIN_POS`], { thickness: PWR })}
+      {net(`OUT${n}`, [`${r(1)} > .pin2`, `${INA} > .VIN_NEG`, `${INA} > .VBUS`, `${r(2)} > .pin1`], { thickness: PWR })}
+      {net(`FB${n}`, [`${U} > .FB`, `${r(2)} > .pin2`, `${r(3)} > .pin1`, `${r(11)} > .pin1`, `${Q} > .C`])}
+      <trace from={`${r(11)} > .pin2`} to={`${c(13)} > .pin1`} maxLength={TRACE_MAX} />
+      {net(`ISET${n}_E`, [`${Q} > .E`, `${r(4)} > .pin1`, OPA.neg])}
+      <trace from={`${Q} > .B`} to={`${r(5)} > .pin2`} maxLength={TRACE_MAX} />
+      {net(`ISET${n}_DRV`, [`${r(5)} > .pin1`, OPA.out])}
+      {net(`PWM${n}`, [`${r(6)} > .pin1`])}
+      {net(`PWM${n}_F`, [`${r(6)} > .pin2`, `${c(10)} > .pin1`, `${r(7)} > .pin1`])}
+      {net(`VSET${n}`, [`${r(7)} > .pin2`, `${r(8)} > .pin1`, `${c(11)} > .pin1`, OPA.pos])}
+      {net(`EN${n}`, [`${U} > .EN`, `${r(9)} > .pin1`, `${r(10)} > .pin2`, `${INA} > .Alert`])}
+      {net(`EN${n}_MCU`, [`${r(10)} > .pin1`])}
+      {net("V3V3", [`${INA} > .VS_POS`, `${c(12)} > .pin1`])}
+      {net("I2C_SCL", [`${INA} > .SCL`])}
+      {net("I2C_SDA", [`${INA} > .SDA`])}
+      {net(n === 1 ? "GND" : "V3V3", [`${INA} > .A0`])}
     </>
   )
 }
@@ -132,35 +160,42 @@ export default () => (
     {net("I2C_SDA", [".U1 > .SDA"])}
     {net("PD_ALERT", [".U1 > .ALERT"])}
 
-    {/* load switch: VBUS_EN_SNK (open drain) pulls the P-FET gate low once a contract exists */}
+    {/* load switch: VBUS_EN_SNK (open drain) pulls the P-FET gate down through R7 once a contract exists;
+        R3/R7 limit Vgs to -0.68 * VBUS, C19 slows the turn-on */}
       <AO4407A name="Q1" {...at(-9.5, 32.5)} />
       <R name="R3" {...at(-9, 27.6)} v="100k" />
-      <SMBJ24A name="D1" {...at(-9, 24)} />
+      <R name="R7" {...at(-14, 28)} pcbRotation={90} v="47k" />
+      <C name="C19" {...at(-4.5, 28)} pcbRotation={90} v="100nF" />
+      <SMBJ22A name="D1" {...at(-9, 24)} />
       <ELCAP name="C6" {...at(-9, 16)} />
-      <C name="C7" {...at(-14.5, 18.5)} pcbRotation={90} v="2.2uF 100V" />
-      <C name="C8" {...at(-3.5, 18.5)} pcbRotation={90} v="2.2uF 100V" />
-    {net("VBUS", [".Q1 > .S1", ".Q1 > .S2", ".Q1 > .S3", ".R3 > .pin1"], { thickness: PWR })}
-    {net("PD_GATE", [".Q1 > .G", ".R3 > .pin2", ".U1 > .VBUS_EN_SNK"])}
+      <C name="C7" {...at(-15, 18.5)} pcbRotation={90} v="10uF 50V" />
+      <C name="C8" {...at(-3, 18.5)} pcbRotation={90} v="10uF 50V" />
+    {net("VBUS", [".Q1 > .S1", ".Q1 > .S2", ".Q1 > .S3", ".R3 > .pin1", ".C19 > .pin1"], { thickness: PWR })}
+    {net("PD_GATE", [".Q1 > .G", ".R3 > .pin2", ".C19 > .pin2", ".R7 > .pin2"])}
+    {net("PD_EN", [".R7 > .pin1", ".U1 > .VBUS_EN_SNK"])}
     {net("VIN", [".Q1 > .D1", ".Q1 > .D2", ".Q1 > .D3", ".Q1 > .D4", ".D1 > .C", ".C6 > .pin1", ".C7 > .pin1", ".C8 > .pin1"], { thickness: PWR })}
     {net("GND", [".D1 > .A", ".C6 > .pin2", ".C7 > .pin2", ".C8 > .pin2"], { thickness: PWR })}
 
     {/* ============================ logic supplies: 5 V buck + 3.3 V LDO ============================ */}
-      <LMR51635XDDCR name="U3" {...at(-31, 12)} />
-      <SWPA6045S100MT name="L1" {...at(-22, 12)} />
-      <C name="C9" {...at(-36.5, 12)} pcbRotation={90} v="2.2uF 100V" />
-      <C name="C10" {...at(-34, 15.5)} v="100nF 100V" />
-      <C name="C11" {...at(-28, 15.5)} v="100nF" />
+      <LMR33630ADDAR name="U3" {...at(-31, 12)} />
+      <SWPA4030S150MT name="L1" {...at(-22.5, 12)} />
+      <C name="C9" {...at(-36.5, 12)} pcbRotation={90} v="10uF 50V" />
+      <C name="C10" {...at(-34, 16)} v="100nF" />
+      <C name="C11" {...at(-28, 16)} v="100nF" />
+      <C name="C20" {...at(-26.5, 9)} pcbRotation={90} v="1uF" />
       <C name="C12" {...at(-16.5, 13.5)} pcbRotation={90} v="22uF" />
       <C name="C13" {...at(-16.5, 10)} pcbRotation={90} v="22uF" />
       <R name="R4" {...at(-35, 7.5)} v="100k" />
       <R name="R5" {...at(-32, 7.5)} v="100k" />
-      <R name="R6" {...at(-29, 7.5)} v="20k" />
-    {/* 5 V = 0.8 V * (1 + 100k / 20k) = 4.8 V */}
+      <R name="R6" {...at(-29, 7.5)} v="24k" />
+    {/* 5 V = 1 V * (1 + 100k / 24k) = 5.17 V (AP2112K: 6 V max) */}
     {net("VIN", [".U3 > .VIN", ".C9 > .pin1", ".C10 > .pin1", ".R4 > .pin1"], { thickness: MID })}
-    {net("GND", [".U3 > .GND", ".C9 > .pin2", ".C10 > .pin2", ".C12 > .pin2", ".C13 > .pin2", ".R6 > .pin2"], { thickness: MID })}
+    {net("GND", [".U3 > .PGND", ".U3 > .EP", ".C9 > .pin2", ".C10 > .pin2", ".C12 > .pin2", ".C13 > .pin2", ".C20 > .pin2",
+      ".R6 > .pin2"], { thickness: MID })}
     <trace from=".U3 > .EN" to=".R4 > .pin2" maxLength={TRACE_MAX} />
     {net("SW5", [".U3 > .SW", ".L1 > .pin1", ".C11 > .pin2"], { thickness: MID })}
-    <trace from=".U3 > .CB" to=".C11 > .pin1" maxLength={TRACE_MAX} />
+    <trace from=".U3 > .BOOT" to=".C11 > .pin1" maxLength={TRACE_MAX} />
+    <trace from=".U3 > .VCC" to=".C20 > .pin1" maxLength={TRACE_MAX} />
     {net("V5", [".L1 > .pin2", ".C12 > .pin1", ".C13 > .pin1", ".R5 > .pin1"], { thickness: MID })}
     {net("FB5", [".U3 > .FB", ".R5 > .pin2", ".R6 > .pin1"])}
       <AP2112K_3_3TRG1 name="U4" {...at(-39, 1)} />
@@ -182,7 +217,7 @@ export default () => (
       <R name="R10" {...at(12, 2)} v="10k" />
       <TS_1187A_B_A_B name="SW2" {...at(5, 2)} />
       <R name="R11" {...at(8, 14)} v="4.7k" />
-      <R name="R12" {...at(8, 16.5)} v="4.7k" />
+      <R name="R12" {...at(8, 17)} v="4.7k" />
       <R name="R13" {...at(8, 19)} v="10k" />
     {net("V3V3", [".U5 > .3V3", ".C16 > .pin1", ".C17 > .pin1", ".R9 > .pin1", ".R10 > .pin1", ".R11 > .pin1",
       ".R12 > .pin1", ".R13 > .pin1"], { thickness: MID })}
@@ -199,15 +234,20 @@ export default () => (
     {net("PD_ALERT", [".U5 > .IO10", ".R13 > .pin2"])}
     {net("PWM1", [".U5 > .IO4"])}
     {net("PWM2", [".U5 > .IO5"])}
-    {net("EN1", [".U5 > .IO6"])}
-    {net("EN2", [".U5 > .IO7"])}
+    {net("EN1_MCU", [".U5 > .IO6"])}
+    {net("EN2_MCU", [".U5 > .IO7"])}
     {net("ENC_A", [".U5 > .IO15"])}
     {net("ENC_B", [".U5 > .IO16"])}
     {net("ENC_SW", [".U5 > .IO17"])}
 
     {/* ============================ output channels ============================ */}
-    <Channel n={1} ox={-37} oy={-12} />
-    <Channel n={2} ox={-37} oy={-27} />
+    <Channel n={1} ox={-35} oy={-10} />
+    <Channel n={2} ox={-35} oy={-26.5} />
+    {/* FB current sinks of both channels: A = CH1, B = CH2 */}
+    <TLV9062IDR name="U6" {...at(9, -21)} />
+      <C name="C21" {...at(9, -15.5)} v="100nF" />
+    {net("V3V3", [".U6 > .V_POS", ".C21 > .pin1"])}
+    {net("GND", [".U6 > .V_NEG", ".C21 > .pin2"])}
     <DG301_5_0_04P_14_1000A_H_ name="J2" {...at(24, -30)} />
     {net("OUT1", [".J2 > .pin1"], { thickness: PWR })}
     {net("GND", [".J2 > .pin2", ".J2 > .pin4"], { thickness: PWR })}
@@ -233,7 +273,7 @@ export default () => (
     <copperpour connectsTo="net.GND" layer="inner2" clearance="0.3mm" boardEdgeMargin="0.5mm" />
     <copperpour connectsTo="net.GND" layer="bottom" clearance="0.3mm" boardEdgeMargin="0.5mm" />
 
-    <silkscreentext text="bench-psu rev A" pcbX={0} pcbY={-35.5} fontSize="1.2mm" />
+    <silkscreentext text="bench-psu rev B" pcbX={0} pcbY={-35.5} fontSize="1.2mm" />
     <silkscreentext text="CH1+ CH1- CH2+ CH2-" pcbX={24} pcbY={-24} fontSize="1mm" />
     <silkscreentext text="RST" pcbX={5} pcbY={11} fontSize="1mm" />
     <silkscreentext text="BOOT" pcbX={5} pcbY={5} fontSize="1mm" />

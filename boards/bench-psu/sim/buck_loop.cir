@@ -1,0 +1,91 @@
+* bench-psu: one output channel - control loop (crossover, phase margin) and 1 A <-> 3 A load steps
+* run: ngspice -b boards/bench-psu/sim/buck_loop.cir      (a few seconds)
+*
+* Why this deck exists: the LMR33630's compensation is internal and sized for a feedback gain of
+* H = VREF/VOUT (TI keeps 4 x 22 uF from 3.3 V to 12 V at 400 kHz: crossover ~ H * K / (2 pi Cout)).
+* The fail-safe FB network (Vout = 1.6 V + 120k * Isink) has H = 200k/(120k+200k) = 0.625 at EVERY output
+* voltage, i.e. it loads the loop like a 1.6 V design even at 16 V, where the derated output capacitance is
+* only ~18 uF. lag=1 adds Rs + Cs from FB to GND (R111/C113, R211/C213: 6.8k + 220 nF): H drops to 0.054 above ~100 Hz,
+* DC regulation is unchanged.
+*
+* Averaged peak-current-mode model (Ridley):
+*  - EA: transconductance into Rc + Cc; K = gm * Rc / Ri = 120 A/V, derived from the datasheet's CFF equation
+*    (CFF = VOUT*COUT / (120 * RFBT * sqrt(VREF/VOUT)), which places the CFF zero at the crossover of a design with
+*    fc = K * H / (2 pi COUT)). Assumed split: gm 1 mS, Rc 12 k, Ri 0.1 V/A, Cc 4.7 nF (zero 2.8 kHz),
+*    EA high-frequency pole ~250 kHz. These internal values are NOT published: the absolute numbers are indicative,
+*    the ratio between lag=0 and lag=1 is the point.
+*  - Current loop: sampling double pole at fsw/2 with Q = 2/pi (adaptive slope compensation assumed).
+*  - Peak current limit 4.5 A (ISC typ). Output caps at DC bias as in buck_loadpoints.cir, 20 mOhm shunt,
+*    regulation point after the shunt, FB pin + NPN collector capacitance 5 pF.
+*  - Load: Vout / 1 A resistor + 2 A current step (2 us edges) at 0.2 ms, released at 0.6 ms.
+
+.param vout=5 lag=1
+.param cout={vout < 2 ? 70u : vout < 4 ? 56u : vout < 6 ? 45u : vout < 13 ? 24u : 18u}
+.param rs={lag > 0.5 ? 6.8k : 1e12} cs=220n
+.param isink={(vout - 1.6) / 120k}
+.param gm=1m rc=12k cc=4.7n ri=0.1
+* sampling double pole as an RLC low-pass: wn = pi * fsw, Q = 2/pi, C = 1 nF
+.param wn={3.14159 * 400k} qs={2 / 3.14159} chn=1n lhn={1 / (wn * wn * chn)} rhn={sqrt(lhn / chn) / qs}
+
+* --- error amplifier + compensation ---
+Bea 0 comp i = gm * (1.0 - v(fb))
+Roea comp 0 10meg
+Rc comp cz {rc}
+Cc cz 0 {cc}
+Chf comp 0 50p
+
+* --- current loop: command -> sampling double pole -> inductor current ---
+Bcmd icmd 0 v = min(4.5, max(-1, v(comp) / ri))
+Rhn icmd hn1 {rhn}
+Lhn hn1 ilv {lhn}
+Chn ilv 0 {chn}
+Bil 0 outb i = v(ilv)
+
+* --- output: caps, shunt, load ---
+Cout outb co_e {cout}
+Rcout co_e 0 0.75m
+Rsh outb out 20m
+Rload out 0 {vout / 1}
+Istep out 0 pwl(0 0 0.2m 0 0.202m 2 0.6m 2 0.602m 0)
+
+* --- feedback at the terminal: injection source for the loop gain, divider, current sink, lag network ---
+Vinj fbtop out dc 0 ac 1
+Rt fbtop fb 120k
+Rb fb 0 200k
+Isink fb 0 {isink}
+Rs fb xs {rs}
+Cs xs 0 {cs}
+Cfb fb 0 5p
+
+.control
+  set noaskquit
+  echo "Vout lag |  fc_kHz  PM_deg |  undershoot_mV  overshoot_mV  err_390us_mV  (1->3 A step, 3->1 A release)"
+  foreach vo 1.6 3.3 5 12 16
+    foreach lg 0 1
+      alterparam vout = $vo
+      alterparam lag = $lg
+      reset
+      ac dec 200 100 2meg
+      let t = -v(out) / v(fbtop)
+      let tmag = db(t)
+      let tph = 180 / 3.14159 * cph(t)
+      meas ac fc when tmag=0 fall=last
+      meas ac phc find tph at=fc
+      let pm = 180 + phc
+      let fck = fc / 1000
+      set fcv = "$&fck"
+      set pmv = "$&pm"
+      tran 0.2u 1m
+      meas tran v0 find v(out) at=0.199m
+      meas tran vmin min v(out) from=0.2m to=0.6m
+      meas tran v1 find v(out) at=0.59m
+      meas tran vmax max v(out) from=0.6m to=1m
+      let us = (v0 - vmin) * 1000
+      let os = (vmax - v0) * 1000
+      let e1 = (v0 - v1) * 1000
+      echo "$vo  $lg | $fcv $pmv | $&us $&os $&e1"
+      destroy all
+    end
+  end
+.endc
+.end

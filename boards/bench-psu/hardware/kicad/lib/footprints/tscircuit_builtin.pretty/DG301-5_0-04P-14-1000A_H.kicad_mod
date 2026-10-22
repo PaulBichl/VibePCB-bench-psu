@@ -1068,7 +1068,7 @@
       (type default)
     )
     (fill no)
-    (uuid 2e04fe00-5ea4-1081-14b2-e0fe77f62d83)
+    (uuid 3601e040-56a7-2e41-1caf-c33e6ff94b43)
   )
   (fp_poly
     (pts
@@ -1090,28 +1090,28 @@
     (size 1.999996 1.999996)
     (drill 1.1999976)
     (layers *.Cu *.Mask)
-    (uuid 04873dd8-5962-3ad8-51c2-c828031834d8)
+    (uuid 59410000-12bc-5ce1-33c8-463e7a4ce95d)
   )
   (pad "2" thru_hole circle
     (at -2.499995000000002 0 0)
     (size 1.999996 1.999996)
     (drill 1.1999976)
     (layers *.Cu *.Mask)
-    (uuid 6c56e43a-3ece-1ec6-160c-de3a6ae7db3a)
+    (uuid 18b173e0-2dd3-2f3f-7457-d25e45238a83)
   )
   (pad "1" thru_hole circle
     (at -7.499985000000002 0 0)
     (size 1.999996 1.999996)
     (drill 1.1999976)
     (layers *.Cu *.Mask)
-    (uuid 53137584-5811-8d7c-0336-907c51a46c84)
+    (uuid 0d557ec0-53da-21df-65a1-3b021f1c97e3)
   )
   (pad "4" thru_hole circle
     (at 7.499984999999999 0 0)
     (size 1.999996 1.999996)
     (drill 1.1999976)
     (layers *.Cu *.Mask)
-    (uuid 5df46140-4cba-3bc1-0897-273e5de88a3d)
+    (uuid 704f0584-3ad5-fd7c-1a04-ff846edffc84)
   )
   (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C3037697.step"
     (offset
