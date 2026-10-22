@@ -1,0 +1,19 @@
+# Review findings (format: src/vibepcb/findings.py). Set status = "accepted" with a reason to close one.
+
+[[finding]]
+id = "decoupling:U12:8"
+ref = "U12"
+pin = "VBUS"
+text = "power pin VBUS (net OUT1) has no capacitor to ground on its net"
+status = "open"
+reason = ""
+source = "netcheck"
+
+[[finding]]
+id = "decoupling:U22:8"
+ref = "U22"
+pin = "VBUS"
+text = "power pin VBUS (net OUT2) has no capacitor to ground on its net"
+status = "open"
+reason = ""
+source = "netcheck"

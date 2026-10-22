@@ -72,56 +72,6 @@
       )
     )
   )
-  (fp_text user "CLK"
-    (at -5.079999999999998 -1.3500000000000012 180)
-    (layer F.SilkS)
-    (effects
-      (font
-        (size 0.5 0.5)
-        (thickness 0.15)
-      )
-    )
-  )
-  (fp_text user "DT"
-    (at -2.539999999999999 -1.3500000000000012 180)
-    (layer F.SilkS)
-    (effects
-      (font
-        (size 0.5 0.5)
-        (thickness 0.15)
-      )
-    )
-  )
-  (fp_text user "SW"
-    (at -8.266365894244643e-17 -1.3500000000000014 180)
-    (layer F.SilkS)
-    (effects
-      (font
-        (size 0.5 0.5)
-        (thickness 0.15)
-      )
-    )
-  )
-  (fp_text user "VCC"
-    (at 2.539999999999999 -1.3500000000000016 180)
-    (layer F.SilkS)
-    (effects
-      (font
-        (size 0.5 0.5)
-        (thickness 0.15)
-      )
-    )
-  )
-  (fp_text user "GND"
-    (at 5.08 -1.3500000000000016 180)
-    (layer F.SilkS)
-    (effects
-      (font
-        (size 0.5 0.5)
-        (thickness 0.15)
-      )
-    )
-  )
   (fp_text reference "J4"
     (at -1.555301434917138e-16 -2.539999999999999 0)
     (layer F.SilkS)
@@ -147,35 +97,35 @@
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 46801400-2778-d85f-6a8e-3b42036ab11d)
+    (uuid 036b2ca0-6a8d-bfbf-2779-53e2467f987d)
   )
   (pad "2" thru_hole circle
     (at -2.539999999999999 1.555301434917138e-16 270)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 363ff040-37b8-fc1f-5a4e-178213aad4dd)
+    (uuid 0cd4f720-7acd-e37f-1739-302256bfbc3d)
   )
   (pad "3" thru_hole circle
     (at 0 0 270)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 6caace64-2ae5-339c-3d8a-ca645a05379c)
+    (uuid 27785126-7017-b0da-07a7-b2da60c84b26)
   )
   (pad "4" thru_hole circle
     (at 2.539999999999999 -1.555301434917138e-16 270)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 2085bac0-7181-58e1-0388-6c826a707fdd)
+    (uuid 639aa220-2e6c-7181-3f8c-7ade527a98c3)
   )
   (pad "5" thru_hole circle
     (at 5.08 -3.110602869834277e-16 270)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 692031b8-187d-6e38-3825-55487737e738)
+    (uuid 5a8b3b7a-09e8-77fa-46ba-4b8668a2f0fa)
   )
-  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/pinrow5_p2.54.step")
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/pinrow5_p2.54_nopinlabels.step")
 )

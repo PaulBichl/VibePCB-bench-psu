@@ -27,6 +27,8 @@
 // - Measure / protect: INA226 per channel (0x40 / 0x41), 20 mOhm shunt (4.096 A full scale, 125 uA LSB, 0.18 W at 3 A).
 //   Its ALERT (shunt over-limit, latched) pulls the converter's EN low directly: hardware current trip within one
 //   conversion, independent of the firmware. The ESP32 drives EN through 10k (no contention), 100k pull-down: off at reset.
+// - Status LEDs per channel above the terminal: ON follows the converter's EN node (NPN buffer, so it is the hardware
+//   state, dark after a trip); OC is an ESP32 GPIO for the latched INA226 over-current flag.
 // - No output electrolytic: the output capacitance (4 x 22 uF ceramic) is what a short sees before the trip.
 // - Control: ESP32-S3-MINI-1 (native USB for flashing/CDC, Bluetooth LE for load curves), 3.3 V from a 5 V
 //   LMR33630 (same part as the channels) + LDO.
@@ -114,6 +116,39 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
       {net("I2C_SCL", [`${INA} > .SCL`])}
       {net("I2C_SDA", [`${INA} > .SDA`])}
       {net(n === 1 ? "GND" : "V3V3", [`${INA} > .A0`])}
+    </>
+  )
+}
+
+/** Status LEDs of channel n, centred at x = cx above the output terminal.
+ *  ON (yellow-green): hardware truth, the converter's EN node through an NPN, so it also goes dark on an INA226 trip.
+ *  OC (red): ESP32 GPIO, lit while the INA226 over-current latch is set (firmware reads the Mask/Enable register). */
+const StatusLeds = ({ n, cx, gpio }: { n: 1 | 2; cx: number; gpio: string }) => {
+  const id = (s: string, i: number) => `${s}${n}${String(i).padStart(2, "0")}`
+  const y = -19.5
+  return (
+    <>
+      <led name={id("D", 1)} color="green" footprint="0603" manufacturerPartNumber="KT-0603YG"
+        supplierPartNumbers={{ jlcpcb: ["C2289"] }} {...at(cx - 3, y)} />
+      <led name={id("D", 2)} color="red" footprint="0603" manufacturerPartNumber="KT-0603R"
+        supplierPartNumbers={{ jlcpcb: ["C2286"] }} {...at(cx + 3, y)} />
+      {/* ~1.1 mA each from 3.3 V (Vf ~2 V): bright enough on 300 mcd parts, nothing for the 3.3 V rail */}
+      <R name={id("R", 12)} {...at(cx - 3, y + 3.5)} v="1k" />
+      <R name={id("R", 13)} {...at(cx + 3, y + 3.5)} v="1k" />
+      {/* EN at 3.3 V via 10k: 47k base resistor leaves EN at ~2.6 V (LMR33630 EN threshold 1.2 V), Ib ~40 uA */}
+      <NPN name={`Q${n}2`} {...at(cx - 3, y + 8)} />
+      <R name={id("R", 14)} {...at(cx + 1.5, y + 8)} v="47k" />
+      {net("V3V3", [`.${id("R", 12)} > .pin1`])}
+      <trace from={`.${id("R", 12)} > .pin2`} to={`.${id("D", 1)} > .anode`} maxLength={TRACE_MAX} />
+      <trace from={`.${id("D", 1)} > .cathode`} to={`.Q${n}2 > .C`} maxLength={TRACE_MAX} />
+      <trace from={`.Q${n}2 > .B`} to={`.${id("R", 14)} > .pin2`} maxLength={TRACE_MAX} />
+      {net(`EN${n}`, [`.${id("R", 14)} > .pin1`])}
+      {net(`LED_OC${n}`, [`.${id("R", 13)} > .pin1`, `.U5 > .${gpio}`])}
+      <trace from={`.${id("R", 13)} > .pin2`} to={`.${id("D", 2)} > .anode`} maxLength={TRACE_MAX} />
+      {net("GND", [`.Q${n}2 > .E`, `.${id("D", 2)} > .cathode`])}
+      <silkscreentext text="ON" {...at(cx - 3, y - 1.6)} fontSize="0.8mm" />
+      <silkscreentext text="OC" {...at(cx + 3, y - 1.6)} fontSize="0.8mm" />
+      <silkscreentext text={`CH${n}`} {...at(cx, y - 1.6)} fontSize="0.8mm" />
     </>
   )
 }
@@ -206,8 +241,9 @@ export default () => (
     {net("GND", [".U4 > .GND", ".C14 > .pin2", ".C15 > .pin2"])}
 
     {/* ============================ MCU: ESP32-S3-MINI-1 ============================ */}
-    {/* IO8/IO9 = I2C (STUSB4500, 2 x INA219, OLED), IO4/IO5 = PWM voltage set, IO6/IO7 = channel enable,
-        IO15/16/17 = encoder A/B/switch, IO19/IO20 = native USB, IO10 = PD alert, IO0 = boot. Antenna end at the +y board edge. */}
+    {/* IO8/IO9 = I2C (STUSB4500, 2 x INA226, OLED), IO4/IO5 = PWM voltage set, IO6/IO7 = channel enable,
+        IO15/16/17 = encoder A/B/switch, IO19/IO20 = native USB, IO10 = PD alert, IO21/IO47 = OC LEDs CH1/CH2, IO0 = boot.
+        Antenna end at the +y board edge. */}
     <ESP32_S3_MINI_1_N8 name="U5" {...at(27, 27.5)} />
       <C name="C16" {...at(17, 14)} v="10uF" />
       <C name="C17" {...at(17, 11.5)} v="100nF" />
@@ -253,13 +289,17 @@ export default () => (
     {net("GND", [".J2 > .pin2", ".J2 > .pin4"], { thickness: PWR })}
     {net("OUT2", [".J2 > .pin3"], { thickness: PWR })}
 
+    {/* ============================ output status LEDs ============================ */}
+    <StatusLeds n={1} cx={19} gpio="IO21" />
+    <StatusLeds n={2} cx={29} gpio="IO47" />
+
     {/* ============================ front panel: OLED + encoder modules ============================ */}
     <pinheader name="J3" pinCount={4} pitch="2.54mm" {...at(42, 2)} pcbRotation={90}
       supplierPartNumbers={{ jlcpcb: ["C492403"] }} manufacturerPartNumber="PZ254V-11-04P"
-      pinLabels={["GND", "VCC", "SCL", "SDA"]} showSilkscreenPinLabels />
+      pinLabels={["GND", "VCC", "SCL", "SDA"]} />
     <pinheader name="J4" pinCount={5} pitch="2.54mm" {...at(42, -12)} pcbRotation={90}
       supplierPartNumbers={{ jlcpcb: ["C492404"] }} manufacturerPartNumber="PZ254V-11-05P"
-      pinLabels={["CLK", "DT", "SW", "VCC", "GND"]} showSilkscreenPinLabels />
+      pinLabels={["CLK", "DT", "SW", "VCC", "GND"]} />
     {net("GND", [".J3 > .pin1", ".J4 > .pin5"])}
     {net("V3V3", [".J3 > .pin2", ".J4 > .pin4"])}
     {net("I2C_SCL", [".J3 > .pin3"])}
@@ -273,9 +313,26 @@ export default () => (
     <copperpour connectsTo="net.GND" layer="inner2" clearance="0.3mm" boardEdgeMargin="0.5mm" />
     <copperpour connectsTo="net.GND" layer="bottom" clearance="0.3mm" boardEdgeMargin="0.5mm" />
 
-    <silkscreentext text="bench-psu rev B" pcbX={0} pcbY={-35.5} fontSize="1.2mm" />
-    <silkscreentext text="CH1+ CH1- CH2+ CH2-" pcbX={24} pcbY={-24} fontSize="1mm" />
-    <silkscreentext text="RST" pcbX={5} pcbY={11} fontSize="1mm" />
-    <silkscreentext text="BOOT" pcbX={5} pcbY={5} fontSize="1mm" />
+    <silkscreentext text="bench-psu rev B" pcbX={24} pcbY={-5} fontSize="1.5mm" />
+    <silkscreentext text="CH1+ CH1- CH2+ CH2-" pcbX={24} pcbY={-25.2} fontSize="1mm" />
+    {/* header pins (the footprint's own pin labels are below the fab's minimum text height) */}
+    {[["SDA", 5.8], ["SCL", 3.3], ["VCC", 0.7], ["GND", -1.8], ["GND", -6.9], ["VCC", -9.5], ["SW", -12], ["DT", -14.5],
+      ["CLK", -17.1]].map(([t, y]) => (
+      <silkscreentext key={`hdr${y}`} text={t as string} pcbX={40.2} pcbY={y as number} pcbRotation={90} fontSize="0.8mm" />
+    ))}
+    <silkscreentext text="RST" pcbX={-2.2} pcbY={8} fontSize="1mm" />
+    <silkscreentext text="BOOT" pcbX={-2.6} pcbY={2} fontSize="1mm" />
+    <silkscreentext text="PD 20V IN" pcbX={-35} pcbY={28.3} fontSize="0.9mm" />
+    <silkscreentext text="OLED" pcbX={38} pcbY={2} pcbRotation={90} fontSize="1mm" />
+    <silkscreentext text="ENCODER" pcbX={38} pcbY={-12} pcbRotation={90} fontSize="1mm" />
+    {/* bring-up probe points (README "Bring-up"): the rails at their output capacitors */}
+    <silkscreentext text="VIN" pcbX={-9} pcbY={12.3} fontSize="0.8mm" />
+    <silkscreentext text="5V" pcbX={-14.3} pcbY={11.8} fontSize="0.8mm" />
+    <silkscreentext text="3V3" pcbX={-32.5} pcbY={1} fontSize="0.8mm" />
+    {/* back side: what you need on the bench without the README */}
+    <silkscreentext text="bench-psu rev B - USB-C PD 20 V in" pcbX={0} pcbY={6} fontSize="1.2mm" layers={["bottom"]} />
+    <silkscreentext text="CH1 / CH2: 1.6-16.6 V, 3 A, hardware OC trip" pcbX={0} pcbY={3.5} fontSize="1mm" layers={["bottom"]} />
+    <silkscreentext text="I2C IO8/IO9: INA226 0x40 / 0x41, STUSB4500 0x28, OLED 0x3C" pcbX={0} pcbY={1.5} fontSize="1mm" layers={["bottom"]} />
+    <silkscreentext text="PWM IO4/IO5  EN IO6/IO7  OC LED IO21/IO47  ENC IO15/16/17" pcbX={0} pcbY={-0.5} fontSize="1mm" layers={["bottom"]} />
   </board>
 )

@@ -10,6 +10,7 @@ USB-C PD (STUSB4500, 20 V) -> P-FET -> VIN
    VIN -> LMR33630 buck (x2) -> 20 mR shunt + INA226 -> output terminal (CH1, CH2)
 ESP32 PWM -> RC filter -> op-amp/NPN current sink on the buck FB node = output voltage setpoint
 INA226 ALERT -> buck EN = hardware over-current trip
+per channel: ON LED (follows buck EN), OC LED (ESP32 GPIO)
 header J3: SSD1306 OLED (I2C)   header J4: rotary encoder module (KY-040)
 ```
 
@@ -53,6 +54,12 @@ header J3: SSD1306 OLED (I2C)   header J4: rotary encoder module (KY-040)
   TVS clamp), 100 nF gate-source for a slow turn-on. SMBJ22A TVS (35.5 V clamp, below the LMR33630's 38 V abs max),
   100 uF SMD electrolytic for damping.
 - **Logic supply:** 5 V buck (same LMR33630, 15 uH) -> AP2112K 3.3 V; native USB on the ESP32 for flashing / CDC.
+- **Status LEDs:** per channel above the terminal, ON (yellow-green) and OC (red). ON is driven from the converter's
+  EN node through an NPN (47k base resistor, EN stays at ~2.6 V), so it shows the hardware state: dark at reset and
+  dark after an INA226 trip even if the firmware still thinks the channel is on. OC is a GPIO (IO21 / IO47) for the
+  latched over-current flag. 1k from 3.3 V, ~1 mA each.
+- **Silkscreen:** connector pins, LED functions, RST/BOOT, rail probe points (VIN, 5V, 3V3) on the top; a pin /
+  I2C-address summary on the back.
 - **Antenna:** ESP32-S3-MINI-1 antenna end sits at the +y board edge; `vibepcb.toml` keeps GND pour out under it.
 
 ### Changed from rev A (and why)
@@ -93,6 +100,7 @@ ngspice decks for one channel, `ngspice -b boards/bench-psu/sim/<deck>.cir`:
 | IO6 / IO7 | EN1_MCU / EN2_MCU | channel enable (through 10k; INA226 ALERT overrides) |
 | IO15 / IO16 / IO17 | ENC_A / ENC_B / ENC_SW | encoder (J4: CLK, DT, SW, VCC, GND) |
 | IO19 / IO20 | USB_DN / USB_DP | native USB |
+| IO21 / IO47 | LED_OC1 / LED_OC2 | red OC LED CH1 / CH2 (high = on) |
 | IO0, EN | BOOT, EN_RST | tactile switches |
 
 ## Firmware duties (not part of this repo yet)
@@ -100,9 +108,76 @@ ngspice decks for one channel, `ngspice -b boards/bench-psu/sim/<deck>.cir`:
 - Write the STUSB4500 NVM once over I2C so it requests 20 V (default NVM: 5 V only).
 - Close the voltage loop on the INA226 bus-voltage reading (PWM -> Vout is ~4.55 V/V, offset +-80 mV before trim).
 - Program each INA226's shunt over-limit (Mask/Enable SOL + LEN latch) to the set current limit; after a trip read
-  Mask/Enable (clears the latch) and report it.
+  Mask/Enable (clears the latch) and report it; light the channel's OC LED (IO21 / IO47) until the user re-enables.
 - Budget power: 2 x 16 V x 3 A = 96 W exceeds most PD sources (60 W at 20 V / 3 A); limit the sum of both
   channels to the negotiated PDO current.
+
+## Bring-up
+
+Bring the board up from the bottom: logic first from a plain 5 V source, then the channels at 5 V input, and 20 V
+only after that. The STUSB4500's factory NVM asks for 5 V only, so any USB-C port or charger gives VIN = 5 V until
+step 4. Use a PC port or a USB-C supply you can current-limit; keep a DMM, a scope and a power resistor (a few ohms,
+10 W) at hand.
+
+Probe points (silkscreen labels on the top side):
+
+| Net | Where | Expected |
+|-----|-------|----------|
+| VIN | C6 / C7 / C8 (+ pad) | 5 V (before NVM write), 20 V after |
+| 5V | C12 / C13, label "5V" | ~4.6 V at 5 V input (buck in dropout), 5.17 V at 20 V input |
+| 3V3 | C15, label "3V3" | 3.30 V |
+| OUTn | J2 CH1+ / CH2+ against CH1- / CH2- | 1.6 V with PWM at 0 (channel enabled) |
+| ENn | R109 / R209 pin 1 | 0 V off, ~2.6 V on, 0 V after a trip |
+| VSETn | C111 / C211 | PWM * 10k/110k: 0..0.3 V |
+
+### 0. Unpowered
+
+1. Look: D1 (TVS) and C6 (electrolytic) polarity, the LEDs (D101/D102/D201/D202) the right way round, no solder bridges
+   on U5 (ESP32), U12/U22 (INA226, 0.65 mm pitch), U6. Thermal vias in the LMR33630 pads (see open items).
+2. Resistance to GND (meter on 2 kOhm+ range, capacitors charge): VBUS, VIN, 5V, 3V3 not shorted;
+   OUT1 / OUT2 > 100 kOhm (feedback divider and INA226 inputs only); SW nodes (L11 / L21 / L1 pin 1) not shorted.
+
+### 1. Logic at 5 V
+
+1. Plug a plain USB-C 5 V source (current limit ~300 mA). Idle draw should be well under 100 mA.
+2. Measure VIN ~5 V, 5V ~4.6 V, 3V3 = 3.3 V. Both ON LEDs stay dark (EN pulled down), both OC LEDs dark.
+3. Nothing gets warm. If 3V3 is missing, check 5V first, then U4 (AP2112K) EN = 5 V.
+
+### 2. Firmware and I2C
+
+1. Hold BOOT, tap RST, release BOOT: the ESP32-S3 enumerates as "USB JTAG/serial debug unit" on the same USB-C
+   connector. Flash a test firmware (`esptool.py --chip esp32s3 write_flash ...` or the Arduino/IDF tool).
+2. I2C scan on IO8 (SDA) / IO9 (SCL): 0x28 STUSB4500, 0x40 INA226 CH1, 0x41 INA226 CH2, 0x3C OLED (if the module is
+   on J3). Read each INA226's die ID (register 0xFF = 0x2260).
+3. Toggle IO21 / IO47: the red OC LEDs light. Turn the encoder on J4: IO15 / IO16 count, IO17 reads the push.
+
+### 3. Channels at 5 V input
+
+Do each channel alone, no load first. Output range at 5 V input is 1.6 V to ~4.3 V (buck dropout).
+
+1. PWM duty 0, then EN high (IO6 / IO7): the ON LED lights, OUTn = 1.6 V (+- 80 mV before trim). INA226 bus voltage
+   agrees with the DMM within a few mV.
+2. Step the PWM: Vout = 1.6 V + 4.55 * Vpwm (VSET = Vpwm / 11). Stop at ~4 V. Note the offset / gain per channel
+   for the firmware's calibration.
+3. EN low: ON LED dark, the output falls to 0 V.
+4. Load: a few ohms at 1.6 V, read the current from the INA226 (125 uA / LSB with CAL = 2048 for 20 mOhm) and compare
+   with the DMM.
+5. Trip: program the shunt over-limit (Mask/Enable SOL + LEN) to 0.3 A, connect a load drawing more. The ON LED goes
+   dark at once, EN = 0 V; the firmware sees the alert flag and lights OC. Reading Mask/Enable clears the latch.
+
+### 4. 20 V
+
+1. Write the STUSB4500 NVM for a 20 V PDO (20 V at 3 A, with 5 V / 9 V as fallback; check the readback), unplug.
+2. Plug a PD charger that offers 20 V (45 W or more). VIN = 20 V within ~1 s; Q1 (AO4407A) Vgs ~-13.6 V; 5V = 5.17 V.
+   Idle input current is a few tens of mA.
+3. Per channel, no load: 1.6 V at duty 0; sweep to full PWM: ~16.6 V (the hardware maximum). Firmware caps at 16.5 V.
+4. Load steps with the scope on the terminal (AC, 20 mV/div): 0 -> 2 A at 1.6 V and at 16 V. Expect a clean recovery
+   with at most one undershoot and the 8 mV / ~18 ms tail from the lag network (sim/README.md). Ringing that does not
+   settle means less phase margin than simulated: report it.
+5. Heat: 3 A at 5 V and 12 V for 10 minutes. The LMR33630 should stay below ~85 C case (thermal camera / thermocouple);
+   the shunt at ~0.18 W stays cool.
+6. Both channels loaded: the sum must stay inside the PDO (60 W at 20 V / 3 A); a PD source that drops VBUS (contract
+   reset) shows as both ON LEDs going dark with 5V / 3V3 restarting.
 
 ## Status / open items
 

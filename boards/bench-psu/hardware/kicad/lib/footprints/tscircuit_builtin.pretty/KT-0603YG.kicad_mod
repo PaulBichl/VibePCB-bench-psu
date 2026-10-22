@@ -1,0 +1,189 @@
+(footprint "KT-0603YG"
+  (layer F.Cu)
+  (property "Reference" "REF**"
+    (at 0 -3 0)
+    (layer F.SilkS)
+    (hide yes)
+    (uuid 20bf27c0-6be9-e6c1-076d-0abe7ac3fc3d)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "KT-0603YG"
+    (at 0 3 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 28a3ff00-7161-1a3f-0b66-337e5a94b343)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 39d30880-52d6-0601-2080-eb7e6c282303)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Description" ""
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 423afd60-3b9b-8eff-34fc-209e2e5cb23d)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Supplier Part Number" "C2289"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 6dea49fe-057a-4bfe-62f5-b202349a4ffe)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "MPN" "KT-0603YG"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 044b31c0-1f92-50a1-3ad9-6f8256208e63)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_text reference "D101"
+    (at 0 -1.375 0)
+    (layer F.SilkS)
+    (effects
+      (font
+        (size 0.4 0.4)
+        (thickness 0.15)
+      )
+    )
+  )
+  (fp_line
+    (start 0.8249999999999993 -0.875)
+    (end -1.4250000000000007 -0.875)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -1.4250000000000007 -0.875)
+    (end -1.4250000000000007 0.875)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -1.4250000000000007 0.875)
+    (end 0.8249999999999993 0.875)
+    (stroke
+      (width 0.1)
+      (type default)
+    )
+    (layer F.SilkS)
+  )
+  (fp_line
+    (start -0.8249999999999993 0)
+    (end -0.33000000000000007 0)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_line
+    (start -0.33000000000000007 0.24749999999999872)
+    (end 0.3299999999999983 0)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_line
+    (start 0.3299999999999983 0)
+    (end -0.33000000000000007 -0.24749999999999872)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_line
+    (start -0.33000000000000007 -0.24749999999999872)
+    (end -0.33000000000000007 0.24749999999999872)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_line
+    (start 0.3299999999999983 0.24749999999999872)
+    (end 0.3299999999999983 -0.24749999999999872)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_line
+    (start 0.3299999999999983 0)
+    (end 0.8249999999999993 0)
+    (stroke
+      (width 0.08)
+      (type default)
+    )
+    (layer F.Fab)
+  )
+  (fp_rect
+    (start -1.48 -0.73)
+    (end 1.48 0.73)
+    (layer F.CrtYd)
+    (stroke
+      (width 0.05)
+      (type default)
+    )
+    (fill no)
+  )
+  (pad "1" smd rect
+    (at -0.8249999999999993 0 0)
+    (size 0.8 0.95)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 42a98a60-1749-dac1-713d-3fe234cf5afd)
+  )
+  (pad "2" smd rect
+    (at 0.8249999999999993 0 0)
+    (size 0.8 0.95)
+    (layers F.Cu F.Paste F.Mask)
+    (uuid 6fd0c53a-7cc4-4806-6959-554655ee6286)
+  )
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/0603_color(green).step")
+)
