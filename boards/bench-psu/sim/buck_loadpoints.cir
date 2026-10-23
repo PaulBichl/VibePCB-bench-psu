@@ -1,5 +1,5 @@
 * bench-psu: one output channel (LMR33630A DDA, 400 kHz) at load points - efficiency, losses, ripple, Tj
-* run: ngspice -b boards/bench-psu/sim/buck_loadpoints.cir      (~20 s: the 3 A corners; the full 20-point table of
+* run: ngspice -b boards/bench-psu/sim/buck_loadpoints.cir      (~25 s: the 3 A corners incl. 10 V, the worst inductor peak; the full 20-point table of
 *      sim/README.md: foreach vo 1.6 3.3 5 12 16 / foreach io 0.3 1 2 3 below)
 *
 * covers: thermal U11 U21
@@ -13,7 +13,7 @@
 *    Losses not in the switch model, added in .control: switching 0.5*Vin*I*(tr+tf)*fsw with tr+tf = 8 ns,
 *    dead time 2 x 20 ns x 0.7 V body diode, gate drive / VCC 2.5 mA from VIN, Iq negligible (24 uA).
 *    tr/tf, dead time and gate current are assumptions (not in the datasheet).
-*  - FXL1040-100-M: 10 uH, DCR 30 mOhm (+20 % hot). Core loss not modelled.
+*  - FXL1040-150-M (rev C, review U11:inductor): 15 uH, DCR 45 mOhm (+20 % hot = 54 mOhm). Core loss not modelled.
 *  - Output 4 x 22 uF 25 V X5R 1206 (CL31A226KAHNNNE) at DC bias, estimated from the DC-bias curve:
 *    1.6 V 70 uF, 3.3 V 56 uF, 5 V 45 uF, 12 V 24 uF, 16 V 18 uF total; ESR 3 mOhm each.
 *  - Input 2 x 10 uF 50 V X5R 1206 at 20 V ~ 2 x 4.5 uF; source 20 V behind 30 mOhm / 50 nH (VIN plane, bulk cap).
@@ -28,7 +28,7 @@
 .param fsw=400k tper={1/fsw}
 .param cout={vout < 2 ? 70u : vout < 4 ? 56u : vout < 6 ? 45u : vout < 13 ? 24u : 18u}
 .param rload={vout/iout}
-.param rhs=124m rls=86m dcr=36m rsh=20m
+.param rhs=124m rls=86m dcr=54m rsh=20m
 
 * --- input: source, VIN plane, 2 x 10 uF at the converter ---
 Vin src 0 {vin}
@@ -56,7 +56,7 @@ Bgl gl 0 v = (v(d) <= v(saw)) && (i(ViL) > 0.02) ? 1 : 0
 
 * --- inductor, output caps, shunt, load ---
 ViL sw lx 0
-Lbuck lx lr 10u ic={iout}
+Lbuck lx lr 15u ic={iout}
 Rdcr lr outb {dcr}
 Cout outb co_e {cout} ic={vout + iout*rsh}
 Rcout co_e 0 0.75m
@@ -81,7 +81,7 @@ Bd d 0 v = min(0.97, max(0.0, v(dff) + v(integ) - (1 / vin) * (v(ilf) - iout)))
   echo "   V       A   |  V       %       W       W      W      W  |   A      A    |   mVpp     |  C      C"
   let tjmax = 0
   let ilmax = 0
-  foreach vo 1.6 5 16
+  foreach vo 1.6 5 10 16
     foreach io 3
       alterparam vout = $vo
       alterparam iout = $io
@@ -93,7 +93,7 @@ Bd d 0 v = min(0.97, max(0.0, v(dff) + v(integ) - (1 / vin) * (v(ilf) - iout)))
       let pout_v = v(out) * v(out) / ($vo / $io)
       let phs_v = (v(hs_in) - v(sw)) * i(vmh)
       let pls_v = v(sw) * i(vml)
-      let pl_v = i(vil) * i(vil) * 36m
+      let pl_v = i(vil) * i(vil) * 54m
       let psh_v = (v(outb) - v(out)) * (v(outb) - v(out)) / 20m
       meas tran pin avg pin_v from=1.2025m to=1.6m
       meas tran pout avg pout_v from=1.2025m to=1.6m

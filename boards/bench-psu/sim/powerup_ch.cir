@@ -65,10 +65,10 @@ Rbsel dgn dgb {bias > 0.5 ? 1m : 1e12}
 D15 dgb xa dsig
 R126 xa xs 100k
 .model dsig d(is=2.5n n=1.9 rs=0.6)
-* the discharge FET (Q13 + R121 1k) holds OUT at 0 V while EN is low
+* the discharge FET (Q13 + R121 4.7k) holds OUT at 0 V while EN is low
 Vctl ctl 0 pwl(0 1 2u 0)
 Sdis out dd1 ctl 0 swdis
-R121 dd1 0 1k
+R121 dd1 0 4.7k
 .model swdis sw(vt=0.5 vh=0.1 ron=3 roff=1g)
 Cfb fb 0 5p
 

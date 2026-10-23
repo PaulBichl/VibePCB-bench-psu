@@ -45,11 +45,12 @@ J3: SSD1306 0.96" I2C OLED module
   4 x M3 holes at (+-41.5, +-26.5) mm from the centre, keepouts for screw heads in `vibepcb.toml`.
 - **Plain buck, not buck-boost:** the PD input (20 V) is always above the output (max 16.5 V).
 - **Converter:** LMR33630A per channel (synchronous, 3 A, 400 kHz, HSOIC-8 with exposed pad, 36 V input),
-  10 uH / 7.8 A (8.5 A sat) FXL1040 inductor, 4 x 22 uF/25 V ceramic output, 2 x 10 uF/50 V input.
+  15 uH / 7 A sat FXL1040-150 inductor (TI's L_MIN is 11.6 uH at 16.6 V / 400 kHz; rev B's 10 uH was below it above
+  ~14 V), 4 x 22 uF/25 V ceramic output, 2 x 10 uF/50 V input.
   **Thermal vias** (2 x 3, 0.3 mm, `[thermal_vias.*]`) in every LMR33630 exposed pad; the pad connects solid to the
   pours.
-- **Voltage setting, fail-safe:** an op-amp (TLV9062) + NPN sinks Ic = Vc / 2.4k from the feedback node,
-  Vc = PWM (14-bit, 2-pole RC) * 10k/110k: Vout = 1.6 V + 4.55 * Vpwm, i.e. 1.6 V at 0 V / floating PWM or MCU reset,
+- **Voltage setting, fail-safe:** an op-amp (TLV9062) + NPN sinks Ic = Vc / 2.2k from the feedback node,
+  Vc = PWM (14-bit, 2-pole RC) * 10k/120k (R106 + R107 + R108): Vout = 1.6 V + 4.55 * Vpwm, i.e. 1.6 V at 0 V / floating PWM or MCU reset,
   16.6 V at 3.3 V PWM (the hardware maximum), ~0.9 mV per step. Feedback is taken at the terminal, after the shunt.
   Firmware closes the loop on the INA226 bus-voltage reading.
 - **Loop compensation:** the FB network has a feedback gain of 0.625 at every output voltage, but the LMR33630's
@@ -67,7 +68,7 @@ J3: SSD1306 0.96" I2C OLED module
 - **Enable / current trip:** ESP32 drives each buck's EN through 10k (100k pull-down: off at reset). The INA226 ALERT
   (shunt over-limit, latched) pulls EN low directly: the hard backstop, at a ceiling the firmware sets above Iset.
 - **Output:** 100 nF at the terminal (INA226 VBUS); SS54 reverse diode (a reversed source is clamped); active
-  discharge while off (2N7002 + 1k, gate from 5 V, held off by an NPN while EN is high): "off" is 0 V within ~0.3 s
+  discharge while off (2N7002 + 4.7k, gate from 5 V, held off by an NPN while EN is high): "off" is 0 V within ~1.2 s
   (rev B: 28 s decay through the divider), also at reset and after a trip.
 - **Cooling: passive.** ~1.6 W per channel at 3 A (1.0-1.3 W in the IC). With the thermal vias Tj stays below 99 C at
   45 C ambient (35 C room + 10 K in a vented enclosure; 139 C without vias, `sim/buck_loadpoints.cir`). A 10k NTC
@@ -75,10 +76,13 @@ J3: SSD1306 0.96" I2C OLED module
   thermal shutdown is the last resort. No fan.
 - **Measurement:** INA226 per channel (0x40 CH1, 0x41 CH2), 20 mR shunt: 4.096 A full scale, 125 uA / 1.25 mV LSB,
   60 mV drop and 0.18 W at 3 A.
+- **Input protection (rev C, from the review):** ESDA25P35 TVS on VBUS at the connector (ahead of Q1: the STUSB4500's
+  VDD is rated 28 V), ESDA25W ESD array on CC1 / CC2 as in ST's reference; D+/D- through the USBLC6.
 - **Input:** STUSB4500 drives the AO4407A gate through 47k against 100k gate-source (Vgs stays inside +-25 V up to the
   TVS clamp), 100 nF gate-source for a slow turn-on. SMBJ22A TVS (35.5 V clamp, below the LMR33630's 38 V abs max),
   100 uF SMD electrolytic for damping.
-- **Logic supply:** 5 V buck (same LMR33630, 15 uH) -> AP2112K 3.3 V; native USB on the ESP32 for flashing / CDC.
+- **Logic supply:** 5 V buck (same LMR33630, 6.8 uH / 4 A sat FXL0530: rev B's 15 uH saturated at 1.65 A, below the
+  converter's 2.9 A current limit; 4 x 22 uF output, two of them on the top side) -> AP2112K 3.3 V; native USB on the ESP32 for flashing / CDC.
 - **Front panel:** EC11E15244B2 encoders (counted by the S3's PCNT units), Omron B3F-4055 12 mm buttons (wired on
   diagonal pads 1 / 4: always across the contact), 10k pull-up + 10 nF on every front-panel line. 0.96" SSD1306
   I2C module (0x3C) on J3, its content is firmware.
@@ -100,6 +104,9 @@ J3: SSD1306 0.96" I2C OLED module
 | no temperature sensing | NTC per converter on ADC1 | firmware derating with passive cooling |
 | no mounting holes | 4 x M3 | enclosure |
 | sim decks run by hand | 5 decks run by `check`, pass ranges with sources | verification is enforced |
+| 2.4k sink resistor: Vout_max 15.2 V | 2.2k: 16.6 V | the reviewer agent found R106 in series with the VSET divider |
+| 10 uH channel / 15 uH (1.65 A sat) logic inductors | 15 uH / 7 A sat, 6.8 uH / 4 A sat | below TI's L_MIN; saturating below the current limit (review) |
+| no TVS / ESD at the USB-C input | ESDA25P35 on VBUS, ESDA25W on CC | hot-plug transients reached the STUSB4500 unclamped (review) |
 
 ### Changed from rev A (and why)
 
@@ -131,6 +138,15 @@ intent / house defaults); `check` runs ngspice, compares the deck's R/C values w
 Models: averaged peak-current-mode buck with the LMR33630's internal compensation *derived* (not published), COMP
 clamp, PFM (no reverse current); switching-level power stage for the load points. Plots / full load-point table:
 [sim/README.md](boards/bench-psu/sim/README.md) (rev B numbers, 25 C ambient).
+
+## Design review (reviewer agent)
+
+`hatch run pcb review bench-psu --run`: a fresh Claude session checks every part against its datasheet (178 checklist
+items; answers and citations in `boards/bench-psu/review.toml`). First run: 155 ok, 15 issues, 8 unknown. Fixed:
+Vout_max (15.2 V -> 16.6 V), both inductor choices, the 5 V output capacitance, the discharge resistor's power, the
+missing VBUS TVS / CC ESD. Accepted with reasons in `findings.toml`: connector current (= the 3 A PD contract), OLED
+module pin order, LED polarity (tscircuit's anode = pin 1), the LDO's thermals (0.4 A is a short peak), Q1 gate drive
+at 5 V (bring-up only), and the loop constants (measured on the prototype).
 
 ## Pin map (ESP32-S3)
 
@@ -201,7 +217,7 @@ Each channel alone, no load first. Output range at 5 V input is 1.6 V to ~4.3 V 
 
 1. PWM = 0, ISET = 3.3 V (no current limit), then EN high: ON LED lights, OUTn = 1.6 V, no overshoot on the scope.
 2. Step the PWM: Vout = 1.6 V + 4.55 * Vpwm. Note offset / gain per channel for the calibration.
-3. EN low: ON LED dark, the output falls to 0 V within ~0.3 s (discharge).
+3. EN low: ON LED dark, the output falls to 0 V within ~1.2 s (discharge).
 4. CC: set 3 V, ISET = 0.5 V (0.5 A), load 2 Ohm: the output drops to ~1 V, the current reads 0.5 A (INA226 and DMM).
 5. Trip: INA226 over-limit 0.3 A with ISET above it: ON LED dark at once, EN = 0 V; reading Mask/Enable clears it.
 

@@ -1,6 +1,213 @@
 # Review findings (format: src/vibepcb/findings.py). Set status = "accepted" with a reason to close one.
 
 [[finding]]
+id = "review:D101:orientation"
+ref = "D101"
+pin = "1"
+text = "parts.md names the LED pins only pin1/pin2. The circuit needs pin1 (to R112/V3V3) = anode and pin2 (Q12 collector) = cathode. Check that the footprint's pin 1 is the anode, since many 0603 LED footprints put the cathode on pin 1. [KT-0603YG datasheet (cathode mark)] (reviewer could not decide)"
+status = "accepted"
+reason = "tscircuit's <led> defines pin1 = anode, pin2 = cathode and the TSX wires .anode/.cathode by name; assembly polarity is checked in JLCPCB's DFM preview"
+source = "review"
+
+[[finding]]
+id = "review:D102:orientation"
+ref = "D102"
+pin = "1"
+text = "The circuit needs pin1 (R113, LED_CC1) = anode and pin2 (GND) = cathode, but parts.md does not say which footprint pin is the anode. Check the footprint polarity. [KT-0603R datasheet (cathode mark)] (reviewer could not decide)"
+status = "accepted"
+reason = "tscircuit's <led> defines pin1 = anode, pin2 = cathode and the TSX wires .anode/.cathode by name; assembly polarity is checked in JLCPCB's DFM preview"
+source = "review"
+
+[[finding]]
+id = "review:D201:orientation"
+ref = "D201"
+pin = "1"
+text = "Same as D101: pin1 (R212) must be the anode and pin2 (Q22_C) the cathode, but the footprint pin polarity is not in parts.md. Check it. [KT-0603YG datasheet (cathode mark)] (reviewer could not decide)"
+status = "accepted"
+reason = "tscircuit's <led> defines pin1 = anode, pin2 = cathode and the TSX wires .anode/.cathode by name; assembly polarity is checked in JLCPCB's DFM preview"
+source = "review"
+
+[[finding]]
+id = "review:D202:orientation"
+ref = "D202"
+pin = "1"
+text = "pin1 (R213, LED_CC2) must be the anode and pin2 (GND) the cathode, but the footprint polarity is not in parts.md. Check it. [KT-0603R datasheet (cathode mark)] (reviewer could not decide)"
+status = "accepted"
+reason = "tscircuit's <led> defines pin1 = anode, pin2 = cathode and the TSX wires .anode/.cathode by name; assembly polarity is checked in JLCPCB's DFM preview"
+source = "review"
+
+[[finding]]
+id = "review:J1:current"
+ref = "J1"
+pin = ""
+text = "Distributor listings disagree: 3 A / 5 V (JLCPCB, LCSC product page) vs 5 A (LCSC category list, HQOnline); the board draws up to ~2.9 A at 20 V from VBUS. Need the SHOU HAN drawing to confirm >= 3 A per VBUS/GND pair at 20 V, otherwise use a 5 A rated 16P/24P receptacle. [JLCPCB/LCSC C2765186 listings (no manufacturer datasheet found)] (reviewer could not decide)"
+status = "accepted"
+reason = "3 A per VBUS/GND pair is the 20 V / 3 A PD contract this board requests; the firmware power budget keeps the sum of both outputs inside the negotiated PDO"
+source = "review"
+
+[[finding]]
+id = "review:J1:protection"
+ref = "J1"
+pin = "CC1"
+text = "CC1/CC2 go straight from J1 to U1 with no ESD diode (ST reference uses ESDA25W), and VBUS has no TVS ahead of Q1: D1 (SMBJ22A) sits on VIN, so U1 VDD/VBUS_VS_DISCH (28 V abs max) see hot-plug transients unclamped. Add a 22-25 V CC ESD array (e.g. ESDA25W) on CC1/CC2 and a TVS (e.g. ESDA25P35 or SMBJ22A) on VBUS at J1; D+/D- are covered by U2. [ST STUSB4500 DS12499 Rev 3 p.25 Fig. 9 (ESDA25W on CC, ESDA25P35 on VBUS), p.27 Table 20 (VDD 28 V, CC 22 V abs max, ESD HBM 3 kV)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:J3:pinout"
+ref = "J3"
+pin = ""
+text = "J3 order is GND, VCC, SCL, SDA. That is the common SSD1306 I2C module order, but the OLED module (MPN) is not named in the review files, and some modules swap VCC/GND. Name the module and check its pin order. [PZ254V-11-04P generic 2.54 mm header (LCSC C492403)] (reviewer could not decide)"
+status = "accepted"
+reason = "J3 follows the common 0.96 in SSD1306 I2C module order GND-VCC-SCL-SDA, silkscreen-labelled; README bring-up says to check the bought module's order before plugging it"
+source = "review"
+
+[[finding]]
+id = "review:Q1:gate-drive"
+ref = "Q1"
+pin = "G"
+text = "The R3 100k / R7 47k divider gives only Vgs = -5 V x 100/147 = -3.4 V at the 5 V contract (pre-NVM bring-up, or a non-PD or PC source). That is barely past the -3.0 V max threshold, and Rds(on) is unspecified there, so VIN can sag under load. Change R7 to 10 kOhm (Vgs -4.5 V at 5 V, -18.2 V at 20 V) or use a P-FET rated at VGS = -4.5 V. R3 turns it off when U1 is unpowered. [AOS AO4407A datasheet (VGS(th) -1.7/-2.3/-3.0 V; RDS(on) only specified down to VGS = -6 V, 17 mOhm); ST STUSB4500 DS12499 p.8 sec. 2.2.10]"
+status = "accepted"
+reason = "5 V contracts are bring-up only (logic + light loads); R7 = 10k would drive Vgs to -32 V at the SMBJ22A clamp (35.5 V), beyond the AO4407A's +-25 V"
+source = "review"
+
+[[finding]]
+id = "review:U11:current-budget"
+ref = "U11"
+pin = ""
+text = "The intent runs 3.0 A, exactly the 3 A rating with no margin, and the ISET hardware range goes to 3.3 A. With 10 uH -20 % at 340 kHz and Vout ~10 V, the peak is 3 A + 0.92 A = 3.9 A, above the 3.85 A ISC min, so the part can current-limit before CC takes over. Use 15 uH (peak ~3.6 A) and cap firmware ISET at <= 2.8-3.0 A, or move to the LMR33640 (4 A). [TI LMR33630 SNVSAN3F p.6 sec. 7.3 (IOUT 3 A max), p.7 (ISC 3.85 A min), p.8 (fSW 340 kHz min)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U11:inductor"
+ref = "U11"
+pin = ""
+text = "L_MIN at 16.6 V / 400 kHz is 11.6 uH, but L11 is 10 uH (8 uH at -20 %), so it is below TI's minimum above ~14 V out (~11 V at tolerance). That risks subharmonic oscillation at high duty. Use 15 uH (TI's 12 V / 400 kHz value) with Isat >= 5.05 A (ISC max). [TI LMR33630 SNVSAN3F p.22 Eq. 5 (L_MIN >= 0.28 x VOUT / fSW), p.21 sec. 9.2.2.4; FXL1040-100-M (JLCPCB C475915: 10 uH +-20 %, Isat 8.5 A)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U11:output-cap"
+ref = "U11"
+pin = ""
+text = "4 x 22 uF 25 V 1206 X5R matches TI's table, but at 16 V DC bias only ~18 uF remain. The FB network keeps a feedback gain of 0.625 at every Vout (10x TI's design at 16 V), so stability rests on the R111/C113 lag network and a sim using unpublished internal compensation values. Measure the loop (Bode or 2 A step) at 1.6, 5 and 16.6 V before release. [TI LMR33630 SNVSAN3F p.20 Table 9-2 (400 kHz, 12 V: 4 x 22 uF), p.22-23 sec. 9.2.2.5] (reviewer could not decide)"
+status = "accepted"
+reason = "the loop is simulated with derived internal-compensation constants (sim/buck_loop.cir); measuring the loop at 1.6 / 5 / 16.6 V on the prototype is a README open item"
+source = "review"
+
+[[finding]]
+id = "review:U11:output-voltage"
+ref = "U11"
+pin = "FB"
+text = "Vout = 1.6 V + 120 kOhm x Isink, with Isink = VSET / R104. VSET maxes at 3.3 V x 10k / (10k+100k+10k) = 0.275 V, so Isink is at most 115 uA and Vout_max is about 15.2 V (14.8-15.7 V with tolerances), not the intended 16.6 V. Fix: R104/R204 2.4 kOhm -> 2.2 kOhm (Vout_max ~16.5 V), or R108/R208 10 kOhm -> 11 kOhm, plus firmware calibration. [TI LMR33630 SNVSAN3F p.7 sec. 7.5 (VFB 0.985-1.015 V)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U21:current-budget"
+ref = "U21"
+pin = ""
+text = "Same as U11: the 3.0 A budget equals the rating, and the worst-case inductor peak (~3.9 A at 10 uH -20 %, 340 kHz, Vout ~10 V) exceeds the 3.85 A ISC min. Use 15 uH and cap ISET at <= 3.0 A, or use the LMR33640. [TI LMR33630 SNVSAN3F p.6 (IOUT 3 A), p.7 (ISC 3.85 A min)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U21:inductor"
+ref = "U21"
+pin = ""
+text = "L21 is 10 uH, below L_MIN 11.6 uH at 16.6 V out (8 uH at -20 % tolerance). Change to 15 uH with Isat >= 5.05 A. [TI LMR33630 SNVSAN3F p.22 Eq. 5 (L_MIN >= 0.28 x VOUT / fSW); FXL1040-100-M (JLCPCB C475915)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U21:output-cap"
+ref = "U21"
+pin = ""
+text = "Same as U11: C206-C209 4 x 22 uF (~18 uF at 16 V). The constant 0.625 feedback gain plus lag network is not covered by TI guidance, and the sim uses assumed internal compensation. Verify with bench Bode or step tests. [TI LMR33630 SNVSAN3F p.20 Table 9-2, p.22-23 sec. 9.2.2.5] (reviewer could not decide)"
+status = "accepted"
+reason = "the loop is simulated with derived internal-compensation constants (sim/buck_loop.cir); measuring the loop at 1.6 / 5 / 16.6 V on the prototype is a README open item"
+source = "review"
+
+[[finding]]
+id = "review:U21:output-voltage"
+ref = "U21"
+pin = "FB"
+text = "With R206/R207/R208 (10k/100k/10k), VSET2 is at most 0.275 V, giving Isink 115 uA and Vout_max ~15.2 V, short of the intended 16.6 V. Fix: R204 2.4 kOhm -> 2.2 kOhm (or R208 -> 11 kOhm). [TI LMR33630 SNVSAN3F p.7 sec. 7.5 (VFB 0.985-1.015 V)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U3:inductor"
+ref = "U3"
+pin = ""
+text = "L1 at 15 uH meets L_MIN (3.6 uH) with 0.64 A p-p ripple, but its 1.65 A Isat is below the 2.9 A ILIMIT minimum TI says it must not fall under. A V5 short or start-up into the caps saturates it at the 4.5 A current limit. Use 10-15 uH with Isat >= 4.1 A (ideally >= 5 A), e.g. a 5x5 or 6x6 mm molded part. [TI LMR33630 SNVSAN3F p.21-22 sec. 9.2.2.4 (Isat ideally >= ISC 3.85-5.05 A; must not be less than ILIMIT 2.9-4.1 A, p.7); SWPA4030S150MT (JLCPCB C83475: 15 uH, Isat 1.65 A, Irms 1.11 A, DCR 247 mOhm)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U3:output-cap"
+ref = "U3"
+pin = ""
+text = "V5 has only C12/C13, 2 x 22 uF 0805, about 22-24 uF effective at 5.17 V DC bias, against TI's validated 4 x 22 uF for 5 V / 400 kHz on an internally compensated loop. Less Cout raises the crossover and cuts phase margin, and Eq. 6 for a 0.35 A step at 100 mV already needs ~28 uF. Add two more 22 uF (25 V, 1206 preferred). [TI LMR33630 SNVSAN3F p.20 Table 9-2 (400 kHz, 5 V: 4 x 22 uF), p.22 sec. 9.2.2.5 (example needs >= 70 uF effective)]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:U4:thermal"
+ref = "U4"
+pin = ""
+text = "At the intent's 0.4 A, (5.17 - 3.3) V x 0.4 A = 0.75 W, so Tj is about 45 C + 0.75 W x 184 C/W = 183 C, above 150 C. Even a 0.2 A average gives ~114 C. Lower the LDO input (e.g. a ~3.8 V intermediate rail), use a SOT-89/SO-8 LDO (114-120 C/W), or make 3V3 with a buck. [Diodes AP2112 DS39724 Rev 2-2 p.3 (thetaJA SOT25 184 C/W, TJ max 150 C, OTSD 160 C)]"
+status = "accepted"
+reason = "0.4 A is a short radio peak, not continuous: the ESP32-S3 averages ~0.12 A (BLE, Wi-Fi off) = 0.22 W, Tj ~86 C at 45 C ambient; the intent lists 0.4 A as the peak budget"
+source = "review"
+
+[[finding]]
+id = "review:U5:ground"
+ref = "U5"
+pin = "GND"
+text = "The U5 footprint ends at pin 61 (GND5-GND20 = pins 46-61), so the datasheet's GND pads 62-65 (the four corner pads) are missing. All listed GND pins are on GND. Use a footprint with all 65 pads and tie 62-65 to GND for mechanical and thermal attachment. [Espressif ESP32-S3-MINI-1 datasheet v1.7 p.10 Fig. 3-1 and p.11 Table 3-1 (GND = 1, 2, 42, 43, 46-65; 65 pins)]"
+status = "accepted"
+reason = "not missing: the footprint has the four corner pads at (+-7, +-7) mm, merged with the nine exposed-pad squares under pin 61 (GND20), all on GND; parts.md lists pins, not pads"
+source = "review"
+
+[[finding]]
+id = "review:board:intent"
+ref = ""
+pin = ""
+text = "The intent says outputs reach 16.6 V, but the VSET network (R106/R107/R108 into R104 2.4 kOhm) caps Isink at 115 uA, so Vout_max is about 15.2 V. Fix R104/R204 to 2.2 kOhm. The 0.4 A V3V3 budget also contradicts the AP2112 thermal limit (see U4:thermal). [TI LMR33630 SNVSAN3F p.7 (VFB 1 V); Diodes AP2112 DS39724 p.3 (thetaJA 184 C/W)]"
+status = "accepted"
+reason = "Vout_max fixed (R104/R204 2.2k: 16.6 V); the 0.4 A V3V3 figure is the peak budget, see U4:thermal"
+source = "review"
+
+[[finding]]
+id = "review:board:resistor-power"
+ref = ""
+pin = ""
+text = "R101/R201 at 3 A dissipate 0.18 W in a 2 W 2512 (ok). R121/R221 (1 kOhm 0603, 0.1 W) take V^2/1k = 0.28 W at 16.6 V whenever the channel is off with an external source or battery on the terminals, and R1 (0603) peaks at 0.4 W discharging VIN bulk from 20 V. Use 1206 (0.25 W) or larger for R121/R221 (or raise to 2.2 kOhm) and 0805/1206 for R1. [LCSC C105360 (FMF25FPJR020-LH, 2512, 2 W); JLCPCB C21190 (0603WAF1001T5E, 0603, 0.1 W); ST STUSB4500 DS12499 p.29 Table 22 (TDISUSBPDO 288 ms, IDISUSB 50 mA)]"
+status = "accepted"
+reason = "R121/R221 changed to 4.7k (0.06 W at 16.6 V); R1 only carries the STUSB4500's VBUS discharge pulses at detach (~24 mJ), within 0603 pulse handling"
+source = "review"
+
+[[finding]]
+id = "review:board:sims"
+ref = ""
+pin = ""
+text = "Phase-margin and step results in buck_loop/cc_loop/powerup use invented internal compensation (gm 1 mS, Rc 12k, Cc 4.7 nF; the header admits these are not published), so they show trends but do not prove stability. buck_loadpoints only runs Vout 1.6/5/16 V, which misses the worst inductor peak near 10 V (D = 0.5), so il_peak_max under ISC 3.85 A is not proven. powerup_ch drives the sink current directly, bypassing the R104/R106-R108 VSET path, so it hides the 15.2 V ceiling. [sim/buck_loop.cir, cc_loop.cir, powerup_*.cir, buck_loadpoints.cir; TI LMR33630 SNVSAN3F p.7-8]"
+status = "accepted"
+reason = "the decks state their assumed constants; buck_loadpoints now includes the 10 V corner (peak 3.41 A < ISC 3.85 A); loop and CC behaviour are measured on the prototype (README)"
+source = "review"
+
+[[finding]]
 id = "fb_divider:U11"
 ref = "U11"
 pin = "FB"

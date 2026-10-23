@@ -13,9 +13,9 @@
 //   -24 V at the SMBJ22A clamp voltage), inside the AO4407A's +-25 V; 100 nF gate-source slows the turn-on (~3 ms).
 //   SMBJ22A (35.5 V clamp) stays below the LMR33630's 38 V absolute maximum.
 // - Converter: one LMR33630A (400 kHz, HSOIC-8 + exposed pad with a 2 x 3 thermal via grid, vibepcb.toml) per channel,
-//   10 uH / 7.8 A FXL1040, 4 x 22 uF output. Input never below output (PD 20 V, output <= 16.5 V): a buck is enough.
+//   15 uH / 7 A sat FXL1040-150 (TI L_MIN 11.6 uH at 16.6 V), 4 x 22 uF output. Input never below output (PD 20 V, output <= 16.5 V): a buck is enough.
 // - Voltage set, fail-safe: Vout = 1 V * (1 + 120k/200k) + 120k * Ic, Ic sunk from FB by an op-amp + NPN current sink,
-//   Ic = Vc / 2.4k, Vc = PWM (2-pole RC) * 10k/110k. PWM 0 V / floating / ESP32 in reset -> 1.6 V; 3.3 V -> 16.6 V (the
+//   Ic = Vc / 2.2k, Vc = PWM (2-pole RC) * 10k/120k (R106 + R107 + R108; rev B's 2.4k reached only 15.2 V). PWM 0 V / floating / ESP32 in reset -> 1.6 V; 3.3 V -> 16.6 V (the
 //   hardware maximum). Loop: 6.8k + 220 nF lag network FB-GND (sim/buck_loop.cir: phase margin 52..75 deg).
 //   The lag capacitor is pre-charged (~1.1 V via 1N4148W + 100k from the discharge gate node) while the channel is
 //   off: otherwise the soft start charges it through the 120k top resistor and every start overshoots to ~7.7 V
@@ -26,7 +26,7 @@
 //   lowers Vout until I = Iset (constant current). In CV the amp sits at 0 V and the diode is off. The INA226 ALERT ->
 //   EN trip stays as a fast backstop at a ceiling the firmware sets above Iset. sim/cc_loop.cir: CC loop stability.
 // - Output: 100 nF at the terminal (INA226 VBUS), SS54 reverse diode (a reversed source / battery is clamped), and an
-//   active discharge (2N7002 + 1k, gate from 5 V, held off by an NPN while EN is high): "off" is 0 V within ~0.3 s
+//   active discharge (2N7002 + 4.7k, gate from 5 V, held off by an NPN while EN is high): "off" is 0 V within ~1.2 s
 //   instead of a 28 s decay through the feedback divider; also at reset and after a trip.
 // - Temperature: 10k NTC next to each LMR33630 into ESP32 ADC1 (IO1 / IO2): firmware derates / switches off (passive
 //   cooling, ~1.6 W per channel at 3 A; the converter's own thermal shutdown is the last resort).
@@ -35,9 +35,9 @@
 // - Control: ESP32-S3-MINI-1, native USB on the USB-C port (flashing / CDC; BOOT + RST on the back), BLE.
 //   Encoders counted by the S3's PCNT units; 10k pull-ups + 10 nF on every front-panel line.
 import {
-  A_1N4148W, A_2N7002, AO4407A, AP2112K_3_3TRG1, B3F_4055, DG301_5_0_04P_14_1000A_H_, EC11E15244B2, ESP32_S3_MINI_1_N8,
-  FXL1040_100_M, INA181A2IDBVR, INA226AIDGSR, LMR33630ADDAR, MMBT3904_RANGE_100_300_ as NPN,
-  RVT1V101M0607_100UF_35V as ELCAP, SMBJ22A, SS54, STUSB4500QTR, SWPA4030S150MT, TLV9062IDR, TS_1187A_B_A_B,
+  A_1N4148W, A_2N7002, AO4407A, AP2112K_3_3TRG1, B3F_4055, DG301_5_0_04P_14_1000A_H_, EC11E15244B2, ESDA25P35_1U1M, ESDA25W,
+  ESP32_S3_MINI_1_N8, FXL0530_6R8_M, FXL1040_150_M, INA181A2IDBVR, INA226AIDGSR, LMR33630ADDAR, MMBT3904_RANGE_100_300_ as NPN,
+  RVT1V101M0607_100UF_35V as ELCAP, SMBJ22A, SS54, STUSB4500QTR, TLV9062IDR, TS_1187A_B_A_B,
   TYPE_C_16PIN_2MD_073_, USBLC6_2SC6,
 } from "./imports"
 import { C, R, RSENSE, TRACE_MAX, net } from "./parts"
@@ -80,7 +80,7 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
       <C name={id("C", 3)} {...p(-5, -2.5)} pcbRotation={90} v="100nF" />
       <C name={id("C", 4)} {...p(3.5, 4)} v="100nF" />
       <C name={id("C", 5)} {...p(4.4, -2.5)} pcbRotation={90} v="1uF" />
-      <FXL1040_100_M name={`L${n}1`} {...p(12, 0)} />
+      <FXL1040_150_M name={`L${n}1`} {...p(12, 0)} />
       <C name={id("C", 6)} {...p(20.5, 2.6)} pcbRotation={90} v="22uF 25V" />
       <C name={id("C", 7)} {...p(23, 2.6)} pcbRotation={90} v="22uF 25V" />
       <C name={id("C", 8)} {...p(20.5, -2.6)} pcbRotation={90} v="22uF 25V" />
@@ -98,7 +98,7 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
       <R name={id("R", 11)} {...p(-0.5, -7.5)} v="6.8k" />
       <C name={id("C", 13)} {...p(2.7, -7.5)} v="220nF" />
       <NPN name={`Q${n}1`} {...p(6.5, -7.5)} />
-      <R name={id("R", 4)} {...p(10.3, -7.5)} v="2.4k" />
+      <R name={id("R", 4)} {...p(10.3, -7.5)} v="2.2k" />
       <R name={id("R", 25)} {...p(13.8, -7.5)} v="330" />
       <R name={id("R", 15)} {...p(17.5, -7.5)} v="10k" />
       <C name={id("C", 16)} {...p(20.5, -7.5)} v="100nF" />
@@ -127,7 +127,7 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
       <R name={id("R", 18)} {...p(8.5, -13.5)} v="330" />
       <C name={id("C", 17)} {...p(11.5, -13.5)} v="100nF" />
       <A_2N7002 name={`Q${n}3`} {...p(15.2, -13.5)} />
-      <R name={id("R", 21)} {...p(18.5, -13.5)} v="1k" />
+      <R name={id("R", 21)} {...p(18.5, -13.5)} v="4.7k" />
       <NPN name={`Q${n}4`} {...p(22.2, -13.5)} />
       <R name={id("R", 22)} {...p(25.5, -13.5)} v="47k" />
       <R name={id("R", 23)} {...p(28.5, -13.5)} v="47k" />
@@ -280,8 +280,14 @@ export default () => (
       ".U1 > .ADDR0", ".U1 > .ADDR1", ".C1 > .pin2", ".C2 > .pin2", ".C3 > .pin2", ".C4 > .pin2", ".R2 > .pin2",
       ".C5 > .pin2", ".U2 > .GND"])}
     {net("USB_SHIELD", [".J1 > .EH1", ".J1 > .EH2", ".J1 > .EH3", ".J1 > .EH4", ".R2 > .pin1", ".C5 > .pin1"])}
-    {net("CC1", [".J1 > .CC1", ".U1 > .CC1", ".U1 > .CC1DB"])}
-    {net("CC2", [".J1 > .CC2", ".U1 > .CC2", ".U1 > .CC2DB"])}
+    {/* hot-plug protection at the connector (top side, review J1:protection): VBUS TVS ahead of Q1 (U1 VDD 28 V abs max),
+        CC1 / CC2 ESD array as in ST's STUSB4500 reference */}
+    <ESDA25P35_1U1M name="D2" {...at(17, 21.5)} />
+    <ESDA25W name="U8" {...at(22.3, 20.6)} />
+    {net("VBUS", [".D2 > .pin1"], { thickness: PWR })}
+    {net("GND", [".D2 > .pin2", ".U8 > .A"])}
+    {net("CC1", [".J1 > .CC1", ".U1 > .CC1", ".U1 > .CC1DB", ".U8 > .K1"])}
+    {net("CC2", [".J1 > .CC2", ".U1 > .CC2", ".U1 > .CC2DB", ".U8 > .K2"])}
     {net("USB_DP", [".J1 > .Dp1", ".J1 > .Dp2", ".U2 > .pin3", ".U2 > .pin4"])}
     {net("USB_DN", [".J1 > .Dn1", ".J1 > .Dn2", ".U2 > .pin1", ".U2 > .pin6"])}
     {net("V3V3", [".U2 > .VBUS"])}
@@ -294,8 +300,8 @@ export default () => (
 
     {/* load switch: VBUS_EN_SNK (open drain) pulls the P-FET gate down through R7 once a contract exists;
         R3/R7 limit Vgs to -0.68 * VBUS, C19 slows the turn-on */}
-      <AO4407A name="Q1" {...bot(20, 7.25)} pcbRotation={90} />
-      <R name="R3" {...bot(13.5, 8.5)} v="100k" />
+      <AO4407A name="Q1" {...bot(20.3, 7.25)} pcbRotation={90} />
+      <R name="R3" {...bot(13.5, 8.7)} v="100k" />
       <R name="R7" {...bot(25.6, 8.5)} pcbRotation={90} v="47k" />
       <C name="C19" {...bot(25.6, 4.8)} pcbRotation={90} v="100nF" />
       <SMBJ22A name="D1" {...bot(20, 2.25)} />
@@ -310,25 +316,29 @@ export default () => (
 
     {/* ============================ logic supplies: 5 V buck + 3.3 V LDO (bottom) ============================ */}
       <LMR33630ADDAR name="U3" {...bot(6, 3)} />
-      <SWPA4030S150MT name="L1" {...bot(13, 2.5)} />
+      <FXL0530_6R8_M name="L1" {...bot(13, 3.0)} />
       <C name="C9" {...bot(0.8, 3)} pcbRotation={90} v="10uF 50V" />
       <C name="C10" {...bot(3, 6.5)} v="100nF" />
-      <C name="C11" {...bot(8.5, 6.5)} v="100nF" />
+      <C name="C11" {...bot(8.2, 6.6)} v="100nF" />
       <C name="C20" {...bot(9.6, -1.8)} v="1uF" />
       <C name="C12" {...bot(12.9, -1.8)} v="22uF" />
-      <C name="C13" {...bot(13, 6.2)} v="22uF" />
+      <C name="C13" {...bot(13, 6.9)} v="22uF" />
+      {/* two more 22 uF 25 V on the top side, above L1 (TI validates 4 x 22 uF at 5 V / 400 kHz; review U3:output-cap) */}
+      <C name="C23" {...at(13, 1)} pcbRotation={90} v="22uF 25V" />
+      <C name="C24" {...at(15.5, 1)} pcbRotation={90} v="22uF 25V" />
       <R name="R4" {...bot(0.5, -1.8)} v="100k" />
-      <R name="R5" {...bot(3.5, -1.8)} v="100k" />
+      <R name="R5" {...bot(3.5, -2.1)} v="100k" />
       <R name="R6" {...bot(6.5, -1.8)} v="24k" />
     {/* 5 V = 1 V * (1 + 100k / 24k) = 5.17 V (AP2112K: 6 V max) */}
     {net("VIN", [".U3 > .VIN", ".C9 > .pin1", ".C10 > .pin1", ".R4 > .pin1"], { thickness: MID })}
-    {net("GND", [".U3 > .PGND", ".U3 > .EP", ".C9 > .pin2", ".C10 > .pin2", ".C12 > .pin2", ".C13 > .pin2", ".C20 > .pin2",
+    {net("GND", [".U3 > .PGND", ".U3 > .EP", ".C9 > .pin2", ".C10 > .pin2", ".C12 > .pin2", ".C13 > .pin2", ".C23 > .pin2",
+      ".C24 > .pin2", ".C20 > .pin2",
       ".R6 > .pin2"], { thickness: MID })}
     <trace from=".U3 > .EN" to=".R4 > .pin2" maxLength={TRACE_MAX} />
     {net("SW5", [".U3 > .SW", ".L1 > .pin1", ".C11 > .pin2"], { thickness: MID })}
     <trace from=".U3 > .BOOT" to=".C11 > .pin1" maxLength={TRACE_MAX} />
     <trace from=".U3 > .VCC" to=".C20 > .pin1" maxLength={TRACE_MAX} />
-    {net("V5", [".L1 > .pin2", ".C12 > .pin1", ".C13 > .pin1", ".R5 > .pin1"], { thickness: MID })}
+    {net("V5", [".L1 > .pin2", ".C12 > .pin1", ".C13 > .pin1", ".C23 > .pin1", ".C24 > .pin1", ".R5 > .pin1"], { thickness: MID })}
     {net("FB5", [".U3 > .FB", ".R5 > .pin2", ".R6 > .pin1"])}
       <AP2112K_3_3TRG1 name="U4" {...bot(4.2, -5)} pcbRotation={90} />
       <C name="C14" {...bot(1, -5)} pcbRotation={90} v="1uF" />
@@ -349,9 +359,9 @@ export default () => (
       <TS_1187A_B_A_B name="SW1" {...bot(20, -24.5)} />
       <R name="R10" {...bot(24.6, -28.3)} v="10k" />
       <TS_1187A_B_A_B name="SW2" {...bot(28.2, -24.5)} />
-      <R name="R11" {...bot(23, -12)} v="4.7k" />
-      <R name="R12" {...bot(26, -12)} v="4.7k" />
-      <R name="R13" {...bot(29, -12)} v="10k" />
+      <R name="R11" {...bot(23, -12.4)} v="4.7k" />
+      <R name="R12" {...bot(26, -12.4)} v="4.7k" />
+      <R name="R13" {...bot(29, -12.4)} v="10k" />
     {net("V3V3", [".U5 > .3V3", ".C16 > .pin1", ".C17 > .pin1", ".R9 > .pin1", ".R10 > .pin1", ".R11 > .pin1",
       ".R12 > .pin1", ".R13 > .pin1"], { thickness: MID })}
     {net("GND", [".U5 > .GND1", ".U5 > .GND2", ".U5 > .GND3", ".U5 > .GND4", ".U5 > .GND5", ".U5 > .GND6", ".U5 > .GND7",

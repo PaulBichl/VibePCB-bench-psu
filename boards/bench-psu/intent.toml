@@ -4,7 +4,7 @@ assumptions = [
   "the sum of both outputs stays inside the PD contract (firmware power budget); one channel alone may take 3 A",
   "outputs 1.6-16.6 V adjustable; OUTn voltage below is the maximum (ratings are checked against it)",
   "passive cooling in a vented enclosure, ambient <= 35 C; ~1.6 W per channel at 3 A (sim/buck_loadpoints.cir)",
-  "logic budget: ESP32-S3 with BLE ~350 mA peak on 3V3, OLED 20 mA, LEDs 4 mA",
+  "logic budget: ESP32-S3 with BLE ~350 mA peak / ~120 mA average on 3V3 (Wi-Fi off), OLED 20 mA, LEDs 4 mA",
   "load transient: a 2 A load step / release moves the output by at most 400 mV and recovers within 1 ms (the FB lag network trades transient speed for stability over 1.6-16 V; 15 % at 1.6 V, 2.3 % at 16 V)",
   "CC response: after a step into the current limit the converter runs at its own ~4.5 A peak limit for up to ~2 ms before the CC loop takes over (sim/cc_loop.cir); the INA226 trip is the fast backstop",
 ]
