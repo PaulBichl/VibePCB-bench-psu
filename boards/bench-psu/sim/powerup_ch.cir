@@ -1,25 +1,27 @@
-* bench-psu rev C: channel power-up - EN at the minimum set point, then the firmware ramps the set point
-* run: ngspice -b boards/bench-psu/sim/powerup_ch.cir      (a few seconds)
+* bench-psu rev C: channel power-up and set-point changes through the real VSET network
+* run: ngspice -b boards/bench-psu/sim/powerup_ch.cir      (~30 s)
 *
 * covers: powerup U11 U21
-* range: pu_overshoot_pct 0 5 source=house:rules/sim-defaults.toml overshoot_pct (worst of 1.6 / 5 / 16.6 V, 0 / 1 A)
-* range: pu_settle_ms - 10 source=house:rules/sim-defaults.toml settle_ms (to 2 % after the set-point ramp ends)
+* range: pu_overshoot_pct 0 5 source=house:rules/sim-defaults.toml overshoot_pct (EN at PWM 0, 0 / 1 A; and every set-point step)
+* range: pu_settle_ms - 20 source=intent:assumptions "power-up from EN settles within 20 ms" (EN at PWM 0 to 2 % of 1.6 V, incl. the 4 ms soft start)
+* range: setpoint_settle_ms - 1000 source=intent:assumptions "set-point changes settle within 1 s" (PWM step to 2 %, via the 2-pole RC)
+* range: vmin_out1 15.77 - source=intent:rail OUT1 16.6 V -5 % (settled output at full PWM through R104 / R106..R108)
 *
 * Why the sequence matters: the VSET current sink pulls Ic from FB from the moment EN rises, so the output target
-* is 1.6 V + 120k * Ic regardless of the converter's soft-start reference (FB = vref(t) -> Vout = vref * 1.6 + 120k * Ic).
-* Enabling at a high set point charges the output at the converter's current limit with no soft start. The firmware
-* (README "Firmware duties") enables a channel with PWM = 0 (1.6 V, also the reset state), waits for the soft start,
-* then ramps the set point over 5 ms. That sequence is simulated here.
+* is 1.6 V + 120k * Ic regardless of the converter's soft-start reference. The firmware (README "Firmware duties")
+* enables a channel with PWM = 0 (1.6 V, also the reset state), waits for the soft start, then sets the PWM.
 *
 * Model: the averaged peak-current-mode buck of buck_loop.cir (same assumed internal compensation), its error
-* amplifier referenced to a soft-start ramp vref = min(1, t / tss), tss = 4 ms (LMR33630 internal soft start;
-* SNVSAN3F gives 3-5 ms typ - assumption, the result is insensitive to it), PFM variant: no reverse current.
-* Output capacitance at DC bias as in buck_loadpoints.cir. The set-point ramp drives the sink current directly
-* (the PWM's 2-pole RC is ~20 ms slower than this ramp, so the hardware ramp is gentler than modelled).
+* amplifier referenced to a soft-start ramp vref = min(1, t / tss), tss = 4 ms (assumption, SNVSAN3F 3-5 ms typ),
+* COMP clamp, PFM variant (no reverse current). Output capacitance at DC bias as in buck_loadpoints.cir.
+* Set point as on the board (review board:sims: the deck used to drive the sink current directly and so could not
+* see rev B's 15.2 V ceiling): PWM average (0..3.3 V) -> R106 10k -> C110 1 uF -> R107 100k -> VSET (R108 10k,
+* C111 1 uF), op-amp + NPN sink Ic = VSET / R104 (2.2k; the op-amp held ideal, its loop is far faster than the RC).
+* Lag-capacitor pre-charge as on the board (D15 + R126 from DIS1_G).
 
-.param vt=5 iload=1 tss=4m t1=6m tramp=5m bias=1
+.param vt=5 iload=1 tss=4m t1=6m bias=1
+.param duty={(vt - 1.6) / 15}
 .param cout={vt < 2 ? 70u : vt < 4 ? 56u : vt < 6 ? 45u : vt < 13 ? 24u : 18u}
-.param ic_t={(vt - 1.6) / 120k}
 .param gm=1m rc=12k cc=4.7n ri=0.1
 .param wn={3.14159 * 400k} qs={2 / 3.14159} chn=1n lhn={1 / (wn * wn * chn)} rhn={sqrt(lhn / chn) / qs}
 
@@ -49,7 +51,17 @@ Rload out 0 {iload > 0 ? vt / iload : 1meg}
 * --- feedback (R102 / R103, lag R111 + C113), set-point sink ramped by the firmware from t1 over tramp ---
 R102 out fb 120k
 R103 fb 0 200k
-Bsink fb 0 i = ic_t * min(1, max(0, (time - t1) / tramp))
+* set point: PWM average from t1 (the firmware sets it after the soft start), filtered as on the board
+Vpwm pwm 0 pwl(0 0 {t1} 0 {t1 + 1u} {3.3 * duty})
+R106 pwm pf 10k
+C110 pf 0 1u
+R107 pf vset 100k
+R108 vset 0 10k
+C111 vset 0 1u
+Efol em 0 vset 0 1
+Vis em em2 0
+R104 em2 0 2.2k
+Bsink fb 0 i = i(Vis)
 R111 fb xs 6.8k
 C113 xs 0 220n
 * lag-capacitor pre-charge while the channel is off (rev C): DIS1_G (the discharge FET's gate, ~4.3 V while EN is
@@ -76,31 +88,59 @@ Cfb fb 0 5p
   set noaskquit
   let os_max = 0
   let ts_max = 0
-  echo "Vset  Iload | Vmax   overshoot_%  settle_ms"
-  foreach v 1.6 5 16.6
+  let ss_max = 0
+  let vfull = 0
+  echo "power-up at PWM 0 (1.6 V):  Iload | Vmax   overshoot_%  settle_ms"
+  foreach i 0 1
+    alterparam vt = 1.6
+    alterparam iload = $i
+    reset
+    tran 2u 40m
+    meas tran vpk max v(out)
+    let os = 100 * (vpk - 1.6) / 1.6
+    let os = os > 0 ? os : 0
+    let err = abs(v(out) - 1.6) - 0.032
+    meas tran tlast when err=0 cross=last
+    let ts = tlast * 1000
+    echo "  $i | $&vpk $&os $&ts"
+    if os > os_max
+      let os_max = os
+    end
+    if ts > ts_max
+      let ts_max = ts
+    end
+    destroy all
+  end
+  echo "set point (PWM at 6 ms):  Vset Iload | Vend  overshoot_%  settle_ms"
+  foreach v 5 16.6
     foreach i 0 1
       alterparam vt = $v
       alterparam iload = $i
       reset
-      tran 2u 40m
+      tran 10u 1.2
+      meas tran vend find v(out) at=1.19
       meas tran vpk max v(out)
-      let os = 100 * (vpk - $v) / $v
+      let os = 100 * (vpk - vend) / vend
       let os = os > 0 ? os : 0
-      let err = abs(v(out) - $v) - 0.02 * $v
+      let err = abs(v(out) - vend) - 0.02 * vend
       meas tran tlast when err=0 cross=last
-      let ts = (tlast - 11m) * 1000
-      let ts = ts > 0 ? ts : 0
-      echo "$v  $i | $&vpk $&os $&ts"
+      let ss = (tlast - 6m) * 1000
+      echo "  $v  $i | $&vend $&os $&ss"
       if os > os_max
         let os_max = os
       end
-      if ts > ts_max
-        let ts_max = ts
+      if ss > ss_max
+        let ss_max = ss
+      end
+      if $v > 16
+        let vfull = vend
       end
       destroy all
     end
   end
   echo "pu_overshoot_pct = $&os_max"
   echo "pu_settle_ms = $&ts_max"
+  echo "setpoint_settle_ms = $&ss_max"
+  echo "vmin_out1 = $&vfull"
 .endc
 .end
