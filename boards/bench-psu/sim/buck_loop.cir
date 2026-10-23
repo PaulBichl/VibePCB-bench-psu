@@ -1,6 +1,10 @@
 * bench-psu: one output channel - control loop (crossover, phase margin) and 1 A <-> 3 A load steps
 * run: ngspice -b boards/bench-psu/sim/buck_loop.cir      (a few seconds)
 *
+* covers: loop U11 U21
+* range: cv_min_phase_margin_deg 45 - source=house:rules/sim-defaults.toml phase_margin_deg (1.6..16 V)
+* range: cv_step_dev_mv 0 400 source=intent:assumptions "load transient" (2 A step / release, worst of 1.6..16 V)
+*
 * Why this deck exists: the LMR33630's compensation is internal and sized for a feedback gain of
 * H = VREF/VOUT (TI keeps 4 x 22 uF from 3.3 V to 12 V at 400 kHz: crossover ~ H * K / (2 pi Cout)).
 * The fail-safe FB network (Vout = 1.6 V + 120k * Isink) has H = 200k/(120k+200k) = 0.625 at EVERY output
@@ -59,33 +63,43 @@ Cfb fb 0 5p
 
 .control
   set noaskquit
-  echo "Vout lag |  fc_kHz  PM_deg |  undershoot_mV  overshoot_mV  err_390us_mV  (1->3 A step, 3->1 A release)"
+  * the board's configuration (lag network fitted); `alterparam lag = 0` reproduces the rev A problem
+  let pm_min = 999
+  let dev_max = 0
+  echo "Vout |  fc_kHz  PM_deg |  undershoot_mV  overshoot_mV  (1 -> 3 A step, 3 -> 1 A release)"
   foreach vo 1.6 3.3 5 12 16
-    foreach lg 0 1
-      alterparam vout = $vo
-      alterparam lag = $lg
-      reset
-      ac dec 200 100 2meg
-      let t = -v(out) / v(fbtop)
-      let tmag = db(t)
-      let tph = 180 / 3.14159 * cph(t)
-      meas ac fc when tmag=0 fall=last
-      meas ac phc find tph at=fc
-      let pm = 180 + phc
-      let fck = fc / 1000
-      set fcv = "$&fck"
-      set pmv = "$&pm"
-      tran 0.2u 1m
-      meas tran v0 find v(out) at=0.199m
-      meas tran vmin min v(out) from=0.2m to=0.6m
-      meas tran v1 find v(out) at=0.59m
-      meas tran vmax max v(out) from=0.6m to=1m
-      let us = (v0 - vmin) * 1000
-      let os = (vmax - v0) * 1000
-      let e1 = (v0 - v1) * 1000
-      echo "$vo  $lg | $fcv $pmv | $&us $&os $&e1"
-      destroy all
+    alterparam vout = $vo
+    alterparam lag = 1
+    reset
+    ac dec 200 100 2meg
+    let t = -v(out) / v(fbtop)
+    let tmag = db(t)
+    let tph = 180 / 3.14159 * cph(t)
+    meas ac fc when tmag=0 fall=last
+    meas ac phc find tph at=fc
+    let pm = 180 + phc
+    let fck = fc / 1000
+    set fcv = "$&fck"
+    set pmv = "$&pm"
+    if pm < pm_min
+      let pm_min = pm
     end
+    tran 0.2u 1m
+    meas tran v0 find v(out) at=0.199m
+    meas tran vmin min v(out) from=0.2m to=0.6m
+    meas tran vmax max v(out) from=0.6m to=1m
+    let us = 1000 * (v0 - vmin)
+    let os = 1000 * (vmax - v0)
+    echo "$vo | $fcv $pmv | $&us $&os"
+    if us > dev_max
+      let dev_max = us
+    end
+    if os > dev_max
+      let dev_max = os
+    end
+    destroy all
   end
+  echo "cv_min_phase_margin_deg = $&pm_min"
+  echo "cv_step_dev_mv = $&dev_max"
 .endc
 .end

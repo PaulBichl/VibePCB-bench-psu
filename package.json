@@ -2,6 +2,9 @@
   "name": "vibepcb-boards",
   "private": true,
   "type": "module",
+  "scripts": {
+    "postinstall": "node ../VibePCB/scripts/patch-tscircuit.mjs --root ."
+  },
   "description": "tscircuit boards (boards/<name>/index.circuit.tsx), built via `hatch run pcb build <name>`",
   "devDependencies": {
     "@types/react": "^19.0.0",

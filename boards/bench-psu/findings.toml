@@ -1,19 +1,19 @@
 # Review findings (format: src/vibepcb/findings.py). Set status = "accepted" with a reason to close one.
 
 [[finding]]
-id = "decoupling:U12:8"
-ref = "U12"
-pin = "VBUS"
-text = "power pin VBUS (net OUT1) has no capacitor to ground on its net"
-status = "open"
-reason = ""
+id = "fb_divider:U11"
+ref = "U11"
+pin = "FB"
+text = "divider R102 120000 / R103 200000 ohm to OUT1 (16.6 V) implies Vref 10.375 V, outside the usual 0.4..1.3 V (set vref in intent.toml to check it)"
+status = "accepted"
+reason = "the divider alone gives 1.6 V (Vref 1.0 V); the output above that is set by the VSET current sink (Q11/Q21 + U6) pulling Ic from FB: Vout = 1.6 V + 120k * Ic, verified in sim/powerup_ch.cir and buck_loop.cir"
 source = "netcheck"
 
 [[finding]]
-id = "decoupling:U22:8"
-ref = "U22"
-pin = "VBUS"
-text = "power pin VBUS (net OUT2) has no capacitor to ground on its net"
-status = "open"
-reason = ""
+id = "fb_divider:U21"
+ref = "U21"
+pin = "FB"
+text = "divider R202 120000 / R203 200000 ohm to OUT2 (16.6 V) implies Vref 10.375 V, outside the usual 0.4..1.3 V (set vref in intent.toml to check it)"
+status = "accepted"
+reason = "the divider alone gives 1.6 V (Vref 1.0 V); the output above that is set by the VSET current sink (Q11/Q21 + U6) pulling Ic from FB: Vout = 1.6 V + 120k * Ic, verified in sim/powerup_ch.cir and buck_loop.cir"
 source = "netcheck"

@@ -1,5 +1,10 @@
 * bench-psu: one output channel (LMR33630A DDA, 400 kHz) at load points - efficiency, losses, ripple, Tj
-* run: ngspice -b boards/bench-psu/sim/buck_loadpoints.cir      (~1-2 min, 20 load points)
+* run: ngspice -b boards/bench-psu/sim/buck_loadpoints.cir      (~20 s: the 3 A corners; the full 20-point table of
+*      sim/README.md: foreach vo 1.6 3.3 5 12 16 / foreach io 0.3 1 2 3 below)
+*
+* covers: thermal U11 U21
+* range: tj_max_c - 125 source=datasheet:LMR33630 SNVSAN3F recommended operating Tj -40..125 C (Ta 45 C, RthJA 43 C/W)
+* range: il_peak_max_a - 3.85 source=datasheet:LMR33630 SNVSAN3F ISC high-side peak current limit 3.85 A min
 *
 * Switching-level power stage, steady state. What is modelled and from where:
 *  - LMR33630 DDA (datasheet SNVSAN3F): Rds_on HS 95 mOhm / LS 66 mOhm typ at 25 C, x1.3 for a hot die
@@ -15,8 +20,9 @@
 *  - 20 mOhm shunt, regulation point at the terminal (after the shunt), as on the board.
 *  - Control: ideal duty controller (feed-forward + integrator) instead of the part's peak-current loop:
 *    plus an inductor-current damping term; steady-state results do not depend on it. Loop dynamics: buck_loop.cir.
-* Thermal: Tj = 25 C + P_ic * RthJA, RthJA 43 C/W (JEDEC 4-layer with thermal vias, datasheet table)
-*          and 75 C/W (estimate: exposed pad on top copper only, no thermal vias - the current board state).
+* Thermal: Tj = Ta + P_ic * RthJA with Ta = 45 C (intent: 35 C room + ~10 K inside a vented enclosure),
+*          RthJA 43 C/W (JEDEC 4-layer with thermal vias, datasheet table; rev C has the 2 x 3 via grid)
+*          and 75 C/W (estimate without thermal vias, rev B).
 
 .param vin=20 vout=5 iout=1
 .param fsw=400k tper={1/fsw}
@@ -50,7 +56,7 @@ Bgl gl 0 v = (v(d) <= v(saw)) && (i(ViL) > 0.02) ? 1 : 0
 
 * --- inductor, output caps, shunt, load ---
 ViL sw lx 0
-L1 lx lr 10u ic={iout}
+Lbuck lx lr 10u ic={iout}
 Rdcr lr outb {dcr}
 Cout outb co_e {cout} ic={vout + iout*rsh}
 Rcout co_e 0 0.75m
@@ -73,8 +79,10 @@ Bd d 0 v = min(0.97, max(0.0, v(dff) + v(integ) - (1 / vin) * (v(ilf) - iout)))
   set noaskquit
   echo "Vout_set  Iout | Vout   eff_tot  P_loss  P_ic   P_L    P_sh | iL_pk  iL_val | ripple_out | Tj@43  Tj@75"
   echo "   V       A   |  V       %       W       W      W      W  |   A      A    |   mVpp     |  C      C"
-  foreach vo 1.6 3.3 5 12 16
-    foreach io 0.3 1 2 3
+  let tjmax = 0
+  let ilmax = 0
+  foreach vo 1.6 5 16
+    foreach io 3
       alterparam vout = $vo
       alterparam iout = $io
       reset
@@ -103,13 +111,21 @@ Bd d 0 v = min(0.97, max(0.0, v(dff) + v(integ) - (1 / vin) * (v(ilf) - iout)))
       let pic = phs + pls + psw
       let ptot = pin - pout + psw
       let eff = 100 * pout / (pin + psw)
-      let tj43 = 25 + pic * 43
-      let tj75 = 25 + pic * 75
+      let tj43 = 45 + pic * 43
+      let tj75 = 45 + pic * 75
+      if tj43 > tjmax
+        let tjmax = tj43
+      end
+      if ilpk > ilmax
+        let ilmax = ilpk
+      end
       let vpp_mv = vpp * 1000
       echo "$vo  $io | $&voavg $&eff $&ptot $&pic $&pl $&psh | $&ilpk $&ilval | $&vpp_mv | $&tj43 $&tj75"
       destroy all
     end
   end
+  echo "tj_max_c = $&tjmax"
+  echo "il_peak_max_a = $&ilmax"
   echo "limits: HS current limit ISC 3.85 A min / 4.5 typ (peak); LS valley limit ILIMIT 2.9 A min / 3.5 typ (valley)"
 .endc
 .end

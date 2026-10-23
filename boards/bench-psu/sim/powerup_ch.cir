@@ -1,0 +1,106 @@
+* bench-psu rev C: channel power-up - EN at the minimum set point, then the firmware ramps the set point
+* run: ngspice -b boards/bench-psu/sim/powerup_ch.cir      (a few seconds)
+*
+* covers: powerup U11 U21
+* range: pu_overshoot_pct 0 5 source=house:rules/sim-defaults.toml overshoot_pct (worst of 1.6 / 5 / 16.6 V, 0 / 1 A)
+* range: pu_settle_ms - 10 source=house:rules/sim-defaults.toml settle_ms (to 2 % after the set-point ramp ends)
+*
+* Why the sequence matters: the VSET current sink pulls Ic from FB from the moment EN rises, so the output target
+* is 1.6 V + 120k * Ic regardless of the converter's soft-start reference (FB = vref(t) -> Vout = vref * 1.6 + 120k * Ic).
+* Enabling at a high set point charges the output at the converter's current limit with no soft start. The firmware
+* (README "Firmware duties") enables a channel with PWM = 0 (1.6 V, also the reset state), waits for the soft start,
+* then ramps the set point over 5 ms. That sequence is simulated here.
+*
+* Model: the averaged peak-current-mode buck of buck_loop.cir (same assumed internal compensation), its error
+* amplifier referenced to a soft-start ramp vref = min(1, t / tss), tss = 4 ms (LMR33630 internal soft start;
+* SNVSAN3F gives 3-5 ms typ - assumption, the result is insensitive to it), PFM variant: no reverse current.
+* Output capacitance at DC bias as in buck_loadpoints.cir. The set-point ramp drives the sink current directly
+* (the PWM's 2-pole RC is ~20 ms slower than this ramp, so the hardware ramp is gentler than modelled).
+
+.param vt=5 iload=1 tss=4m t1=6m tramp=5m bias=1
+.param cout={vt < 2 ? 70u : vt < 4 ? 56u : vt < 6 ? 45u : vt < 13 ? 24u : 18u}
+.param ic_t={(vt - 1.6) / 120k}
+.param gm=1m rc=12k cc=4.7n ri=0.1
+.param wn={3.14159 * 400k} qs={2 / 3.14159} chn=1n lhn={1 / (wn * wn * chn)} rhn={sqrt(lhn / chn) / qs}
+
+* --- error amplifier against the soft-start reference ---
+Bea 0 comp i = gm * (min(1, time / tss) - v(fb))
+Roea comp 0 10meg
+Rc comp cz {rc}
+Cc cz 0 {cc}
+Chf comp 0 50p
+* COMP clamp (the IC's error amp output is limited; without it the model winds up while FB is above vref)
+Dclh comp clh dclamp
+Vclh clh 0 0.5
+Dcll cll comp dclamp
+Vcll cll 0 -0.05
+.model dclamp d(is=1e-12 n=0.05)
+Bcmd icmd 0 v = min(4.5, max(0, v(comp) / ri))
+Rhn icmd hn1 {rhn}
+Lhn hn1 ilv {lhn}
+Chn ilv 0 {chn}
+Bil 0 outb i = v(ilv)
+Cout outb co_e {cout}
+Rcout co_e 0 0.75m
+Rsh outb out 20m
+* load: iload at the target voltage (resistive), 0 = only the feedback divider and INA inputs
+Rload out 0 {iload > 0 ? vt / iload : 1meg}
+
+* --- feedback (R102 / R103, lag R111 + C113), set-point sink ramped by the firmware from t1 over tramp ---
+R102 out fb 120k
+R103 fb 0 200k
+Bsink fb 0 i = ic_t * min(1, max(0, (time - t1) / tramp))
+R111 fb xs 6.8k
+C113 xs 0 220n
+* lag-capacitor pre-charge while the channel is off (rev C): DIS1_G (the discharge FET's gate, ~4.3 V while EN is
+* low, 0.1 V once the NPN Q14 pulls it down at EN) feeds C113 through D15 (1N4148W) + R126 (100k): C113 sits at
+* ~1.3 V before EN (R126 swept 68k..180k: overshoot returns above ~165k, settling grows below 100k), so the soft start does not have to charge it through R102. With EN high the diode blocks
+* (no offset in operation). bias=0: the rev B network (7.7 V overshoot at every start).
+* DIS1_G: 5 V through R123 (47k); Q14 (NPN) pulls it to ~0.1 V once EN is high
+V5 v5 0 5
+R123 v5 dgn 47k
+Ven en 0 pwl(0 0 2u 1)
+Snpn dgn 0 en 0 swdis
+Rbsel dgn dgb {bias > 0.5 ? 1m : 1e12}
+D15 dgb xa dsig
+R126 xa xs 100k
+.model dsig d(is=2.5n n=1.9 rs=0.6)
+* the discharge FET (Q13 + R121 1k) holds OUT at 0 V while EN is low
+Vctl ctl 0 pwl(0 1 2u 0)
+Sdis out dd1 ctl 0 swdis
+R121 dd1 0 1k
+.model swdis sw(vt=0.5 vh=0.1 ron=3 roff=1g)
+Cfb fb 0 5p
+
+.control
+  set noaskquit
+  let os_max = 0
+  let ts_max = 0
+  echo "Vset  Iload | Vmax   overshoot_%  settle_ms"
+  foreach v 1.6 5 16.6
+    foreach i 0 1
+      alterparam vt = $v
+      alterparam iload = $i
+      reset
+      tran 2u 40m
+      meas tran vpk max v(out)
+      let os = 100 * (vpk - $v) / $v
+      let os = os > 0 ? os : 0
+      let err = abs(v(out) - $v) - 0.02 * $v
+      meas tran tlast when err=0 cross=last
+      let ts = (tlast - 11m) * 1000
+      let ts = ts > 0 ? ts : 0
+      echo "$v  $i | $&vpk $&os $&ts"
+      if os > os_max
+        let os_max = os
+      end
+      if ts > ts_max
+        let ts_max = ts
+      end
+      destroy all
+    end
+  end
+  echo "pu_overshoot_pct = $&os_max"
+  echo "pu_settle_ms = $&ts_max"
+.endc
+.end

@@ -1,0 +1,74 @@
+* bench-psu rev C: logic supply power-up - VIN ramp, 5 V buck (U3), 3.3 V LDO (U4), then an ESP32 load step
+* run: ngspice -b boards/bench-psu/sim/powerup_logic.cir      (a few seconds)
+*
+* covers: powerup U3 U4
+* (vmax_v5 / vmin_v5 / vmax_v3v3 / vmin_v3v3: pass ranges from intent.toml [rail.V5] / [rail.V3V3])
+* range: vmax_v5 - 5.325 source=intent:rail V5 5.17 V +3 %; AP2112K VIN abs max 6.5 V (datasheet) is above
+* range: vmin_v5 5.015 - source=intent:rail V5 5.17 V -3 % (after start-up, through the 3V3 load step)
+* range: vmax_v3v3 - 3.40 source=intent:rail V3V3 3.3 V +3 %; ESP32-S3 VDD 3.0-3.6 V (datasheet) is wider
+* range: vmin_v3v3 3.20 - source=intent:rail V3V3 3.3 V -3 % (after start-up, through the 0.1 -> 0.35 A step)
+*
+* Model:
+*  - VIN: the PD load switch (Q1 with R3 / R7 / C19) turns on with ~3 ms: 0 -> 20 V ramp from 1 ms.
+*  - U3 LMR33630 (5 V, 15 uH SWPA4030): the averaged peak-current-mode model of buck_loop.cir (assumed internal
+*    compensation), COMP clamp, no reverse current. EN through R4 100k from VIN: on above UVLO 3.8 V (datasheet
+*    VIN_UVLO rising 3.8 V typ). Soft start 4 ms (assumption, as powerup_ch.cir). FB R5 100k / R6 24k (bound to
+*    the board): 1 V * (1 + 100k/24k) = 5.17 V. Output C12 + C13 22 uF 0805 X5R at 5 V DC bias ~ 2 x 12 uF.
+*  - U4 AP2112K-3.3: behavioural: Vout -> min(3.3, V5 - dropout), dropout 250 mV at 600 mA (datasheet, scaled
+*    with current), output resistance 50 mOhm; output C15 10 uF 0805 at 3.3 V ~ 7 uF.
+*  - Loads: V5 = LDO input (+ 5 mA misc); V3V3 = 100 mA (ESP32 idle + INA + OLED), stepping to 350 mA at 30 ms
+*    (radio burst, intent logic budget).
+*  NOTE: the reference designators in the element names (R5, R6) are compared with the board values by `check`.
+
+.param tss=4m
+.param gm=1m rc=12k cc=4.7n ri=0.1
+.param wn={3.14159 * 400k} qs={2 / 3.14159} chn=1n lhn={1 / (wn * wn * chn)} rhn={sqrt(lhn / chn) / qs}
+
+* --- VIN ramp and the converter's enable (UVLO) ---
+Vvin vin 0 pwl(0 0 1m 0 4m 20)
+Benable en 0 v = v(vin) > 3.8 ? 1 : 0
+* soft start runs from the enable instant: reference = min(1, t_since_enable / tss)
+Cssr ssr 0 1u
+Bssr 0 ssr i = v(en) > 0.5 ? 1u / tss : -v(ssr) * 1m
+Bref ref 0 v = min(1, max(0, v(ssr)))
+
+* --- U3 averaged buck ---
+Bea 0 comp i = v(en) > 0.5 ? gm * (v(ref) - v(fb5)) : -1m
+Roea comp 0 10meg
+Rc comp cz {rc}
+Cc cz 0 {cc}
+Chf comp 0 50p
+Dclh comp clh dclamp
+Vclh clh 0 0.5
+Dcll cll comp dclamp
+Vcll cll 0 -0.05
+.model dclamp d(is=1e-12 n=0.05)
+Bcmd icmd 0 v = min(4.5, max(0, v(comp) / ri))
+Rhn icmd hn1 {rhn}
+Lhn hn1 ilv {lhn}
+Chn ilv 0 {chn}
+Bil 0 v5 i = v(ilv)
+Cv5 v5 cv5e 24u
+Rcv5 cv5e 0 3m
+R5 v5 fb5 100k
+R6 fb5 0 24k
+Cfb fb5 0 5p
+
+* --- U4 LDO (behavioural) and loads ---
+Bldo ldo 0 v = min(3.3, max(0, v(v5) - 0.25 * i(Vsense) / 0.6))
+Rldo ldo v33b 0.05
+Vsense v33b v3v3 0
+Cv33 v3v3 cv33e 7u
+Rcv33 cv33e 0 5m
+Bv5load v5 0 i = i(Vsense) + 5m
+Bload v3v3 0 i = (time < 30m ? 0.1 : 0.35) * min(1, v(v3v3) / 3)
+
+.control
+  set noaskquit
+  tran 2u 40m
+  meas tran vmax_v5 max v(v5)
+  meas tran vmin_v5 min v(v5) from=15m to=40m
+  meas tran vmax_v3v3 max v(v3v3)
+  meas tran vmin_v3v3 min v(v3v3) from=15m to=40m
+.endc
+.end

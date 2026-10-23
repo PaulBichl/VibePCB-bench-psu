@@ -1,0 +1,131 @@
+* bench-psu rev C: constant-current (CC) loop of one channel - stability and settling
+* run: ngspice -b boards/bench-psu/sim/cc_loop.cir      (a few seconds)
+*
+* covers: cc U11 U21
+* range: cc_min_phase_margin_deg 45 - source=house:rules/sim-defaults.toml phase_margin_deg (CC loop, all loads)
+* range: cc_settle_ms 0 10 source=house:rules/sim-defaults.toml settle_ms (to 5 % of Iset, 20 R -> 2 R at Iset 1 A)
+* range: cc_iout_err_pct -2 2 source=intent:"current limit = set value"; 1 V/A sense, INA181 gain error 1 % (datasheet SBOS793 table 7.5)
+*
+* CC loop (index.circuit.tsx Channel): INA181A2 (x50, BW 210 kHz single pole, datasheet SBOS793) on the 20 mOhm
+* shunt = 1 V/A -> R115 (10k) into the + input with R125 (330) + C116 (100 nF) to GND; ISET (here a DC source) ->
+* R117 (10k) into the - input, R118 (330) + C117 (100 nF) from the output: a differential PI integrator,
+* (Visense - Viset) * (1 + s Rz C) / (s R C), whose high-frequency gain Rz/R = 0.033 (a non-inverting PI would
+* keep a gain >= 1 there: unstable into a short). Its output (TLV9062: GBW 10 MHz, rails 0..3.3 V, datasheet SBOS799)
+* feeds FB through R116 (10k) + D14 (1N4148W): when I > Iset the injected current lowers Vout until I = Iset.
+* In CV the output rests at 0 V and the diode is off.
+* The buck is the averaged peak-current-mode model of buck_loop.cir (same assumed internal compensation, lag network
+* fitted), CV set point 12 V (VSET sink current), so the CC loop is closed around the closed CV loop; the inductor
+* current cannot go negative (LMR33630A = PFM variant, no reverse current).
+* The plant gain Iinj -> Isense is 120k / (R116 * Rload) V/V: 240 into a short (50 mOhm), 2.4 at 5 Ohm.
+* Values chosen by sweeping C = 1u..100n, Rz = 47..470 (2026-10-22): C 100 nF / Rz 330 Ohm gives PM >= 90 deg from a
+* short to 5 Ohm and settles a 20 R -> 2 R step in ~3.6 ms. Large-signal limit: after a step the integrator first
+* has to rise ~1.6 V (FB 1 V + diode) before injection starts; meanwhile the converter runs at its own 4.5 A peak
+* limit (plus the output capacitors' discharge). The INA226 ALERT trip (firmware ceiling) is the fast backstop.
+.param rz=330 rload=1 iset=1 cint=100n
+.param cout=24u
+.param isink={(12 - 1.6) / 120k}
+.param gm=1m rc=12k cc=4.7n ri=0.1
+.param wn={3.14159 * 400k} qs={2 / 3.14159} chn=1n lhn={1 / (wn * wn * chn)} rhn={sqrt(lhn / chn) / qs}
+
+* --- buck (averaged, as buck_loop.cir) ---
+Bea 0 comp i = gm * (1.0 - v(fb))
+Roea comp 0 10meg
+Rc comp cz {rc}
+Cc cz 0 {cc}
+Chf comp 0 50p
+* COMP clamp (the IC's error amp output is limited; without it the model winds up while FB is above vref)
+Dclh comp clh dclamp
+Vclh clh 0 0.5
+Dcll cll comp dclamp
+Vcll cll 0 -0.05
+.model dclamp d(is=1e-12 n=0.05)
+Bcmd icmd 0 v = min(4.5, max(0, v(comp) / ri))
+Rhn icmd hn1 {rhn}
+Lhn hn1 ilv {lhn}
+Chn ilv 0 {chn}
+Bil 0 outb i = v(ilv)
+Cout outb co_e {cout}
+Rcout co_e 0 0.75m
+Rsh outb out 20m
+Rload out 0 {rload}
+* load step for the transient: 2.22 R switched in parallel at 2 ms (20 R -> 2 R); open in the AC sweeps (op: ctl = 0)
+Vctl ctl 0 pwl(0 0 2m 0 2.001m 1)
+Sstep out nstep ctl 0 swstep
+Rstep nstep 0 2.22
+.model swstep sw(vt=0.5 vh=0.1 ron=1m roff=1g)
+
+* --- CV feedback at the terminal (R102 / R103 / R111 + C113, VSET sink) ---
+R102 out fb 120k
+R103 fb 0 200k
+Isink fb 0 {isink}
+R111 fb xs 6.8k
+C113 xs 0 220n
+Cfb fb 0 5p
+
+* --- current sense: INA181A2, x50, 210 kHz ---
+Bsen sraw 0 v = 50 * (v(outb) - v(out))
+Rsp sraw isens 1k
+Csp isens 0 {1 / (2 * 3.14159 * 210k * 1k)}
+
+* --- differential PI error amp (TLV9062 half), output 0..3.3 V ---
+R115 isens ccp 10k
+R125 ccp ccpz {rz}
+C116 ccpz 0 {cint}
+Viset iset 0 dc {iset}
+R117 iset ccn 10k
+R118 cca ccnz {rz}
+C117 ccnz ccn {cint}
+* open-loop gain 1e5, 100 Hz pole (GBW 10 MHz), output clamp
+Gamp 0 aint ccp ccn 1m
+Raint aint 0 100meg
+Caint aint 0 {1m / (2 * 3.14159 * 10meg)}
+Bclamp cca 0 v = min(3.3, max(0, v(aint)))
+
+* --- injection into FB: R116 + D14, loop-gain probe between amp output and R116 ---
+Vinj ccb cca dc 0 ac 1
+R116 ccb dd 10k
+D14 dd fb dsig
+.model dsig d(is=2.5n n=1.9 rs=0.6)
+
+.control
+  set noaskquit
+  let pm_min = 999
+  echo "Rload  Iset |  fc_Hz   PM_deg"
+  foreach rl 0.05 0.3 1 5
+    foreach is 0.5 2
+      alterparam rload = $rl
+      alterparam iset = $is
+      reset
+      ac dec 100 1 1meg
+      let t = -v(cca) / v(ccb)
+      let tmag = db(t)
+      let tph = 180 / 3.14159 * cph(t)
+      meas ac fcx when tmag=0 fall=last
+      meas ac phx find tph at=fcx
+      let pm = 180 + phx
+      if pm < pm_min
+        let pm_min = pm
+      end
+      echo "$rl  $is | $&fcx $&pm"
+      destroy all
+    end
+  end
+  * settling: Iset 1 A, CV 0.6 A into 20 R, then 2 R at 2 ms (6 A demand): time until I stays within 5 %
+  alterparam rload = 20
+  alterparam iset = 1
+  reset
+  tran 1u 20m
+  let isns = (v(outb) - v(out)) / 20m
+  let ipk = maximum(isns)
+  meas tran thi when isns=1.05 fall=last
+  meas tran tlo when isns=0.95 rise=last
+  let tset = (thi > tlo ? thi : tlo) - 2m
+  let tset_ms = tset * 1000
+  meas tran iend find isns at=19m
+  let ierr = 100 * (iend - 1) / 1
+  echo "cc_min_phase_margin_deg = $&pm_min"
+  echo "cc_settle_ms = $&tset_ms"
+  echo "cc_iout_err_pct = $&ierr"
+  echo "peak current after the step: $&ipk A"
+.endc
+.end

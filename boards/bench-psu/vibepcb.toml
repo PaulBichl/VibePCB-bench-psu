@@ -2,7 +2,31 @@
 profiles = ["jlcpcb-4l", "ipc-class2"]
 
 
-# ESP32-S3-MINI-1 antenna end at the board edge: no GND pour under it. KiCad mm = (100 + x, 100 - y).
+# ESP32-S3-MINI-1 (bottom) antenna end at the +x board edge (it overhangs the edge): no copper between the
+# module pads (x <= 41.9 mm from the centre) and the edge, on any layer.
+# KiCad mm = (100 + x, 100 - y).
 [keepout.antenna]
-area = [118.5, 62.0, 135.5, 68.5]
-block = ["pour"]
+area = [142.2, 92.0, 145.0, 110.0]
+block = ["pour", "tracks", "vias"]
+
+# M3 mounting holes at (+-41.5, +-26.5): no tracks / vias under the screw heads and standoffs (7 mm)
+[keepout.mh1]
+area = [55.0, 70.0, 62.0, 77.0]
+block = ["tracks", "vias"]
+[keepout.mh2]
+area = [138.0, 70.0, 145.0, 77.0]
+block = ["tracks", "vias"]
+[keepout.mh3]
+area = [55.0, 123.0, 62.0, 130.0]
+block = ["tracks", "vias"]
+[keepout.mh4]
+area = [138.0, 123.0, 145.0, 130.0]
+block = ["tracks", "vias"]
+
+# LMR33630 exposed pads (pad 9): via grid into the inner GND planes (sim: Tj 68-79 C with, 100-119 C without)
+[thermal_vias.U11]
+pad = "9"
+[thermal_vias.U21]
+pad = "9"
+[thermal_vias.U3]
+pad = "9"
