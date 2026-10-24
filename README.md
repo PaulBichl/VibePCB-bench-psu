@@ -148,6 +148,13 @@ missing VBUS TVS / CC ESD. Accepted with reasons in `findings.toml`: connector c
 module pin order, LED polarity (tscircuit's anode = pin 1), the LDO's thermals (0.4 A is a short peak), Q1 gate drive
 at 5 V (bring-up only), and the loop constants (measured on the prototype).
 
+Second run (rev C, 185 items): 169 ok, 11 issues, 5 unknown. Fixed: 220 nF 50 V HF input caps (C10, C103, C203),
+100 uF bulk per output (C25 / C26: the ceramics derate to ~18 uF at 16 V; CV phase margin now >= 63 deg for any
+ESR 0.05..1 Ohm), the intent (the factory NVM already gives 20 V / 1 A; 3V3 budget 0.2 A average), the sim decks
+(logic deck BOM values and a load-model bug, loadpoints at max Rds(on)). Accepted: L1's 4 A soft saturation on the
+internal 5 V rail, Q1 gate drive on a 5 V-only source, the LDO burst current, LED polarity (pad 1 = anode; the
+silkscreen bracket closes on the ANODE side, not the usual cathode mark).
+
 ## Pin map (ESP32-S3)
 
 | Pin | Net | Use |
@@ -169,7 +176,8 @@ at 5 V (bring-up only), and the loop constants (measured on the prototype).
 
 ## Firmware duties (not part of this repo yet)
 
-- Write the STUSB4500 NVM once over I2C so it requests 20 V (default NVM: 5 V only).
+- Write the STUSB4500 NVM once over I2C (20 V / 3 A). The factory NVM already asks a 20 V source for 20 V / 1 A
+  (PDO3, DS12499 table 18): keep both channels off until the NVM is written.
 - **Enable sequence:** PWM (VSET) = 0 before EN high, wait ~5 ms for the soft start, then ramp the set point (>= 5 ms).
   Enabling at a high set point starts at the converter's current limit with no soft start (`sim/powerup_ch.cir`).
 - Close the voltage loop on the INA226 bus-voltage reading (PWM -> Vout is ~4.55 V/V, offset trimmed per channel).
@@ -184,15 +192,15 @@ at 5 V (bring-up only), and the loop constants (measured on the prototype).
 ## Bring-up
 
 Bring the board up from the bottom: logic first from a plain 5 V source, then the channels at 5 V input, and 20 V
-only after that. The STUSB4500's factory NVM asks for 5 V only, so any USB-C port or charger gives VIN = 5 V until
-step 4. Use a PC port or a USB-C supply you can current-limit; keep a DMM, a scope and a power resistor (a few ohms,
+only after that. The STUSB4500's factory NVM asks a 20 V source for 20 V / 1 A (PDO3), so use a 5 V-only port (a PC
+port) until step 4: a PD charger gives VIN = 20 V from the first plug-in. Use a PC port or a USB-C supply you can current-limit; keep a DMM, a scope and a power resistor (a few ohms,
 10 W) at hand. `hatch run pcb fab bench-psu` also writes a generated bring-up sheet (`bench-psu-bringup.md`).
 
 Test points (bottom, labelled): TP1 VBUS, TP2 VIN, TP3 V5, TP4 3V3, TP5 GND. Outputs at the terminal (top).
 
 ### 0. Unpowered
 
-1. Look: D1 (TVS), C6 (electrolytic), D13 / D23 (SS54) polarity, the LEDs the right way round, no solder bridges on
+1. Look: D1 (TVS), C6 / C25 / C26 (electrolytics), D13 / D23 (SS54) polarity, the LEDs the right way round (cathode = pad 2, the side where the silkscreen bracket is open), no solder bridges on
    U5 (ESP32), U12 / U22 (INA226, 0.65 mm pitch), U6 / U7. Thermal vias visible in the LMR33630 pads.
 2. Resistance to GND (meter on 2 kOhm+ range, capacitors charge): VBUS, VIN, 5V, 3V3 not shorted; OUT1 / OUT2
    > 100 kOhm (the discharge FET needs its 5 V gate drive, so it is off while unpowered).

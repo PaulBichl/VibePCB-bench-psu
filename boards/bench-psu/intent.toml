@@ -1,10 +1,10 @@
 description = "USB-C PD (20 V) powered 2-channel bench supply, 1.6-16.6 V / 3 A per channel, CV/CC, front-panel OLED + encoders"
 assumptions = [
-  "PD source offers 20 V / 3 A (60 W); before the STUSB4500 NVM write only 5 V (logic bring-up, outputs <= ~4.3 V)",
+  "PD source offers 20 V / 3 A (60 W). The STUSB4500 factory NVM already asks a 20 V source for 20 V / 1 A (PDO3, DS12499 table 18): the firmware keeps both channels off until it has written the NVM (20 V / 3 A); a 5 V-only source runs the logic only",
   "the sum of both outputs stays inside the PD contract (firmware power budget); one channel alone may take 3 A",
   "outputs 1.6-16.6 V adjustable; OUTn voltage below is the maximum (ratings are checked against it)",
   "passive cooling in a vented enclosure, ambient <= 35 C; ~1.6 W per channel at 3 A (sim/buck_loadpoints.cir)",
-  "logic budget: ESP32-S3 with BLE ~350 mA peak / ~120 mA average on 3V3 (Wi-Fi off), OLED 20 mA, LEDs 4 mA",
+  "logic budget on 3V3: ~150 mA average (ESP32-S3 with BLE ~120 mA, Wi-Fi off; OLED 20 mA; LEDs 4 mA), radio bursts to ~350 mA for milliseconds; [rail.V3V3] current is the average with margin (the LDO thermal figure: 0.2 A x 1.87 V x 184 C/W = 69 K), the burst is in sim/powerup_logic.cir",
   "load transient: a 2 A load step / release moves the output by at most 400 mV and recovers within 1 ms (the FB lag network trades transient speed for stability over 1.6-16 V; 15 % at 1.6 V, 2.3 % at 16 V)",
   "power-up from EN settles within 20 ms (4 ms soft start, then the pre-charged lag capacitor relaxes; no overshoot)",
   "set-point changes settle within 1 s (knob turns: the PWM 2-pole RC is ~0.1 s)",
@@ -30,7 +30,7 @@ vref = 1.0
 [rail.V3V3]
 voltage = 3.3
 tolerance_pct = 3
-current = 0.4
+current = 0.2
 regulator = "U4"
 
 [rail.OUT1]

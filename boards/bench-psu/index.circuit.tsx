@@ -13,7 +13,9 @@
 //   -24 V at the SMBJ22A clamp voltage), inside the AO4407A's +-25 V; 100 nF gate-source slows the turn-on (~3 ms).
 //   SMBJ22A (35.5 V clamp) stays below the LMR33630's 38 V absolute maximum.
 // - Converter: one LMR33630A (400 kHz, HSOIC-8 + exposed pad with a 2 x 3 thermal via grid, vibepcb.toml) per channel,
-//   15 uH / 7 A sat FXL1040-150 (TI L_MIN 11.6 uH at 16.6 V), 4 x 22 uF output. Input never below output (PD 20 V, output <= 16.5 V): a buck is enough.
+//   15 uH / 7 A sat FXL1040-150 (TI L_MIN 11.6 uH at 16.6 V), 4 x 22 uF output + 100 uF electrolytic
+//   at the terminal (C25 / C26: ceramics derate to ~18 uF at 16 V, the loop gain does not change with Vout), 220 nF
+//   50 V HF input cap. Input never below output (PD 20 V, output <= 16.5 V): a buck is enough.
 // - Voltage set, fail-safe: Vout = 1 V * (1 + 120k/200k) + 120k * Ic, Ic sunk from FB by an op-amp + NPN current sink,
 //   Ic = Vc / 2.2k, Vc = PWM (2-pole RC) * 10k/120k (R106 + R107 + R108; rev B's 2.4k reached only 15.2 V). PWM 0 V / floating / ESP32 in reset -> 1.6 V; 3.3 V -> 16.6 V (the
 //   hardware maximum). Loop: 6.8k + 220 nF lag network FB-GND (sim/buck_loop.cir: phase margin 52..75 deg).
@@ -26,8 +28,8 @@
 //   lowers Vout until I = Iset (constant current). In CV the amp sits at 0 V and the diode is off. The INA226 ALERT ->
 //   EN trip stays as a fast backstop at a ceiling the firmware sets above Iset. sim/cc_loop.cir: CC loop stability.
 // - Output: 100 nF at the terminal (INA226 VBUS), SS54 reverse diode (a reversed source / battery is clamped), and an
-//   active discharge (2N7002 + 4.7k, gate from 5 V, held off by an NPN while EN is high): "off" is 0 V within ~1.2 s
-//   instead of a 28 s decay through the feedback divider; also at reset and after a trip.
+//   active discharge (2N7002 + 4.7k, gate from 5 V, held off by an NPN while EN is high): "off" is below 0.5 V within ~2 s
+//   (C25 / C26 100 uF + ceramics through 4.7k) instead of a ~60 s decay through the feedback divider; also at reset and after a trip.
 // - Temperature: 10k NTC next to each LMR33630 into ESP32 ADC1 (IO1 / IO2): firmware derates / switches off (passive
 //   cooling, ~1.6 W per channel at 3 A; the converter's own thermal shutdown is the last resort).
 // - Measure: INA226 per channel (0x40 / 0x41): 4.096 A full scale, 125 uA / 1.25 mV LSB.
@@ -77,7 +79,7 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
       <LMR33630ADDAR name={`U${n}1`} {...p(0, 0)} />
       <C name={id("C", 1)} {...p(-5.5, 1.5)} pcbRotation={90} v="10uF 50V" />
       <C name={id("C", 2)} {...p(-7.8, 1.5)} pcbRotation={90} v="10uF 50V" />
-      <C name={id("C", 3)} {...p(-5, -2.5)} pcbRotation={90} v="100nF" />
+      <C name={id("C", 3)} {...p(-5, -2.5)} pcbRotation={90} v="220nF 50V" />
       <C name={id("C", 4)} {...p(3.5, 4)} v="100nF" />
       <C name={id("C", 5)} {...p(4.4, -2.5)} pcbRotation={90} v="1uF" />
       <FXL1040_150_M name={`L${n}1`} {...p(12, 0)} />
@@ -318,7 +320,7 @@ export default () => (
       <LMR33630ADDAR name="U3" {...bot(6, 3)} />
       <FXL0530_6R8_M name="L1" {...bot(13, 3.0)} />
       <C name="C9" {...bot(0.8, 3)} pcbRotation={90} v="10uF 50V" />
-      <C name="C10" {...bot(3, 6.5)} v="100nF" />
+      <C name="C10" {...bot(3, 6.5)} v="220nF 50V" />
       <C name="C11" {...bot(8.2, 6.6)} v="100nF" />
       <C name="C20" {...bot(9.6, -1.8)} v="1uF" />
       <C name="C12" {...bot(12.9, -1.8)} v="22uF" />
@@ -415,6 +417,14 @@ export default () => (
     {net("OUT1", [".J2 > .pin1"], { thickness: PWR })}
     {net("GND", [".J2 > .pin2", ".J2 > .pin4"], { thickness: PWR })}
     {net("OUT2", [".J2 > .pin3"], { thickness: PWR })}
+    {/* output bulk (review U11/U21:output-cap): the 4 x 22 uF ceramics derate to ~18 uF at 16 V while the loop gain is
+        fixed (FB divider 0.625); 100 uF electrolytic keeps Cout from collapsing and its ESR (~0.3 Ohm) adds a damping
+        zero (~5 kHz). Top side by the terminal, where the front panel is empty. */}
+    <ELCAP name="C25" {...at(-15, -15)} pcbRotation={90} />
+    <ELCAP name="C26" {...at(-6, -15)} pcbRotation={90} />
+    {net("OUT1", [".C25 > .pin1"], { thickness: PWR })}
+    {net("OUT2", [".C26 > .pin1"], { thickness: PWR })}
+    {net("GND", [".C25 > .pin2", ".C26 > .pin2"], { thickness: PWR })}
     <Controls n={1} cx={CH1X} ccGpio="IO21" />
     <Controls n={2} cx={CH2X} ccGpio="IO47" />
 
@@ -442,7 +452,7 @@ export default () => (
     <copperpour connectsTo="net.GND" layer="bottom" clearance="0.3mm" boardEdgeMargin="0.5mm" />
 
     {/* top: front panel labels */}
-    <silkscreentext text="bench-psu rev C" pcbX={20} pcbY={27.5} fontSize="1.2mm" />
+    <silkscreentext text="bench-psu rev C" pcbX={-8.5} pcbY={-25} fontSize="1.2mm" />
     <silkscreentext text="CH1+  CH1-  CH2+  CH2-" pcbX={-28} pcbY={-21.8} fontSize="1mm" />
     {[["GND", -31.81], ["VCC", -29.27], ["SCL", -26.73], ["SDA", -24.19]].map(([t, x]) => (
       <silkscreentext key={`oled${x}`} text={t as string} pcbX={x as number} pcbY={25.2} fontSize="0.8mm" />

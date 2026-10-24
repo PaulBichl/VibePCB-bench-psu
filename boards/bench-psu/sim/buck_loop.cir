@@ -49,6 +49,11 @@ Bil 0 outb i = v(ilv)
 Cout outb co_e {cout}
 Rcout co_e 0 0.75m
 Rsh outb out 20m
+* output bulk at the terminal: C25 (OUT1; C26 on OUT2) 100 uF electrolytic, no DC-bias derating; ESR 0.3 Ohm assumed
+* (6.3 x 7.7 mm general-purpose SMD electrolytic, not in the datasheet: ESR-zero ~5 kHz). Checked at 0.05 and 1 Ohm:
+* CV phase margin >= 63 deg, CC >= 86 deg, 2 A step <= 323 mV - the result does not hinge on the ESR value.
+C25 out cb_e 100u
+Resr25 cb_e 0 0.3
 Rload out 0 {vout / 1}
 Istep out 0 pwl(0 0 0.2m 0 0.202m 2 0.6m 2 0.602m 0)
 

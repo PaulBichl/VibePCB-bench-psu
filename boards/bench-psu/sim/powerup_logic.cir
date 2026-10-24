@@ -10,10 +10,11 @@
 *
 * Model:
 *  - VIN: the PD load switch (Q1 with R3 / R7 / C19) turns on with ~3 ms: 0 -> 20 V ramp from 1 ms.
-*  - U3 LMR33630 (5 V, 15 uH SWPA4030): the averaged peak-current-mode model of buck_loop.cir (assumed internal
+*  - U3 LMR33630 (5 V, L1 6.8 uH FXL0530; in the averaged current-mode model L sets only the ripple): the averaged peak-current-mode model of buck_loop.cir (assumed internal
 *    compensation), COMP clamp, no reverse current. EN through R4 100k from VIN: on above UVLO 3.8 V (datasheet
 *    VIN_UVLO rising 3.8 V typ). Soft start 4 ms (assumption, as powerup_ch.cir). FB R5 100k / R6 24k (bound to
-*    the board): 1 V * (1 + 100k/24k) = 5.17 V. Output C12 + C13 22 uF 0805 X5R at 5 V DC bias ~ 2 x 12 uF.
+*    the board): 1 V * (1 + 100k/24k) = 5.17 V. Output C12 + C13 22 uF 0805 X5R (~12 uF each at 5 V DC bias)
+*    + C23 + C24 22 uF 25 V 1206 (~16 uF each) ~ 56 uF.
 *  - U4 AP2112K-3.3: behavioural: Vout -> min(3.3, V5 - dropout), dropout 250 mV at 600 mA (datasheet, scaled
 *    with current), output resistance 50 mOhm; output C15 10 uF 0805 at 3.3 V ~ 7 uF.
 *  - Loads: V5 = LDO input (+ 5 mA misc); V3V3 = 100 mA (ESP32 idle + INA + OLED), stepping to 350 mA at 30 ms
@@ -48,7 +49,7 @@ Rhn icmd hn1 {rhn}
 Lhn hn1 ilv {lhn}
 Chn ilv 0 {chn}
 Bil 0 v5 i = v(ilv)
-Cv5 v5 cv5e 24u
+Cv5 v5 cv5e 56u
 Rcv5 cv5e 0 3m
 R5 v5 fb5 100k
 R6 fb5 0 24k
@@ -60,7 +61,8 @@ Rldo ldo v33b 0.05
 Vsense v33b v3v3 0
 Cv33 v3v3 cv33e 7u
 Rcv33 cv33e 0 5m
-Bv5load v5 0 i = i(Vsense) + 5m
+* misc 5 mA load scales with V5 (a constant current source would drive V5 to -620 V before start-up)
+Bv5load v5 0 i = i(Vsense) + 5m * max(0, min(1, v(v5) / 5))
 Bload v3v3 0 i = (time < 30m ? 0.1 : 0.35) * min(1, v(v3v3) / 3)
 
 .control
