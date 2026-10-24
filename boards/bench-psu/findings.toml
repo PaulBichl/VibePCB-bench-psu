@@ -4,144 +4,126 @@
 id = "review:D101:orientation"
 ref = "D101"
 pin = "pin1"
-text = "The circuit needs pin1 (via R112 to V3V3) = anode and pin2 (Q12 collector) = cathode, but the pins are only named pin1/pin2 and the KENTO page gives no pad polarity. Confirm the footprint's pad 1 is the anode, or the LED stays dark. (reviewer could not decide)"
+text = "The circuit needs pin1 = anode (R112 from V3V3) and pin2 = cathode (Q12 collector), but parts.md names the pads only pin1/pin2. Check that the footprint's pad 1 is the anode, not the cathode mark. [KT-0603YG datasheet not readable (LCSC C2289)] (reviewer could not decide)"
 status = "accepted"
-reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+). Hand assembly: the silkscreen bracket closes on pad 1 = ANODE (opposite to the usual cathode mark), noted in the bring-up sheet"
+reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+); the footprint's pad 1 is at -x where the silkscreen bracket closes (marks the ANODE, noted in the README bring-up step 0 for hand assembly)"
 source = "review"
 
 [[finding]]
 id = "review:D102:orientation"
 ref = "D102"
 pin = "pin1"
-text = "The circuit needs pin1 (R113 side) = anode and pin2 (GND) = cathode, but the pins are only named pin1/pin2 and the KENTO listing gives no pad polarity. Confirm the footprint polarity. (reviewer could not decide)"
+text = "The circuit needs pin1 = anode (R113 from LED_CC1) and pin2 = cathode (GND), but the pads are only named pin1/pin2. Check the footprint's pad 1 against the datasheet's cathode mark. [KT-0603R datasheet not readable (LCSC C2286)] (reviewer could not decide)"
 status = "accepted"
-reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+). Hand assembly: the silkscreen bracket closes on pad 1 = ANODE (opposite to the usual cathode mark), noted in the bring-up sheet"
+reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+); the footprint's pad 1 is at -x where the silkscreen bracket closes (marks the ANODE, noted in the README bring-up step 0 for hand assembly)"
 source = "review"
 
 [[finding]]
 id = "review:D201:orientation"
 ref = "D201"
 pin = "pin1"
-text = "Same as D101: pin1 (R212 / V3V3) must be the anode and pin2 (Q22 collector) the cathode, but the pins are only named pin1/pin2. Confirm the footprint polarity. (reviewer could not decide)"
+text = "The circuit needs pin1 = anode (R212) and pin2 = cathode (Q22 collector); check the footprint's pad 1 against the cathode mark. [KT-0603YG datasheet not readable (LCSC C2289)] (reviewer could not decide)"
 status = "accepted"
-reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+). Hand assembly: the silkscreen bracket closes on pad 1 = ANODE (opposite to the usual cathode mark), noted in the bring-up sheet"
+reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+); the footprint's pad 1 is at -x where the silkscreen bracket closes (marks the ANODE, noted in the README bring-up step 0 for hand assembly)"
 source = "review"
 
 [[finding]]
 id = "review:D202:orientation"
 ref = "D202"
 pin = "pin1"
-text = "Same as D102: pin1 (R213 side) must be the anode and pin2 (GND) the cathode, but the pins are only named pin1/pin2. Confirm the footprint polarity. (reviewer could not decide)"
+text = "The circuit needs pin1 = anode (R213) and pin2 = cathode (GND); check the footprint's pad 1 against the cathode mark. [KT-0603R datasheet not readable (LCSC C2286)] (reviewer could not decide)"
 status = "accepted"
-reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+). Hand assembly: the silkscreen bracket closes on pad 1 = ANODE (opposite to the usual cathode mark), noted in the bring-up sheet"
+reason = "pin1 = anode is verified: tscircuit's <led> names pin1 anode, the TSX wires .anode/.cathode by name and the netlist shows D101-D202 pin1 (+); the footprint's pad 1 is at -x where the silkscreen bracket closes (marks the ANODE, noted in the README bring-up step 0 for hand assembly)"
+source = "review"
+
+[[finding]]
+id = "review:ENC1:interface"
+ref = "ENC1"
+pin = "A"
+text = "R130/R131/R132 10 k\u03a9 to 3.3 V give 0.33 mA, below the encoder's 1 mA minimum (A, B) and the switch's 500 \u00b5A minimum (E), which risks unreliable contact wetting. Fix: 3.3 k\u03a9 pull-ups on ENC1_A/ENC1_B (1 mA) and 4.7 k\u03a9 or less on ENC1_SW, keeping the RC filter (retune C130-C132 to about 33 nF to keep the time constant). [Alps EC11E15244B2 product page: min operating current 1 mA (encoder), push switch min rating 500 \u00b5A 5 V DC]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:ENC2:interface"
+ref = "ENC2"
+pin = "A"
+text = "R230/R231/R232 10 k\u03a9 at 3.3 V give 0.33 mA, below the 1 mA (A/B) and 500 \u00b5A (E) minimum contact currents. Fix: 3.3 k\u03a9 on ENC2_A/ENC2_B and 4.7 k\u03a9 or less on ENC2_SW, with C230-C232 rescaled. [Alps EC11E15244B2 product page: min operating current 1 mA, push switch min 500 \u00b5A 5 V DC]"
+status = "open"
+reason = ""
+source = "review"
+
+[[finding]]
+id = "review:J1:current"
+ref = "J1"
+pin = "VBUS1"
+text = "The 20 V / 3 A contract puts 3 A through the two VBUS and two GND pads; distributor listings give 3 A (product page) and 5 A (category list) for this SHOU HAN 16P receptacle. At 3 A there is no margin: confirm the VBUS contact rating in the manufacturer datasheet or choose a 5 A-rated receptacle. [LCSC / JLCPCB C2765186 listings (no manufacturer datasheet obtained)] (reviewer could not decide)"
+status = "accepted"
+reason = "3 A is the USB Type-C rating for a standard cable and the PD contract is 3 A (60 W at 20 V): the connector is used at its rating, as on every 60 W USB-C sink; the firmware power budget keeps the sum of both channels inside it"
 source = "review"
 
 [[finding]]
 id = "review:J3:pinout"
 ref = "J3"
 pin = ""
-text = "J3 is GND, VCC, SCL, SDA for the OLED module, but no module MPN is given; common 0.96 inch SSD1306 I2C modules come in both GND-VCC and VCC-GND orders. Name the exact module and confirm its header order (a swap reverses the 3V3 supply). (reviewer could not decide)"
+text = "Pin order GND, VCC, SCL, SDA matches the common 0.96 inch SSD1306 module, but the OLED module MPN is not in the review inputs and modules also ship with VCC/GND swapped. Name the module and check its pin order. [PZ254V-11-04P 2.54 mm 4-pin header] (reviewer could not decide)"
 status = "accepted"
-reason = "J3 follows the common 0.96 in SSD1306 I2C module order GND-VCC-SCL-SDA, silkscreen-labelled; README bring-up says to check the bought module's order before plugging it"
+reason = "the OLED module is bought separately; the silkscreen labels J3 GND VCC SCL SDA and the README bring-up says to check the module's header order before plugging it in (a swapped module would reverse 3V3)"
 source = "review"
 
 [[finding]]
 id = "review:Q1:gate-drive"
 ref = "Q1"
 pin = "G"
-text = "At 20 V the R3 100k / R7 47k divider gives Vgs = -13.6 V (fine). At the 5 V bring-up contract it gives only -3.4 V, just past the -3.0 V max threshold and far below the -6 V Rds(on) spec, so Q1 can sit in linear mode. Fix: change R7 to 10 k\u03a9 (Vgs -4.5 V at 5 V, -18.2 V at 20 V, inside \u00b125 V). [AO4407A Rev.11.1 p.2 (VGS(th) -1.7/-2.3/-3.0 V; RDS(on) specified only down to VGS = -6 V); STUSB4500 DS12499 p.8 (VBUS_EN_SNK asserted at 5 V by default)]"
+text = "R3 100 k\u03a9 / R7 47 k\u03a9 give VGS = -(VBUS - 0.4 V) \u00d7 0.68 \u2248 -3.1 V at the 5 V attach (every power-up, and on 5 V-only sources), right at VGS(th) max -3 V, so the logic supply may not come up on a high-threshold part. At 20 V it is -13.6 V (fine). Fix: R7 = 10 k\u03a9 (VGS -4.0 V at 5 V and -19 V at 21 V, inside \u00b125 V), or a PMOS with RDS(ON) specified at -2.5 V. [AOS AO4407A Rev 11.1 p.2 (VGS(th) -1.7/-2.3/-3.0 V; RDS(ON) only specified down to VGS -6 V), p.3 Fig. 1; ST DS12499 p.28 (VBUS_EN_SNK VOL 0.4 V)]"
 status = "accepted"
-reason = "20 V is the operating contract (the factory NVM already asks for it); a 5 V-only source runs the logic only (~0.2 A, Vgs -3.4 V is past the -3.0 V max threshold: a few 100 mOhm, mW of loss). R7 = 10k would give Vgs -32 V at the SMBJ22A clamp, beyond the AO4407A's +-25 V"
-source = "review"
-
-[[finding]]
-id = "review:U11:input-cap"
-ref = "U11"
-pin = "VIN"
-text = "U11 has C101 + C102 10 \u00b5F 50 V 1206 (about 4.5 \u00b5F each at 20 V, about 9 \u00b5F effective) and C103 100 nF, not the required 220 nF HF cap. Fix: make C103 a 220 nF 50 V X7R next to VIN/PGND; consider a third 10 \u00b5F. [LMR33630 SNVSAN3F p.23 \u00a79.2.2.6 (>= 10 \u00b5F effective ceramic plus a 220 nF 50 V X7R as close as possible to VIN)]"
-status = "open"
-reason = "fixed: C103 220 nF 50 V X7R (C107083); recheck in the next review"
+reason = "PD always attaches at 5 V, then the firmware-written NVM (or the factory PDO3) moves to 20 V within ~0.5 s, where Vgs = -13.6 V; at the 5 V attach Q1 may conduct only weakly (Vgs -3.1 V vs Vth max -3.0 V), which at most delays the logic start until 20 V. 5 V-only sources are not supported (intent). R7 = 10k would put Vgs at -32 V at the SMBJ22A clamp, beyond the AO4407A's +-25 V"
 source = "review"
 
 [[finding]]
 id = "review:U11:output-cap"
 ref = "U11"
 pin = "FB"
-text = "FB gain is fixed at 200k/320k = 0.625 (1.6 V-like loop) at every set point, but 4 x 22 \u00b5F 25 V X5R falls to about 18 \u00b5F at 16 V. Eq.6 for a 2 A step / 400 mV at 1.6 V wants about 150 \u00b5F vs about 70 \u00b5F fitted, and stability rests on the R111/C113 lag network checked only with assumed internal compensation. Fix: add bulk (e.g. 100 \u00b5F 25 V polymer) per output so Cout stays nearly constant, and confirm phase margin on the bench. [LMR33630 SNVSAN3F p.20 Table 9-2 (4 x 22 \u00b5F validated for 3.3-12 V), p.22 Eq.6 and p.22-23 (Cout sets phase margin; Bode/transient test required)]"
-status = "open"
-reason = "fixed: C25 100 uF electrolytic at the terminal (no DC-bias loss, ESR damping); buck_loop phase margin >= 63 deg for ESR 0.05..1 Ohm"
-source = "review"
-
-[[finding]]
-id = "review:U1:control-pins"
-ref = "U1"
-pin = "VBUS_EN_SNK"
-text = "RESET to GND and ADDR0/ADDR1 to GND (address 0x28) are fine. But the factory NVM requests 20 V / 1.0 A (PDO3), so a 20 V charger delivers 20 V from the first plug-in, not 5 V as the intent assumes. Firmware must keep the load under 1 A (20 W) until the NVM is written, or write the NVM before first use. [STUSB4500 DS12499 Rev 3 p.22 Table 18 (default NVM: PDO2 15 V/1.5 A, PDO3 20 V/1.0 A), p.5 \u00a72.2.3 (RESET active high), p.6 \u00a72.2.4]"
+text = "4 \u00d7 22 \u00b5F 25 V 1206 (\u2248 18 \u00b5F at 16.6 V) + C25 100 \u00b5F electrolytic after the shunt, with a fixed FB gain of 0.625 and an R111/C113 lag network: stability cannot be judged from the datasheet (internal compensation is not published) and relies on the assumed-compensation sims. Bench Bode at 1.6 V and 16.6 V is needed. [TI SNVSAN3F p.20 Table 9-2 (12 V/400 kHz: 4 \u00d7 22 \u00b5F), p.22-23 \u00a79.2.2.5 (Bode / transient validation required)] (reviewer could not decide)"
 status = "accepted"
-reason = "no board change needed: the intent is corrected (factory NVM gives 20 V / 1 A from a 20 V source); the firmware keeps both channels off (EN low, the 100k pull-downs hold them off in reset too) until it has written the NVM, so the load stays at the logic's ~1 W"
-source = "review"
-
-[[finding]]
-id = "review:U21:input-cap"
-ref = "U21"
-pin = "VIN"
-text = "C201/C202 2 x 10 \u00b5F give about 9 \u00b5F effective at 20 V, and C203 is 100 nF instead of the required 220 nF 50 V X7R. Fix: change C203 to 220 nF next to VIN/PGND. [LMR33630 SNVSAN3F p.23 \u00a79.2.2.6]"
-status = "open"
-reason = "fixed: C203 220 nF 50 V X7R (C107083); recheck in the next review"
+reason = "the loop rests on TI's unpublished internal compensation: the decks use derived constants and show CV phase margin >= 63 deg for any ESR 0.05..1 Ohm of C25/C26 (wide margin, not a datasheet proof); the README bring-up measures the loop (injection at R102/R202, 2 A steps at 1.6 and 16.6 V) before use"
 source = "review"
 
 [[finding]]
 id = "review:U21:output-cap"
 ref = "U21"
 pin = "FB"
-text = "Same as U11: FB gain is fixed at 0.625 while effective Cout (C206-C209) falls from about 70 \u00b5F to about 18 \u00b5F at 16 V, and stability is only shown with assumed internal compensation. Fix: add about 100 \u00b5F 25 V bulk on OUT2_B and measure loop gain on the bench. [LMR33630 SNVSAN3F p.20 Table 9-2, p.22 Eq.6 and \u00a79.2.2.5]"
-status = "open"
-reason = "fixed: C26 100 uF electrolytic at the terminal; as U11"
+text = "Same network as U11 (C206-C209 4 \u00d7 22 \u00b5F + C26 100 \u00b5F, fixed FB gain with the R211/C213 lag): stability rests on unpublished internal compensation and needs bench Bode / step tests at 1.6 V and 16.6 V. [TI SNVSAN3F p.22-23 \u00a79.2.2.5] (reviewer could not decide)"
+status = "accepted"
+reason = "the loop rests on TI's unpublished internal compensation: the decks use derived constants and show CV phase margin >= 63 deg for any ESR 0.05..1 Ohm of C25/C26 (wide margin, not a datasheet proof); the README bring-up measures the loop (injection at R102/R202, 2 A steps at 1.6 and 16.6 V) before use"
 source = "review"
 
 [[finding]]
 id = "review:U3:inductor"
 ref = "U3"
 pin = "SW"
-text = "L1 6.8 \u00b5H meets Lmin 3.6 \u00b5H, but its 4 A Isat is below ISC max 5.05 A and ILIMIT max 4.1 A, so a short on V5 can saturate it. Fix: use a 6.8 \u00b5H part with Isat >= 5.1 A (e.g. FXL0630/FXL0650 size). [LMR33630 SNVSAN3F p.21-22 \u00a79.2.2.4 (Isat should be >= ISC 5.05 A max; must not be < ILIMIT 4.1 A max), p.7; FXL0530-6R8-M (LCSC C177249) Isat 4 A, 3.5 A rated]"
+text = "L1 Isat 4 A is below ILIMIT max 4.1 A and ISC typ 4.5 A, so a short on V5 can saturate it (normal 0.5 A load peaks \u2248 1.2 A and is fine). Fix: a 6.8-8.2 \u00b5H part with Isat \u2265 5.1 A (e.g. FXL0630/FXL0650 class); 6.8 \u00b5H itself is fine (Eq. 5 min 3.6 \u00b5H, Table 9-2 gives 8 \u00b5H). [TI SNVSAN3F p.21-22 \u00a79.2.2.4 (Isat must not be less than ILIMIT 4.1 A max, ideally \u2265 ISC 5.05 A max); JLCPCB C177249 FXL0530-6R8-M: Isat 4 A]"
 status = "accepted"
-reason = "FXL0530-6R8 is metal composite: its 4 A Isat is the -30 % inductance point, a soft roll-off, not a ferrite's hard saturation; at the 4.1 A max limit L is still ~4.7 uH > Lmin 3.6 uH. V5 is an internal rail (no connector, only the LDO and two gate pull-ups), so a short needs a board fault, and the LMR33630 hiccup mode ends it. A 5.1 A part means a larger footprint in the crowded logic block"
+reason = "FXL0530-6R8 is metal composite: its 4 A Isat is the -30 % inductance point, a soft roll-off, not a ferrite's hard saturation; at the 4.1 A max limit L is still ~4.7 uH > Lmin 3.6 uH. V5 is an internal rail (no connector; the LDO and two gate pull-ups), so a short needs a board fault, and the LMR33630's hiccup mode ends it"
 source = "review"
 
 [[finding]]
-id = "review:U3:input-cap"
-ref = "U3"
-pin = "VIN"
-text = "The HF cap C10 is 100 nF instead of the required 220 nF 50 V X7R. Fix: change C10 to 220 nF and place it at U3 VIN/PGND, next to C9 10 \u00b5F 50 V. [LMR33630 SNVSAN3F p.20 Table 9-2 (CIN 10 \u00b5F + CHF 220 nF), p.23 \u00a79.2.2.6]"
-status = "open"
-reason = "fixed: C10 220 nF 50 V X7R (C107083); recheck in the next review"
-source = "review"
-
-[[finding]]
-id = "review:U4:thermal"
-ref = "U4"
-pin = "VIN"
-text = "At the 0.4 A V3V3 budget, (5.17 - 3.3) V x 0.4 A = 0.75 W gives a 138 K rise, so Tj is about 183 \u00b0C (45 \u00b0C ambient), over 150 \u00b0C abs max. Even the 0.15 A average gives Tj of about 97 \u00b0C. Fix: lower V5 to about 4.0 V (R6 24k to 33k; DIS gate drive and LDO headroom stay fine), or make 3.3 V with a buck. [AP2112 DS39724 p.3 (\u03b8JA SOT25 184 \u00b0C/W, TJ 150 \u00b0C abs max), p.8 (OTSD 160 \u00b0C)]"
-status = "accepted"
-reason = "the 0.4 A was a peak figure: the intent now budgets 0.2 A average with margin (ESP32-S3 BLE ~120 mA, Wi-Fi off) = 0.37 W, Tj = 45 + 69 = 114 C < 150 C; the ~350 mA radio bursts last milliseconds, far below the SOT-25's thermal time constant (seconds)"
-source = "review"
-
-[[finding]]
-id = "review:board:intent"
+id = "review:board:current-path"
 ref = ""
 pin = ""
-text = "Two intent assumptions do not hold. (1) \"before the STUSB4500 NVM write only 5 V\": factory NVM negotiates 20 V at 1 A with a 20 V source, so loads must stay under 20 W until programmed. (2) The V3V3 0.4 A budget cannot be met thermally by the AP2112K from 5.17 V (see U4:thermal). Fix: correct the intent and limit load before NVM write; lower V5 or change the 3V3 regulator. [STUSB4500 DS12499 Rev 3 p.22 Table 18 (default PDO3 20 V / 1.0 A); AP2112 DS39724 p.3 (\u03b8JA 184 \u00b0C/W)]"
-status = "open"
-reason = "fixed: NVM assumption and the 3V3 budget (0.2 A average) corrected"
+text = "There is no fuse (the PD source limits current). J1 is listed at 3 A, equal to the full 3 A contract (see J1:current). About 130 \u00b5F (C6 100 \u00b5F + 7 \u00d7 10 \u00b5F derated) is switched onto VBUS by Q1 during PD voltage transitions; check it against the USB PD sink bulk-capacitance limit (cSnkBulkPd). [LCSC / JLCPCB C2765186 listings (3 A); AOS AO4407A p.1-2; USB PD spec sink bulk-capacitance limit not looked up] (reviewer could not decide)"
+status = "accepted"
+reason = "no fuse by design: the PD source limits current and the INA226 trips each channel. The bulk behind Q1 (~150 uF) is switched on slowly (C19: ~3 ms gate ramp), so the attach capacitance is only the VBUS side (C19 100 nF, TVS, ESD); at a 5 -> 20 V transition the source's slew limit sets the charge current, as for any large-bulk 60 W sink (laptops). The exact cSnkBulkPd figure was not verified (USB-IF spec)"
 source = "review"
 
 [[finding]]
 id = "review:board:sims"
 ref = ""
 pin = ""
-text = "powerup_logic.cir models U3 with a \"15 uH SWPA4030\" and 24 \u00b5F on V5, but the board has L1 6.8 \u00b5H FXL0530 and 4 x 22 \u00b5F (C12, C13, C23, C24). buck_loop/cc_loop/powerup_ch rest on assumed, unpublished EA values (gm 1 mS, Rc 12k, Cc 4.7 nF), so their phase margins are not datasheet-backed. buck_loadpoints uses typical Rds x 1.3 and the JEDEC R\u03b8JA, which TI says not to use for design. Fix: align the decks with the BOM, run the thermal corner with max Rds(on), and confirm the loops on the bench. [LMR33630 SNVSAN3F p.7 \u00a77.4 note 2 (R\u03b8JA not for design), p.8 (RDS-ON max 160/110 m\u03a9); sim/powerup_logic.cir header]"
-status = "open"
-reason = "fixed: powerup_logic (6.8 uH, 4 x 22 uF ~56 uF, misc-load bug), loadpoints at max Rds(on), bulk caps in the loop decks"
+text = "buck_loop, cc_loop and both powerup decks rest on an assumed internal compensation (gm 1 mS, Rc 12 k\u03a9, Cc 4.7 nF, Ri 0.1 V/A) that the datasheet does not publish, so their phase-margin and step results for this fixed-gain FB network are not datasheet-backed. buck_loop also does not measure the 1 ms recovery claimed in intent. Fix: confirm by bench Bode (inject at R102/R202) and 2 A steps at 1.6 V and 16.6 V; buck_loadpoints (max RDS-ON, ISC min) is properly sourced. [TI SNVSAN3F p.22-23 \u00a79.2.2.5 (Bode plots and load transients must be validated); p.7-8 (ISC, ILIMIT, RDS-ON, tSS 2.9-6 ms)]"
+status = "accepted"
+reason = "the loop rests on TI's unpublished internal compensation: the decks use derived constants and show CV phase margin >= 63 deg for any ESR 0.05..1 Ohm of C25/C26 (wide margin, not a datasheet proof); the README bring-up measures the loop (injection at R102/R202, 2 A steps at 1.6 and 16.6 V) before use; the 1 ms recovery claim was dropped from the intent (bench item)"
 source = "review"
 
 [[finding]]

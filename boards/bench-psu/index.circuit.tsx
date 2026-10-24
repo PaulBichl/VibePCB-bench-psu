@@ -35,7 +35,8 @@
 // - Measure: INA226 per channel (0x40 / 0x41): 4.096 A full scale, 125 uA / 1.25 mV LSB.
 // - Status LEDs per channel: ON follows the converter's EN node (hardware truth, dark after a trip), CC is a GPIO.
 // - Control: ESP32-S3-MINI-1, native USB on the USB-C port (flashing / CDC; BOOT + RST on the back), BLE.
-//   Encoders counted by the S3's PCNT units; 10k pull-ups + 10 nF on every front-panel line.
+//   Encoders counted by the S3's PCNT units; 3.3k pull-ups + 33 nF (~110 us) on every front-panel line: 1 mA
+//   contact current, the EC11's minimum for contact wetting (review ENC:interface; 10k gave 0.33 mA).
 import {
   A_1N4148W, A_2N7002, AO4407A, AP2112K_3_3TRG1, B3F_4055, DG301_5_0_04P_14_1000A_H_, EC11E15244B2, ESDA25P35_1U1M, ESDA25W,
   ESP32_S3_MINI_1_N8, FXL0530_6R8_M, FXL1040_150_M, INA181A2IDBVR, INA226AIDGSR, LMR33630ADDAR, MMBT3904_RANGE_100_300_ as NPN,
@@ -205,8 +206,8 @@ const Controls = ({ n, cx, ccGpio }: { n: 1 | 2; cx: number; ccGpio: string }) =
       <B3F_4055 name={`SW${n}3`} {...at(cx, yb)} />
       {lines.map((line, i) => (
         <>
-          <R key={`r${line}`} name={id("R", 30 + i)} {...bot(rc[i][0], rc[i][1] + (i === 3 ? 0.9 : 0))} v="10k" />
-          <C key={`c${line}`} name={id("C", 30 + i)} {...bot(rc[i][0] + 3, rc[i][1] - (i === 3 ? 0.9 : 0))} v="10nF" />
+          <R key={`r${line}`} name={id("R", 30 + i)} {...bot(rc[i][0], rc[i][1] + (i === 3 ? 0.9 : 0))} v="3.3k" />
+          <C key={`c${line}`} name={id("C", 30 + i)} {...bot(rc[i][0] + 3, rc[i][1] - (i === 3 ? 0.9 : 0))} v="33nF" />
           {net("V3V3", [`.${id("R", 30 + i)} > .pin1`])}
           {net(line, [`.${id("R", 30 + i)} > .pin2`, `.${id("C", 30 + i)} > .pin1`])}
           {net("GND", [`.${id("C", 30 + i)} > .pin2`])}

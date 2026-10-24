@@ -5,7 +5,7 @@ assumptions = [
   "outputs 1.6-16.6 V adjustable; OUTn voltage below is the maximum (ratings are checked against it)",
   "passive cooling in a vented enclosure, ambient <= 35 C; ~1.6 W per channel at 3 A (sim/buck_loadpoints.cir)",
   "logic budget on 3V3: ~150 mA average (ESP32-S3 with BLE ~120 mA, Wi-Fi off; OLED 20 mA; LEDs 4 mA), radio bursts to ~350 mA for milliseconds; [rail.V3V3] current is the average with margin (the LDO thermal figure: 0.2 A x 1.87 V x 184 C/W = 69 K), the burst is in sim/powerup_logic.cir",
-  "load transient: a 2 A load step / release moves the output by at most 400 mV and recovers within 1 ms (the FB lag network trades transient speed for stability over 1.6-16 V; 15 % at 1.6 V, 2.3 % at 16 V)",
+  "load transient: a 2 A load step / release moves the output by at most 400 mV (sim/buck_loop.cir; the recovery time and the loop itself are measured on the prototype, README bring-up; the FB lag network trades transient speed for stability over 1.6-16 V; 15 % at 1.6 V, 2.3 % at 16 V)",
   "power-up from EN settles within 20 ms (4 ms soft start, then the pre-charged lag capacitor relaxes; no overshoot)",
   "set-point changes settle within 1 s (knob turns: the PWM 2-pole RC is ~0.1 s)",
   "CC response: after a step into the current limit the converter runs at its own ~4.5 A peak limit for up to ~2 ms before the CC loop takes over (sim/cc_loop.cir); the INA226 trip is the fast backstop",

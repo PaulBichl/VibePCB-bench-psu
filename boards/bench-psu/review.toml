@@ -1,55 +1,55 @@
 # Last reviewer-agent review (pcb review --merge); its issue / unknown answers are in findings.toml.
-hash = "ff328569e46e21ce"  # netlist the review saw (review.netlist_hash)
-date = "2026-10-24 13:32 UTC"
+hash = "cb979fdcb8109b4c"  # netlist the review saw (review.netlist_hash)
+date = "2026-10-24 14:46 UTC"
 
 [[item]]
 id = "J1:pinout"
 verdict = "ok"
 pin = ""
-cite = "SHOU HAN TYPE-C 16PIN 2MD(073) (LCSC C2765186) pin names; USB Type-C receptacle pinout"
-text = "Both VBUS and both GND pins tied, Dp1/Dp2 -> USB_DP and Dn1/Dn2 -> USB_DN (orientation-independent USB 2.0), CC1/CC2 kept separate to U1, SBU open, shell EH1..4 to USB_SHIELD."
+cite = "ST DS12499 Rev 2 STUSB4500 p.24 Fig. 8 (reference Type-C sink wiring)"
+text = "VBUS1/2, GND1/2, CC1/CC2 to U1, both D+ and both D- pads joined (USB 2.0 flip support), SBU open, shell to GND via R2 1 M\u03a9 || C5 4.7 nF; matches the ST reference sink wiring."
 
 [[item]]
 id = "J1:current"
-verdict = "ok"
-pin = ""
-cite = "LCSC/JLCPCB C2765186 listing: rated current 3 A"
-text = "Intent input is 20 V / 3 A, exactly the connector's 3 A rating (also the USB-C non-e-marked cable limit); both VBUS and both GND pins are used. No margin, but within rating; firmware must keep the sum inside the PD contract."
+verdict = "unknown"
+pin = "VBUS1"
+cite = "LCSC / JLCPCB C2765186 listings (no manufacturer datasheet obtained)"
+text = "The 20 V / 3 A contract puts 3 A through the two VBUS and two GND pads; distributor listings give 3 A (product page) and 5 A (category list) for this SHOU HAN 16P receptacle. At 3 A there is no margin: confirm the VBUS contact rating in the manufacturer datasheet or choose a 5 A-rated receptacle."
 
 [[item]]
 id = "J1:protection"
 verdict = "ok"
 pin = ""
-cite = "STUSB4500 DS12499 Rev 3 p.25 Fig.9 (ESDA25P35 on VBUS, ESDA25W on CC); ESDA25P35-1U1M VRM 22 V; ESDA25W VRM 24 V"
-text = "VBUS has D2 (ESDA25P35-1U1M, 22 V standoff > 21 V max PD 20 V+5 %), CC1/CC2 have U8 (ESDA25W), D+/D- have U2 (USBLC6-2SC6), shield via R2 1 M\u03a9 || C5 4.7 nF; matches ST's reference. No fuse: overcurrent relies on the PD source's OCP."
+cite = "ST DocID029556 Rev 2 ESDA25P35-1U1M p.2 Table 2; ST ESDA25W datasheet (VRM 24 V); ST DS12499 p.24 Fig. 8"
+text = "VBUS has D2 ESDA25P35 (VRM 22 V \u2265 21 V max VBUS), CC1/CC2 have U8 ESDA25W (VRM 24 V, as in ST's reference), D+/D- have U2 USBLC6-2SC6. Overcurrent is limited by the PD source; reverse polarity does not apply to Type-C."
 
 [[item]]
 id = "J1:levels"
 verdict = "ok"
-pin = ""
-cite = "STUSB4500 DS12499 Rev 3 p.29 Table 22 (Rd 5.1 k\u03a9 \u00b110 % internal), p.5 \u00a72.2.2 (CCxDB to CCx for dead battery)"
-text = "CC Rd 5.1 k\u03a9 is integrated in U1 and CC1DB/CC2DB are tied to CC1/CC2; USB D+/D- go straight to the ESP32-S3 USB PHY (IO20/IO19), as in the module's peripheral schematic (0 \u03a9 series)."
+pin = "CC1"
+cite = "ST DS12499 Rev 2 p.27 Table 22 (Rd 5.1 k\u03a9 \u00b110% internal)"
+text = "CC Rd 5.1 k\u03a9 is inside the STUSB4500 (no external resistor needed); D+/D- go directly to the ESP32-S3 USB PHY (GPIO19/20) at USB 2.0 FS levels."
 
 [[item]]
 id = "J2:pinout"
 verdict = "ok"
 pin = ""
-cite = "DG301-5.0-04P-14-1000A(H) (LCSC C3037697): 4-position 5.0 mm screw terminal"
-text = "Pin 1 OUT1, 2 GND, 3 OUT2, 4 GND: each output paired with its own return; generic terminal block, no mating-side constraint."
+cite = "LCSC C3037697 DG301-5.0-04P listing (4-way 5.0 mm screw terminal)"
+text = "Pins 1-4 = OUT1, GND, OUT2, GND; a screw terminal has no mating keying, the front-panel labels must match this order."
 
 [[item]]
 id = "J2:current"
 verdict = "ok"
 pin = ""
-cite = "JLCPCB C3037697 listing: 17.5 A, 250 V"
-text = "3 A per output (4.5 A peak current limit) against a 17.5 A contact rating."
+cite = "LCSC C3037697 listing: 17.5 A, 250 V"
+text = "3 A per channel (4.5 A transient peak) against a 17.5 A per-pole rating; each output has its own GND pole."
 
 [[item]]
 id = "J2:protection"
 verdict = "ok"
 pin = ""
-cite = "SS54 datasheet (40 V / 5 A Schottky); INA226 SBOS547C p.4 abs max -0.3..40 V; INA181 SBOS793H p.7 abs max GND-0.3..26 V"
-text = "D13/D23 (SS54) clamp a reversed external source on each output; overcurrent is handled by the CC loop, LMR33630 current limit and INA226 alert. No positive TVS, but 4 x 22 \u00b5F per output absorbs ESD."
+cite = "SS54 datasheet (VRRM 40 V, IF 5 A); TI SNVSAN3F p.6 note 3 (VOUT must not go below 0 V)"
+text = "D13/D23 SS54 clamp a reverse-connected or negative output to protect the LMR33630 (VOUT must not fall below 0 V); C25/C26 100 \u00b5F absorb ESD at the terminals and the CC loop + INA226 trip limit the current. There is no protection against an external source back-feeding above 16.6 V (acceptable for a bench supply)."
 
 [[item]]
 id = "J2:levels"
@@ -62,232 +62,232 @@ text = ""
 id = "J3:pinout"
 verdict = "unknown"
 pin = ""
-cite = ""
-text = "J3 is GND, VCC, SCL, SDA for the OLED module, but no module MPN is given; common 0.96 inch SSD1306 I2C modules come in both GND-VCC and VCC-GND orders. Name the exact module and confirm its header order (a swap reverses the 3V3 supply)."
+cite = "PZ254V-11-04P 2.54 mm 4-pin header"
+text = "Pin order GND, VCC, SCL, SDA matches the common 0.96 inch SSD1306 module, but the OLED module MPN is not in the review inputs and modules also ship with VCC/GND swapped. Name the module and check its pin order."
 
 [[item]]
 id = "J3:current"
 verdict = "ok"
-pin = ""
-cite = "PZ254V-11-04P 2.54 mm header (LCSC C492403); intent logic budget OLED 20 mA"
-text = "About 20 mA OLED supply on a 2.54 mm header pin (rated about 3 A)."
+pin = "VCC"
+cite = "PZ254V 2.54 mm header (typ. 3 A per contact); intent.toml OLED 20 mA"
+text = "The OLED draws about 20 mA from V3V3, far below a 2.54 mm header contact rating."
 
 [[item]]
 id = "J3:protection"
 verdict = "ok"
 pin = ""
-cite = "n/a: internal board-to-module header inside the enclosure, not user-accessible"
+cite = "n/a: internal board-to-module header behind the front panel, not user-accessible"
 text = ""
 
 [[item]]
 id = "J3:levels"
 verdict = "ok"
-pin = ""
-cite = "STUSB4500 DS12499 p.28 Table 21 (I/O 0..4.5 V); INA226 SBOS547C p.4"
-text = "I2C at 3.3 V with R11/R12 4.7 k\u03a9 pull-ups to V3V3, shared with U1/U12/U22; OLED VCC is 3.3 V, so no level shifting is needed. On-module pull-ups, if any, only add in parallel."
+pin = "SDA"
+cite = "TI SBOS547B INA226 \u00a76.1 (SDA/SCL 6 V abs max); ST DS12499 p.26 Table 21 (I/O 0-4.5 V)"
+text = "The bus runs at 3.3 V with R11/R12 4.7 k\u03a9 to V3V3; the module is powered from V3V3, so any onboard pull-ups also go to 3.3 V, within every device's I/O range."
 
 [[item]]
 id = "D1:ratings"
 verdict = "ok"
-pin = ""
-cite = "SMBJ22A (BORN, LCSC C151920): VRWM 22 V, VBR 24.4 V min / 26.9 V, VC 35.5 V @ 16.9 A, 600 W 10/1000 \u00b5s"
-text = "VIN max is 21 V (PD 20 V +5 %) < VRWM 22 V. A 35.5 V clamp stays below the LMR33630 VIN abs max of 38 V (SNVSAN3F p.6)."
+pin = "C"
+cite = "Diodes / MCC SMBJ22A datasheet: VRWM 22 V, VBR 24.4 V min, VC 35.5 V at 16.9 A"
+text = "VIN max 21 V (20 V PD +5 %) is below VRWM 22 V, and the 35.5 V clamp stays under the LMR33630 VIN abs max of 38 V (SNVSAN3F p.6)."
 
 [[item]]
 id = "D1:orientation"
 verdict = "ok"
-pin = ""
-cite = "SMBJ22A datasheet: unidirectional, cathode band"
-text = "Cathode on VIN, anode on GND: it clamps positive surges and does not conduct in normal operation."
+pin = "C"
+cite = "SMBJ22A datasheet (unidirectional, cathode band)"
+text = "Cathode on VIN and anode on GND: blocks in normal operation and clamps positive surges."
 
 [[item]]
 id = "D101:ratings"
 verdict = "ok"
 pin = ""
-cite = "KT-0603YG (Hubei KENTO, LCSC C2289): IF test 20 mA, Pd 40 mW, VF about 1.8-2.4 V"
-text = "(3.3 V - about 2.0 V - Q12 Vce(sat) 0.1 V) / R112 1 k\u03a9 = about 1.2 mA, far below 20 mA. Never reverse-biased."
+cite = "JLCPCB C2289 KT-0603YG listing (20 mA test current); MMBT3904 datasheet"
+text = "(3.3 V - ~2 V - 0.1 V) / 1 k\u03a9 \u2248 1.2 mA, far below 20 mA; the LED is never reverse-biased (Q12 open leaves the cathode floating)."
 
 [[item]]
 id = "D101:orientation"
 verdict = "unknown"
 pin = "pin1"
-cite = ""
-text = "The circuit needs pin1 (via R112 to V3V3) = anode and pin2 (Q12 collector) = cathode, but the pins are only named pin1/pin2 and the KENTO page gives no pad polarity. Confirm the footprint's pad 1 is the anode, or the LED stays dark."
+cite = "KT-0603YG datasheet not readable (LCSC C2289)"
+text = "The circuit needs pin1 = anode (R112 from V3V3) and pin2 = cathode (Q12 collector), but parts.md names the pads only pin1/pin2. Check that the footprint's pad 1 is the anode, not the cathode mark."
 
 [[item]]
 id = "D102:ratings"
 verdict = "ok"
 pin = ""
-cite = "KT-0603R (Hubei KENTO, LCSC C2286): IF test 20 mA, Pd 40 mW, VF 1.8-2.4 V"
-text = "GPIO21 3.3 V through R113 1 k\u03a9 gives about 1.3 mA, far below 20 mA. Reverse voltage is 0 V when the GPIO is low."
+cite = "JLCPCB C2286 KT-0603R listing (20 mA test current, VF 1.8-2.4 V)"
+text = "(3.3 V - ~1.9 V) / 1 k\u03a9 \u2248 1.4 mA from GPIO21, far below 20 mA; the reverse voltage is 0 V when the GPIO is low."
 
 [[item]]
 id = "D102:orientation"
 verdict = "unknown"
 pin = "pin1"
-cite = ""
-text = "The circuit needs pin1 (R113 side) = anode and pin2 (GND) = cathode, but the pins are only named pin1/pin2 and the KENTO listing gives no pad polarity. Confirm the footprint polarity."
+cite = "KT-0603R datasheet not readable (LCSC C2286)"
+text = "The circuit needs pin1 = anode (R113 from LED_CC1) and pin2 = cathode (GND), but the pads are only named pin1/pin2. Check the footprint's pad 1 against the datasheet's cathode mark."
 
 [[item]]
 id = "D13:ratings"
 verdict = "ok"
-pin = ""
+pin = "cathode"
 cite = "SS54 datasheet: VRRM 40 V, IF(AV) 5 A"
-text = "OUT1 is at most 16.6 V (at most VIN 21 V under fault), below the 40 V VRRM; 5 A forward covers a reversed source clamped through the 4.5 A converter limit."
+text = "Reverse voltage is at most 16.6 V (OUT1) against 40 V. Forward current flows only under a reverse-polarity fault, and 5 A covers the converter's 4.5 A typ current limit."
 
 [[item]]
 id = "D13:orientation"
 verdict = "ok"
 pin = ""
-cite = "SS54 datasheet: cathode band"
-text = "Anode on GND, cathode on OUT1: reverse-polarity clamp, off in normal operation."
+cite = "SS54 datasheet (cathode band)"
+text = "Cathode on OUT1 and anode on GND: clamps a negative output and blocks in normal operation."
 
 [[item]]
 id = "D14:ratings"
 verdict = "ok"
 pin = ""
-cite = "1N4148W datasheet: VR 75 V, IF 150 mA"
-text = "At most about 3.3 V reverse and (3.3 - 1.6) V / R116 10 k\u03a9 = about 0.2 mA forward."
+cite = "1N4148W datasheet: VRRM 100 V / VR 75 V, IF 150 mA"
+text = "Reverse voltage is at most ~1 V (FB) and forward current at most (3.3 V - 1 V) / 10 k\u03a9 \u2248 0.2 mA."
 
 [[item]]
 id = "D14:orientation"
 verdict = "ok"
 pin = ""
-cite = "1N4148W datasheet: cathode band"
-text = "Anode from CC1_OUT via R116, cathode on FB1: the CC amp can only inject current into FB (lowering Vout), and the diode blocks in CV when the amp output sits at 0 V."
+cite = "TI SNVSAN3F p.21 \u00a79.2.2.3 (FB regulation); 1N4148W datasheet"
+text = "Anode at the CC amp (via R116) and cathode on FB1: the diode only sources current into FB to pull VOUT down in CC mode, and blocks in CV mode when U7 sits at 0 V."
 
 [[item]]
 id = "D15:ratings"
 verdict = "ok"
 pin = ""
 cite = "1N4148W datasheet: VR 75 V, IF 150 mA"
-text = "DIS1_G is 0.1-5.2 V and LAG1 about 1 V; \u00b5A currents through R126 100 k\u03a9."
+text = "Forward current is at most ~(4.3 V - 0.6 V) / 100 k\u03a9 \u2248 40 \u00b5A and reverse voltage is a few volts at most."
 
 [[item]]
 id = "D15:orientation"
 verdict = "ok"
 pin = ""
-cite = "1N4148W datasheet: cathode band"
-text = "Anode on DIS1_G, cathode via R126 to LAG1: it pre-charges C113 while EN is low and blocks once Q14 pulls DIS1_G to about 0.1 V."
+cite = "1N4148W datasheet"
+text = "Anode on DIS1_G and cathode toward R126/LAG1: it pre-charges C113 while the channel is off and blocks once Q14 pulls DIS1_G to ~0.1 V."
 
 [[item]]
 id = "D2:ratings"
 verdict = "ok"
-pin = ""
-cite = "ESDA25P35-1U1M (ST): VRM 22 V, VBR 23.3 V min, 35 A 8/20 \u00b5s, VCL 41 V max (distributor data of ST datasheet)"
-text = "VBUS max is 21 V (20 V +5 %), below the 22 V standoff; same part ST uses on VBUS in the STUSB4500 reference (DS12499 p.25)."
+pin = "pin1"
+cite = "ST DocID029556 Rev 2 ESDA25P35-1U1M p.2 Table 2: VRM 22 V, VBR 23.3 V min, VCL 31 V at 10 A"
+text = "VBUS max 21 V (20 V +5 %) is below VRM 22 V. The margin to VBR 23.3 V is only 2.3 V, but that is ST's own choice for 20 V VBUS (DS12499 Fig. 8)."
 
 [[item]]
 id = "D2:orientation"
 verdict = "ok"
 pin = "pin1"
-cite = "ESDA25P35-1U1M QFN-2L pin table (pin 1 = I/O, pin 2 = GND; drop-in ElecSuper ESDA25P35-1U1M-ES datasheet)"
-text = "Pin 1 is on VBUS and pin 2 on GND, matching the I/O/GND pad assignment. Check the footprint's pad 1 against ST's package drawing at assembly."
+cite = "ST DocID029556 Rev 2 p.1 Fig. 1 (pin 1 = cathode)"
+text = "Pin 1 (cathode) is on VBUS and pin 2 (anode) on GND, so the diode is reverse-biased in operation."
 
 [[item]]
 id = "D201:ratings"
 verdict = "ok"
 pin = ""
-cite = "KT-0603YG (LCSC C2289): IF test 20 mA, Pd 40 mW"
-text = "About 1.2 mA through R212 1 k\u03a9 from 3.3 V, as D101."
+cite = "JLCPCB C2289 KT-0603YG listing (20 mA test current)"
+text = "About 1.2 mA through R212 1 k\u03a9 from 3.3 V, far below 20 mA; no reverse bias."
 
 [[item]]
 id = "D201:orientation"
 verdict = "unknown"
 pin = "pin1"
-cite = ""
-text = "Same as D101: pin1 (R212 / V3V3) must be the anode and pin2 (Q22 collector) the cathode, but the pins are only named pin1/pin2. Confirm the footprint polarity."
+cite = "KT-0603YG datasheet not readable (LCSC C2289)"
+text = "The circuit needs pin1 = anode (R212) and pin2 = cathode (Q22 collector); check the footprint's pad 1 against the cathode mark."
 
 [[item]]
 id = "D202:ratings"
 verdict = "ok"
 pin = ""
-cite = "KT-0603R (LCSC C2286): IF test 20 mA, Pd 40 mW"
-text = "About 1.3 mA from IO47 through R213 1 k\u03a9."
+cite = "JLCPCB C2286 KT-0603R listing (20 mA test current)"
+text = "About 1.4 mA through R213 1 k\u03a9 from GPIO47, far below 20 mA."
 
 [[item]]
 id = "D202:orientation"
 verdict = "unknown"
 pin = "pin1"
-cite = ""
-text = "Same as D102: pin1 (R213 side) must be the anode and pin2 (GND) the cathode, but the pins are only named pin1/pin2. Confirm the footprint polarity."
+cite = "KT-0603R datasheet not readable (LCSC C2286)"
+text = "The circuit needs pin1 = anode (R213) and pin2 = cathode (GND); check the footprint's pad 1 against the cathode mark."
 
 [[item]]
 id = "D23:ratings"
 verdict = "ok"
-pin = ""
+pin = "cathode"
 cite = "SS54 datasheet: VRRM 40 V, IF(AV) 5 A"
-text = "OUT2 is at most 16.6 V, below the 40 V VRRM; the 5 A forward rating covers reverse-polarity clamping."
+text = "Reverse voltage is at most 16.6 V (OUT2) against 40 V; 5 A covers reverse-polarity fault current up to the converter limit."
 
 [[item]]
 id = "D23:orientation"
 verdict = "ok"
 pin = ""
-cite = "SS54 datasheet: cathode band"
-text = "Anode on GND, cathode on OUT2: reverse clamp."
+cite = "SS54 datasheet (cathode band)"
+text = "Cathode on OUT2 and anode on GND, as for D13."
 
 [[item]]
 id = "D24:ratings"
 verdict = "ok"
 pin = ""
 cite = "1N4148W datasheet: VR 75 V, IF 150 mA"
-text = "At most 3.3 V reverse and about 0.2 mA forward, as D14."
+text = "At most ~1 V reverse and ~0.2 mA forward."
 
 [[item]]
 id = "D24:orientation"
 verdict = "ok"
 pin = ""
-cite = "1N4148W datasheet: cathode band"
-text = "Anode from CC2_OUT via R216, cathode on FB2: CC injection only."
+cite = "1N4148W datasheet"
+text = "Anode via R216 from CC2_OUT and cathode on FB2: injects current only, as for D14."
 
 [[item]]
 id = "D25:ratings"
 verdict = "ok"
 pin = ""
 cite = "1N4148W datasheet: VR 75 V, IF 150 mA"
-text = "At most 5.2 V and \u00b5A currents through R226 100 k\u03a9."
+text = "About 40 \u00b5A forward and a few volts reverse."
 
 [[item]]
 id = "D25:orientation"
 verdict = "ok"
 pin = ""
-cite = "1N4148W datasheet: cathode band"
-text = "Anode on DIS2_G, cathode via R226 to LAG2: lag-capacitor pre-charge, as D15."
+cite = "1N4148W datasheet"
+text = "Anode on DIS2_G and cathode via R226 to LAG2, as for D15."
 
 [[item]]
 id = "ENC1:supply"
 verdict = "ok"
 pin = ""
-cite = "n/a: passive mechanical encoder (Alps EC11E15244B2), no supply pin"
+cite = "n/a: passive mechanical encoder, no supply pin"
 text = ""
 
 [[item]]
 id = "ENC1:abs-max"
 verdict = "ok"
 pin = ""
-cite = "Alps EC11E15244B2 catalog: rating 10 mA 5 V DC"
-text = "Contacts switch 3.3 V through 10 k\u03a9 pull-ups (0.33 mA), within 5 V / 10 mA."
+cite = "Alps EC11E15244B2 product page: rating 10 mA 5 V DC; push switch 0.1 A 5 V DC"
+text = "Contacts see 3.3 V and 0.33 mA, inside the 5 V DC / 10 mA rating."
 
 [[item]]
 id = "ENC1:control-pins"
 verdict = "ok"
 pin = ""
-cite = "n/a: no control pins on a mechanical encoder"
+cite = "n/a: encoder has no control pins"
 text = ""
 
 [[item]]
 id = "ENC1:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "Alps EC11E catalog: terminals A/B/C encoder, D/E push switch, mounting legs"
-text = "Common C and switch D go to GND, and the mounting legs (pins 6/7) go to GND. No pin is left unused."
+cite = "Alps EC11E drawing (A/B phase, C common, D/E push switch, mounting tabs)"
+text = "Common C and switch terminal D go to GND, mounting tabs 6/7 to GND; no pin is left open."
 
 [[item]]
 id = "ENC1:interface"
-verdict = "ok"
-pin = ""
-cite = "Alps EC11E catalog (10 mA 5 V DC); ESP32-S3-MINI-1 datasheet v1.7 p.11 Table 3-1"
-text = "A/B/switch each have a 10 k\u03a9 pull-up to 3V3 and 10 nF to GND (tau 100 \u00b5s) into GPIO15/16/17, which suits the 15-pulse encoder."
+verdict = "issue"
+pin = "A"
+cite = "Alps EC11E15244B2 product page: min operating current 1 mA (encoder), push switch min rating 500 \u00b5A 5 V DC"
+text = "R130/R131/R132 10 k\u03a9 to 3.3 V give 0.33 mA, below the encoder's 1 mA minimum (A, B) and the switch's 500 \u00b5A minimum (E), which risks unreliable contact wetting. Fix: 3.3 k\u03a9 pull-ups on ENC1_A/ENC1_B (1 mA) and 4.7 k\u03a9 or less on ENC1_SW, keeping the RC filter (retune C130-C132 to about 33 nF to keep the time constant)."
 
 [[item]]
 id = "ENC2:supply"
@@ -300,999 +300,999 @@ text = ""
 id = "ENC2:abs-max"
 verdict = "ok"
 pin = ""
-cite = "Alps EC11E15244B2 catalog: rating 10 mA 5 V DC"
-text = "3.3 V / 0.33 mA through 10 k\u03a9 pull-ups."
+cite = "Alps EC11E15244B2 product page: rating 10 mA 5 V DC"
+text = "3.3 V and 0.33 mA, inside the rating."
 
 [[item]]
 id = "ENC2:control-pins"
 verdict = "ok"
 pin = ""
-cite = "n/a: no control pins"
+cite = "n/a: encoder has no control pins"
 text = ""
 
 [[item]]
 id = "ENC2:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "Alps EC11E catalog terminal layout"
-text = "C, D and the mounting legs go to GND; A, B and E are pulled up to 3V3."
+cite = "Alps EC11E drawing"
+text = "C, D and mounting tabs 6/7 go to GND."
 
 [[item]]
 id = "ENC2:interface"
-verdict = "ok"
-pin = ""
-cite = "Alps EC11E catalog; ESP32-S3-MINI-1 datasheet v1.7 p.11"
-text = "10 k\u03a9 pull-up and 10 nF RC into GPIO13/14/18, as ENC1."
+verdict = "issue"
+pin = "A"
+cite = "Alps EC11E15244B2 product page: min operating current 1 mA, push switch min 500 \u00b5A 5 V DC"
+text = "R230/R231/R232 10 k\u03a9 at 3.3 V give 0.33 mA, below the 1 mA (A/B) and 500 \u00b5A (E) minimum contact currents. Fix: 3.3 k\u03a9 on ENC2_A/ENC2_B and 4.7 k\u03a9 or less on ENC2_SW, with C230-C232 rescaled."
 
 [[item]]
 id = "U1:supply"
 verdict = "ok"
 pin = "VDD"
-cite = "STUSB4500 DS12499 Rev 3 p.28 Table 21 (VDD 4.1-22 V), p.9 \u00a72.2.13/2.2.15 (VREG 1 \u00b5F, 0.5-10 \u00b5F), p.23 \u00a76.1.1 (VSYS to GND)"
-text = "VDD on VBUS 5-21 V, with C4 100 nF + C1 1 \u00b5F; VREG_1V2 C2 1 \u00b5F and VREG_2V7 C3 1 \u00b5F; VSYS tied to GND as recommended."
+cite = "ST DS12499 Rev 2 p.26 Table 21 (VDD 4.1-22 V); p.9 \u00a72.2.13/2.2.15 (VREG caps 1 \u00b5F typ)"
+text = "VDD = VBUS 5-21 V is inside 4.1-22 V, with C1 1 \u00b5F 50 V + C4 100 nF; VREG_1V2 (C2) and VREG_2V7 (C3) have 1 \u00b5F each; VSYS is grounded as recommended when unused."
 
 [[item]]
 id = "U1:abs-max"
 verdict = "ok"
 pin = ""
-cite = "STUSB4500 DS12499 Rev 3 p.27 Table 20 (VDD / VBUS pins 28 V, CC 22 V, I/O -0.3..6 V), p.29 (IDISUSB 50 mA max)"
-text = "VDD and VBUS_EN_SNK see at most 21 V (< 28 V). I2C/ALERT are pulled to 3.3 V (< 4.5 V operating). VBUS_VS_DISCH goes through R1 1 k\u03a9, so discharge current is at most 21 mA (< 50 mA)."
+cite = "ST DS12499 Rev 2 p.25 Table 20"
+text = "VDD and VBUS_VS_DISCH \u2264 21 V (28 V abs max); VBUS_EN_SNK \u2264 21 V (28 V); CC \u2264 5.5 V operating (22 V abs max, TVS-protected); SCL/SDA/ALERT at 3.3 V (6 V abs max)."
 
 [[item]]
 id = "U1:control-pins"
-verdict = "issue"
-pin = "VBUS_EN_SNK"
-cite = "STUSB4500 DS12499 Rev 3 p.22 Table 18 (default NVM: PDO2 15 V/1.5 A, PDO3 20 V/1.0 A), p.5 \u00a72.2.3 (RESET active high), p.6 \u00a72.2.4"
-text = "RESET to GND and ADDR0/ADDR1 to GND (address 0x28) are fine. But the factory NVM requests 20 V / 1.0 A (PDO3), so a 20 V charger delivers 20 V from the first plug-in, not 5 V as the intent assumes. Firmware must keep the load under 1 A (20 W) until the NVM is written, or write the NVM before first use."
+verdict = "ok"
+pin = "RESET"
+cite = "ST DS12499 Rev 2 p.5 \u00a72.2.2-2.2.3, p.6 \u00a72.2.4, p.9 \u00a72.2.12"
+text = "RESET (active high) is on GND; CC1DB/CC2DB are tied to CC1/CC2 (dead-battery mode, needed because U1 is VBUS-powered); ADDR0/ADDR1 are on GND (base address 0x28, distinct from INA226 0x40/0x41); VBUS_VS_DISCH goes through R1 1 k\u03a9, limiting discharge to 21 mA (< 50 mA max), as in ST Fig. 8."
 
 [[item]]
 id = "U1:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "STUSB4500 DS12499 Rev 3 p.6-9 \u00a72.2.5-2.2.11 (DISCH optional, ATTACH/POWER_OK/GPIO/A_B_SIDE open-drain outputs)"
-text = "DISCH, ATTACH, POWER_OK2/3, GPIO, A_B_SIDE and NC are open (outputs or optional discharge, fine to leave open); EP on GND."
+cite = "ST DS12499 Rev 2 p.6-9 \u00a72.2.5-2.2.11"
+text = "DISCH, ATTACH, POWER_OK2/3, GPIO and A_B_SIDE are open-drain outputs and may be left open; NC is open; the EP is on GND."
 
 [[item]]
 id = "U1:interface"
 verdict = "ok"
-pin = ""
-cite = "STUSB4500 DS12499 Rev 3 p.6 Table 3 (SCL/SDA/ALERT need external pull-up), p.30 (VIH 1.2 V, VIL 0.35 V)"
-text = "SCL/SDA have 4.7 k\u03a9 pull-ups and ALERT 10 k\u03a9 to 3V3, to ESP32 IO9/IO8/IO10."
+pin = "SDA"
+cite = "ST DS12499 Rev 2 p.6 Table 3, p.26 Table 21 (I/O 0-4.5 V), p.28 (VIH 1.2 V)"
+text = "SCL/SDA have R12/R11 4.7 k\u03a9 and ALERT has R13 10 k\u03a9 to 3.3 V, inside the 0-4.5 V I/O range, and 3.3 V clears VIH 1.2 V."
 
 [[item]]
 id = "U12:supply"
 verdict = "ok"
 pin = "VS_POS"
-cite = "INA226 SBOS547C p.3 Table 4-1 (VS 2.7-5.5 V), p.6"
-text = "VS on V3V3 with C112 100 nF."
+cite = "TI SBOS547B INA226 \u00a76.3 (VS 2.7-5.5 V), \u00a78.2 (0.1 \u00b5F bypass)"
+text = "VS = 3.3 V with 100 nF caps (C112/C115) on V3V3 in the channel block."
 
 [[item]]
 id = "U12:abs-max"
 verdict = "ok"
-pin = ""
-cite = "INA226 SBOS547C p.4 \u00a75.1 (IN+/IN- -0.3..40 V, VBUS -0.3..40 V, SDA 6 V, SCL VS+0.3, IOUT 10 mA)"
-text = "IN+/IN-/VBUS are at most 16.6 V (at most VIN 21 V under fault), and the shunt sees 60 mV at 3 A (full scale 81.92 mV). SDA/SCL/Alert are at most 3.3 V; Alert sinks at most 0.33 mA from R110."
+pin = "VBUS"
+cite = "TI SBOS547B INA226 \u00a76.1 (inputs and VBUS -0.3-40 V; SDA/SCL/Alert 6 V)"
+text = "VIN+/VIN-/VBUS \u2264 16.6 V in operation and \u2264 21 V worst case, below the 36 V operating and 40 V abs max; digital pins are at 3.3 V."
 
 [[item]]
 id = "U12:control-pins"
 verdict = "ok"
-pin = ""
-cite = "INA226 SBOS547C Table 6-2 (A1/A0 address map)"
-text = "A1 = A0 = GND gives 0x40; U22 has A0 = VS (0x41) and U1 is at 0x28, so there are no conflicts on the shared bus."
+pin = "A0"
+cite = "TI SBOS547B INA226 \u00a77.5.5.1 address table"
+text = "A1 = A0 = GND gives 0x40; U22 (A0 = VS) gives 0x41, so there is no clash with U1 (0x28) or a 0x3C OLED."
 
 [[item]]
 id = "U12:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "INA226 SBOS547C p.3 Table 4-1"
-text = "All 10 pins are used; there is no exposed pad (VSSOP-10)."
+cite = "TI SBOS547B INA226 \u00a75 pin functions (VSSOP-10, no EP)"
+text = "All 10 pins are used; there is no exposed pad."
 
 [[item]]
 id = "U12:interface"
 verdict = "ok"
 pin = "Alert"
-cite = "INA226 SBOS547C p.3 (Alert open-drain), p.5-6 (VIH 0.7xVS, VOL 0.4 V @ 3 mA)"
-text = "I2C 3.3 V with 4.7 k\u03a9 pull-ups. Open-drain Alert wired onto EN1, pulled up via R110 10 k\u03a9 from the MCU, so a trip pulls the LMR33630 EN below 1.2 V."
+cite = "TI SBOS547B INA226 \u00a76.1 (Alert open drain, 10 mA), \u00a76.3"
+text = "I2C is pulled up at 3.3 V. The open-drain Alert drives EN1 low against R110 10 k\u03a9 from the MCU (0.33 mA sink), a valid hardware trip; Alert is disabled at power-up, so EN1 is not held low."
 
 [[item]]
 id = "U13:supply"
 verdict = "ok"
 pin = "VS"
-cite = "INA181 SBOS793H p.7 \u00a76.3 (VS 2.7-5.5 V)"
-text = "VS on V3V3; C115 100 nF on V3V3 serves as bypass."
+cite = "TI SBOS793 INA181 \u00a76.3 (VS 2.7-5.5 V), \u00a79 (0.1 \u00b5F bypass)"
+text = "VS = 3.3 V with a 100 nF cap on V3V3 nearby."
 
 [[item]]
 id = "U13:abs-max"
 verdict = "ok"
-pin = ""
-cite = "INA181 SBOS793H p.7 \u00a76.1 (IN\u00b1 GND-0.3..26 V, differential \u00b126 V), \u00a76.3 (VCM -0.2..26 V)"
-text = "Common mode is at most 16.6 V (at most 21 V under fault) and differential at most 90 mV at the 4.5 A limit; REF is on GND."
+pin = "IN_POS"
+cite = "TI SBOS793 INA181 \u00a76.1/6.3 (VCM -0.2-26 V)"
+text = "IN+/IN- sit at OUT1_B/OUT1 \u2264 16.6 V (\u2264 21 V worst case), inside the 26 V common-mode range; the differential is \u2264 90 mV."
 
 [[item]]
 id = "U13:control-pins"
 verdict = "ok"
 pin = "REF"
-cite = "INA181 SBOS793H p.4 Table 5-1 (REF 0..VS)"
-text = "REF on GND gives a unidirectional 0 V-based output; gain 50 V/V (A2) on 20 m\u03a9 = 1 V/A."
+cite = "TI SBOS793 INA181 \u00a78.3 (REF pin sets output offset)"
+text = "REF on GND gives unidirectional operation, 1 V/A with gain 50 and a 20 m\u03a9 shunt, as the CC loop expects."
 
 [[item]]
 id = "U13:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "INA181 SBOS793H p.4 Table 5-1"
-text = "All 6 SOT-23 pins are used; no exposed pad."
+cite = "TI SBOS793 INA181 pin functions (SOT-23-6)"
+text = "All pins are used."
 
 [[item]]
 id = "U13:interface"
 verdict = "ok"
 pin = "OUT"
-cite = "INA181 SBOS793H p.8 \u00a76.5 (swing VS-0.03 V, gain error \u00b11 %, max capacitive load 1 nF)"
-text = "3 A gives 3.0 V, below the 3.27 V swing limit; OUT drives R115 10 k\u03a9, which isolates C116 100 nF from the 1 nF load limit."
+cite = "TI SBOS793 INA181 \u00a76.5 (swing to VS - ~0.02 V, gain error \u00b11 %)"
+text = "3.3 A (ISET max 3.3 V) gives a 3.3 V output, about at the top rail. Settings up to ~3.2 A are linear, which covers the 3 A design limit."
 
 [[item]]
 id = "U2:supply"
 verdict = "ok"
 pin = "VBUS"
-cite = "ST USBLC6-2 datasheet (pin 5 VBUS reference, VBUS max 6 V)"
-text = "Pin 5 on V3V3 (bypassed by the 3V3 caps) sets the clamp reference for 3.3 V USB 2.0 data lines."
+cite = "ST USBLC6-2 datasheet pin description (VBUS reference pin, 6 V max)"
+text = "Pin 5 on V3V3 (decoupled by C15-C17) is a valid reference supply and keeps the clamp below the ESP32 I/O limit."
 
 [[item]]
 id = "U2:abs-max"
 verdict = "ok"
 pin = ""
-cite = "ST USBLC6-2 datasheet absolute maximum ratings"
-text = "D+/D- (0-3.6 V) and VBUS 3.3 V are within ratings."
+cite = "ST USBLC6-2 datasheet abs max (VBUS/I/O 6 V)"
+text = "D+/D- at USB FS levels (\u2264 3.6 V) and VBUS pin at 3.3 V."
 
 [[item]]
 id = "U2:control-pins"
 verdict = "ok"
 pin = ""
-cite = "n/a: ESD array has no control pins"
+cite = "n/a: TVS array has no control pins"
 text = ""
 
 [[item]]
 id = "U2:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "ST USBLC6-2 datasheet Fig.1 pinout (1/6 I/O1, 3/4 I/O2, 2 GND, 5 VBUS)"
-text = "I/O1 pins 1/6 on USB_DN and I/O2 pins 3/4 on USB_DP (pass-through); all pins used."
+cite = "ST USBLC6-2 datasheet Fig. 1 (I/O1 pins 1/6, I/O2 pins 3/4)"
+text = "Flow-through pairs are both connected: pins 1/6 USB_DN and pins 3/4 USB_DP; GND on pin 2."
 
 [[item]]
 id = "U2:interface"
 verdict = "ok"
 pin = ""
-cite = "ST USBLC6-2 datasheet; ESP32-S3-MINI-1 datasheet v1.7 p.11 (IO19 USB_D-, IO20 USB_D+)"
-text = "Flow-through on the USB 2.0 FS lines between J1 and ESP32 IO19/IO20, polarity consistent."
+cite = "ST USBLC6-2 datasheet (low line capacitance for USB 2.0)"
+text = "In line on D+/D- between J1 and ESP32 GPIO19/20; no level translation needed."
 
 [[item]]
 id = "U22:supply"
 verdict = "ok"
 pin = "VS_POS"
-cite = "INA226 SBOS547C p.3 (VS 2.7-5.5 V)"
-text = "VS on V3V3 with C212 100 nF."
+cite = "TI SBOS547B INA226 \u00a76.3 (VS 2.7-5.5 V)"
+text = "VS = 3.3 V with 100 nF caps (C212/C215) on V3V3."
 
 [[item]]
 id = "U22:abs-max"
 verdict = "ok"
-pin = ""
-cite = "INA226 SBOS547C p.4 \u00a75.1"
-text = "IN\u00b1/VBUS at most 16.6 V (< 40 V), shunt 60 mV at 3 A, I2C/Alert at most 3.3 V."
+pin = "VBUS"
+cite = "TI SBOS547B INA226 \u00a76.1 (-0.3-40 V)"
+text = "OUT2/OUT2_B \u2264 21 V worst case, below 36 V operating and 40 V abs max."
 
 [[item]]
 id = "U22:control-pins"
 verdict = "ok"
 pin = "A0"
-cite = "INA226 SBOS547C Table 6-2"
-text = "A1 = GND, A0 = VS gives 0x41, distinct from U12 (0x40) and U1 (0x28)."
+cite = "TI SBOS547B INA226 \u00a77.5.5.1 address table"
+text = "A1 = GND, A0 = VS gives 0x41, distinct from U12 (0x40)."
 
 [[item]]
 id = "U22:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "INA226 SBOS547C p.3 Table 4-1"
-text = "All pins used; no exposed pad."
+cite = "TI SBOS547B INA226 pin functions"
+text = "All pins are used; no EP."
 
 [[item]]
 id = "U22:interface"
 verdict = "ok"
 pin = "Alert"
-cite = "INA226 SBOS547C p.3, p.6"
-text = "3.3 V I2C with pull-ups; Alert open-drain on EN2 (R210 10 k\u03a9 from the MCU) as the fast shutdown."
+cite = "TI SBOS547B INA226 \u00a76.1 (Alert open drain)"
+text = "I2C at 3.3 V; Alert pulls EN2 low against R210 10 k\u03a9, as for U12."
 
 [[item]]
 id = "U23:supply"
 verdict = "ok"
 pin = "VS"
-cite = "INA181 SBOS793H p.7 \u00a76.3"
-text = "VS on V3V3 (2.7-5.5 V) with C215 100 nF."
+cite = "TI SBOS793 INA181 \u00a76.3 (VS 2.7-5.5 V)"
+text = "VS = 3.3 V with a 100 nF cap on V3V3."
 
 [[item]]
 id = "U23:abs-max"
 verdict = "ok"
-pin = ""
-cite = "INA181 SBOS793H p.7 \u00a76.1"
-text = "Common mode at most 16.6 V (< 26 V), REF on GND."
+pin = "IN_POS"
+cite = "TI SBOS793 INA181 \u00a76.3 (VCM -0.2-26 V)"
+text = "Inputs \u2264 21 V worst case, inside the 26 V common-mode range."
 
 [[item]]
 id = "U23:control-pins"
 verdict = "ok"
 pin = "REF"
-cite = "INA181 SBOS793H p.4 Table 5-1"
-text = "REF on GND (unidirectional, 1 V/A)."
+cite = "TI SBOS793 INA181 \u00a78.3"
+text = "REF on GND gives unidirectional operation at 1 V/A."
 
 [[item]]
 id = "U23:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "INA181 SBOS793H p.4 Table 5-1"
-text = "All pins used."
+cite = "TI SBOS793 INA181 pin functions"
+text = "All pins are used."
 
 [[item]]
 id = "U23:interface"
 verdict = "ok"
 pin = "OUT"
-cite = "INA181 SBOS793H p.8 \u00a76.5"
-text = "3.0 V at 3 A, below the 3.27 V swing limit; R215 10 k\u03a9 isolates C216."
+cite = "TI SBOS793 INA181 \u00a76.5"
+text = "0-3 V output into R215 10 k\u03a9, linear up to ~3.2 A."
 
 [[item]]
 id = "U6:supply"
 verdict = "ok"
 pin = "V_POS"
-cite = "TLV9062 SBOS839N \u00a71 Features / \u00a76.3 (VS 1.8-5.5 V)"
-text = "V+ on V3V3 with C21 100 nF, V- on GND."
+cite = "TI SBOS839 TLV9062 \u00a76.3 (VS 1.8-5.5 V)"
+text = "3.3 V single supply with 100 nF caps on V3V3."
 
 [[item]]
 id = "U6:abs-max"
 verdict = "ok"
 pin = ""
-cite = "TLV9062 SBOS839N \u00a76.1 (inputs (V-)-0.5..(V+)+0.5 V)"
-text = "Inputs see VSET 0-0.275 V and ISINK_E 0-0.3 V; output into R105 1 k\u03a9 / Q11 base."
+cite = "TI SBOS839 TLV9062 \u00a76.1/6.3 (inputs V- -0.1 to V+ +0.1 V)"
+text = "VSET 0-0.275 V and ISINK_E 0-0.3 V are inside the rails; outputs drive Q11/Q21 bases through 1 k\u03a9."
 
 [[item]]
 id = "U6:control-pins"
 verdict = "ok"
 pin = ""
-cite = "n/a: TLV9062 SOIC-8 has no shutdown pin (only the TLV9062S has)"
+cite = "n/a: TLV9062 (SOIC-8) has no shutdown pin"
 text = ""
 
 [[item]]
 id = "U6:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "TLV9062 SBOS839N \u00a75 pin functions (D: 1 OUT1, 2 IN1-, 3 IN1+, 4 V-, 5 IN2+, 6 IN2-, 7 OUT2, 8 V+)"
-text = "Both halves used (channel 1 and channel 2 sinks); pinout matches."
+cite = "TI SBOS839 TLV9062 pin functions"
+text = "Both halves are used (A = CH1 sink, B = CH2 sink)."
 
 [[item]]
 id = "U6:interface"
 verdict = "ok"
-pin = ""
-cite = "TLV9062 SBOS839N (rail-to-rail input/output)"
-text = "The output needs about VSET + 0.7 V + Ib*1 k\u03a9, at most about 1 V, inside the 0-3.3 V swing; the emitter-follower sink is Isink = VSET / 2.2 k\u03a9, at most 125 \u00b5A."
+pin = "OUTA"
+cite = "TI SBOS839 TLV9062 \u00a76.5 (RRIO)"
+text = "Rail-to-rail input works at 0 V common mode (VSET = 0 at the 1.6 V setting); the output drives the NPN emitter follower via R105/R205 1 k\u03a9."
 
 [[item]]
 id = "U7:supply"
 verdict = "ok"
 pin = "V_POS"
-cite = "TLV9062 SBOS839N \u00a76.3 (1.8-5.5 V)"
-text = "V+ on V3V3 with C22 100 nF."
+cite = "TI SBOS839 TLV9062 \u00a76.3 (VS 1.8-5.5 V)"
+text = "3.3 V with 100 nF caps on V3V3."
 
 [[item]]
 id = "U7:abs-max"
 verdict = "ok"
 pin = ""
-cite = "TLV9062 SBOS839N \u00a76.1"
-text = "Inputs are ISENSx_F (INA181 output, at most 3.27 V) and CCx_NEG (ISET filter, at most 3.3 V), both within the rails."
+cite = "TI SBOS839 TLV9062 \u00a76.1/6.3"
+text = "Inputs ISENS_F (0-3.3 V, INA181-driven from the same rail) and CC_NEG stay within the rails; outputs drive 10 k\u03a9 + diode into FB (\u2264 ~1.6 V)."
 
 [[item]]
 id = "U7:control-pins"
 verdict = "ok"
 pin = ""
-cite = "n/a: no shutdown pin on TLV9062IDR"
+cite = "n/a: no shutdown pin"
 text = ""
 
 [[item]]
 id = "U7:unused-pins"
 verdict = "ok"
 pin = ""
-cite = "TLV9062 SBOS839N \u00a75 (SOIC-8 pinout)"
-text = "Both halves used as CC integrators; pinout matches."
+cite = "TI SBOS839 TLV9062 pin functions"
+text = "Both halves are used (CC1, CC2)."
 
 [[item]]
 id = "U7:interface"
 verdict = "ok"
-pin = ""
-cite = "TLV9062 SBOS839N (RRIO); 1N4148W"
-text = "The output (0-3.3 V) drives FB through R116 10 k\u03a9 + D14, at most about 0.2 mA, and the diode blocks in CV."
+pin = "OUTA"
+cite = "TI SBOS839 TLV9062 \u00a76.5; TI SNVSAN3F p.6 (FB abs max 5.5 V)"
+text = "The maximum injection (3.3 V - 0.6 V - 1 V) / 10 k\u03a9 \u2248 170 \u00b5A exceeds the ~140 \u00b5A needed to pull OUT to 0 V at full VSET sink; FB stays \u2264 3.3 V < 5.5 V."
 
 [[item]]
 id = "U8:supply"
 verdict = "ok"
 pin = ""
-cite = "n/a: ESDA25W is a passive TVS array, no supply"
+cite = "n/a: TVS array, no supply pin"
 text = ""
 
 [[item]]
 id = "U8:abs-max"
 verdict = "ok"
-pin = ""
-cite = "ESDA25W (ST): VRM 24 V, VBR 25 V min, common anode SOT-323"
-text = "CC lines operate at 0-5.5 V, well below the 24 V standoff; same part as ST's STUSB4500 reference (DS12499 p.25)."
+pin = "K1"
+cite = "ST ESDA25W datasheet (VRM 24 V, VBR 25-30 V, 65 pF); ST DS12499 p.24 Fig. 8"
+text = "CC lines run 0-5.5 V, and a CC-to-VBUS short (\u2264 21 V) stays below VRM 24 V; this is the same part ST uses on CC."
 
 [[item]]
 id = "U8:control-pins"
 verdict = "ok"
 pin = ""
-cite = "n/a: no control pins"
+cite = "n/a: TVS array has no control pins"
 text = ""
 
 [[item]]
 id = "U8:unused-pins"
 verdict = "ok"
-pin = ""
-cite = "ESDA25W datasheet: K1, K2 cathodes, A common anode"
-text = "K1 on CC1, K2 on CC2, A on GND."
+pin = "A"
+cite = "ST ESDA25W datasheet (SOT-323 common anode)"
+text = "K1 on CC1, K2 on CC2 and the common anode on GND; all pins are used."
 
 [[item]]
 id = "U8:interface"
 verdict = "ok"
 pin = ""
-cite = "ESDA25W: about 65 pF line capacitance"
-text = "65 pF on CC is acceptable for BMC PD signalling and matches ST's reference."
+cite = "ST ESDA25W datasheet (65 pF line capacitance)"
+text = "65 pF per CC line is small next to the Type-C receiver capacitance budget; ST uses it in its reference."
 
 [[item]]
 id = "U5:supply-pins"
 verdict = "ok"
 pin = "3V3"
-cite = "ESP32-S3-MINI-1 datasheet v1.7 p.2 (3.0-3.6 V), p.41 Fig.9-1 (22 \u00b5F + 0.1 \u00b5F on 3V3)"
-text = "The single 3V3 pin is on V3V3 (3.3 V \u00b11.5 %) with C16 10 \u00b5F + C17 100 nF, plus C15 10 \u00b5F at the LDO; 20 \u00b5F nominal against the 22 \u00b5F reference is acceptable."
+cite = "Espressif ESP32-S3-MINI-1 datasheet \u00a75 (VDD 3.0-3.6 V), \u00a77 peripheral schematic (22 \u00b5F + 0.1 \u00b5F on 3V3)"
+text = "3V3 from the AP2112 (3.3 V \u00b11.5 %) with C15/C16 2 \u00d7 10 \u00b5F + C17/C21/C22 100 nF, about 20 \u00b5F nominal, close to the 22 \u00b5F recommendation; the module handles its own internal rails."
 
 [[item]]
 id = "U5:reset"
 verdict = "ok"
 pin = "EN"
-cite = "ESP32-S3-MINI-1 datasheet v1.7 p.41 (EN RC delay R = 10 k\u03a9, C = 1 \u00b5F), p.12 (EN not floating)"
-text = "R9 10 k\u03a9 to 3V3, C18 1 \u00b5F, SW1 to GND. USB-Serial/JTAG on IO19/20 can reset the chip itself."
+cite = "Espressif ESP32-S3-MINI-1 datasheet \u00a77 peripheral schematic (EN RC 10 k\u03a9 / 1 \u00b5F)"
+text = "R9 10 k\u03a9 to 3V3 + C18 1 \u00b5F + SW1 to GND match the recommended RC delay; the USB-Serial/JTAG can also reset."
 
 [[item]]
 id = "U5:boot"
 verdict = "ok"
 pin = "IO0"
-cite = "ESP32-S3-MINI-1 datasheet v1.7 p.13 Table 4-1, p.14 Table 4-3"
-text = "IO0 has a 10 k\u03a9 pull-up and SW2 to GND (SPI boot, or download when pressed). IO3, IO45 and IO46 are left open: IO45 weak pull-down gives 3.3 V VDD_SPI for the N8 flash, and IO46 is weak pull-down."
+cite = "Espressif ESP32-S3-MINI-1 datasheet \u00a73.3 strapping pins (GPIO0, GPIO3, GPIO45, GPIO46)"
+text = "GPIO0 has R10 10 k\u03a9 pull-up + SW2 (SPI boot / download); GPIO3, GPIO45 and GPIO46 are unconnected and use their defaults (GPIO45 low = 3.3 V VDD_SPI, correct for N8 flash)."
 
 [[item]]
 id = "U5:clock"
 verdict = "ok"
 pin = ""
-cite = "n/a: ESP32-S3-MINI-1 has the 40 MHz crystal on module (datasheet v1.7 p.9 Fig.2-1); no 32 kHz crystal used"
+cite = "n/a: the ESP32-S3-MINI-1 module contains its 40 MHz crystal"
 text = ""
 
 [[item]]
 id = "U5:debug"
 verdict = "ok"
 pin = "IO19"
-cite = "ESP32-S3-MINI-1 datasheet v1.7 p.11 (IO19 USB_D-, IO20 USB_D+), p.14 (USB-Serial-JTAG download boot)"
-text = "Native USB on J1 through U2 gives flashing and JTAG; BOOT and RESET buttons are present. UART0 is not brought out, which is acceptable."
+cite = "Espressif ESP32-S3-MINI-1 datasheet pin table (GPIO19 = USB_D-, GPIO20 = USB_D+)"
+text = "Native USB-Serial/JTAG on IO19/IO20 reaches J1 through U2, with BOOT (SW2) and EN (SW1) buttons; UART0 is not brought out, which is acceptable."
 
 [[item]]
 id = "U5:pin-functions"
 verdict = "ok"
-pin = ""
-cite = "ESP32-S3-MINI-1 datasheet v1.7 p.11-12 Table 3-1"
-text = "NTC1/NTC2 are on IO1/IO2 = ADC1_CH0/CH1 (usable with radio on). PWM/I2C/GPIO are on GPIO-matrix pins and USB is on IO19/IO20. IO26 is unused (free on N8)."
+pin = "IO1"
+cite = "Espressif ESP32-S3 datasheet pin/ADC table (GPIO1/2 = ADC1_CH0/CH1)"
+text = "NTC1/NTC2 are on ADC1 (usable with radio on); USB on IO19/20; the PWM outputs (IO4, IO5, IO11, IO12) and I2C (IO8/9) use the GPIO matrix / LEDC, available on any GPIO."
 
 [[item]]
 id = "U5:io-limits"
 verdict = "ok"
 pin = ""
-cite = "ESP32-S3-MINI-1 datasheet v1.7 p.2 (3.0-3.6 V supply)"
-text = "Every net on a GPIO is at most 3.3 V (pull-ups to V3V3, INA226 Alert open-drain, NTC divider). Pin currents are at most 1.3 mA (LEDs) and 0.33 mA (EN pulled by Alert)."
+cite = "Espressif ESP32-S3 datasheet \u00a75 DC characteristics (VIH max VDD + 0.3 V)"
+text = "Every net on U5 is \u2264 3.3 V (pull-ups to V3V3, INA226 Alert not on the MCU); the outputs load \u2265 1 k\u03a9 (LED \u2248 1.4 mA, PWM into 10 k\u03a9)."
 
 [[item]]
 id = "U5:ground"
 verdict = "ok"
-pin = ""
-cite = "ESP32-S3-MINI-1 datasheet v1.7 p.11 Table 3-1 (GND 1, 2, 42, 43, 46-65)"
-text = "Pins 1, 2, 42, 43 and 46-61 are on GND as listed in parts.md."
+pin = "GND1"
+cite = "Espressif ESP32-S3-MINI-1 datasheet pin table"
+text = "GND1-GND20 (pins 1, 2, 42, 43, 46-61) are all on GND."
 
 [[item]]
 id = "U11:input-range"
 verdict = "ok"
 pin = "VIN"
-cite = "LMR33630 SNVSAN3F p.6 \u00a77.1 (VIN 38 V abs), \u00a77.3 (3.8-36 V)"
-text = "VIN is 5-21 V, and D1 (SMBJ22A) clamps surges to 35.5 V, below 38 V."
+cite = "TI SNVSAN3F p.6 \u00a77.1 (VIN 38 V abs max), \u00a77.3 (3.8-36 V)"
+text = "VIN 19-21 V (20 V PD \u00b15 %), or 5 V before negotiation, is inside 3.8-36 V; surges are clamped by D1 at 35.5 V, below 38 V."
 
 [[item]]
 id = "U11:dropout"
 verdict = "ok"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.8 \u00a77.6 (tON_MIN 108 ns max, tOFF_MIN 85 ns max DDA), p.9 (DMAX 98 % in dropout), p.6 note 3 (Vout up to 95 % VIN)"
-text = "16.6 V / 3 A from 19-21 V needs D of about 0.86-0.92, below the 0.966 limit (85 ns at 400 kHz). 1.6 V at 21 V gives tON of about 190 ns, above 108 ns."
+cite = "TI SNVSAN3F p.8 \u00a77.5/7.6 (tON_MIN 108 ns max, tOFF_MIN 85 ns max DDA, fsw 400 kHz)"
+text = "16.6 V / 3 A from 19 V needs D \u2248 0.91, so tOFF \u2248 225 ns > 85 ns; 1.6 V from 21 V needs tON \u2248 200 ns > 108 ns."
 
 [[item]]
 id = "U11:output-cap"
-verdict = "issue"
+verdict = "unknown"
 pin = "FB"
-cite = "LMR33630 SNVSAN3F p.20 Table 9-2 (4 x 22 \u00b5F validated for 3.3-12 V), p.22 Eq.6 and p.22-23 (Cout sets phase margin; Bode/transient test required)"
-text = "FB gain is fixed at 200k/320k = 0.625 (1.6 V-like loop) at every set point, but 4 x 22 \u00b5F 25 V X5R falls to about 18 \u00b5F at 16 V. Eq.6 for a 2 A step / 400 mV at 1.6 V wants about 150 \u00b5F vs about 70 \u00b5F fitted, and stability rests on the R111/C113 lag network checked only with assumed internal compensation. Fix: add bulk (e.g. 100 \u00b5F 25 V polymer) per output so Cout stays nearly constant, and confirm phase margin on the bench."
+cite = "TI SNVSAN3F p.20 Table 9-2 (12 V/400 kHz: 4 \u00d7 22 \u00b5F), p.22-23 \u00a79.2.2.5 (Bode / transient validation required)"
+text = "4 \u00d7 22 \u00b5F 25 V 1206 (\u2248 18 \u00b5F at 16.6 V) + C25 100 \u00b5F electrolytic after the shunt, with a fixed FB gain of 0.625 and an R111/C113 lag network: stability cannot be judged from the datasheet (internal compensation is not published) and relies on the assumed-compensation sims. Bench Bode at 1.6 V and 16.6 V is needed."
 
 [[item]]
 id = "U11:input-cap"
-verdict = "issue"
+verdict = "ok"
 pin = "VIN"
-cite = "LMR33630 SNVSAN3F p.23 \u00a79.2.2.6 (>= 10 \u00b5F effective ceramic plus a 220 nF 50 V X7R as close as possible to VIN)"
-text = "U11 has C101 + C102 10 \u00b5F 50 V 1206 (about 4.5 \u00b5F each at 20 V, about 9 \u00b5F effective) and C103 100 nF, not the required 220 nF HF cap. Fix: make C103 a 220 nF 50 V X7R next to VIN/PGND; consider a third 10 \u00b5F."
+cite = "TI SNVSAN3F p.23 \u00a79.2.2.6 (\u2265 10 \u00b5F ceramic, ideally 2 \u00d7 VIN rating, + 220 nF 50 V X7R)"
+text = "C101/C102 10 \u00b5F 50 V X5R 1206 (CL31A106KBHNNNE) + C103 220 nF 50 V X7R 0603 (CC0603KRX7R9BB224); placement next to VIN/PGND is not checkable from these inputs."
 
 [[item]]
 id = "U11:output-voltage"
 verdict = "ok"
 pin = "FB"
-cite = "LMR33630 SNVSAN3F p.7 \u00a77.5 (VFB 0.985-1.015 V), p.21 (RFBT max 1 M\u03a9)"
-text = "Vout = 1 V x (1 + 120k/200k) + 120k x Isink, where Isink = VSET / 2.2 k\u03a9 and VSET = 3.3 V x 10k/120k = 0.275 V at full PWM. That gives 1.6-16.6 V (\u00b11.5 % from VFB); the fail-safe minimum is 1.6 V."
+cite = "TI SNVSAN3F p.7 \u00a77.5 (VFB 0.985-1.015 V), p.21 Eq. 3"
+text = "R102 120 k\u03a9 / R103 200 k\u03a9 give 1.6 V (1.58-1.62 V); the Q11 sink at VSET max 3.3 V \u00d7 10k/120k = 0.275 V / R104 2.2 k\u03a9 = 125 \u00b5A adds 120 k\u03a9 \u00d7 125 \u00b5A = 15 V, so 16.6 V, matching intent."
 
 [[item]]
 id = "U11:control-pins"
 verdict = "ok"
 pin = "EN"
-cite = "LMR33630 SNVSAN3F p.5 Table 6-1 (EN do not float, PG may be left open), p.6 (EN <= VIN+0.3 V), p.7 (VEN-H 1.26 V max)"
-text = "EN1 is driven from the 3.3 V GPIO through R110 10 k\u03a9 with R109 100 k\u03a9 pull-down and two 47 k\u03a9 base loads. That gives about 2.4 V, above 1.26 V, and the INA226 Alert can pull it low. PG is open (allowed)."
+cite = "TI SNVSAN3F p.5 Table 6-1, p.6 \u00a77.1 (EN \u2264 VIN + 0.3 V), p.7 (VEN-H 1.26 V max)"
+text = "EN1 \u2248 2.4 V when IO6 is high (R110 10 k\u03a9 against R109 100 k\u03a9 and the two 47 k\u03a9 base loads), > 1.26 V and < VIN; R109 holds EN low while the MCU is in reset; PG is left open, as allowed."
 
 [[item]]
 id = "U11:inductor"
 verdict = "ok"
-pin = ""
-cite = "LMR33630 SNVSAN3F p.21-22 Eq.4/Eq.5, Isat >= ISC (5.05 A max, p.7); FXL1040-150-M (LCSC C475916) 15 \u00b5H, 45 m\u03a9, Isat 7 A"
-text = "15 \u00b5H gives K of about 0.28 at 10 V out / 3 A and is above Lmin = 0.28 x 16.6 / 400 kHz = 11.6 \u00b5H. Isat 7 A is above ISC max 5.05 A."
+pin = "SW"
+cite = "TI SNVSAN3F p.21-22 Eq. 4/5 and Isat \u2265 ISC (5.05 A max); Changjiang FXL1040 table (FXL1040-150-M: 15 \u00b5H, 45 m\u03a9, Isat 7 A)"
+text = "15 \u00b5H gives K \u2248 0.28 at the worst case (10 V out, 3 A) and matches Table 9-2 (12 V: 15 \u00b5H); Isat 7 A > ISC max 5.05 A. At 1.6 V the ripple is \u2248 0.25 A, slightly under the 10 % (0.3 A) rule of thumb."
 
 [[item]]
 id = "U11:thermal"
 verdict = "ok"
 pin = "EP"
-cite = "LMR33630 SNVSAN3F p.7 \u00a77.4 (R\u03b8JA 42.9 \u00b0C/W JEDEC), p.8 (RDS-ON HS 160 / LS 110 m\u03a9 max), p.25 Fig.9-3"
-text = "At 16.6 V / 3 A with max Rds(on), IC loss is about 1.5 W, so Tj is about 45 + 1.5 x 43 = 110 \u00b0C, below 125 \u00b0C. EP is on GND; layout copper (Fig.9-3) decides the real R\u03b8JA."
+cite = "TI SNVSAN3F p.7 \u00a77.4 (R\u03b8JA 42.9 \u00b0C/W DDA), p.24-25 \u00a79.2.2.11 / Fig. 9-3, p.8 (RDS-ON max 160/110 m\u03a9)"
+text = "At 3 A, IC loss \u2248 1.3 W at max RDS-ON gives Tj \u2248 45 \u00b0C + 1.3 W \u00d7 43 \u00b0C/W \u2248 101 \u00b0C < 125 \u00b0C; EP is on GND."
 
 [[item]]
 id = "U11:current-budget"
 verdict = "ok"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.6 \u00a77.3 (IOUT 0-3 A), p.7 (ISC 3.85 A min, ILIMIT 2.9 A min)"
-text = "3 A budget equals the 3 A rating: peak is about 3.4 A (below ISC min 3.85 A) and valley about 2.77 A at 16.6 V out. The valley margin to ILIMIT min 2.9 A is small but positive."
+cite = "TI SNVSAN3F p.6 \u00a77.3 (IOUT 0-3 A), p.7 (ISC 3.85 A min, ILIMIT 2.9 A min)"
+text = "The 3 A budget equals the 3 A rating, with no margin: peak \u2248 3.42 A < ISC min 3.85 A and valley \u2248 2.6 A < ILIMIT min 2.9 A at 10 V out. The firmware must cap ISET at 3 A (ISET can reach 3.3 A)."
 
 [[item]]
 id = "U21:input-range"
 verdict = "ok"
 pin = "VIN"
-cite = "LMR33630 SNVSAN3F p.6 \u00a77.1/\u00a77.3"
-text = "VIN is 5-21 V with surges clamped to 35.5 V by D1, below the 38 V abs max."
+cite = "TI SNVSAN3F p.6 \u00a77.1/7.3"
+text = "VIN 19-21 V inside 3.8-36 V; D1 clamps at 35.5 V < 38 V."
 
 [[item]]
 id = "U21:dropout"
 verdict = "ok"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.8 \u00a77.6, p.9 \u00a77.7"
-text = "Same as U11: D of 0.92 at most against the 0.966 limit; minimum tON about 190 ns, above 108 ns."
+cite = "TI SNVSAN3F p.8 \u00a77.6 (tON_MIN 108 ns, tOFF_MIN 85 ns DDA)"
+text = "Same as U11: tOFF \u2248 225 ns at 16.6 V / 3 A from 19 V, and tON \u2248 200 ns at 1.6 V."
 
 [[item]]
 id = "U21:output-cap"
-verdict = "issue"
+verdict = "unknown"
 pin = "FB"
-cite = "LMR33630 SNVSAN3F p.20 Table 9-2, p.22 Eq.6 and \u00a79.2.2.5"
-text = "Same as U11: FB gain is fixed at 0.625 while effective Cout (C206-C209) falls from about 70 \u00b5F to about 18 \u00b5F at 16 V, and stability is only shown with assumed internal compensation. Fix: add about 100 \u00b5F 25 V bulk on OUT2_B and measure loop gain on the bench."
+cite = "TI SNVSAN3F p.22-23 \u00a79.2.2.5"
+text = "Same network as U11 (C206-C209 4 \u00d7 22 \u00b5F + C26 100 \u00b5F, fixed FB gain with the R211/C213 lag): stability rests on unpublished internal compensation and needs bench Bode / step tests at 1.6 V and 16.6 V."
 
 [[item]]
 id = "U21:input-cap"
-verdict = "issue"
+verdict = "ok"
 pin = "VIN"
-cite = "LMR33630 SNVSAN3F p.23 \u00a79.2.2.6"
-text = "C201/C202 2 x 10 \u00b5F give about 9 \u00b5F effective at 20 V, and C203 is 100 nF instead of the required 220 nF 50 V X7R. Fix: change C203 to 220 nF next to VIN/PGND."
+cite = "TI SNVSAN3F p.23 \u00a79.2.2.6"
+text = "C201/C202 10 \u00b5F 50 V 1206 + C203 220 nF 50 V X7R."
 
 [[item]]
 id = "U21:output-voltage"
 verdict = "ok"
 pin = "FB"
-cite = "LMR33630 SNVSAN3F p.7 (VFB 1 V \u00b11.5 %)"
-text = "R202 120k / R203 200k plus the VSET2 sink (R204 2.2 k\u03a9, VSET at most 0.275 V) give 1.6-16.6 V."
+cite = "TI SNVSAN3F p.7 \u00a77.5 (VFB 1 V \u00b11.5 %)"
+text = "R202/R203 120k/200k gives 1.6 V, and the VSET sink (R204 2.2 k\u03a9, 0.275 V max) adds up to 15 V, so 16.6 V."
 
 [[item]]
 id = "U21:control-pins"
 verdict = "ok"
 pin = "EN"
-cite = "LMR33630 SNVSAN3F p.5 Table 6-1, p.7 (VEN-H 1.26 V max)"
-text = "EN2 is about 2.4 V via R210 from IO7, with R209 100 k\u03a9 pull-down and U22 Alert; PG open."
+cite = "TI SNVSAN3F p.6-7"
+text = "EN2 \u2248 2.4 V from IO7 via R210, R209 pull-down, INA226 Alert trip; PG is open."
 
 [[item]]
 id = "U21:inductor"
 verdict = "ok"
-pin = ""
-cite = "LMR33630 SNVSAN3F Eq.4/Eq.5; FXL1040-150-M (C475916) Isat 7 A"
-text = "L21 15 \u00b5H is above Lmin 11.6 \u00b5H, and Isat 7 A is above ISC max 5.05 A."
+pin = "SW"
+cite = "TI SNVSAN3F p.21-22; Changjiang FXL1040 table (Isat 7 A)"
+text = "L21 15 \u00b5H, Isat 7 A > ISC max 5.05 A."
 
 [[item]]
 id = "U21:thermal"
 verdict = "ok"
 pin = "EP"
-cite = "LMR33630 SNVSAN3F p.7 \u00a77.4, p.8"
-text = "About 1.5 W worst case gives Tj of about 110 \u00b0C at 45 \u00b0C ambient, below 125 \u00b0C; EP on GND."
+cite = "TI SNVSAN3F p.7 \u00a77.4 (42.9 \u00b0C/W)"
+text = "Tj \u2248 101 \u00b0C at 3 A / 45 \u00b0C ambient, as for U11; EP is on GND."
 
 [[item]]
 id = "U21:current-budget"
 verdict = "ok"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.6-7"
-text = "3 A budget at the 3 A rating; peak 3.4 A is below ISC min 3.85 A."
+cite = "TI SNVSAN3F p.6-7"
+text = "3 A at the 3 A rating, with peak inside ISC min 3.85 A; the firmware must cap ISET at 3 A."
 
 [[item]]
 id = "U3:input-range"
 verdict = "ok"
 pin = "VIN"
-cite = "LMR33630 SNVSAN3F p.6"
-text = "VIN is 5-21 V, below 36 V. At 5 V bring-up the 5.17 V rail drops out to about VIN, which is still above what the AP2112K needs."
+cite = "TI SNVSAN3F p.6 \u00a77.1/7.3"
+text = "VIN 5-21 V inside 3.8-36 V. On a 5 V-only source the rail drops below 5.17 V (dropout), but the AP2112 still regulates 3.3 V."
 
 [[item]]
 id = "U3:dropout"
 verdict = "ok"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.8 \u00a77.6"
-text = "5.17 V from 20 V gives D = 0.26 and tON about 650 ns, above 108 ns."
+cite = "TI SNVSAN3F p.8 \u00a77.6"
+text = "20 V to 5.17 V needs D \u2248 0.26, so tON \u2248 650 ns \u226b 108 ns min."
 
 [[item]]
 id = "U3:output-cap"
 verdict = "ok"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.20 Table 9-2 (5 V, 400 kHz: 4 x 22 \u00b5F)"
-text = "V5 has C12, C13 (22 \u00b5F 0805 25 V) and C23, C24 (22 \u00b5F 1206 25 V) = 4 x 22 \u00b5F as in TI's table; standard 100k/24k divider."
+cite = "TI SNVSAN3F p.20 Table 9-2 (5 V / 400 kHz: 4 \u00d7 22 \u00b5F, \u2265 16 V rating p.22)"
+text = "C12/C13 22 \u00b5F 25 V 0805 (CL21A226MAQNNNE) + C23/C24 22 \u00b5F 25 V 1206 = 4 \u00d7 22 \u00b5F, 25 V parts as the datasheet asks for 5 V outputs."
 
 [[item]]
 id = "U3:input-cap"
-verdict = "issue"
+verdict = "ok"
 pin = "VIN"
-cite = "LMR33630 SNVSAN3F p.20 Table 9-2 (CIN 10 \u00b5F + CHF 220 nF), p.23 \u00a79.2.2.6"
-text = "The HF cap C10 is 100 nF instead of the required 220 nF 50 V X7R. Fix: change C10 to 220 nF and place it at U3 VIN/PGND, next to C9 10 \u00b5F 50 V."
+cite = "TI SNVSAN3F p.23 \u00a79.2.2.6"
+text = "C7-C9 3 \u00d7 10 \u00b5F 50 V 1206 + C10 220 nF 50 V X7R (+ C6 100 \u00b5F 35 V bulk)."
 
 [[item]]
 id = "U3:output-voltage"
 verdict = "ok"
 pin = "FB"
-cite = "LMR33630 SNVSAN3F p.7 (VFB 0.985-1.015 V), p.21 Eq.3"
-text = "1 V x (1 + 100k/24k) = 5.17 V (5.09-5.25 V with VFB tolerance), below the AP2112K 6.0 V maximum."
+cite = "TI SNVSAN3F p.7 (VFB 0.985-1.015 V), p.21 Eq. 3 (RFBT 100 k\u03a9 recommended)"
+text = "R5 100 k\u03a9 / R6 24 k\u03a9 give 5.17 V (5.09-5.25 V with VFB tolerance), inside intent's 5.17 V \u00b13 %."
 
 [[item]]
 id = "U3:control-pins"
 verdict = "ok"
 pin = "EN"
-cite = "LMR33630 SNVSAN3F p.5 Table 6-1 (EN may connect directly to VIN; PG may be open)"
-text = "EN goes to VIN via R4 100 k\u03a9, so the internal 3.8 V UVLO governs start-up; PG open."
+cite = "TI SNVSAN3F p.5 Table 6-1 (EN may connect directly to VIN)"
+text = "EN goes to VIN through R4 100 k\u03a9 (EN leakage 0.2 nA, so EN \u2248 VIN \u2264 VIN + 0.3 V); PG is open."
 
 [[item]]
 id = "U3:inductor"
 verdict = "issue"
 pin = "SW"
-cite = "LMR33630 SNVSAN3F p.21-22 \u00a79.2.2.4 (Isat should be >= ISC 5.05 A max; must not be < ILIMIT 4.1 A max), p.7; FXL0530-6R8-M (LCSC C177249) Isat 4 A, 3.5 A rated"
-text = "L1 6.8 \u00b5H meets Lmin 3.6 \u00b5H, but its 4 A Isat is below ISC max 5.05 A and ILIMIT max 4.1 A, so a short on V5 can saturate it. Fix: use a 6.8 \u00b5H part with Isat >= 5.1 A (e.g. FXL0630/FXL0650 size)."
+cite = "TI SNVSAN3F p.21-22 \u00a79.2.2.4 (Isat must not be less than ILIMIT 4.1 A max, ideally \u2265 ISC 5.05 A max); JLCPCB C177249 FXL0530-6R8-M: Isat 4 A"
+text = "L1 Isat 4 A is below ILIMIT max 4.1 A and ISC typ 4.5 A, so a short on V5 can saturate it (normal 0.5 A load peaks \u2248 1.2 A and is fine). Fix: a 6.8-8.2 \u00b5H part with Isat \u2265 5.1 A (e.g. FXL0630/FXL0650 class); 6.8 \u00b5H itself is fine (Eq. 5 min 3.6 \u00b5H, Table 9-2 gives 8 \u00b5H)."
 
 [[item]]
 id = "U3:thermal"
 verdict = "ok"
 pin = "EP"
-cite = "LMR33630 SNVSAN3F p.7 \u00a77.4 (R\u03b8JA 42.9 \u00b0C/W)"
-text = "0.5 A x 5.17 V at about 85 % efficiency gives under 0.4 W total loss, about 15 K rise; EP on GND."
+cite = "TI SNVSAN3F p.7 \u00a77.4 (42.9 \u00b0C/W), p.27 Fig. 9-7"
+text = "0.5 A \u00d7 5.17 V at \u2248 88 % efficiency is \u2248 0.35 W total (IC < 0.3 W), so \u0394T < 15 K; EP is on GND."
 
 [[item]]
 id = "U3:current-budget"
 verdict = "ok"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.6 (IOUT 3 A)"
-text = "V5 budget 0.5 A against a 3 A rating."
+cite = "TI SNVSAN3F p.6 \u00a77.3 (3 A)"
+text = "0.5 A budget (LDO + discharge gates) against a 3 A rating."
 
 [[item]]
 id = "U4:input-range"
 verdict = "ok"
 pin = "VIN"
-cite = "AP2112 DS39724 Rev.2-2 p.3 (VIN 2.5-6.0 V, 6.5 V abs)"
-text = "V5 is 5.09-5.25 V, inside 2.5-6.0 V."
+cite = "Diodes DS39724 AP2112 p.3 (VIN 2.5-6.0 V, 6.5 V abs max)"
+text = "V5 5.09-5.25 V (sim max 5.325 V) is inside 2.5-6.0 V."
 
 [[item]]
 id = "U4:dropout"
 verdict = "ok"
 pin = ""
-cite = "AP2112 DS39724 p.8 (3.3 V: VDROP 400 mV max @ 600 mA)"
-text = "Headroom is about 1.8 V, far above 400 mV."
+cite = "Diodes DS39724 AP2112 p.1 (250 mV typ at 600 mA, 3.3 V), p.6 (400 mV max at 600 mA)"
+text = "Headroom 5.17 V - 3.3 V = 1.87 V \u226b 400 mV at the 350 mA burst. On a 5 V-only source V5 \u2248 4.7-4.9 V still leaves > 1 V."
 
 [[item]]
 id = "U4:output-cap"
 verdict = "ok"
 pin = "VOUT"
-cite = "AP2112 DS39724 p.1 (stable with 1.0 \u00b5F ceramic), p.2 Note 4 (X5R/X7R)"
-text = "V3V3 has C15 + C16 10 \u00b5F X5R and several 100 nF, far above 1 \u00b5F."
+cite = "Diodes DS39724 AP2112 p.1-2 (stable with 1.0 \u00b5F ceramic, X5R/X7R)"
+text = "C15/C16 10 \u00b5F X5R (\u2248 7 \u00b5F each at 3.3 V) + 100 nF caps, well above 1 \u00b5F."
 
 [[item]]
 id = "U4:input-cap"
 verdict = "ok"
 pin = "VIN"
-cite = "AP2112 DS39724 p.2 (CIN 1 \u00b5F)"
-text = "C14 1 \u00b5F at VIN plus the 4 x 22 \u00b5F V5 bank."
+cite = "Diodes DS39724 AP2112 p.2 (CIN 1 \u00b5F)"
+text = "C14 1 \u00b5F 50 V X5R on V5, plus the buck's 4 \u00d7 22 \u00b5F."
 
 [[item]]
 id = "U4:output-voltage"
 verdict = "ok"
 pin = ""
-cite = "AP2112 DS39724 p.8 (3.251-3.350 V)"
-text = "Fixed 3.3 V \u00b11.5 %, inside the ESP32-S3 3.0-3.6 V range."
+cite = "Diodes DS39724 AP2112 p.1 (\u00b11.5 %)"
+text = "Fixed 3.3 V (3.25-3.35 V), inside intent's \u00b13 % and the ESP32 3.0-3.6 V."
 
 [[item]]
 id = "U4:control-pins"
 verdict = "ok"
 pin = "EN"
-cite = "AP2112 DS39724 p.8 (VIH 1.5-6.0 V)"
-text = "EN is tied to VIN (V5 5.17 V, below 6.0 V); pin 4 NC is open; pinout 1 VIN, 2 GND, 3 EN, 5 VOUT matches SOT25 (p.2)."
+cite = "Diodes DS39724 AP2112 p.4 (VIH 1.5-6.0 V)"
+text = "EN tied to VIN (V5 \u2248 5.17 V \u2264 6 V); the NC pin is open."
 
 [[item]]
 id = "U4:inductor"
 verdict = "ok"
 pin = ""
-cite = "n/a: U4 is an LDO"
+cite = "n/a: LDO"
 text = ""
 
 [[item]]
 id = "U4:thermal"
-verdict = "issue"
-pin = "VIN"
-cite = "AP2112 DS39724 p.3 (\u03b8JA SOT25 184 \u00b0C/W, TJ 150 \u00b0C abs max), p.8 (OTSD 160 \u00b0C)"
-text = "At the 0.4 A V3V3 budget, (5.17 - 3.3) V x 0.4 A = 0.75 W gives a 138 K rise, so Tj is about 183 \u00b0C (45 \u00b0C ambient), over 150 \u00b0C abs max. Even the 0.15 A average gives Tj of about 97 \u00b0C. Fix: lower V5 to about 4.0 V (R6 24k to 33k; DIS gate drive and LDO headroom stay fine), or make 3.3 V with a buck."
+verdict = "ok"
+pin = ""
+cite = "Diodes DS39724 AP2112 p.3 (\u03b8JA 184 \u00b0C/W SOT25, TJ 150 \u00b0C abs max), p.4 (OTSD 160 \u00b0C)"
+text = "At 0.15 A average: 1.87 V \u00d7 0.15 A = 0.28 W, \u0394T \u2248 52 K, so Tj \u2248 97 \u00b0C at 45 \u00b0C. Even 0.2 A gives Tj \u2248 114 \u00b0C, under 150 \u00b0C but with limited margin; keep copper on the GND/VOUT pins."
 
 [[item]]
 id = "U4:current-budget"
 verdict = "ok"
 pin = ""
-cite = "AP2112 DS39724 p.8 (IOUT(MAX) 600 mA min)"
-text = "0.4 A budget against 600 mA, 33 % margin electrically; the thermal limit is covered under U4:thermal."
+cite = "Diodes DS39724 AP2112 p.1 (600 mA min output)"
+text = "0.2 A average and 0.35 A bursts against 600 mA."
 
 [[item]]
 id = "Q1:ratings"
 verdict = "ok"
-pin = ""
-cite = "AO4407A Rev.11.1 p.1 (VDS -30 V, VGS \u00b125 V)"
-text = "|Vds| is at most 21 V when off (VBUS against a discharged VIN). Vgs = -VBUS x 100k/147k = -14.3 V at 21 V, inside \u00b125 V. Only a surge beyond the D2 clamp (up to 41 V) could exceed 30 V while off."
+pin = "G"
+cite = "AOS AO4407A Rev 11.1 p.1 (VDS -30 V, VGS \u00b125 V, EAR 101 mJ)"
+text = "VDS \u2264 21 V; VGS = -VBUS \u00d7 100k/147k = -14.3 V at 21 V, within \u00b125 V. ESD/surge on VBUS above 30 V (D2 VCL 31-41 V) only occurs briefly and is covered by the avalanche rating."
 
 [[item]]
 id = "Q1:current"
 verdict = "ok"
-pin = ""
-cite = "AO4407A p.1 (ID -10 A @70 \u00b0C, IDM -60 A), p.2 (RDS(on) 13 m\u03a9 max @ -10 V)"
-text = "3 A continuous. Inrush into about 150 \u00b5F is slowed by C19 100 nF / R3 || R7 (a few ms ramp), about 1-2 A, well within SOA."
+pin = "D1"
+cite = "AOS AO4407A Rev 11.1 p.1-2 (ID -12 A, IDM -60 A, RDS(ON) 13 m\u03a9 at -10 V)"
+text = "3 A continuous against 12 A. Turn-on is slowed by C19 100 nF and R7 47 k\u03a9 (\u2248 3.5 V/ms) into \u2248 130 \u00b5F on VIN, so inrush \u2248 0.45 A."
 
 [[item]]
 id = "Q1:gate-drive"
 verdict = "issue"
 pin = "G"
-cite = "AO4407A Rev.11.1 p.2 (VGS(th) -1.7/-2.3/-3.0 V; RDS(on) specified only down to VGS = -6 V); STUSB4500 DS12499 p.8 (VBUS_EN_SNK asserted at 5 V by default)"
-text = "At 20 V the R3 100k / R7 47k divider gives Vgs = -13.6 V (fine). At the 5 V bring-up contract it gives only -3.4 V, just past the -3.0 V max threshold and far below the -6 V Rds(on) spec, so Q1 can sit in linear mode. Fix: change R7 to 10 k\u03a9 (Vgs -4.5 V at 5 V, -18.2 V at 20 V, inside \u00b125 V)."
+cite = "AOS AO4407A Rev 11.1 p.2 (VGS(th) -1.7/-2.3/-3.0 V; RDS(ON) only specified down to VGS -6 V), p.3 Fig. 1; ST DS12499 p.28 (VBUS_EN_SNK VOL 0.4 V)"
+text = "R3 100 k\u03a9 / R7 47 k\u03a9 give VGS = -(VBUS - 0.4 V) \u00d7 0.68 \u2248 -3.1 V at the 5 V attach (every power-up, and on 5 V-only sources), right at VGS(th) max -3 V, so the logic supply may not come up on a high-threshold part. At 20 V it is -13.6 V (fine). Fix: R7 = 10 k\u03a9 (VGS -4.0 V at 5 V and -19 V at 21 V, inside \u00b125 V), or a PMOS with RDS(ON) specified at -2.5 V."
 
 [[item]]
 id = "Q1:orientation"
 verdict = "ok"
 pin = ""
-cite = "AO4407A p.1 (SOIC-8: 1-3 S, 4 G, 5-8 D; P-channel)"
-text = "Source on VBUS and drain on VIN: the body diode (drain to source) blocks VBUS to VIN when off, as needed for a sink load switch."
+cite = "AOS AO4407A Rev 11.1 p.1 (SOIC-8: S 1-3, G 4, D 5-8)"
+text = "P-channel with S on VBUS and D on VIN: the body diode (D to S) points VIN to VBUS, so the off state blocks VBUS from VIN as a load switch should."
 
 [[item]]
 id = "Q1:thermal"
 verdict = "ok"
 pin = ""
-cite = "AO4407A p.1 (R\u03b8JA 75 \u00b0C/W max steady state), p.2 (15 m\u03a9 @125 \u00b0C)"
-text = "9 A\u00b2 x 15 m\u03a9 = 0.14 W, about a 10 K rise."
+cite = "AOS AO4407A Rev 11.1 p.1-3 (R\u03b8JA 75 \u00b0C/W max, Fig. 4 \u2248 1.4\u00d7 at 125 \u00b0C)"
+text = "3 A\u00b2 \u00d7 13 m\u03a9 \u00d7 1.4 \u2248 0.16 W gives \u0394T \u2248 12 K."
 
 [[item]]
 id = "Q11:ratings"
 verdict = "ok"
-pin = ""
-cite = "MMBT3904 (CJ, LCSC C20526): VCEO 40 V, VEBO 6 V"
-text = "Collector on FB1 (about 1 V, at most 5.5 V FB abs max) and emitter at most 0.3 V; Vce at most about 1 V."
+pin = "C"
+cite = "MMBT3904 datasheet (VCEO 40 V, VEBO 6 V)"
+text = "Collector on FB1 (\u2248 1 V, \u2264 5.5 V), emitter 0-0.3 V; VCE \u2264 ~1 V, and the base is driven from 3.3 V via 1 k\u03a9."
 
 [[item]]
 id = "Q11:current"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): IC 200 mA"
-text = "Ic is at most VSET / R104 = 0.275 V / 2.2 k\u03a9 = 125 \u00b5A."
+cite = "MMBT3904 datasheet (IC 200 mA)"
+text = "IC \u2264 125 \u00b5A (0.275 V / 2.2 k\u03a9)."
 
 [[item]]
 id = "Q11:gate-drive"
 verdict = "ok"
 pin = "B"
-cite = "MMBT3904 (C20526): hFE 100 min"
-text = "Linear current sink driven by U6A through R105 1 k\u03a9 with emitter feedback; with PWM 0 or the op-amp unpowered there is no base drive, so Vout falls back to 1.6 V."
+cite = "MMBT3904 datasheet (hFE 100-300)"
+text = "Linear current sink closed by U6 (emitter feedback); R105 1 k\u03a9 base resistor. With VSET = 0 V (PWM floating) the sink is off, giving the fail-safe 1.6 V."
 
 [[item]]
 id = "Q11:orientation"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 SOT-23 pinout (1 B, 2 E, 3 C)"
-text = "NPN, collector on FB1 and emitter to R104: it sinks current out of FB as intended."
+cite = "MMBT3904 datasheet SOT-23 (1 B, 2 E, 3 C)"
+text = "NPN with B = Q11_B, E = ISINK1_E, C = FB1, as needed."
 
 [[item]]
 id = "Q11:thermal"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): Pd 200 mW"
-text = "About 1 V x 125 \u00b5A = 0.1 mW."
+cite = "MMBT3904 datasheet (PD 350 mW)"
+text = "About 1 V \u00d7 125 \u00b5A \u2248 0.1 mW."
 
 [[item]]
 id = "Q12:ratings"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): VCEO 40 V, VEBO 6 V"
-text = "Vce at most 3.3 V and Vbe from EN1 at most 3.3 V."
+cite = "MMBT3904 datasheet (VCEO 40 V)"
+text = "VCE \u2264 3.3 V; base from EN1 (\u2264 3.3 V) via 47 k\u03a9."
 
 [[item]]
 id = "Q12:current"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): IC 200 mA"
-text = "LED current is about 1.2 mA."
+cite = "MMBT3904 datasheet (IC 200 mA)"
+text = "LED current \u2248 1.2 mA."
 
 [[item]]
 id = "Q12:gate-drive"
 verdict = "ok"
 pin = "B"
-cite = "MMBT3904 (C20526): hFE 100 min"
-text = "Ib is about (2.4 - 0.7) V / 47 k\u03a9 = 36 \u00b5A against 12 \u00b5A needed, so it saturates. Off via R109 100 k\u03a9 on EN1 when the MCU is unpowered."
+cite = "MMBT3904 datasheet (hFE \u2265 100 at 1-10 mA)"
+text = "IB \u2248 (2.4 V - 0.7 V) / 47 k\u03a9 \u2248 36 \u00b5A \u00d7 100 \u2248 3.6 mA \u226b 1.2 mA (saturated); EN1 has R109 to GND, so the base is defined when the MCU is unpowered."
 
 [[item]]
 id = "Q12:orientation"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 SOT-23 pinout (1 B, 2 E, 3 C)"
-text = "NPN low-side switch for D101, emitter on GND."
+cite = "MMBT3904 datasheet SOT-23 (1 B, 2 E, 3 C)"
+text = "Emitter on GND and collector on the LED cathode side."
 
 [[item]]
 id = "Q12:thermal"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): Pd 200 mW"
+cite = "MMBT3904 datasheet (PD 350 mW)"
 text = "Under 1 mW."
 
 [[item]]
 id = "Q13:ratings"
 verdict = "ok"
-pin = ""
-cite = "2N7002 (CJ, LCSC C8545): VDS 60 V, VGS \u00b120 V"
-text = "Drain sees at most 16.6 V via R121 and the gate at most 5.25 V (V5 via R123)."
+pin = "D"
+cite = "2N7002 datasheet (VDS 60 V, VGS \u00b120 V)"
+text = "VDS \u2264 16.6 V (OUT1 via R121) and VGS \u2264 5.2 V (V5 via R123)."
 
 [[item]]
 id = "Q13:current"
 verdict = "ok"
 pin = ""
-cite = "2N7002 (C8545): ID 115 mA"
-text = "Discharge current is at most 16.6 V / 4.7 k\u03a9 = 3.5 mA."
+cite = "2N7002 datasheet (ID 115 mA)"
+text = "ID \u2264 16.6 V / 4.7 k\u03a9 \u2248 3.5 mA."
 
 [[item]]
 id = "Q13:gate-drive"
 verdict = "ok"
 pin = "G"
-cite = "2N7002 (C8545): VGS(th) 2.5 V max, RDS(on) 5 \u03a9 @ 10 V"
-text = "About 5 V gate (Vth 2.5 V max) easily carries 3.5 mA in series with 4.7 k\u03a9. Q14 pulls the gate to about 0.1 V when EN is high; the gate is also low whenever V5 is absent."
+cite = "2N7002 datasheet (VGS(th) \u2264 2.5 V, RDS(ON) \u2264 7.5 \u03a9 at 4.5 V)"
+text = "The gate sits at \u2248 4.1 V while the channel is off (R123 47 k\u03a9 from V5, minus the D15/R126 load), well above VGS(th) for 3.5 mA, and RDS(ON) is small next to R121 4.7 k\u03a9. Q14 pulls it to ~0.1 V when EN is high."
 
 [[item]]
 id = "Q13:orientation"
 verdict = "ok"
 pin = ""
-cite = "2N7002 SOT-23 pinout (1 G, 2 S, 3 D)"
-text = "N-channel, source on GND, drain via R121 to OUT1."
+cite = "2N7002 datasheet SOT-23 (1 G, 2 S, 3 D)"
+text = "N-channel with S on GND and D on Q13_D (R121 to OUT1); the body diode is reverse-biased by the positive output."
 
 [[item]]
 id = "Q13:thermal"
 verdict = "ok"
 pin = ""
-cite = "2N7002 (C8545): Pd 225 mW"
-text = "(3.5 mA)\u00b2 x about 7 \u03a9, under 0.1 mW; R121 takes the power."
+cite = "2N7002 datasheet (PD 200-300 mW)"
+text = "Under 0.1 mW in the FET; R121 takes \u2248 59 mW."
 
 [[item]]
 id = "Q14:ratings"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): VCEO 40 V, VEBO 6 V"
-text = "Vce at most 5.25 V (V5 via R123) and Vbe from EN1 at most 3.3 V."
+cite = "MMBT3904 datasheet (VCEO 40 V)"
+text = "VCE \u2264 5.2 V (V5 via R123)."
 
 [[item]]
 id = "Q14:current"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): IC 200 mA"
-text = "Ic is at most 5.25 V / 47 k\u03a9 = 0.11 mA."
+cite = "MMBT3904 datasheet (IC 200 mA)"
+text = "IC \u2248 5 V / 47 k\u03a9 \u2248 0.11 mA."
 
 [[item]]
 id = "Q14:gate-drive"
 verdict = "ok"
 pin = "B"
-cite = "MMBT3904 (C20526): hFE 100 min"
-text = "Ib of about 36 \u00b5A via R122 47 k\u03a9 against about 1 \u00b5A needed, so it saturates; off when EN1 is low (R109)."
+cite = "MMBT3904 datasheet (hFE \u2265 100)"
+text = "IB \u2248 36 \u00b5A through R122 47 k\u03a9 saturates 0.11 mA; with EN1 low (R109) Q14 is off and Q13 discharges the output."
 
 [[item]]
 id = "Q14:orientation"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 SOT-23 pinout (1 B, 2 E, 3 C)"
-text = "NPN pulls DIS1_G to GND when EN1 is high."
+cite = "MMBT3904 datasheet SOT-23 (1 B, 2 E, 3 C)"
+text = "Emitter on GND and collector on DIS1_G."
 
 [[item]]
 id = "Q14:thermal"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): Pd 200 mW"
-text = "Negligible (\u00b5W)."
+cite = "MMBT3904 datasheet (PD 350 mW)"
+text = "Negligible."
 
 [[item]]
 id = "Q21:ratings"
 verdict = "ok"
-pin = ""
-cite = "MMBT3904 (C20526): VCEO 40 V, VEBO 6 V"
-text = "Collector on FB2 (about 1 V) and emitter at most 0.3 V."
+pin = "C"
+cite = "MMBT3904 datasheet (VCEO 40 V, VEBO 6 V)"
+text = "Collector on FB2 (\u2248 1 V), VCE \u2264 ~1 V."
 
 [[item]]
 id = "Q21:current"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): IC 200 mA"
-text = "Ic is at most 125 \u00b5A."
+cite = "MMBT3904 datasheet (IC 200 mA)"
+text = "IC \u2264 125 \u00b5A."
 
 [[item]]
 id = "Q21:gate-drive"
 verdict = "ok"
 pin = "B"
-cite = "MMBT3904 (C20526)"
-text = "Linear sink driven by U6B via R205 1 k\u03a9; no drive gives the 1.6 V fail-safe."
+cite = "MMBT3904 datasheet"
+text = "U6 OUTB via R205 1 k\u03a9 with emitter feedback; off at VSET2 = 0 V."
 
 [[item]]
 id = "Q21:orientation"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 SOT-23 pinout (1 B, 2 E, 3 C)"
-text = "NPN, collector on FB2, emitter on R204."
+cite = "MMBT3904 datasheet SOT-23 (1 B, 2 E, 3 C)"
+text = "NPN with C on FB2 and E on ISINK2_E."
 
 [[item]]
 id = "Q21:thermal"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): Pd 200 mW"
+cite = "MMBT3904 datasheet (PD 350 mW)"
 text = "About 0.1 mW."
 
 [[item]]
 id = "Q22:ratings"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): VCEO 40 V, VEBO 6 V"
-text = "Vce and Vbe at most 3.3 V."
+cite = "MMBT3904 datasheet (VCEO 40 V)"
+text = "VCE \u2264 3.3 V."
 
 [[item]]
 id = "Q22:current"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): IC 200 mA"
-text = "About 1.2 mA LED current."
+cite = "MMBT3904 datasheet (IC 200 mA)"
+text = "About 1.2 mA."
 
 [[item]]
 id = "Q22:gate-drive"
 verdict = "ok"
 pin = "B"
-cite = "MMBT3904 (C20526): hFE 100 min"
-text = "36 \u00b5A base current via R214 47 k\u03a9 saturates it; off via R209 when EN2 is low."
+cite = "MMBT3904 datasheet (hFE \u2265 100)"
+text = "IB \u2248 36 \u00b5A via R214 47 k\u03a9 saturates 1.2 mA; R209 defines EN2 when the MCU is off."
 
 [[item]]
 id = "Q22:orientation"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 SOT-23 pinout (1 B, 2 E, 3 C)"
-text = "NPN low-side switch for D201."
+cite = "MMBT3904 datasheet SOT-23 (1 B, 2 E, 3 C)"
+text = "Emitter on GND and collector on Q22_C (LED)."
 
 [[item]]
 id = "Q22:thermal"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): Pd 200 mW"
+cite = "MMBT3904 datasheet (PD 350 mW)"
 text = "Under 1 mW."
 
 [[item]]
 id = "Q23:ratings"
 verdict = "ok"
-pin = ""
-cite = "2N7002 (C8545): VDS 60 V, VGS \u00b120 V"
-text = "Vds at most 16.6 V and Vgs at most 5.25 V."
+pin = "D"
+cite = "2N7002 datasheet (VDS 60 V, VGS \u00b120 V)"
+text = "VDS \u2264 16.6 V and VGS \u2264 5.2 V."
 
 [[item]]
 id = "Q23:current"
 verdict = "ok"
 pin = ""
-cite = "2N7002 (C8545): ID 115 mA"
-text = "At most 3.5 mA through R221 4.7 k\u03a9."
+cite = "2N7002 datasheet (ID 115 mA)"
+text = "ID \u2264 3.5 mA via R221 4.7 k\u03a9."
 
 [[item]]
 id = "Q23:gate-drive"
 verdict = "ok"
 pin = "G"
-cite = "2N7002 (C8545): VGS(th) 2.5 V max"
-text = "About 5 V gate via R223, pulled low by Q24 when EN2 is high."
+cite = "2N7002 datasheet (VGS(th) \u2264 2.5 V)"
+text = "Gate \u2248 4.1 V from V5 via R223 when off; pulled to ~0.1 V by Q24 when EN2 is high."
 
 [[item]]
 id = "Q23:orientation"
 verdict = "ok"
 pin = ""
-cite = "2N7002 SOT-23 pinout (1 G, 2 S, 3 D)"
-text = "N-channel low-side discharge of OUT2."
+cite = "2N7002 datasheet SOT-23 (1 G, 2 S, 3 D)"
+text = "S on GND and D via R221 to OUT2."
 
 [[item]]
 id = "Q23:thermal"
 verdict = "ok"
 pin = ""
-cite = "2N7002 (C8545): Pd 225 mW"
-text = "Under 0.1 mW."
+cite = "2N7002 datasheet"
+text = "Negligible."
 
 [[item]]
 id = "Q24:ratings"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): VCEO 40 V, VEBO 6 V"
-text = "Vce at most 5.25 V and Vbe at most 3.3 V."
+cite = "MMBT3904 datasheet (VCEO 40 V)"
+text = "VCE \u2264 5.2 V."
 
 [[item]]
 id = "Q24:current"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): IC 200 mA"
-text = "At most 0.11 mA."
+cite = "MMBT3904 datasheet (IC 200 mA)"
+text = "About 0.11 mA."
 
 [[item]]
 id = "Q24:gate-drive"
 verdict = "ok"
 pin = "B"
-cite = "MMBT3904 (C20526): hFE 100 min"
-text = "36 \u00b5A base current via R222 47 k\u03a9, off with EN2 low."
+cite = "MMBT3904 datasheet (hFE \u2265 100)"
+text = "R222 47 k\u03a9 from EN2 saturates it; off when EN2 is low."
 
 [[item]]
 id = "Q24:orientation"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 SOT-23 pinout (1 B, 2 E, 3 C)"
-text = "NPN pulls DIS2_G low."
+cite = "MMBT3904 datasheet SOT-23 (1 B, 2 E, 3 C)"
+text = "Emitter on GND and collector on DIS2_G."
 
 [[item]]
 id = "Q24:thermal"
 verdict = "ok"
 pin = ""
-cite = "MMBT3904 (C20526): Pd 200 mW"
+cite = "MMBT3904 datasheet"
 text = "Negligible."
 
 [[item]]
 id = "board:cap-ratings"
 verdict = "ok"
 pin = ""
-cite = "LCSC part data: C13585 10 \u00b5F 50 V 1206, C12891 22 \u00b5F 25 V 1206, C45783 22 \u00b5F 25 V 0805, C15850 10 \u00b5F 25 V 0805, C15849 1 \u00b5F 50 V, C14663 100 nF 50 V, C21120 220 nF 16 V, C970686 100 \u00b5F 35 V"
-text = "VIN/VBUS caps are 50 V (C6 35 V electrolytic, 60 %), OUT caps 25 V at 16.6 V (66 %), V5 caps 25 V at 5.17 V, C113/C213 16 V on about 1.3 V, and C19 50 V on 14 V. DC-bias loss on VIN and OUT is covered under U11/U21 input-cap / output-cap."
+cite = "LCSC: C13585 CL31A106KBHNNNE 50 V; C12891 CL31A226KAHNNNE 25 V; C45783 CL21A226MAQNNNE 25 V; C15849 CL10A105KB8NNNC 50 V; C14663 / C107083 50 V X7R; C53987 50 V; C970686 RVT 35 V"
+text = "VIN (\u2264 21 V) uses 50 V ceramics and the 35 V electrolytic (\u2264 60 %); OUTn (\u2264 16.6 V) uses 25 V parts (66 %); V5 uses 25 V parts. DC bias is heavy on the 1206 10 \u00b5F at 20 V and 22 \u00b5F at 16.6 V (\u2248 18 \u00b5F total output), which the sims already model; C15850/C21120/C100042 sit only on \u2264 3.3 V nets."
 
 [[item]]
 id = "board:resistor-power"
 verdict = "ok"
 pin = ""
-cite = "R101/R201 2512 20 m\u03a9 (C105360); 0603 thick film 0.1 W; STUSB4500 DS12499 p.29 (TDISUSBPDO 288 ms default)"
-text = "Shunt: 9 A\u00b2 x 20 m\u03a9 = 0.18 W in a 2512. R121/R221 dissipate at most 59 mW (59 % of 0.1 W) while discharging or back-fed. R1 1 k\u03a9 sees up to 0.44 W only as short VBUS-discharge pulses, as in ST's reference. LED and divider resistors are under 2 mW."
+cite = "LCSC C105360 FMF25FPJR020-LH (20 m\u03a9 2512, 2 W); ST DS12499 p.9 \u00a72.2.12, p.27 (IDISUSB \u2264 50 mA)"
+text = "R101/R201 take 3\u00b2 \u00d7 20 m\u03a9 = 0.18 W (0.4 W at a 4.5 A peak) against 2 W; R121/R221 take 16.6\u00b2 / 4.7 k\u03a9 = 59 mW in 0603. R1 1 k\u03a9 sees up to 0.44 W only for the short VBUS discharge pulses (same value as ST Fig. 8), and LED and divider resistors are under 5 mW."
 
 [[item]]
 id = "board:current-path"
-verdict = "ok"
+verdict = "unknown"
 pin = ""
-cite = "J1 C2765186 3 A; AO4407A p.1-2; LMR33630 SNVSAN3F p.6"
-text = "3 A input passes J1 (3 A rated), Q1 (13 m\u03a9) and the VIN plane; there is no fuse/PTC, so overcurrent protection relies on the PD source and the firmware power budget. Each output path (L, 20 m\u03a9 shunt, J2 17.5 A) carries 3 A."
+cite = "LCSC / JLCPCB C2765186 listings (3 A); AOS AO4407A p.1-2; USB PD spec sink bulk-capacitance limit not looked up"
+text = "There is no fuse (the PD source limits current). J1 is listed at 3 A, equal to the full 3 A contract (see J1:current). About 130 \u00b5F (C6 100 \u00b5F + 7 \u00d7 10 \u00b5F derated) is switched onto VBUS by Q1 during PD voltage transitions; check it against the USB PD sink bulk-capacitance limit (cSnkBulkPd)."
 
 [[item]]
 id = "board:intent"
-verdict = "issue"
+verdict = "ok"
 pin = ""
-cite = "STUSB4500 DS12499 Rev 3 p.22 Table 18 (default PDO3 20 V / 1.0 A); AP2112 DS39724 p.3 (\u03b8JA 184 \u00b0C/W)"
-text = "Two intent assumptions do not hold. (1) \"before the STUSB4500 NVM write only 5 V\": factory NVM negotiates 20 V at 1 A with a 20 V source, so loads must stay under 20 W until programmed. (2) The V3V3 0.4 A budget cannot be met thermally by the AP2112K from 5.17 V (see U4:thermal). Fix: correct the intent and limit load before NVM write; lower V5 or change the 3V3 regulator."
+cite = "TI SNVSAN3F p.7 (VFB); Diodes DS39724 p.1; ST DS12499 p.21 Table 18"
+text = "V5 is 5.17 V, V3V3 is 3.3 V, OUTn is 1.6-16.6 V (R102/R103 + VSET sink) and per-channel 3 A is within the LMR33630 rating; the NVM default 20 V / 1 A matches the intent note. The one contradiction is the 5 V-only / 5 V-attach logic supply, which depends on the marginal Q1 gate drive (see Q1:gate-drive)."
 
 [[item]]
 id = "board:sims"
 verdict = "issue"
 pin = ""
-cite = "LMR33630 SNVSAN3F p.7 \u00a77.4 note 2 (R\u03b8JA not for design), p.8 (RDS-ON max 160/110 m\u03a9); sim/powerup_logic.cir header"
-text = "powerup_logic.cir models U3 with a \"15 uH SWPA4030\" and 24 \u00b5F on V5, but the board has L1 6.8 \u00b5H FXL0530 and 4 x 22 \u00b5F (C12, C13, C23, C24). buck_loop/cc_loop/powerup_ch rest on assumed, unpublished EA values (gm 1 mS, Rc 12k, Cc 4.7 nF), so their phase margins are not datasheet-backed. buck_loadpoints uses typical Rds x 1.3 and the JEDEC R\u03b8JA, which TI says not to use for design. Fix: align the decks with the BOM, run the thermal corner with max Rds(on), and confirm the loops on the bench."
+cite = "TI SNVSAN3F p.22-23 \u00a79.2.2.5 (Bode plots and load transients must be validated); p.7-8 (ISC, ILIMIT, RDS-ON, tSS 2.9-6 ms)"
+text = "buck_loop, cc_loop and both powerup decks rest on an assumed internal compensation (gm 1 mS, Rc 12 k\u03a9, Cc 4.7 nF, Ri 0.1 V/A) that the datasheet does not publish, so their phase-margin and step results for this fixed-gain FB network are not datasheet-backed. buck_loop also does not measure the 1 ms recovery claimed in intent. Fix: confirm by bench Bode (inject at R102/R202) and 2 A steps at 1.6 V and 16.6 V; buck_loadpoints (max RDS-ON, ISC min) is properly sourced."

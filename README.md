@@ -129,10 +129,10 @@ intent / house defaults); `check` runs ngspice, compares the deck's R/C values w
 
 | Deck | Covers | Result |
 |------|--------|--------|
-| `buck_loop.cir` | CV loop U11 / U21 | phase margin >= 52 deg (1.6-16 V), 2 A step <= 371 mV (intent: 400 mV) |
-| `cc_loop.cir` | CC loop | phase margin >= 90 deg (short .. 5 R), settles in 3.6 ms, current error < 0.01 % |
-| `powerup_ch.cir` | power-up U11 / U21 | overshoot 0.02 % (rev B network: 384 %), settles in 2.2 ms after the set-point ramp |
-| `powerup_logic.cir` | power-up U3 / U4 | V5 5.15-5.17 V, V3V3 3.28-3.31 V through a 0.1 -> 0.35 A step |
+| `buck_loop.cir` | CV loop U11 / U21 | phase margin >= 93 deg (1.6-16 V; >= 63 deg for C25/C26 ESR 0.05..1 Ohm), 2 A step <= 251 mV (intent: 400 mV) |
+| `cc_loop.cir` | CC loop | phase margin >= 91 deg (short .. 5 R), settles in 1.7 ms, current error < 0.01 % |
+| `powerup_ch.cir` | power-up U11 / U21 | overshoot 0.02 % (rev B network: 384 %), settles 13.5 ms after EN, 16.60 V at full PWM |
+| `powerup_logic.cir` | power-up U3 / U4 | V5 5.15-5.17 V, V3V3 3.28-3.30 V through a 0.1 -> 0.35 A step |
 | `buck_loadpoints.cir` | thermal U11 / U21 | Tj <= 99 C at 45 C ambient, inductor peak <= 3.49 A (ISC min 3.85 A) |
 
 Models: averaged peak-current-mode buck with the LMR33630's internal compensation *derived* (not published), COMP
@@ -215,7 +215,8 @@ Test points (bottom, labelled): TP1 VBUS, TP2 VIN, TP3 V5, TP4 3V3, TP5 GND. Out
 
 1. Hold BOOT, tap RST, release BOOT (bottom side): the ESP32-S3 enumerates as "USB JTAG/serial debug unit" on the same
    USB-C connector. Flash a test firmware.
-2. I2C scan: 0x28 STUSB4500, 0x40 / 0x41 INA226, 0x3C OLED (module on J3). INA226 die ID (0xFF) = 0x2260.
+2. Before plugging the OLED module in: its header must read GND VCC SCL SDA like J3's silkscreen (modules also ship
+   with VCC / GND swapped, which would reverse 3V3 into it). I2C scan: 0x28 STUSB4500, 0x40 / 0x41 INA226, 0x3C OLED. INA226 die ID (0xFF) = 0x2260.
 3. Encoders count on IO15/16 and IO13/14, pushes on IO17 / IO18, buttons on IO38 / IO39; CC LEDs on IO21 / IO47.
 4. NTC readings (IO1 / IO2) ~1.65 V at 25 C.
 
@@ -225,7 +226,7 @@ Each channel alone, no load first. Output range at 5 V input is 1.6 V to ~4.3 V 
 
 1. PWM = 0, ISET = 3.3 V (no current limit), then EN high: ON LED lights, OUTn = 1.6 V, no overshoot on the scope.
 2. Step the PWM: Vout = 1.6 V + 4.55 * Vpwm. Note offset / gain per channel for the calibration.
-3. EN low: ON LED dark, the output falls to 0 V within ~1.2 s (discharge).
+3. EN low: ON LED dark, the output falls below 0.5 V within ~2 s (discharge).
 4. CC: set 3 V, ISET = 0.5 V (0.5 A), load 2 Ohm: the output drops to ~1 V, the current reads 0.5 A (INA226 and DMM).
 5. Trip: INA226 over-limit 0.3 A with ISET above it: ON LED dark at once, EN = 0 V; reading Mask/Enable clears it.
 
@@ -234,8 +235,10 @@ Each channel alone, no load first. Output range at 5 V input is 1.6 V to ~4.3 V 
 1. Write the STUSB4500 NVM for a 20 V PDO (with 5 V / 9 V fallback; check the readback), unplug, plug a 20 V PD
    charger (45 W+). VIN = 20 V within ~1 s; 5V = 5.17 V.
 2. Per channel, no load: 1.6 V at PWM 0; ramp to ~16.6 V (hardware maximum; firmware caps at 16.5 V).
-3. Load steps with the scope on the terminal: 1 -> 3 A at 1.6 V and at 16 V: <= ~0.4 V deviation, recovers within
-   1 ms (sim). Ringing that does not settle means less phase margin than simulated: report it.
+3. Load steps with the scope on the terminal: 1 -> 3 A at 1.6 V and at 16.6 V: <= ~0.4 V deviation; note the
+   recovery time. Ringing that does not settle means less phase margin than simulated: report it.
+   Loop gain (the simulation rests on derived, unpublished compensation constants): 10 Ohm in series with R102 / R202
+   at the OUT end, inject across it (Bode box or a scope FRA), measure at 1.6 V and 16.6 V, 1 A: phase margin >= 45 deg.
 4. CC into a short (thick wire) at Iset 1 A and 3 A: the current settles at Iset within a few ms.
 5. Heat: 3 A at 5 V and 12 V for 10 minutes, in the enclosure if there is one: NTC reading and a thermocouple on the
    LMR33630 case should stay below ~85 C.
