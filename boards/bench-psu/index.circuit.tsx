@@ -111,6 +111,10 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
       {/* EN: ESP32 through 10k, 100k pull-down, INA226 ALERT (open drain) overrides */}
       <R name={id("R", 9)} {...p(-4.5, -6)} v="100k" />
       <R name={id("R", 10)} {...p(-7.5, -6)} v="10k" />
+      {/* FB clamp to 3.3 V (review U11:output-voltage): the buck cannot sink, so after a set-point drop or a lost PWM
+          (ESP32 reset) FB would sit at 0.625 * OUT = 10.4 V for seconds (abs max 5.5 V); clamped to ~3.8 V
+          (sim/powerup_ch.cir fb_max_v). Leakage at 2.3 V reverse ~nA: < 0.1 % of the 5 uA divider current */}
+      <A_1N4148W name={`D${n}6`} {...p(-5.1, -8.5)} />
       {/* row B: CC injection, voltage set RC */}
       <R name={id("R", 16)} {...p(-3.5, -10.5)} v="10k" />
       <A_1N4148W name={`D${n}4`} {...p(0.7, -10.5)} />
@@ -152,7 +156,8 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
         `${r(1)} > .pin1`, `${INA} > .VIN_POS`, `${CS} > .IN_POS`], { thickness: PWR })}
       {net(`OUT${n}`, [`${r(1)} > .pin2`, `${INA} > .VIN_NEG`, `${INA} > .VBUS`, `${r(2)} > .pin1`, `${CS} > .IN_NEG`,
         `${c(14)} > .pin1`, `.D${n}3 > .cathode`, `${r(21)} > .pin2`], { thickness: PWR })}
-      {net(`FB${n}`, [`${U} > .FB`, `${r(2)} > .pin2`, `${r(3)} > .pin1`, `${r(11)} > .pin1`, `${Q} > .C`, `.D${n}4 > .cathode`])}
+      {net(`FB${n}`, [`${U} > .FB`, `${r(2)} > .pin2`, `${r(3)} > .pin1`, `${r(11)} > .pin1`, `${Q} > .C`, `.D${n}4 > .cathode`,
+        `.D${n}6 > .anode`])}
       {net(`LAG${n}`, [`${r(11)} > .pin2`, `${c(13)} > .pin1`, `${r(26)} > .pin2`])}
       <trace from={`.D${n}5 > .cathode`} to={`${r(26)} > .pin1`} maxLength={TRACE_MAX} />
       {net(`ISINK${n}_E`, [`${Q} > .E`, `${r(4)} > .pin1`, sink.neg])}
@@ -180,7 +185,8 @@ const Channel = ({ n, ox, oy }: { n: 1 | 2; ox: number; oy: number }) => {
       <trace from={`.Q${n}3 > .D`} to={`${r(21)} > .pin1`} maxLength={TRACE_MAX} />
       {net("V5", [`${r(23)} > .pin2`])}
       {/* supplies, bus, temperature */}
-      {net("V3V3", [`${INA} > .VS_POS`, `${c(12)} > .pin1`, `${CS} > .VS`, `${c(15)} > .pin1`, `${r(24)} > .pin1`])}
+      {net("V3V3", [`${INA} > .VS_POS`, `${c(12)} > .pin1`, `${CS} > .VS`, `${c(15)} > .pin1`, `${r(24)} > .pin1`,
+        `.D${n}6 > .cathode`])}
       {net("I2C_SCL", [`${INA} > .SCL`])}
       {net("I2C_SDA", [`${INA} > .SDA`])}
       {net(n === 1 ? "GND" : "V3V3", [`${INA} > .A0`])}

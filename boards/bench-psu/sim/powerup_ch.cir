@@ -5,6 +5,7 @@
 * range: pu_overshoot_pct 0 5 source=house:rules/sim-defaults.toml overshoot_pct (EN at PWM 0, 0 / 1 A; and every set-point step)
 * range: pu_settle_ms - 20 source=intent:assumptions "power-up from EN settles within 20 ms" (EN at PWM 0 to 2 % of 1.6 V, incl. the 4 ms soft start)
 * range: setpoint_settle_ms - 1000 source=intent:assumptions "set-point changes settle within 1 s" (PWM step to 2 %, via the 2-pole RC)
+* range: fb_max_v - 5.5 source=datasheet:LMR33630 SNVSAN3F 7.1 FB abs max 5.5 V (set point 16.6 V -> PWM 0 at no load: the buck cannot sink, the output stays up while the sink current is gone)
 * range: vmin_out1 15.77 - source=intent:rail OUT1 16.6 V -5 % (settled output at full PWM through R104 / R106..R108)
 *
 * Why the sequence matters: the VSET current sink pulls Ic from FB from the moment EN rises, so the output target
@@ -19,7 +20,7 @@
 * C111 1 uF), op-amp + NPN sink Ic = VSET / R104 (2.2k; the op-amp held ideal, its loop is far faster than the RC).
 * Lag-capacitor pre-charge as on the board (D15 + R126 from DIS1_G).
 
-.param vt=5 iload=1 tss=4m t1=6m bias=1
+.param vt=5 iload=1 tss=4m t1=6m bias=1 tdrop=10 clamp=1
 .param duty={(vt - 1.6) / 15}
 .param cout={vt < 2 ? 70u : vt < 4 ? 56u : vt < 6 ? 45u : vt < 13 ? 24u : 18u}
 .param gm=1m rc=12k cc=4.7n ri=0.1
@@ -57,7 +58,7 @@ Rload out 0 {iload > 0 ? vt / iload : 1meg}
 R102 out fb 120k
 R103 fb 0 200k
 * set point: PWM average from t1 (the firmware sets it after the soft start), filtered as on the board
-Vpwm pwm 0 pwl(0 0 {t1} 0 {t1 + 1u} {3.3 * duty})
+Vpwm pwm 0 pwl(0 0 {t1} 0 {t1 + 1u} {3.3 * duty} {tdrop} {3.3 * duty} {tdrop + 1u} 0)
 R106 pwm pf 10k
 C110 pf 0 1u
 R107 pf vset 100k
@@ -88,6 +89,11 @@ Sdis out dd1 ctl 0 swdis
 R121 dd1 0 4.7k
 .model swdis sw(vt=0.5 vh=0.1 ron=3 roff=1g)
 Cfb fb 0 5p
+* FB clamp D16 (1N4148W, FB -> V3V3; review U11:output-voltage): without it FB = 0.625 * OUT (10.4 V at 16.6 V) for
+* seconds after a set-point drop or a lost PWM (ESP32 reset), the converter cannot pull the output down
+V33 v33 0 3.3
+D16 fb dcl dsig
+Rclsel dcl v33 {clamp > 0.5 ? 1m : 1e12}
 
 .control
   set noaskquit
@@ -143,6 +149,23 @@ Cfb fb 0 5p
       destroy all
     end
   end
+  echo "set point 16.6 V -> PWM 0 at 0.4 s, no load:  clamp | FB max"
+  let fbmax = 0
+  foreach c 0 1
+    alterparam vt = 16.6
+    alterparam iload = 0
+    alterparam tdrop = 0.4
+    alterparam clamp = $c
+    reset
+    tran 10u 1.2
+    meas tran fbpk max v(fb) from=0.4 to=1.2
+    echo "  $c | $&fbpk"
+    if $c > 0
+      let fbmax = fbpk
+    end
+    destroy all
+  end
+  echo "fb_max_v = $&fbmax"
   echo "pu_overshoot_pct = $&os_max"
   echo "pu_settle_ms = $&ts_max"
   echo "setpoint_settle_ms = $&ss_max"

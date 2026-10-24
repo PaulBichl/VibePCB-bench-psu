@@ -181,7 +181,7 @@ silkscreen bracket closes on the ANODE side, not the usual cathode mark).
 - **Enable sequence:** PWM (VSET) = 0 before EN high, wait ~5 ms for the soft start, then ramp the set point (>= 5 ms).
   Enabling at a high set point starts at the converter's current limit with no soft start (`sim/powerup_ch.cir`).
 - Close the voltage loop on the INA226 bus-voltage reading (PWM -> Vout is ~4.55 V/V, offset trimmed per channel).
-- Current limit: ISET PWM = Iset * 1 V/A; light the CC LED while the INA226 current is within ~2 % of Iset.
+- Current limit: ISET PWM = Iset * 1 V/A, capped at 3.0 A (ISET full scale would be 3.3 A; the LMR33630 is rated 3 A); light the CC LED while the INA226 current is within ~2 % of Iset.
   Program each INA226's shunt over-limit (Mask/Enable SOL + LEN latch) to a ceiling above Iset (e.g. Iset + 0.5 A,
   max 3.5 A); after a trip read Mask/Enable (clears the latch) and report it.
 - Temperature: NTC (B 3380) -> derate the current limit above ~85 C board temperature, switch off above ~100 C.
