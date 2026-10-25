@@ -1,6 +1,17 @@
 [rules]
 profiles = ["jlcpcb-4l", "ipc-class2"]
 
+# USB D+/D- (Full Speed, ESP32-S3): 90 Ohm differential pair on the top layer over the In1 GND plane, routed with a
+# fixed path in the TSX (USB_W, 0.32 / 0.2 mm). The net class records the geometry for KiCad.
+[stackup]
+preset = "jlc04161h-7628"
+
+[netclass.USB]
+nets = ["USB_D*"]
+impedance_diff = 90
+diff_pair_gap = 0.2
+layer = "F.Cu"
+
 
 # ESP32-S3-MINI-1 (bottom) antenna end at the +x board edge (it overhangs the edge): no copper between the
 # module pads (x <= 41.9 mm from the centre) and the edge, on any layer.

@@ -239,7 +239,8 @@ Each channel alone, no load first. Output range at 5 V input is 1.6 V to ~4.3 V 
    recovery time. Ringing that does not settle means less phase margin than simulated: report it.
    Loop gain (the simulation rests on derived, unpublished compensation constants): 10 Ohm in series with R102 / R202
    at the OUT end, inject across it (Bode box or a scope FRA), measure at 1.6 V and 16.6 V, 1 A: phase margin >= 45 deg.
-4. CC into a short (thick wire) at Iset 1 A and 3 A: the current settles at Iset within a few ms.
+4. CC into a short (thick wire) at Iset 1 A and 3 A: the current settles at Iset within a few ms. The converter may
+   hiccup once (off, soft restart) before the CC loop holds: fine; repeated hiccup means the CC loop is too slow - report it.
 5. Heat: 3 A at 5 V and 12 V for 10 minutes, in the enclosure if there is one: NTC reading and a thermocouple on the
    LMR33630 case should stay below ~85 C.
 

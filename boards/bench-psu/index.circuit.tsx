@@ -48,6 +48,7 @@ import { C, R, RSENSE, TRACE_MAX, net } from "./parts"
 const PWR = "0.8mm" // output path
 const VIN_W = "1.2mm" // VIN: up to 3 A from the input stage to both channels
 const MID = "0.4mm" // 5 V, 3.3 V, switch-node-adjacent
+const USB_W = "0.32mm" // USB D+/D-: 90 Ohm differential with a 0.2 mm gap on F.Cu (vibepcb.stackup, JLC04161H-7628)
 
 const at = (x: number, y: number) => ({ pcbX: x, pcbY: y })
 const B = { layer: "bottom" as const }
@@ -275,7 +276,8 @@ export default () => (
     <TYPE_C_16PIN_2MD_073_ name="J1" {...bot(20, 24.8)} pcbRotation={180} />
       <USBLC6_2SC6 name="U2" {...bot(20, 19.5)} />
       <R name="R2" {...bot(16.3, 19.5)} pcbRotation={90} v="1M" />
-      <C name="C5" {...bot(23.7, 19.5)} pcbRotation={90} v="4.7nF" />
+      {/* shield cap 1 kV (review J1:protection): an 8 kV / 150 pF shell discharge charges 4.7 nF to ~250 V */}
+      <C name="C5" {...bot(23.7, 19.8)} pcbRotation={90} v="4.7nF 1kV" />
       <STUSB4500QTR name="U1" {...bot(20, 14.5)} />
       <C name="C1" {...bot(16.5, 16.3)} pcbRotation={90} v="1uF" />
       {/* VREG caps east of U1, pad 1 facing their pins (bottom side mirrors: 180 deg = pad 1 at -x): the router
@@ -297,8 +299,29 @@ export default () => (
     {net("GND", [".D2 > .pin2", ".U8 > .A"])}
     {net("CC1", [".J1 > .CC1", ".U1 > .CC1", ".U1 > .CC1DB", ".U8 > .K1"])}
     {net("CC2", [".J1 > .CC2", ".U1 > .CC2", ".U1 > .CC2DB", ".U8 > .K2"])}
-    {net("USB_DP", [".J1 > .Dp1", ".J1 > .Dp2", ".U2 > .pin3", ".U2 > .pin4"])}
-    {net("USB_DN", [".J1 > .Dn1", ".J1 > .Dn2", ".U2 > .pin1", ".U2 > .pin6"])}
+    {/* USBLC6 channels: D+ on pins 1/6, D- on pins 3/4 (the two channels are identical): the pair leaves U2 without
+        crossing on its way to the ESP32 */}
+    {net("USB_DP", [".J1 > .Dp1", ".J1 > .Dp2", ".U2 > .pin1", ".U2 > .pin6"])}
+    {net("USB_DN", [".J1 > .Dn1", ".J1 > .Dn2", ".U2 > .pin3", ".U2 > .pin4"])}
+    {/* D+/D- U2 -> ESP32 as a coupled 90 Ohm pair on the top layer over the In1 GND plane (0.32 / 0.2 mm, vibepcb.toml
+        [netclass.USB]): via under U2 between its pin rows (on the
+        pin 6 - pin 1 / pin 4 - pin 3 line, clear of U1's pins), 45 deg fan-in, side by side down x = 22.3 / 22.8 (the front panel is empty there),
+        45 deg into a via beside each ESP32 pin. Fixed path: the router keeps the rest clear of it. Path points are
+        relative to U2's centre (tscircuit ignores pcbPathRelativeTo here). Full Speed USB would also work uncoupled; this is the standard layout. */}
+    <trace name="USB_DP" from=".U2 > .pin1" to=".U5 > .IO20" thickness={USB_W} maxLength={TRACE_MAX} pcbPath={[
+      { x: 0.95, y: 0, via: true, fromLayer: "bottom", toLayer: "top" },
+      { x: 2.8, y: -1.85 },
+      { x: 2.8, y: -17.25 },
+      { x: 6.2, y: -20.65, via: true, fromLayer: "top", toLayer: "bottom" },
+      ".U5 > .IO20",
+    ]} />
+    <trace name="USB_DN" from=".U2 > .pin3" to=".U5 > .IO19" thickness={USB_W} maxLength={TRACE_MAX} pcbPath={[
+      { x: -0.95, y: 0, via: true, fromLayer: "bottom", toLayer: "top" },
+      { x: 2.28, y: -3.23 },
+      { x: 2.28, y: -17.58 },
+      { x: 6.2, y: -21.5, via: true, fromLayer: "top", toLayer: "bottom" },
+      ".U5 > .IO19",
+    ]} />
     {net("V3V3", [".U2 > .VBUS"])}
     <trace from=".U1 > .VBUS_VS_DISCH" to=".R1 > .pin2" maxLength={TRACE_MAX} />
     <trace from=".U1 > .VREG_1V2" to=".C2 > .pin1" maxLength={TRACE_MAX} />
@@ -379,8 +402,6 @@ export default () => (
       ".C16 > .pin2", ".C17 > .pin2", ".C18 > .pin2", ".SW1 > .pin2", ".SW2 > .pin2"])}
     {net("EN_RST", [".U5 > .EN", ".R9 > .pin2", ".C18 > .pin1", ".SW1 > .pin1"])}
     {net("BOOT", [".U5 > .IO0", ".R10 > .pin2", ".SW2 > .pin1"])}
-    {net("USB_DN", [".U5 > .IO19"])}
-    {net("USB_DP", [".U5 > .IO20"])}
     {net("I2C_SDA", [".U5 > .IO8", ".R11 > .pin2"])}
     {net("I2C_SCL", [".U5 > .IO9", ".R12 > .pin2"])}
     {net("PD_ALERT", [".U5 > .IO10", ".R13 > .pin2"])}

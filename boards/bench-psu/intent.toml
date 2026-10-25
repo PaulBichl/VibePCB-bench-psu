@@ -8,7 +8,7 @@ assumptions = [
   "load transient: a 2 A load step / release moves the output by at most 400 mV (sim/buck_loop.cir; the recovery time and the loop itself are measured on the prototype, README bring-up; the FB lag network trades transient speed for stability over 1.6-16 V; 15 % at 1.6 V, 2.3 % at 16 V)",
   "power-up from EN settles within 20 ms (4 ms soft start, then the pre-charged lag capacitor relaxes; no overshoot)",
   "set-point changes settle within 1 s (knob turns: the PWM 2-pole RC is ~0.1 s)",
-  "CC response: after a step into the current limit the converter runs at its own ~4.5 A peak limit for up to ~2 ms before the CC loop takes over (sim/cc_loop.cir); the INA226 trip is the fast backstop",
+  "CC response: after a step into the current limit the converter runs at its own ~4.5 A peak limit for up to ~2 ms before the CC loop takes over (sim/cc_loop.cir); into a hard short (OUT < ~0.64 V, FB < 0.4 V) the LMR33630 may hiccup (off, soft restart) during that time instead of holding Iset - the current stays limited either way; the INA226 trip is the fast backstop; checked on the prototype (README bring-up 4.4)",
 ]
 
 [supply]
