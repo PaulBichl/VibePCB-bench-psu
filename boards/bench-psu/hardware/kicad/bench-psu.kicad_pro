@@ -78,9 +78,9 @@
       "rules": {
         "min_via_annular_width": 0.1,
         "min_hole_clearance": 0.1,
-        "min_via_diameter": 0.25,
+        "min_via_diameter": 0.45,
         "min_track_width": 0.09,
-        "min_through_hole_diameter": 0.15,
+        "min_through_hole_diameter": 0.3,
         "min_clearance": 0.1,
         "min_hole_to_hole": 0.2,
         "min_copper_edge_clearance": 0.2,
