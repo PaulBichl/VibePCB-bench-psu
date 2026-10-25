@@ -1,1731 +1,1731 @@
 vout,fb_network,freq_hz,gain_db,phase_deg
-1.6,divider only,100,70.47,-90.2
-1.6,divider only,106,69.97,-90.4
-1.6,divider only,112.3,69.46,-90.7
-1.6,divider only,118.9,68.96,-90.9
-1.6,divider only,126,68.46,-91.2
-1.6,divider only,133.4,67.96,-91.4
-1.6,divider only,141.3,67.45,-91.6
-1.6,divider only,149.7,66.95,-91.9
-1.6,divider only,158.6,66.44,-92.1
-1.6,divider only,168,65.94,-92.4
-1.6,divider only,177.9,65.43,-92.7
-1.6,divider only,188.5,64.93,-93.0
-1.6,divider only,199.6,64.42,-93.2
-1.6,divider only,211.5,63.91,-93.5
-1.6,divider only,224,63.4,-93.9
-1.6,divider only,237.3,62.89,-94.2
-1.6,divider only,251.3,62.38,-94.5
-1.6,divider only,266.2,61.87,-94.8
-1.6,divider only,282,61.36,-95.2
-1.6,divider only,298.7,60.84,-95.6
-1.6,divider only,316.4,60.32,-96.0
-1.6,divider only,335.2,59.81,-96.4
-1.6,divider only,355.1,59.28,-96.8
-1.6,divider only,376.1,58.76,-97.2
-1.6,divider only,398.4,58.23,-97.6
-1.6,divider only,422,57.71,-98.1
-1.6,divider only,447,57.17,-98.6
-1.6,divider only,473.5,56.64,-99.1
-1.6,divider only,501.6,56.1,-99.6
-1.6,divider only,531.3,55.55,-100.1
-1.6,divider only,562.8,55.01,-100.7
-1.6,divider only,596.1,54.45,-101.2
-1.6,divider only,631.5,53.9,-101.8
-1.6,divider only,668.9,53.33,-102.4
-1.6,divider only,708.5,52.76,-103.0
-1.6,divider only,750.5,52.19,-103.6
-1.6,divider only,795,51.61,-104.2
-1.6,divider only,842.1,51.02,-104.8
-1.6,divider only,892,50.42,-105.4
-1.6,divider only,944.9,49.82,-106.0
-1.6,divider only,1001,49.21,-106.6
-1.6,divider only,1060,48.6,-107.1
-1.6,divider only,1123,47.97,-107.7
-1.6,divider only,1190,47.34,-108.2
-1.6,divider only,1260,46.7,-108.7
-1.6,divider only,1335,46.06,-109.2
-1.6,divider only,1414,45.41,-109.6
-1.6,divider only,1498,44.76,-110.0
-1.6,divider only,1586,44.1,-110.3
-1.6,divider only,1680,43.44,-110.6
-1.6,divider only,1780,42.77,-110.8
-1.6,divider only,1886,42.1,-111.0
-1.6,divider only,1997,41.44,-111.1
-1.6,divider only,2116,40.77,-111.2
-1.6,divider only,2241,40.1,-111.2
-1.6,divider only,2374,39.44,-111.1
-1.6,divider only,2515,38.77,-111.0
-1.6,divider only,2664,38.12,-110.9
-1.6,divider only,2821,37.46,-110.7
-1.6,divider only,2989,36.81,-110.5
-1.6,divider only,3166,36.17,-110.2
-1.6,divider only,3353,35.54,-109.9
-1.6,divider only,3552,34.91,-109.6
-1.6,divider only,3763,34.28,-109.3
-1.6,divider only,3986,33.67,-109.0
-1.6,divider only,4222,33.06,-108.6
-1.6,divider only,4472,32.46,-108.3
-1.6,divider only,4737,31.86,-107.9
-1.6,divider only,5018,31.27,-107.6
-1.6,divider only,5315,30.69,-107.3
-1.6,divider only,5630,30.12,-107.0
-1.6,divider only,5964,29.55,-106.7
-1.6,divider only,6317,28.99,-106.4
-1.6,divider only,6692,28.43,-106.2
-1.6,divider only,7088,27.88,-106.0
-1.6,divider only,7509,27.33,-105.8
-1.6,divider only,7954,26.78,-105.7
-1.6,divider only,8425,26.24,-105.6
-1.6,divider only,8924,25.71,-105.6
-1.6,divider only,9453,25.17,-105.5
-1.6,divider only,1.001e+04,24.64,-105.6
-1.6,divider only,1.061e+04,24.12,-105.6
-1.6,divider only,1.124e+04,23.59,-105.7
-1.6,divider only,1.19e+04,23.07,-105.9
-1.6,divider only,1.261e+04,22.55,-106.1
-1.6,divider only,1.335e+04,22.03,-106.3
-1.6,divider only,1.415e+04,21.51,-106.6
-1.6,divider only,1.498e+04,20.99,-107.0
-1.6,divider only,1.587e+04,20.48,-107.4
-1.6,divider only,1.681e+04,19.96,-107.9
-1.6,divider only,1.781e+04,19.45,-108.4
-1.6,divider only,1.886e+04,18.93,-109.0
-1.6,divider only,1.998e+04,18.42,-109.6
-1.6,divider only,2.117e+04,17.91,-110.3
-1.6,divider only,2.242e+04,17.39,-111.1
-1.6,divider only,2.375e+04,16.88,-111.9
-1.6,divider only,2.516e+04,16.36,-112.8
-1.6,divider only,2.665e+04,15.85,-113.8
-1.6,divider only,2.823e+04,15.33,-114.9
-1.6,divider only,2.99e+04,14.82,-116.0
-1.6,divider only,3.167e+04,14.3,-117.3
-1.6,divider only,3.355e+04,13.78,-118.6
-1.6,divider only,3.554e+04,13.26,-120.0
-1.6,divider only,3.764e+04,12.73,-121.5
-1.6,divider only,3.987e+04,12.21,-123.2
-1.6,divider only,4.224e+04,11.68,-124.9
-1.6,divider only,4.474e+04,11.14,-126.7
-1.6,divider only,4.739e+04,10.61,-128.7
-1.6,divider only,5.02e+04,10.07,-130.8
-1.6,divider only,5.318e+04,9.52,-133.1
-1.6,divider only,5.633e+04,8.97,-135.5
-1.6,divider only,5.967e+04,8.41,-138.0
-1.6,divider only,6.32e+04,7.85,-140.7
-1.6,divider only,6.695e+04,7.27,-143.5
-1.6,divider only,7.092e+04,6.69,-146.6
-1.6,divider only,7.512e+04,6.09,-149.8
-1.6,divider only,7.957e+04,5.49,-153.2
-1.6,divider only,8.429e+04,4.87,-156.9
-1.6,divider only,8.928e+04,4.23,-160.7
-1.6,divider only,9.457e+04,3.57,-164.8
-1.6,divider only,1.002e+05,2.89,-169.1
-1.6,divider only,1.061e+05,2.19,-173.6
-1.6,divider only,1.124e+05,1.46,-178.4
-1.6,divider only,1.191e+05,0.69,-183.4
-1.6,divider only,1.261e+05,-0.1,-188.7
-1.6,divider only,1.336e+05,-0.94,-194.2
-1.6,divider only,1.415e+05,-1.82,-200.0
-1.6,divider only,1.499e+05,-2.75,-205.9
-1.6,divider only,1.588e+05,-3.74,-212.1
-1.6,divider only,1.682e+05,-4.78,-218.5
-1.6,divider only,1.782e+05,-5.88,-225.1
-1.6,divider only,1.887e+05,-7.05,-231.7
-1.6,divider only,1.999e+05,-8.28,-238.5
-1.6,divider only,2.118e+05,-9.58,-245.3
-1.6,divider only,2.243e+05,-10.95,-252.2
-1.6,divider only,2.376e+05,-12.39,-259.1
-1.6,divider only,2.517e+05,-13.9,-265.9
-1.6,divider only,2.666e+05,-15.47,-272.6
-1.6,divider only,2.824e+05,-17.1,-279.2
-1.6,divider only,2.991e+05,-18.79,-285.7
-1.6,divider only,3.169e+05,-20.54,-292.0
-1.6,divider only,3.356e+05,-22.35,-298.2
-1.6,divider only,3.555e+05,-24.2,-304.2
-1.6,divider only,3.766e+05,-26.1,-310.0
-1.6,divider only,3.989e+05,-28.05,-315.6
-1.6,divider only,4.226e+05,-30.04,-320.9
-1.6,divider only,4.476e+05,-32.06,-326.1
-1.6,divider only,4.741e+05,-34.13,-331.1
-1.6,divider only,5.022e+05,-36.22,-335.8
-1.6,divider only,5.32e+05,-38.35,-340.3
-1.6,divider only,5.635e+05,-40.5,-344.6
-1.6,divider only,5.969e+05,-42.68,-348.7
-1.6,divider only,6.323e+05,-44.89,-352.6
-1.6,divider only,6.698e+05,-47.12,-356.2
-1.6,divider only,7.095e+05,-49.36,-359.6
-1.6,divider only,7.515e+05,-51.63,-362.9
-1.6,divider only,7.961e+05,-53.91,-365.9
-1.6,divider only,8.433e+05,-56.2,-368.6
-1.6,divider only,8.932e+05,-58.51,-371.2
-1.6,divider only,9.462e+05,-60.83,-373.6
-1.6,divider only,1.002e+06,-63.15,-375.8
-1.6,divider only,1.062e+06,-65.49,-377.7
-1.6,divider only,1.125e+06,-67.83,-379.5
-1.6,divider only,1.191e+06,-70.17,-381.1
-1.6,divider only,1.262e+06,-72.52,-382.5
-1.6,divider only,1.337e+06,-74.86,-383.8
-1.6,divider only,1.416e+06,-77.21,-384.8
-1.6,divider only,1.5e+06,-79.55,-385.7
-1.6,divider only,1.589e+06,-81.89,-386.4
-1.6,divider only,1.683e+06,-84.23,-387.0
-1.6,divider only,1.782e+06,-86.56,-387.4
-1.6,divider only,1.888e+06,-88.87,-387.7
-1.6,divider only,2e+06,-91.18,-387.8
-1.6,with lag network,100,52.11,-131.9
-1.6,with lag network,106,51.36,-130.8
-1.6,with lag network,112.3,50.62,-129.6
-1.6,with lag network,118.9,49.89,-128.5
-1.6,with lag network,126,49.17,-127.3
-1.6,with lag network,133.4,48.47,-126.2
-1.6,with lag network,141.3,47.78,-125.0
-1.6,with lag network,149.7,47.1,-123.9
-1.6,with lag network,158.6,46.44,-122.8
-1.6,with lag network,168,45.79,-121.7
-1.6,with lag network,177.9,45.15,-120.7
-1.6,with lag network,188.5,44.51,-119.7
-1.6,with lag network,199.6,43.89,-118.7
-1.6,with lag network,211.5,43.28,-117.8
-1.6,with lag network,224,42.68,-117.0
-1.6,with lag network,237.3,42.08,-116.2
-1.6,with lag network,251.3,41.49,-115.4
-1.6,with lag network,266.2,40.9,-114.7
-1.6,with lag network,282,40.33,-114.0
-1.6,with lag network,298.7,39.75,-113.4
-1.6,with lag network,316.4,39.18,-112.9
-1.6,with lag network,335.2,38.61,-112.4
-1.6,with lag network,355.1,38.05,-112.0
-1.6,with lag network,376.1,37.49,-111.6
-1.6,with lag network,398.4,36.93,-111.3
-1.6,with lag network,422,36.37,-111.0
-1.6,with lag network,447,35.81,-110.8
-1.6,with lag network,473.5,35.24,-110.6
-1.6,with lag network,501.6,34.68,-110.5
-1.6,with lag network,531.3,34.12,-110.4
-1.6,with lag network,562.8,33.55,-110.4
-1.6,with lag network,596.1,32.98,-110.4
-1.6,with lag network,631.5,32.41,-110.5
-1.6,with lag network,668.9,31.84,-110.6
-1.6,with lag network,708.5,31.25,-110.7
-1.6,with lag network,750.5,30.67,-110.9
-1.6,with lag network,795,30.08,-111.1
-1.6,with lag network,842.1,29.48,-111.3
-1.6,with lag network,892,28.88,-111.5
-1.6,with lag network,944.9,28.27,-111.8
-1.6,with lag network,1001,27.66,-112.0
-1.6,with lag network,1060,27.03,-112.3
-1.6,with lag network,1123,26.41,-112.5
-1.6,with lag network,1190,25.77,-112.7
-1.6,with lag network,1260,25.13,-113.0
-1.6,with lag network,1335,24.48,-113.2
-1.6,with lag network,1414,23.83,-113.3
-1.6,with lag network,1498,23.17,-113.5
-1.6,with lag network,1586,22.51,-113.6
-1.6,with lag network,1680,21.85,-113.7
-1.6,with lag network,1780,21.18,-113.7
-1.6,with lag network,1886,20.51,-113.7
-1.6,with lag network,1997,19.84,-113.6
-1.6,with lag network,2116,19.17,-113.5
-1.6,with lag network,2241,18.51,-113.4
-1.6,with lag network,2374,17.84,-113.2
-1.6,with lag network,2515,17.18,-112.9
-1.6,with lag network,2664,16.52,-112.7
-1.6,with lag network,2821,15.86,-112.3
-1.6,with lag network,2989,15.21,-112.0
-1.6,with lag network,3166,14.57,-111.6
-1.6,with lag network,3353,13.93,-111.2
-1.6,with lag network,3552,13.3,-110.8
-1.6,with lag network,3763,12.68,-110.3
-1.6,with lag network,3986,12.07,-109.9
-1.6,with lag network,4222,11.46,-109.4
-1.6,with lag network,4472,10.85,-109.0
-1.6,with lag network,4737,10.26,-108.5
-1.6,with lag network,5018,9.67,-108.1
-1.6,with lag network,5315,9.09,-107.7
-1.6,with lag network,5630,8.52,-107.3
-1.6,with lag network,5964,7.95,-106.9
-1.6,with lag network,6317,7.38,-106.5
-1.6,with lag network,6692,6.83,-106.2
-1.6,with lag network,7088,6.27,-105.9
-1.6,with lag network,7509,5.72,-105.7
-1.6,with lag network,7954,5.18,-105.4
-1.6,with lag network,8425,4.64,-105.2
-1.6,with lag network,8924,4.1,-105.1
-1.6,with lag network,9453,3.57,-105.0
-1.6,with lag network,1.001e+04,3.04,-104.9
-1.6,with lag network,1.061e+04,2.51,-104.8
-1.6,with lag network,1.124e+04,1.99,-104.8
-1.6,with lag network,1.19e+04,1.47,-104.9
-1.6,with lag network,1.261e+04,0.95,-105.0
-1.6,with lag network,1.335e+04,0.43,-105.1
-1.6,with lag network,1.415e+04,-0.09,-105.3
-1.6,with lag network,1.498e+04,-0.61,-105.5
-1.6,with lag network,1.587e+04,-1.12,-105.8
-1.6,with lag network,1.681e+04,-1.64,-106.1
-1.6,with lag network,1.781e+04,-2.15,-106.5
-1.6,with lag network,1.886e+04,-2.66,-106.9
-1.6,with lag network,1.998e+04,-3.18,-107.4
-1.6,with lag network,2.117e+04,-3.69,-107.9
-1.6,with lag network,2.242e+04,-4.2,-108.5
-1.6,with lag network,2.375e+04,-4.71,-109.2
-1.6,with lag network,2.516e+04,-5.23,-109.9
-1.6,with lag network,2.665e+04,-5.74,-110.7
-1.6,with lag network,2.823e+04,-6.25,-111.6
-1.6,with lag network,2.99e+04,-6.77,-112.5
-1.6,with lag network,3.167e+04,-7.28,-113.5
-1.6,with lag network,3.355e+04,-7.8,-114.6
-1.6,with lag network,3.554e+04,-8.32,-115.8
-1.6,with lag network,3.764e+04,-8.84,-117.0
-1.6,with lag network,3.987e+04,-9.36,-118.4
-1.6,with lag network,4.224e+04,-9.89,-119.8
-1.6,with lag network,4.474e+04,-10.41,-121.4
-1.6,with lag network,4.739e+04,-10.94,-123.0
-1.6,with lag network,5.02e+04,-11.48,-124.8
-1.6,with lag network,5.318e+04,-12.02,-126.6
-1.6,with lag network,5.633e+04,-12.56,-128.6
-1.6,with lag network,5.967e+04,-13.11,-130.7
-1.6,with lag network,6.32e+04,-13.66,-133.0
-1.6,with lag network,6.695e+04,-14.23,-135.4
-1.6,with lag network,7.092e+04,-14.8,-138.0
-1.6,with lag network,7.512e+04,-15.38,-140.7
-1.6,with lag network,7.957e+04,-15.97,-143.6
-1.6,with lag network,8.429e+04,-16.57,-146.6
-1.6,with lag network,8.928e+04,-17.19,-149.9
-1.6,with lag network,9.457e+04,-17.83,-153.3
-1.6,with lag network,1.002e+05,-18.48,-157.0
-1.6,with lag network,1.061e+05,-19.15,-160.8
-1.6,with lag network,1.124e+05,-19.86,-164.9
-1.6,with lag network,1.191e+05,-20.58,-169.1
-1.6,with lag network,1.261e+05,-21.34,-173.6
-1.6,with lag network,1.336e+05,-22.14,-178.3
-1.6,with lag network,1.415e+05,-22.97,-183.1
-1.6,with lag network,1.499e+05,-23.85,-188.2
-1.6,with lag network,1.588e+05,-24.78,-193.4
-1.6,with lag network,1.682e+05,-25.76,-198.8
-1.6,with lag network,1.782e+05,-26.79,-204.3
-1.6,with lag network,1.887e+05,-27.88,-209.9
-1.6,with lag network,1.999e+05,-29.02,-215.6
-1.6,with lag network,2.118e+05,-30.23,-221.2
-1.6,with lag network,2.243e+05,-31.5,-226.9
-1.6,with lag network,2.376e+05,-32.82,-232.5
-1.6,with lag network,2.517e+05,-34.2,-238.0
-1.6,with lag network,2.666e+05,-35.64,-243.5
-1.6,with lag network,2.824e+05,-37.13,-248.7
-1.6,with lag network,2.991e+05,-38.66,-253.9
-1.6,with lag network,3.169e+05,-40.24,-258.8
-1.6,with lag network,3.356e+05,-41.86,-263.6
-1.6,with lag network,3.555e+05,-43.52,-268.2
-1.6,with lag network,3.766e+05,-45.21,-272.6
-1.6,with lag network,3.989e+05,-46.93,-276.8
-1.6,with lag network,4.226e+05,-48.68,-280.8
-1.6,with lag network,4.476e+05,-50.46,-284.6
-1.6,with lag network,4.741e+05,-52.25,-288.2
-1.6,with lag network,5.022e+05,-54.07,-291.6
-1.6,with lag network,5.32e+05,-55.9,-294.9
-1.6,with lag network,5.635e+05,-57.75,-297.9
-1.6,with lag network,5.969e+05,-59.61,-300.8
-1.6,with lag network,6.323e+05,-61.48,-303.5
-1.6,with lag network,6.698e+05,-63.36,-306.1
-1.6,with lag network,7.095e+05,-65.26,-308.5
-1.6,with lag network,7.515e+05,-67.16,-310.7
-1.6,with lag network,7.961e+05,-69.07,-312.8
-1.6,with lag network,8.433e+05,-70.98,-314.8
-1.6,with lag network,8.932e+05,-72.9,-316.6
-1.6,with lag network,9.462e+05,-74.82,-318.3
-1.6,with lag network,1.002e+06,-76.74,-319.9
-1.6,with lag network,1.062e+06,-78.66,-321.3
-1.6,with lag network,1.125e+06,-80.59,-322.7
-1.6,with lag network,1.191e+06,-82.51,-324.0
-1.6,with lag network,1.262e+06,-84.44,-325.1
-1.6,with lag network,1.337e+06,-86.36,-326.2
-1.6,with lag network,1.416e+06,-88.28,-327.2
-1.6,with lag network,1.5e+06,-90.19,-328.1
-1.6,with lag network,1.589e+06,-92.1,-328.9
-1.6,with lag network,1.683e+06,-94.01,-329.7
-1.6,with lag network,1.782e+06,-95.91,-330.5
-1.6,with lag network,1.888e+06,-97.8,-331.2
-1.6,with lag network,2e+06,-99.68,-331.8
-3.3,divider only,100,76.72,-92.8
-3.3,divider only,106,76.21,-93.2
-3.3,divider only,112.3,75.71,-93.6
-3.3,divider only,118.9,75.2,-94.0
-3.3,divider only,126,74.69,-94.4
-3.3,divider only,133.4,74.18,-94.8
-3.3,divider only,141.3,73.67,-95.3
-3.3,divider only,149.7,73.15,-95.7
-3.3,divider only,158.6,72.64,-96.2
-3.3,divider only,168,72.12,-96.7
-3.3,divider only,177.9,71.61,-97.2
-3.3,divider only,188.5,71.09,-97.7
-3.3,divider only,199.6,70.57,-98.3
-3.3,divider only,211.5,70.04,-98.9
-3.3,divider only,224,69.51,-99.4
-3.3,divider only,237.3,68.98,-100.1
-3.3,divider only,251.3,68.45,-100.7
-3.3,divider only,266.2,67.91,-101.4
-3.3,divider only,282,67.37,-102.1
-3.3,divider only,298.7,66.82,-102.8
-3.3,divider only,316.4,66.27,-103.5
-3.3,divider only,335.2,65.71,-104.3
-3.3,divider only,355.1,65.15,-105.1
-3.3,divider only,376.1,64.58,-105.9
-3.3,divider only,398.4,64.01,-106.8
-3.3,divider only,422,63.42,-107.6
-3.3,divider only,447,62.83,-108.5
-3.3,divider only,473.5,62.23,-109.4
-3.3,divider only,501.6,61.63,-110.3
-3.3,divider only,531.3,61.01,-111.2
-3.3,divider only,562.8,60.38,-112.1
-3.3,divider only,596.1,59.74,-113.1
-3.3,divider only,631.5,59.1,-114.0
-3.3,divider only,668.9,58.44,-114.9
-3.3,divider only,708.5,57.77,-115.8
-3.3,divider only,750.5,57.09,-116.7
-3.3,divider only,795,56.4,-117.5
-3.3,divider only,842.1,55.7,-118.4
-3.3,divider only,892,54.99,-119.1
-3.3,divider only,944.9,54.27,-119.9
-3.3,divider only,1001,53.54,-120.5
-3.3,divider only,1060,52.81,-121.1
-3.3,divider only,1123,52.06,-121.7
-3.3,divider only,1190,51.31,-122.2
-3.3,divider only,1260,50.55,-122.6
-3.3,divider only,1335,49.79,-122.9
-3.3,divider only,1414,49.03,-123.2
-3.3,divider only,1498,48.26,-123.3
-3.3,divider only,1586,47.49,-123.4
-3.3,divider only,1680,46.73,-123.4
-3.3,divider only,1780,45.96,-123.4
-3.3,divider only,1886,45.2,-123.2
-3.3,divider only,1997,44.44,-123.0
-3.3,divider only,2116,43.69,-122.7
-3.3,divider only,2241,42.94,-122.3
-3.3,divider only,2374,42.2,-121.9
-3.3,divider only,2515,41.47,-121.4
-3.3,divider only,2664,40.75,-120.9
-3.3,divider only,2821,40.04,-120.3
-3.3,divider only,2989,39.33,-119.7
-3.3,divider only,3166,38.64,-119.0
-3.3,divider only,3353,37.96,-118.3
-3.3,divider only,3552,37.29,-117.6
-3.3,divider only,3763,36.62,-117.0
-3.3,divider only,3986,35.97,-116.3
-3.3,divider only,4222,35.33,-115.6
-3.3,divider only,4472,34.7,-114.9
-3.3,divider only,4737,34.08,-114.2
-3.3,divider only,5018,33.47,-113.6
-3.3,divider only,5315,32.87,-112.9
-3.3,divider only,5630,32.28,-112.4
-3.3,divider only,5964,31.69,-111.8
-3.3,divider only,6317,31.11,-111.3
-3.3,divider only,6692,30.54,-110.8
-3.3,divider only,7088,29.98,-110.3
-3.3,divider only,7509,29.42,-110.0
-3.3,divider only,7954,28.86,-109.6
-3.3,divider only,8425,28.31,-109.3
-3.3,divider only,8924,27.77,-109.0
-3.3,divider only,9453,27.23,-108.8
-3.3,divider only,1.001e+04,26.69,-108.7
-3.3,divider only,1.061e+04,26.16,-108.6
-3.3,divider only,1.124e+04,25.63,-108.5
-3.3,divider only,1.19e+04,25.1,-108.5
-3.3,divider only,1.261e+04,24.58,-108.6
-3.3,divider only,1.335e+04,24.05,-108.7
-3.3,divider only,1.415e+04,23.53,-108.9
-3.3,divider only,1.498e+04,23.01,-109.1
-3.3,divider only,1.587e+04,22.49,-109.4
-3.3,divider only,1.681e+04,21.98,-109.8
-3.3,divider only,1.781e+04,21.46,-110.2
-3.3,divider only,1.886e+04,20.94,-110.7
-3.3,divider only,1.998e+04,20.43,-111.2
-3.3,divider only,2.117e+04,19.91,-111.9
-3.3,divider only,2.242e+04,19.4,-112.6
-3.3,divider only,2.375e+04,18.88,-113.3
-3.3,divider only,2.516e+04,18.37,-114.2
-3.3,divider only,2.665e+04,17.85,-115.1
-3.3,divider only,2.823e+04,17.33,-116.1
-3.3,divider only,2.99e+04,16.82,-117.2
-3.3,divider only,3.167e+04,16.3,-118.4
-3.3,divider only,3.355e+04,15.78,-119.6
-3.3,divider only,3.554e+04,15.25,-121.0
-3.3,divider only,3.764e+04,14.73,-122.5
-3.3,divider only,3.987e+04,14.2,-124.1
-3.3,divider only,4.224e+04,13.67,-125.8
-3.3,divider only,4.474e+04,13.14,-127.6
-3.3,divider only,4.739e+04,12.6,-129.6
-3.3,divider only,5.02e+04,12.06,-131.6
-3.3,divider only,5.318e+04,11.52,-133.9
-3.3,divider only,5.633e+04,10.97,-136.2
-3.3,divider only,5.967e+04,10.41,-138.7
-3.3,divider only,6.32e+04,9.84,-141.4
-3.3,divider only,6.695e+04,9.27,-144.3
-3.3,divider only,7.092e+04,8.69,-147.3
-3.3,divider only,7.512e+04,8.09,-150.5
-3.3,divider only,7.957e+04,7.48,-153.9
-3.3,divider only,8.429e+04,6.86,-157.6
-3.3,divider only,8.928e+04,6.22,-161.4
-3.3,divider only,9.457e+04,5.57,-165.5
-3.3,divider only,1.002e+05,4.89,-169.8
-3.3,divider only,1.061e+05,4.18,-174.3
-3.3,divider only,1.124e+05,3.45,-179.1
-3.3,divider only,1.191e+05,2.69,-184.1
-3.3,divider only,1.261e+05,1.89,-189.4
-3.3,divider only,1.336e+05,1.05,-194.9
-3.3,divider only,1.415e+05,0.17,-200.7
-3.3,divider only,1.499e+05,-0.76,-206.7
-3.3,divider only,1.588e+05,-1.75,-212.9
-3.3,divider only,1.682e+05,-2.79,-219.3
-3.3,divider only,1.782e+05,-3.89,-225.9
-3.3,divider only,1.887e+05,-5.06,-232.6
-3.3,divider only,1.999e+05,-6.29,-239.4
-3.3,divider only,2.118e+05,-7.59,-246.3
-3.3,divider only,2.243e+05,-8.96,-253.2
-3.3,divider only,2.376e+05,-10.4,-260.1
-3.3,divider only,2.517e+05,-11.91,-266.9
-3.3,divider only,2.666e+05,-13.48,-273.7
-3.3,divider only,2.824e+05,-15.12,-280.4
-3.3,divider only,2.991e+05,-16.81,-286.9
-3.3,divider only,3.169e+05,-18.57,-293.3
-3.3,divider only,3.356e+05,-20.37,-299.5
-3.3,divider only,3.555e+05,-22.23,-305.6
-3.3,divider only,3.766e+05,-24.13,-311.5
-3.3,divider only,3.989e+05,-26.08,-317.1
-3.3,divider only,4.226e+05,-28.07,-322.6
-3.3,divider only,4.476e+05,-30.1,-327.8
-3.3,divider only,4.741e+05,-32.17,-332.9
-3.3,divider only,5.022e+05,-34.27,-337.7
-3.3,divider only,5.32e+05,-36.4,-342.4
-3.3,divider only,5.635e+05,-38.56,-346.8
-3.3,divider only,5.969e+05,-40.75,-351.0
-3.3,divider only,6.323e+05,-42.96,-354.9
-3.3,divider only,6.698e+05,-45.19,-358.7
-3.3,divider only,7.095e+05,-47.45,-362.3
-3.3,divider only,7.515e+05,-49.72,-365.6
-3.3,divider only,7.961e+05,-52.01,-368.7
-3.3,divider only,8.433e+05,-54.32,-371.7
-3.3,divider only,8.932e+05,-56.64,-374.4
-3.3,divider only,9.462e+05,-58.97,-376.9
-3.3,divider only,1.002e+06,-61.32,-379.3
-3.3,divider only,1.062e+06,-63.67,-381.4
-3.3,divider only,1.125e+06,-66.03,-383.4
-3.3,divider only,1.191e+06,-68.39,-385.1
-3.3,divider only,1.262e+06,-70.76,-386.7
-3.3,divider only,1.337e+06,-73.13,-388.1
-3.3,divider only,1.416e+06,-75.5,-389.4
-3.3,divider only,1.5e+06,-77.88,-390.5
-3.3,divider only,1.589e+06,-80.25,-391.4
-3.3,divider only,1.683e+06,-82.62,-392.1
-3.3,divider only,1.782e+06,-84.99,-392.7
-3.3,divider only,1.888e+06,-87.35,-393.1
-3.3,divider only,2e+06,-89.7,-393.4
-3.3,with lag network,100,58.36,-134.5
-3.3,with lag network,106,57.6,-133.5
-3.3,with lag network,112.3,56.86,-132.5
-3.3,with lag network,118.9,56.12,-131.5
-3.3,with lag network,126,55.4,-130.5
-3.3,with lag network,133.4,54.69,-129.6
-3.3,with lag network,141.3,54.0,-128.6
-3.3,with lag network,149.7,53.31,-127.7
-3.3,with lag network,158.6,52.64,-126.8
-3.3,with lag network,168,51.97,-126.0
-3.3,with lag network,177.9,51.32,-125.2
-3.3,with lag network,188.5,50.67,-124.5
-3.3,with lag network,199.6,50.04,-123.8
-3.3,with lag network,211.5,49.41,-123.1
-3.3,with lag network,224,48.79,-122.6
-3.3,with lag network,237.3,48.17,-122.1
-3.3,with lag network,251.3,47.55,-121.6
-3.3,with lag network,266.2,46.94,-121.2
-3.3,with lag network,282,46.34,-120.9
-3.3,with lag network,298.7,45.73,-120.7
-3.3,with lag network,316.4,45.13,-120.5
-3.3,with lag network,335.2,44.52,-120.4
-3.3,with lag network,355.1,43.92,-120.3
-3.3,with lag network,376.1,43.31,-120.3
-3.3,with lag network,398.4,42.7,-120.4
-3.3,with lag network,422,42.09,-120.5
-3.3,with lag network,447,41.47,-120.7
-3.3,with lag network,473.5,40.84,-120.9
-3.3,with lag network,501.6,40.21,-121.2
-3.3,with lag network,531.3,39.57,-121.5
-3.3,with lag network,562.8,38.93,-121.9
-3.3,with lag network,596.1,38.28,-122.3
-3.3,with lag network,631.5,37.61,-122.7
-3.3,with lag network,668.9,36.94,-123.1
-3.3,with lag network,708.5,36.26,-123.5
-3.3,with lag network,750.5,35.57,-124.0
-3.3,with lag network,795,34.87,-124.4
-3.3,with lag network,842.1,34.17,-124.8
-3.3,with lag network,892,33.45,-125.3
-3.3,with lag network,944.9,32.72,-125.6
-3.3,with lag network,1001,31.99,-126.0
-3.3,with lag network,1060,31.24,-126.3
-3.3,with lag network,1123,30.5,-126.5
-3.3,with lag network,1190,29.74,-126.7
-3.3,with lag network,1260,28.98,-126.9
-3.3,with lag network,1335,28.21,-126.9
-3.3,with lag network,1414,27.45,-126.9
-3.3,with lag network,1498,26.68,-126.9
-3.3,with lag network,1586,25.91,-126.8
-3.3,with lag network,1680,25.14,-126.6
-3.3,with lag network,1780,24.37,-126.3
-3.3,with lag network,1886,23.61,-125.9
-3.3,with lag network,1997,22.85,-125.5
-3.3,with lag network,2116,22.09,-125.1
-3.3,with lag network,2241,21.35,-124.5
-3.3,with lag network,2374,20.61,-123.9
-3.3,with lag network,2515,19.87,-123.3
-3.3,with lag network,2664,19.15,-122.6
-3.3,with lag network,2821,18.44,-121.9
-3.3,with lag network,2989,17.73,-121.2
-3.3,with lag network,3166,17.04,-120.4
-3.3,with lag network,3353,16.36,-119.6
-3.3,with lag network,3552,15.68,-118.8
-3.3,with lag network,3763,15.02,-118.0
-3.3,with lag network,3986,14.37,-117.2
-3.3,with lag network,4222,13.73,-116.4
-3.3,with lag network,4472,13.1,-115.6
-3.3,with lag network,4737,12.48,-114.8
-3.3,with lag network,5018,11.87,-114.1
-3.3,with lag network,5315,11.27,-113.3
-3.3,with lag network,5630,10.67,-112.6
-3.3,with lag network,5964,10.09,-112.0
-3.3,with lag network,6317,9.51,-111.4
-3.3,with lag network,6692,8.94,-110.8
-3.3,with lag network,7088,8.37,-110.3
-3.3,with lag network,7509,7.81,-109.8
-3.3,with lag network,7954,7.26,-109.3
-3.3,with lag network,8425,6.71,-108.9
-3.3,with lag network,8924,6.17,-108.6
-3.3,with lag network,9453,5.63,-108.3
-3.3,with lag network,1.001e+04,5.09,-108.0
-3.3,with lag network,1.061e+04,4.56,-107.8
-3.3,with lag network,1.124e+04,4.03,-107.6
-3.3,with lag network,1.19e+04,3.5,-107.5
-3.3,with lag network,1.261e+04,2.98,-107.5
-3.3,with lag network,1.335e+04,2.45,-107.5
-3.3,with lag network,1.415e+04,1.93,-107.5
-3.3,with lag network,1.498e+04,1.41,-107.6
-3.3,with lag network,1.587e+04,0.89,-107.8
-3.3,with lag network,1.681e+04,0.38,-108.0
-3.3,with lag network,1.781e+04,-0.14,-108.3
-3.3,with lag network,1.886e+04,-0.65,-108.6
-3.3,with lag network,1.998e+04,-1.17,-109.0
-3.3,with lag network,2.117e+04,-1.68,-109.5
-3.3,with lag network,2.242e+04,-2.19,-110.0
-3.3,with lag network,2.375e+04,-2.71,-110.6
-3.3,with lag network,2.516e+04,-3.22,-111.3
-3.3,with lag network,2.665e+04,-3.74,-112.0
-3.3,with lag network,2.823e+04,-4.25,-112.8
-3.3,with lag network,2.99e+04,-4.77,-113.7
-3.3,with lag network,3.167e+04,-5.28,-114.6
-3.3,with lag network,3.355e+04,-5.8,-115.7
-3.3,with lag network,3.554e+04,-6.32,-116.8
-3.3,with lag network,3.764e+04,-6.84,-118.0
-3.3,with lag network,3.987e+04,-7.36,-119.3
-3.3,with lag network,4.224e+04,-7.89,-120.7
-3.3,with lag network,4.474e+04,-8.42,-122.2
-3.3,with lag network,4.739e+04,-8.95,-123.8
-3.3,with lag network,5.02e+04,-9.48,-125.6
-3.3,with lag network,5.318e+04,-10.02,-127.4
-3.3,with lag network,5.633e+04,-10.56,-129.4
-3.3,with lag network,5.967e+04,-11.11,-131.5
-3.3,with lag network,6.32e+04,-11.67,-133.7
-3.3,with lag network,6.695e+04,-12.23,-136.1
-3.3,with lag network,7.092e+04,-12.8,-138.7
-3.3,with lag network,7.512e+04,-13.38,-141.4
-3.3,with lag network,7.957e+04,-13.97,-144.3
-3.3,with lag network,8.429e+04,-14.58,-147.3
-3.3,with lag network,8.928e+04,-15.2,-150.6
-3.3,with lag network,9.457e+04,-15.83,-154.0
-3.3,with lag network,1.002e+05,-16.48,-157.7
-3.3,with lag network,1.061e+05,-17.16,-161.5
-3.3,with lag network,1.124e+05,-17.86,-165.6
-3.3,with lag network,1.191e+05,-18.59,-169.8
-3.3,with lag network,1.261e+05,-19.35,-174.3
-3.3,with lag network,1.336e+05,-20.15,-179.0
-3.3,with lag network,1.415e+05,-20.98,-183.9
-3.3,with lag network,1.499e+05,-21.86,-189.0
-3.3,with lag network,1.588e+05,-22.79,-194.2
-3.3,with lag network,1.682e+05,-23.76,-199.6
-3.3,with lag network,1.782e+05,-24.8,-205.2
-3.3,with lag network,1.887e+05,-25.89,-210.8
-3.3,with lag network,1.999e+05,-27.03,-216.5
-3.3,with lag network,2.118e+05,-28.24,-222.2
-3.3,with lag network,2.243e+05,-29.51,-227.9
-3.3,with lag network,2.376e+05,-30.83,-233.5
-3.3,with lag network,2.517e+05,-32.22,-239.1
-3.3,with lag network,2.666e+05,-33.66,-244.6
-3.3,with lag network,2.824e+05,-35.14,-249.9
-3.3,with lag network,2.991e+05,-36.68,-255.1
-3.3,with lag network,3.169e+05,-38.26,-260.1
-3.3,with lag network,3.356e+05,-39.89,-265.0
-3.3,with lag network,3.555e+05,-41.55,-269.6
-3.3,with lag network,3.766e+05,-43.24,-274.1
-3.3,with lag network,3.989e+05,-44.96,-278.4
-3.3,with lag network,4.226e+05,-46.72,-282.5
-3.3,with lag network,4.476e+05,-48.49,-286.3
-3.3,with lag network,4.741e+05,-50.29,-290.0
-3.3,with lag network,5.022e+05,-52.11,-293.6
-3.3,with lag network,5.32e+05,-53.95,-296.9
-3.3,with lag network,5.635e+05,-55.8,-300.1
-3.3,with lag network,5.969e+05,-57.67,-303.1
-3.3,with lag network,6.323e+05,-59.55,-305.9
-3.3,with lag network,6.698e+05,-61.44,-308.6
-3.3,with lag network,7.095e+05,-63.34,-311.1
-3.3,with lag network,7.515e+05,-65.25,-313.5
-3.3,with lag network,7.961e+05,-67.17,-315.7
-3.3,with lag network,8.433e+05,-69.1,-317.8
-3.3,with lag network,8.932e+05,-71.03,-319.8
-3.3,with lag network,9.462e+05,-72.96,-321.6
-3.3,with lag network,1.002e+06,-74.9,-323.4
-3.3,with lag network,1.062e+06,-76.84,-325.0
-3.3,with lag network,1.125e+06,-78.79,-326.5
-3.3,with lag network,1.191e+06,-80.73,-328.0
-3.3,with lag network,1.262e+06,-82.68,-329.3
-3.3,with lag network,1.337e+06,-84.63,-330.5
-3.3,with lag network,1.416e+06,-86.58,-331.7
-3.3,with lag network,1.5e+06,-88.52,-332.8
-3.3,with lag network,1.589e+06,-90.46,-333.8
-3.3,with lag network,1.683e+06,-92.4,-334.8
-3.3,with lag network,1.782e+06,-94.34,-335.7
-3.3,with lag network,1.888e+06,-96.27,-336.5
-3.3,with lag network,2e+06,-98.2,-337.3
-5,divider only,100,80.3,-94.2
-5,divider only,106,79.79,-94.7
-5,divider only,112.3,79.28,-95.2
-5,divider only,118.9,78.77,-95.6
-5,divider only,126,78.25,-96.2
-5,divider only,133.4,77.74,-96.7
-5,divider only,141.3,77.22,-97.2
-5,divider only,149.7,76.7,-97.8
-5,divider only,158.6,76.18,-98.4
-5,divider only,168,75.66,-99.0
-5,divider only,177.9,75.13,-99.6
-5,divider only,188.5,74.6,-100.3
-5,divider only,199.6,74.07,-101.0
-5,divider only,211.5,73.53,-101.7
-5,divider only,224,72.99,-102.4
-5,divider only,237.3,72.45,-103.2
-5,divider only,251.3,71.9,-104.0
-5,divider only,266.2,71.34,-104.8
-5,divider only,282,70.78,-105.7
-5,divider only,298.7,70.21,-106.5
-5,divider only,316.4,69.64,-107.4
-5,divider only,335.2,69.06,-108.4
-5,divider only,355.1,68.47,-109.3
-5,divider only,376.1,67.87,-110.3
-5,divider only,398.4,67.26,-111.3
-5,divider only,422,66.65,-112.3
-5,divider only,447,66.02,-113.3
-5,divider only,473.5,65.38,-114.4
-5,divider only,501.6,64.74,-115.4
-5,divider only,531.3,64.08,-116.4
-5,divider only,562.8,63.41,-117.4
-5,divider only,596.1,62.73,-118.5
-5,divider only,631.5,62.03,-119.5
-5,divider only,668.9,61.33,-120.4
-5,divider only,708.5,60.61,-121.4
-5,divider only,750.5,59.88,-122.3
-5,divider only,795,59.15,-123.1
-5,divider only,842.1,58.4,-123.9
-5,divider only,892,57.64,-124.6
-5,divider only,944.9,56.87,-125.3
-5,divider only,1001,56.1,-125.9
-5,divider only,1060,55.32,-126.5
-5,divider only,1123,54.53,-126.9
-5,divider only,1190,53.73,-127.3
-5,divider only,1260,52.94,-127.6
-5,divider only,1335,52.14,-127.8
-5,divider only,1414,51.34,-127.9
-5,divider only,1498,50.54,-127.9
-5,divider only,1586,49.74,-127.8
-5,divider only,1680,48.94,-127.7
-5,divider only,1780,48.15,-127.5
-5,divider only,1886,47.36,-127.1
-5,divider only,1997,46.58,-126.8
-5,divider only,2116,45.81,-126.3
-5,divider only,2241,45.04,-125.8
-5,divider only,2374,44.28,-125.2
-5,divider only,2515,43.54,-124.5
-5,divider only,2664,42.8,-123.9
-5,divider only,2821,42.07,-123.1
-5,divider only,2989,41.36,-122.4
-5,divider only,3166,40.65,-121.6
-5,divider only,3353,39.96,-120.8
-5,divider only,3552,39.28,-120.0
-5,divider only,3763,38.61,-119.2
-5,divider only,3986,37.95,-118.4
-5,divider only,4222,37.31,-117.6
-5,divider only,4472,36.67,-116.8
-5,divider only,4737,36.05,-116.0
-5,divider only,5018,35.43,-115.3
-5,divider only,5315,34.82,-114.6
-5,divider only,5630,34.23,-113.9
-5,divider only,5964,33.64,-113.2
-5,divider only,6317,33.06,-112.6
-5,divider only,6692,32.48,-112.1
-5,divider only,7088,31.91,-111.6
-5,divider only,7509,31.35,-111.1
-5,divider only,7954,30.8,-110.7
-5,divider only,8425,30.25,-110.3
-5,divider only,8924,29.7,-110.0
-5,divider only,9453,29.16,-109.8
-5,divider only,1.001e+04,28.62,-109.6
-5,divider only,1.061e+04,28.09,-109.4
-5,divider only,1.124e+04,27.55,-109.3
-5,divider only,1.19e+04,27.03,-109.3
-5,divider only,1.261e+04,26.5,-109.3
-5,divider only,1.335e+04,25.98,-109.4
-5,divider only,1.415e+04,25.45,-109.5
-5,divider only,1.498e+04,24.93,-109.7
-5,divider only,1.587e+04,24.42,-110.0
-5,divider only,1.681e+04,23.9,-110.3
-5,divider only,1.781e+04,23.38,-110.7
-5,divider only,1.886e+04,22.86,-111.2
-5,divider only,1.998e+04,22.35,-111.7
-5,divider only,2.117e+04,21.83,-112.3
-5,divider only,2.242e+04,21.32,-113.0
-5,divider only,2.375e+04,20.8,-113.8
-5,divider only,2.516e+04,20.29,-114.6
-5,divider only,2.665e+04,19.77,-115.5
-5,divider only,2.823e+04,19.25,-116.5
-5,divider only,2.99e+04,18.74,-117.6
-5,divider only,3.167e+04,18.22,-118.7
-5,divider only,3.355e+04,17.7,-120.0
-5,divider only,3.554e+04,17.17,-121.4
-5,divider only,3.764e+04,16.65,-122.8
-5,divider only,3.987e+04,16.12,-124.4
-5,divider only,4.224e+04,15.59,-126.1
-5,divider only,4.474e+04,15.06,-127.9
-5,divider only,4.739e+04,14.52,-129.9
-5,divider only,5.02e+04,13.98,-132.0
-5,divider only,5.318e+04,13.44,-134.2
-5,divider only,5.633e+04,12.88,-136.5
-5,divider only,5.967e+04,12.33,-139.1
-5,divider only,6.32e+04,11.76,-141.7
-5,divider only,6.695e+04,11.19,-144.6
-5,divider only,7.092e+04,10.6,-147.6
-5,divider only,7.512e+04,10.01,-150.9
-5,divider only,7.957e+04,9.4,-154.3
-5,divider only,8.429e+04,8.78,-157.9
-5,divider only,8.928e+04,8.14,-161.8
-5,divider only,9.457e+04,7.48,-165.8
-5,divider only,1.002e+05,6.8,-170.1
-5,divider only,1.061e+05,6.1,-174.7
-5,divider only,1.124e+05,5.37,-179.5
-5,divider only,1.191e+05,4.61,-184.5
-5,divider only,1.261e+05,3.81,-189.8
-5,divider only,1.336e+05,2.97,-195.4
-5,divider only,1.415e+05,2.09,-201.2
-5,divider only,1.499e+05,1.15,-207.2
-5,divider only,1.588e+05,0.17,-213.4
-5,divider only,1.682e+05,-0.87,-219.9
-5,divider only,1.782e+05,-1.98,-226.5
-5,divider only,1.887e+05,-3.14,-233.2
-5,divider only,1.999e+05,-4.38,-240.0
-5,divider only,2.118e+05,-5.68,-247.0
-5,divider only,2.243e+05,-7.05,-253.9
-5,divider only,2.376e+05,-8.49,-260.8
-5,divider only,2.517e+05,-10.0,-267.7
-5,divider only,2.666e+05,-11.57,-274.5
-5,divider only,2.824e+05,-13.21,-281.2
-5,divider only,2.991e+05,-14.9,-287.8
-5,divider only,3.169e+05,-16.66,-294.3
-5,divider only,3.356e+05,-18.47,-300.5
-5,divider only,3.555e+05,-20.32,-306.7
-5,divider only,3.766e+05,-22.23,-312.6
-5,divider only,3.989e+05,-24.18,-318.3
-5,divider only,4.226e+05,-26.17,-323.8
-5,divider only,4.476e+05,-28.21,-329.2
-5,divider only,4.741e+05,-30.27,-334.3
-5,divider only,5.022e+05,-32.38,-339.2
-5,divider only,5.32e+05,-34.51,-343.9
-5,divider only,5.635e+05,-36.67,-348.4
-5,divider only,5.969e+05,-38.87,-352.7
-5,divider only,6.323e+05,-41.08,-356.8
-5,divider only,6.698e+05,-43.32,-360.7
-5,divider only,7.095e+05,-45.58,-364.3
-5,divider only,7.515e+05,-47.86,-367.8
-5,divider only,7.961e+05,-50.16,-371.0
-5,divider only,8.433e+05,-52.48,-374.1
-5,divider only,8.932e+05,-54.81,-377.0
-5,divider only,9.462e+05,-57.15,-379.6
-5,divider only,1.002e+06,-59.5,-382.1
-5,divider only,1.062e+06,-61.86,-384.4
-5,divider only,1.125e+06,-64.24,-386.5
-5,divider only,1.191e+06,-66.61,-388.4
-5,divider only,1.262e+06,-69.0,-390.2
-5,divider only,1.337e+06,-71.39,-391.8
-5,divider only,1.416e+06,-73.78,-393.2
-5,divider only,1.5e+06,-76.18,-394.4
-5,divider only,1.589e+06,-78.57,-395.5
-5,divider only,1.683e+06,-80.97,-396.4
-5,divider only,1.782e+06,-83.36,-397.2
-5,divider only,1.888e+06,-85.75,-397.8
-5,divider only,2e+06,-88.14,-398.3
-5,with lag network,100,61.95,-135.9
-5,with lag network,106,61.18,-135.0
-5,with lag network,112.3,60.43,-134.1
-5,with lag network,118.9,59.69,-133.2
-5,with lag network,126,58.97,-132.3
-5,with lag network,133.4,58.25,-131.4
-5,with lag network,141.3,57.55,-130.6
-5,with lag network,149.7,56.86,-129.8
-5,with lag network,158.6,56.18,-129.0
-5,with lag network,168,55.51,-128.3
-5,with lag network,177.9,54.84,-127.6
-5,with lag network,188.5,54.19,-127.0
-5,with lag network,199.6,53.54,-126.5
-5,with lag network,211.5,52.9,-126.0
-5,with lag network,224,52.26,-125.5
-5,with lag network,237.3,51.63,-125.2
-5,with lag network,251.3,51.0,-124.9
-5,with lag network,266.2,50.38,-124.6
-5,with lag network,282,49.75,-124.5
-5,with lag network,298.7,49.12,-124.4
-5,with lag network,316.4,48.5,-124.4
-5,with lag network,335.2,47.87,-124.4
-5,with lag network,355.1,47.23,-124.5
-5,with lag network,376.1,46.6,-124.7
-5,with lag network,398.4,45.96,-124.9
-5,with lag network,422,45.31,-125.2
-5,with lag network,447,44.65,-125.5
-5,with lag network,473.5,43.99,-125.9
-5,with lag network,501.6,43.32,-126.3
-5,with lag network,531.3,42.64,-126.7
-5,with lag network,562.8,41.95,-127.2
-5,with lag network,596.1,41.26,-127.7
-5,with lag network,631.5,40.55,-128.1
-5,with lag network,668.9,39.83,-128.6
-5,with lag network,708.5,39.1,-129.1
-5,with lag network,750.5,38.37,-129.6
-5,with lag network,795,37.62,-130.0
-5,with lag network,842.1,36.86,-130.4
-5,with lag network,892,36.1,-130.8
-5,with lag network,944.9,35.32,-131.1
-5,with lag network,1001,34.54,-131.4
-5,with lag network,1060,33.75,-131.6
-5,with lag network,1123,32.96,-131.7
-5,with lag network,1190,32.16,-131.8
-5,with lag network,1260,31.36,-131.8
-5,with lag network,1335,30.56,-131.8
-5,with lag network,1414,29.76,-131.6
-5,with lag network,1498,28.96,-131.4
-5,with lag network,1586,28.15,-131.2
-5,with lag network,1680,27.36,-130.8
-5,with lag network,1780,26.56,-130.4
-5,with lag network,1886,25.77,-129.9
-5,with lag network,1997,24.99,-129.3
-5,with lag network,2116,24.21,-128.7
-5,with lag network,2241,23.45,-128.0
-5,with lag network,2374,22.69,-127.2
-5,with lag network,2515,21.94,-126.5
-5,with lag network,2664,21.2,-125.6
-5,with lag network,2821,20.47,-124.8
-5,with lag network,2989,19.76,-123.9
-5,with lag network,3166,19.05,-123.0
-5,with lag network,3353,18.36,-122.0
-5,with lag network,3552,17.68,-121.1
-5,with lag network,3763,17.01,-120.2
-5,with lag network,3986,16.35,-119.3
-5,with lag network,4222,15.71,-118.4
-5,with lag network,4472,15.07,-117.5
-5,with lag network,4737,14.44,-116.6
-5,with lag network,5018,13.83,-115.8
-5,with lag network,5315,13.22,-115.0
-5,with lag network,5630,12.62,-114.2
-5,with lag network,5964,12.03,-113.4
-5,with lag network,6317,11.45,-112.7
-5,with lag network,6692,10.88,-112.1
-5,with lag network,7088,10.31,-111.5
-5,with lag network,7509,9.75,-110.9
-5,with lag network,7954,9.19,-110.4
-5,with lag network,8425,8.64,-110.0
-5,with lag network,8924,8.1,-109.6
-5,with lag network,9453,7.56,-109.2
-5,with lag network,1.001e+04,7.02,-108.9
-5,with lag network,1.061e+04,6.48,-108.6
-5,with lag network,1.124e+04,5.95,-108.4
-5,with lag network,1.19e+04,5.43,-108.3
-5,with lag network,1.261e+04,4.9,-108.2
-5,with lag network,1.335e+04,4.38,-108.2
-5,with lag network,1.415e+04,3.85,-108.2
-5,with lag network,1.498e+04,3.33,-108.3
-5,with lag network,1.587e+04,2.82,-108.4
-5,with lag network,1.681e+04,2.3,-108.6
-5,with lag network,1.781e+04,1.78,-108.8
-5,with lag network,1.886e+04,1.27,-109.2
-5,with lag network,1.998e+04,0.75,-109.5
-5,with lag network,2.117e+04,0.24,-110.0
-5,with lag network,2.242e+04,-0.28,-110.5
-5,with lag network,2.375e+04,-0.79,-111.1
-5,with lag network,2.516e+04,-1.3,-111.7
-5,with lag network,2.665e+04,-1.82,-112.4
-5,with lag network,2.823e+04,-2.33,-113.2
-5,with lag network,2.99e+04,-2.85,-114.1
-5,with lag network,3.167e+04,-3.36,-115.0
-5,with lag network,3.355e+04,-3.88,-116.0
-5,with lag network,3.554e+04,-4.4,-117.1
-5,with lag network,3.764e+04,-4.92,-118.3
-5,with lag network,3.987e+04,-5.44,-119.6
-5,with lag network,4.224e+04,-5.97,-121.0
-5,with lag network,4.474e+04,-6.5,-122.6
-5,with lag network,4.739e+04,-7.03,-124.2
-5,with lag network,5.02e+04,-7.56,-125.9
-5,with lag network,5.318e+04,-8.1,-127.7
-5,with lag network,5.633e+04,-8.65,-129.7
-5,with lag network,5.967e+04,-9.19,-131.8
-5,with lag network,6.32e+04,-9.75,-134.1
-5,with lag network,6.695e+04,-10.31,-136.5
-5,with lag network,7.092e+04,-10.88,-139.0
-5,with lag network,7.512e+04,-11.46,-141.7
-5,with lag network,7.957e+04,-12.06,-144.6
-5,with lag network,8.429e+04,-12.66,-147.7
-5,with lag network,8.928e+04,-13.28,-150.9
-5,with lag network,9.457e+04,-13.91,-154.4
-5,with lag network,1.002e+05,-14.57,-158.0
-5,with lag network,1.061e+05,-15.24,-161.9
-5,with lag network,1.124e+05,-15.94,-166.0
-5,with lag network,1.191e+05,-16.67,-170.3
-5,with lag network,1.261e+05,-17.43,-174.8
-5,with lag network,1.336e+05,-18.23,-179.5
-5,with lag network,1.415e+05,-19.07,-184.4
-5,with lag network,1.499e+05,-19.94,-189.5
-5,with lag network,1.588e+05,-20.87,-194.7
-5,with lag network,1.682e+05,-21.85,-200.2
-5,with lag network,1.782e+05,-22.88,-205.7
-5,with lag network,1.887e+05,-23.97,-211.4
-5,with lag network,1.999e+05,-25.12,-217.1
-5,with lag network,2.118e+05,-26.33,-222.8
-5,with lag network,2.243e+05,-27.6,-228.6
-5,with lag network,2.376e+05,-28.92,-234.3
-5,with lag network,2.517e+05,-30.31,-239.9
-5,with lag network,2.666e+05,-31.74,-245.4
-5,with lag network,2.824e+05,-33.23,-250.8
-5,with lag network,2.991e+05,-34.77,-256.0
-5,with lag network,3.169e+05,-36.36,-261.1
-5,with lag network,3.356e+05,-37.98,-266.0
-5,with lag network,3.555e+05,-39.64,-270.7
-5,with lag network,3.766e+05,-41.34,-275.2
-5,with lag network,3.989e+05,-43.06,-279.6
-5,with lag network,4.226e+05,-44.82,-283.7
-5,with lag network,4.476e+05,-46.6,-287.7
-5,with lag network,4.741e+05,-48.4,-291.5
-5,with lag network,5.022e+05,-50.22,-295.0
-5,with lag network,5.32e+05,-52.06,-298.5
-5,with lag network,5.635e+05,-53.92,-301.7
-5,with lag network,5.969e+05,-55.79,-304.8
-5,with lag network,6.323e+05,-57.68,-307.7
-5,with lag network,6.698e+05,-59.57,-310.5
-5,with lag network,7.095e+05,-61.48,-313.1
-5,with lag network,7.515e+05,-63.4,-315.6
-5,with lag network,7.961e+05,-65.32,-318.0
-5,with lag network,8.433e+05,-67.25,-320.2
-5,with lag network,8.932e+05,-69.19,-322.3
-5,with lag network,9.462e+05,-71.14,-324.3
-5,with lag network,1.002e+06,-73.09,-326.2
-5,with lag network,1.062e+06,-75.04,-328.0
-5,with lag network,1.125e+06,-77.0,-329.6
-5,with lag network,1.191e+06,-78.96,-331.2
-5,with lag network,1.262e+06,-80.92,-332.7
-5,with lag network,1.337e+06,-82.89,-334.1
-5,with lag network,1.416e+06,-84.85,-335.5
-5,with lag network,1.5e+06,-86.82,-336.7
-5,with lag network,1.589e+06,-88.79,-337.9
-5,with lag network,1.683e+06,-90.76,-339.0
-5,with lag network,1.782e+06,-92.72,-340.1
-5,with lag network,1.888e+06,-94.68,-341.1
-5,with lag network,2e+06,-96.64,-342.1
-12,divider only,100,87.85,-96.4
-12,divider only,106,87.33,-97.0
-12,divider only,112.3,86.82,-97.6
-12,divider only,118.9,86.3,-98.2
-12,divider only,126,85.77,-98.9
-12,divider only,133.4,85.25,-99.6
-12,divider only,141.3,84.72,-100.3
-12,divider only,149.7,84.19,-101.0
-12,divider only,158.6,83.66,-101.7
-12,divider only,168,83.12,-102.5
-12,divider only,177.9,82.57,-103.3
-12,divider only,188.5,82.03,-104.2
-12,divider only,199.6,81.47,-105.0
-12,divider only,211.5,80.92,-105.9
-12,divider only,224,80.35,-106.9
-12,divider only,237.3,79.78,-107.8
-12,divider only,251.3,79.2,-108.8
-12,divider only,266.2,78.62,-109.9
-12,divider only,282,78.02,-110.9
-12,divider only,298.7,77.42,-112.0
-12,divider only,316.4,76.81,-113.1
-12,divider only,335.2,76.18,-114.2
-12,divider only,355.1,75.55,-115.3
-12,divider only,376.1,74.91,-116.5
-12,divider only,398.4,74.25,-117.6
-12,divider only,422,73.58,-118.8
-12,divider only,447,72.9,-119.9
-12,divider only,473.5,72.21,-121.1
-12,divider only,501.6,71.51,-122.2
-12,divider only,531.3,70.79,-123.3
-12,divider only,562.8,70.06,-124.4
-12,divider only,596.1,69.32,-125.4
-12,divider only,631.5,68.56,-126.4
-12,divider only,668.9,67.8,-127.4
-12,divider only,708.5,67.02,-128.3
-12,divider only,750.5,66.23,-129.1
-12,divider only,795,65.44,-129.9
-12,divider only,842.1,64.63,-130.6
-12,divider only,892,63.82,-131.2
-12,divider only,944.9,63.0,-131.8
-12,divider only,1001,62.17,-132.2
-12,divider only,1060,61.34,-132.6
-12,divider only,1123,60.51,-132.9
-12,divider only,1190,59.68,-133.0
-12,divider only,1260,58.84,-133.1
-12,divider only,1335,58.0,-133.1
-12,divider only,1414,57.17,-133.1
-12,divider only,1498,56.34,-132.9
-12,divider only,1586,55.51,-132.6
-12,divider only,1680,54.68,-132.3
-12,divider only,1780,53.87,-131.8
-12,divider only,1886,53.06,-131.3
-12,divider only,1997,52.25,-130.8
-12,divider only,2116,51.46,-130.1
-12,divider only,2241,50.68,-129.4
-12,divider only,2374,49.9,-128.6
-12,divider only,2515,49.14,-127.8
-12,divider only,2664,48.39,-127.0
-12,divider only,2821,47.65,-126.1
-12,divider only,2989,46.93,-125.2
-12,divider only,3166,46.21,-124.3
-12,divider only,3353,45.51,-123.3
-12,divider only,3552,44.83,-122.4
-12,divider only,3763,44.15,-121.5
-12,divider only,3986,43.49,-120.5
-12,divider only,4222,42.83,-119.6
-12,divider only,4472,42.19,-118.7
-12,divider only,4737,41.56,-117.9
-12,divider only,5018,40.94,-117.0
-12,divider only,5315,40.33,-116.2
-12,divider only,5630,39.73,-115.4
-12,divider only,5964,39.14,-114.7
-12,divider only,6317,38.56,-114.1
-12,divider only,6692,37.98,-113.4
-12,divider only,7088,37.41,-112.8
-12,divider only,7509,36.85,-112.3
-12,divider only,7954,36.29,-111.8
-12,divider only,8425,35.74,-111.4
-12,divider only,8924,35.19,-111.1
-12,divider only,9453,34.65,-110.7
-12,divider only,1.001e+04,34.11,-110.5
-12,divider only,1.061e+04,33.57,-110.3
-12,divider only,1.124e+04,33.04,-110.2
-12,divider only,1.19e+04,32.51,-110.1
-12,divider only,1.261e+04,31.99,-110.1
-12,divider only,1.335e+04,31.46,-110.1
-12,divider only,1.415e+04,30.94,-110.2
-12,divider only,1.498e+04,30.42,-110.4
-12,divider only,1.587e+04,29.9,-110.7
-12,divider only,1.681e+04,29.38,-111.0
-12,divider only,1.781e+04,28.86,-111.3
-12,divider only,1.886e+04,28.35,-111.8
-12,divider only,1.998e+04,27.83,-112.3
-12,divider only,2.117e+04,27.32,-112.9
-12,divider only,2.242e+04,26.8,-113.5
-12,divider only,2.375e+04,26.28,-114.3
-12,divider only,2.516e+04,25.77,-115.1
-12,divider only,2.665e+04,25.25,-116.0
-12,divider only,2.823e+04,24.74,-117.0
-12,divider only,2.99e+04,24.22,-118.0
-12,divider only,3.167e+04,23.7,-119.2
-12,divider only,3.355e+04,23.18,-120.5
-12,divider only,3.554e+04,22.66,-121.8
-12,divider only,3.764e+04,22.13,-123.3
-12,divider only,3.987e+04,21.6,-124.9
-12,divider only,4.224e+04,21.07,-126.6
-12,divider only,4.474e+04,20.54,-128.4
-12,divider only,4.739e+04,20.0,-130.3
-12,divider only,5.02e+04,19.46,-132.4
-12,divider only,5.318e+04,18.92,-134.6
-12,divider only,5.633e+04,18.36,-137.0
-12,divider only,5.967e+04,17.81,-139.5
-12,divider only,6.32e+04,17.24,-142.2
-12,divider only,6.695e+04,16.67,-145.1
-12,divider only,7.092e+04,16.08,-148.2
-12,divider only,7.512e+04,15.49,-151.4
-12,divider only,7.957e+04,14.88,-154.8
-12,divider only,8.429e+04,14.26,-158.5
-12,divider only,8.928e+04,13.62,-162.4
-12,divider only,9.457e+04,12.96,-166.5
-12,divider only,1.002e+05,12.28,-170.8
-12,divider only,1.061e+05,11.58,-175.4
-12,divider only,1.124e+05,10.85,-180.2
-12,divider only,1.191e+05,10.08,-185.3
-12,divider only,1.261e+05,9.29,-190.6
-12,divider only,1.336e+05,8.45,-196.2
-12,divider only,1.415e+05,7.56,-202.1
-12,divider only,1.499e+05,6.63,-208.1
-12,divider only,1.588e+05,5.65,-214.4
-12,divider only,1.682e+05,4.6,-220.9
-12,divider only,1.782e+05,3.5,-227.5
-12,divider only,1.887e+05,2.33,-234.3
-12,divider only,1.999e+05,1.1,-241.2
-12,divider only,2.118e+05,-0.21,-248.2
-12,divider only,2.243e+05,-1.58,-255.2
-12,divider only,2.376e+05,-3.02,-262.2
-12,divider only,2.517e+05,-4.53,-269.2
-12,divider only,2.666e+05,-6.1,-276.1
-12,divider only,2.824e+05,-7.74,-282.9
-12,divider only,2.991e+05,-9.44,-289.5
-12,divider only,3.169e+05,-11.19,-296.1
-12,divider only,3.356e+05,-13.0,-302.5
-12,divider only,3.555e+05,-14.86,-308.7
-12,divider only,3.766e+05,-16.77,-314.7
-12,divider only,3.989e+05,-18.72,-320.6
-12,divider only,4.226e+05,-20.72,-326.3
-12,divider only,4.476e+05,-22.75,-331.7
-12,divider only,4.741e+05,-24.82,-337.0
-12,divider only,5.022e+05,-26.93,-342.1
-12,divider only,5.32e+05,-29.07,-346.9
-12,divider only,5.635e+05,-31.24,-351.6
-12,divider only,5.969e+05,-33.43,-356.1
-12,divider only,6.323e+05,-35.66,-360.3
-12,divider only,6.698e+05,-37.9,-364.4
-12,divider only,7.095e+05,-40.17,-368.3
-12,divider only,7.515e+05,-42.46,-372.0
-12,divider only,7.961e+05,-44.77,-375.5
-12,divider only,8.433e+05,-47.09,-378.8
-12,divider only,8.932e+05,-49.43,-381.9
-12,divider only,9.462e+05,-51.79,-384.9
-12,divider only,1.002e+06,-54.16,-387.6
-12,divider only,1.062e+06,-56.54,-390.2
-12,divider only,1.125e+06,-58.93,-392.7
-12,divider only,1.191e+06,-61.32,-394.9
-12,divider only,1.262e+06,-63.73,-397.0
-12,divider only,1.337e+06,-66.15,-399.0
-12,divider only,1.416e+06,-68.57,-400.8
-12,divider only,1.5e+06,-70.99,-402.5
-12,divider only,1.589e+06,-73.42,-404.0
-12,divider only,1.683e+06,-75.86,-405.3
-12,divider only,1.782e+06,-78.29,-406.5
-12,divider only,1.888e+06,-80.73,-407.6
-12,divider only,2e+06,-83.17,-408.6
-12,with lag network,100,69.5,-138.1
-12,with lag network,106,68.73,-137.3
-12,with lag network,112.3,67.97,-136.5
-12,with lag network,118.9,67.22,-135.8
-12,with lag network,126,66.49,-135.0
-12,with lag network,133.4,65.76,-134.3
-12,with lag network,141.3,65.05,-133.6
-12,with lag network,149.7,64.35,-133.0
-12,with lag network,158.6,63.65,-132.4
-12,with lag network,168,62.97,-131.8
-12,with lag network,177.9,62.29,-131.3
-12,with lag network,188.5,61.61,-130.9
-12,with lag network,199.6,60.95,-130.5
-12,with lag network,211.5,60.28,-130.2
-12,with lag network,224,59.62,-130.0
-12,with lag network,237.3,58.97,-129.8
-12,with lag network,251.3,58.31,-129.7
-12,with lag network,266.2,57.65,-129.7
-12,with lag network,282,56.99,-129.8
-12,with lag network,298.7,56.33,-129.9
-12,with lag network,316.4,55.66,-130.0
-12,with lag network,335.2,54.99,-130.3
-12,with lag network,355.1,54.32,-130.5
-12,with lag network,376.1,53.63,-130.9
-12,with lag network,398.4,52.94,-131.3
-12,with lag network,422,52.24,-131.7
-12,with lag network,447,51.53,-132.1
-12,with lag network,473.5,50.82,-132.6
-12,with lag network,501.6,50.09,-133.1
-12,with lag network,531.3,49.35,-133.6
-12,with lag network,562.8,48.6,-134.1
-12,with lag network,596.1,47.85,-134.6
-12,with lag network,631.5,47.08,-135.1
-12,with lag network,668.9,46.3,-135.6
-12,with lag network,708.5,45.51,-136.0
-12,with lag network,750.5,44.71,-136.4
-12,with lag network,795,43.91,-136.8
-12,with lag network,842.1,43.09,-137.1
-12,with lag network,892,42.27,-137.3
-12,with lag network,944.9,41.45,-137.5
-12,with lag network,1001,40.62,-137.6
-12,with lag network,1060,39.78,-137.7
-12,with lag network,1123,38.94,-137.7
-12,with lag network,1190,38.1,-137.6
-12,with lag network,1260,37.26,-137.4
-12,with lag network,1335,36.42,-137.2
-12,with lag network,1414,35.59,-136.8
-12,with lag network,1498,34.75,-136.4
-12,with lag network,1586,33.92,-135.9
-12,with lag network,1680,33.1,-135.4
-12,with lag network,1780,32.28,-134.8
-12,with lag network,1886,31.46,-134.1
-12,with lag network,1997,30.66,-133.3
-12,with lag network,2116,29.87,-132.5
-12,with lag network,2241,29.08,-131.6
-12,with lag network,2374,28.31,-130.7
-12,with lag network,2515,27.54,-129.7
-12,with lag network,2664,26.79,-128.8
-12,with lag network,2821,26.05,-127.7
-12,with lag network,2989,25.33,-126.7
-12,with lag network,3166,24.61,-125.6
-12,with lag network,3353,23.91,-124.6
-12,with lag network,3552,23.23,-123.5
-12,with lag network,3763,22.55,-122.5
-12,with lag network,3986,21.88,-121.4
-12,with lag network,4222,21.23,-120.4
-12,with lag network,4472,20.59,-119.4
-12,with lag network,4737,19.96,-118.4
-12,with lag network,5018,19.34,-117.5
-12,with lag network,5315,18.73,-116.6
-12,with lag network,5630,18.13,-115.7
-12,with lag network,5964,17.54,-114.9
-12,with lag network,6317,16.95,-114.2
-12,with lag network,6692,16.38,-113.4
-12,with lag network,7088,15.81,-112.8
-12,with lag network,7509,15.25,-112.1
-12,with lag network,7954,14.69,-111.6
-12,with lag network,8425,14.14,-111.0
-12,with lag network,8924,13.59,-110.6
-12,with lag network,9453,13.05,-110.2
-12,with lag network,1.001e+04,12.51,-109.8
-12,with lag network,1.061e+04,11.97,-109.5
-12,with lag network,1.124e+04,11.44,-109.3
-12,with lag network,1.19e+04,10.91,-109.1
-12,with lag network,1.261e+04,10.39,-109.0
-12,with lag network,1.335e+04,9.86,-108.9
-12,with lag network,1.415e+04,9.34,-108.9
-12,with lag network,1.498e+04,8.82,-108.9
-12,with lag network,1.587e+04,8.3,-109.0
-12,with lag network,1.681e+04,7.78,-109.2
-12,with lag network,1.781e+04,7.27,-109.4
-12,with lag network,1.886e+04,6.75,-109.7
-12,with lag network,1.998e+04,6.24,-110.1
-12,with lag network,2.117e+04,5.72,-110.5
-12,with lag network,2.242e+04,5.21,-111.0
-12,with lag network,2.375e+04,4.69,-111.6
-12,with lag network,2.516e+04,4.18,-112.2
-12,with lag network,2.665e+04,3.66,-112.9
-12,with lag network,2.823e+04,3.15,-113.7
-12,with lag network,2.99e+04,2.63,-114.5
-12,with lag network,3.167e+04,2.12,-115.5
-12,with lag network,3.355e+04,1.6,-116.5
-12,with lag network,3.554e+04,1.08,-117.6
-12,with lag network,3.764e+04,0.56,-118.8
-12,with lag network,3.987e+04,0.04,-120.1
-12,with lag network,4.224e+04,-0.49,-121.5
-12,with lag network,4.474e+04,-1.02,-123.0
-12,with lag network,4.739e+04,-1.55,-124.6
-12,with lag network,5.02e+04,-2.08,-126.3
-12,with lag network,5.318e+04,-2.62,-128.2
-12,with lag network,5.633e+04,-3.16,-130.2
-12,with lag network,5.967e+04,-3.71,-132.3
-12,with lag network,6.32e+04,-4.27,-134.6
-12,with lag network,6.695e+04,-4.83,-137.0
-12,with lag network,7.092e+04,-5.4,-139.5
-12,with lag network,7.512e+04,-5.98,-142.3
-12,with lag network,7.957e+04,-6.58,-145.2
-12,with lag network,8.429e+04,-7.18,-148.3
-12,with lag network,8.928e+04,-7.8,-151.6
-12,with lag network,9.457e+04,-8.43,-155.0
-12,with lag network,1.002e+05,-9.09,-158.7
-12,with lag network,1.061e+05,-9.76,-162.6
-12,with lag network,1.124e+05,-10.47,-166.7
-12,with lag network,1.191e+05,-11.19,-171.0
-12,with lag network,1.261e+05,-11.95,-175.5
-12,with lag network,1.336e+05,-12.75,-180.3
-12,with lag network,1.415e+05,-13.59,-185.2
-12,with lag network,1.499e+05,-14.47,-190.4
-12,with lag network,1.588e+05,-15.39,-195.7
-12,with lag network,1.682e+05,-16.37,-201.2
-12,with lag network,1.782e+05,-17.41,-206.8
-12,with lag network,1.887e+05,-18.5,-212.5
-12,with lag network,1.999e+05,-19.64,-218.3
-12,with lag network,2.118e+05,-20.85,-224.1
-12,with lag network,2.243e+05,-22.12,-229.9
-12,with lag network,2.376e+05,-23.45,-235.6
-12,with lag network,2.517e+05,-24.83,-241.3
-12,with lag network,2.666e+05,-26.27,-246.9
-12,with lag network,2.824e+05,-27.76,-252.4
-12,with lag network,2.991e+05,-29.3,-257.7
-12,with lag network,3.169e+05,-30.89,-262.9
-12,with lag network,3.356e+05,-32.51,-267.9
-12,with lag network,3.555e+05,-34.18,-272.7
-12,with lag network,3.766e+05,-35.88,-277.4
-12,with lag network,3.989e+05,-37.6,-281.8
-12,with lag network,4.226e+05,-39.36,-286.1
-12,with lag network,4.476e+05,-41.14,-290.2
-12,with lag network,4.741e+05,-42.95,-294.1
-12,with lag network,5.022e+05,-44.77,-297.9
-12,with lag network,5.32e+05,-46.62,-301.5
-12,with lag network,5.635e+05,-48.48,-304.9
-12,with lag network,5.969e+05,-50.36,-308.2
-12,with lag network,6.323e+05,-52.25,-311.3
-12,with lag network,6.698e+05,-54.15,-314.3
-12,with lag network,7.095e+05,-56.07,-317.1
-12,with lag network,7.515e+05,-57.99,-319.8
-12,with lag network,7.961e+05,-59.93,-322.4
-12,with lag network,8.433e+05,-61.87,-324.9
-12,with lag network,8.932e+05,-63.82,-327.3
-12,with lag network,9.462e+05,-65.78,-329.5
-12,with lag network,1.002e+06,-67.74,-331.7
-12,with lag network,1.062e+06,-69.71,-333.8
-12,with lag network,1.125e+06,-71.69,-335.8
-12,with lag network,1.191e+06,-73.67,-337.7
-12,with lag network,1.262e+06,-75.66,-339.6
-12,with lag network,1.337e+06,-77.65,-341.3
-12,with lag network,1.416e+06,-79.65,-343.1
-12,with lag network,1.5e+06,-81.65,-344.7
-12,with lag network,1.589e+06,-83.65,-346.3
-12,with lag network,1.683e+06,-85.66,-347.8
-12,with lag network,1.782e+06,-87.67,-349.3
-12,with lag network,1.888e+06,-89.69,-350.8
-12,with lag network,2e+06,-91.7,-352.2
-16,divider only,100,90.35,-96.4
-16,divider only,106,89.83,-97.0
-16,divider only,112.3,89.32,-97.6
-16,divider only,118.9,88.8,-98.2
-16,divider only,126,88.27,-98.9
-16,divider only,133.4,87.75,-99.6
-16,divider only,141.3,87.22,-100.3
-16,divider only,149.7,86.69,-101.0
-16,divider only,158.6,86.15,-101.7
-16,divider only,168,85.62,-102.5
-16,divider only,177.9,85.07,-103.3
-16,divider only,188.5,84.53,-104.2
-16,divider only,199.6,83.97,-105.0
-16,divider only,211.5,83.42,-105.9
-16,divider only,224,82.85,-106.9
-16,divider only,237.3,82.28,-107.8
-16,divider only,251.3,81.7,-108.8
-16,divider only,266.2,81.12,-109.9
-16,divider only,282,80.52,-110.9
-16,divider only,298.7,79.92,-112.0
-16,divider only,316.4,79.31,-113.1
-16,divider only,335.2,78.68,-114.2
-16,divider only,355.1,78.05,-115.3
-16,divider only,376.1,77.41,-116.5
-16,divider only,398.4,76.75,-117.6
-16,divider only,422,76.08,-118.8
-16,divider only,447,75.4,-119.9
-16,divider only,473.5,74.71,-121.1
-16,divider only,501.6,74.01,-122.2
-16,divider only,531.3,73.29,-123.3
-16,divider only,562.8,72.56,-124.4
-16,divider only,596.1,71.82,-125.4
-16,divider only,631.5,71.06,-126.4
-16,divider only,668.9,70.3,-127.4
-16,divider only,708.5,69.52,-128.3
-16,divider only,750.5,68.73,-129.1
-16,divider only,795,67.94,-129.9
-16,divider only,842.1,67.13,-130.6
-16,divider only,892,66.32,-131.2
-16,divider only,944.9,65.5,-131.7
-16,divider only,1001,64.68,-132.2
-16,divider only,1060,63.85,-132.6
-16,divider only,1123,63.01,-132.8
-16,divider only,1190,62.18,-133.0
-16,divider only,1260,61.34,-133.1
-16,divider only,1335,60.5,-133.1
-16,divider only,1414,59.67,-133.1
-16,divider only,1498,58.84,-132.9
-16,divider only,1586,58.01,-132.6
-16,divider only,1680,57.19,-132.3
-16,divider only,1780,56.37,-131.8
-16,divider only,1886,55.56,-131.3
-16,divider only,1997,54.76,-130.8
-16,divider only,2116,53.96,-130.1
-16,divider only,2241,53.18,-129.4
-16,divider only,2374,52.41,-128.6
-16,divider only,2515,51.64,-127.8
-16,divider only,2664,50.89,-127.0
-16,divider only,2821,50.16,-126.1
-16,divider only,2989,49.43,-125.2
-16,divider only,3166,48.72,-124.3
-16,divider only,3353,48.02,-123.3
-16,divider only,3552,47.33,-122.4
-16,divider only,3763,46.65,-121.5
-16,divider only,3986,45.99,-120.5
-16,divider only,4222,45.34,-119.6
-16,divider only,4472,44.7,-118.7
-16,divider only,4737,44.07,-117.9
-16,divider only,5018,43.45,-117.0
-16,divider only,5315,42.84,-116.2
-16,divider only,5630,42.24,-115.5
-16,divider only,5964,41.64,-114.7
-16,divider only,6317,41.06,-114.1
-16,divider only,6692,40.48,-113.4
-16,divider only,7088,39.91,-112.9
-16,divider only,7509,39.35,-112.3
-16,divider only,7954,38.79,-111.9
-16,divider only,8425,38.24,-111.4
-16,divider only,8924,37.69,-111.1
-16,divider only,9453,37.15,-110.8
-16,divider only,1.001e+04,36.61,-110.5
-16,divider only,1.061e+04,36.08,-110.3
-16,divider only,1.124e+04,35.55,-110.2
-16,divider only,1.19e+04,35.02,-110.1
-16,divider only,1.261e+04,34.49,-110.1
-16,divider only,1.335e+04,33.96,-110.2
-16,divider only,1.415e+04,33.44,-110.3
-16,divider only,1.498e+04,32.92,-110.4
-16,divider only,1.587e+04,32.4,-110.7
-16,divider only,1.681e+04,31.88,-111.0
-16,divider only,1.781e+04,31.37,-111.4
-16,divider only,1.886e+04,30.85,-111.8
-16,divider only,1.998e+04,30.33,-112.3
-16,divider only,2.117e+04,29.82,-112.9
-16,divider only,2.242e+04,29.3,-113.6
-16,divider only,2.375e+04,28.79,-114.3
-16,divider only,2.516e+04,28.27,-115.1
-16,divider only,2.665e+04,27.76,-116.0
-16,divider only,2.823e+04,27.24,-117.0
-16,divider only,2.99e+04,26.72,-118.1
-16,divider only,3.167e+04,26.2,-119.2
-16,divider only,3.355e+04,25.68,-120.5
-16,divider only,3.554e+04,25.16,-121.9
-16,divider only,3.764e+04,24.63,-123.4
-16,divider only,3.987e+04,24.11,-124.9
-16,divider only,4.224e+04,23.58,-126.6
-16,divider only,4.474e+04,23.04,-128.5
-16,divider only,4.739e+04,22.51,-130.4
-16,divider only,5.02e+04,21.97,-132.5
-16,divider only,5.318e+04,21.42,-134.7
-16,divider only,5.633e+04,20.87,-137.1
-16,divider only,5.967e+04,20.31,-139.6
-16,divider only,6.32e+04,19.74,-142.3
-16,divider only,6.695e+04,19.17,-145.2
-16,divider only,7.092e+04,18.59,-148.3
-16,divider only,7.512e+04,17.99,-151.5
-16,divider only,7.957e+04,17.38,-155.0
-16,divider only,8.429e+04,16.76,-158.6
-16,divider only,8.928e+04,16.12,-162.5
-16,divider only,9.457e+04,15.46,-166.6
-16,divider only,1.002e+05,14.79,-171.0
-16,divider only,1.061e+05,14.08,-175.6
-16,divider only,1.124e+05,13.35,-180.4
-16,divider only,1.191e+05,12.59,-185.5
-16,divider only,1.261e+05,11.79,-190.8
-16,divider only,1.336e+05,10.95,-196.4
-16,divider only,1.415e+05,10.07,-202.3
-16,divider only,1.499e+05,9.13,-208.4
-16,divider only,1.588e+05,8.15,-214.7
-16,divider only,1.682e+05,7.11,-221.2
-16,divider only,1.782e+05,6.0,-227.8
-16,divider only,1.887e+05,4.83,-234.6
-16,divider only,1.999e+05,3.6,-241.5
-16,divider only,2.118e+05,2.3,-248.5
-16,divider only,2.243e+05,0.92,-255.6
-16,divider only,2.376e+05,-0.52,-262.6
-16,divider only,2.517e+05,-2.03,-269.6
-16,divider only,2.666e+05,-3.6,-276.5
-16,divider only,2.824e+05,-5.24,-283.3
-16,divider only,2.991e+05,-6.94,-290.0
-16,divider only,3.169e+05,-8.69,-296.6
-16,divider only,3.356e+05,-10.5,-303.0
-16,divider only,3.555e+05,-12.36,-309.3
-16,divider only,3.766e+05,-14.27,-315.3
-16,divider only,3.989e+05,-16.22,-321.2
-16,divider only,4.226e+05,-18.22,-326.9
-16,divider only,4.476e+05,-20.25,-332.4
-16,divider only,4.741e+05,-22.33,-337.8
-16,divider only,5.022e+05,-24.43,-342.9
-16,divider only,5.32e+05,-26.57,-347.8
-16,divider only,5.635e+05,-28.74,-352.5
-16,divider only,5.969e+05,-30.94,-357.0
-16,divider only,6.323e+05,-33.16,-361.4
-16,divider only,6.698e+05,-35.41,-365.5
-16,divider only,7.095e+05,-37.68,-369.4
-16,divider only,7.515e+05,-39.97,-373.2
-16,divider only,7.961e+05,-42.28,-376.8
-16,divider only,8.433e+05,-44.61,-380.1
-16,divider only,8.932e+05,-46.95,-383.4
-16,divider only,9.462e+05,-49.31,-386.4
-16,divider only,1.002e+06,-51.68,-389.2
-16,divider only,1.062e+06,-54.06,-391.9
-16,divider only,1.125e+06,-56.45,-394.5
-16,divider only,1.191e+06,-58.86,-396.8
-16,divider only,1.262e+06,-61.27,-399.1
-16,divider only,1.337e+06,-63.69,-401.1
-16,divider only,1.416e+06,-66.11,-403.1
-16,divider only,1.5e+06,-68.55,-404.8
-16,divider only,1.589e+06,-70.98,-406.5
-16,divider only,1.683e+06,-73.42,-408.0
-16,divider only,1.782e+06,-75.87,-409.4
-16,divider only,1.888e+06,-78.32,-410.6
-16,divider only,2e+06,-80.77,-411.7
-16,with lag network,100,72.0,-138.1
-16,with lag network,106,71.22,-137.3
-16,with lag network,112.3,70.47,-136.5
-16,with lag network,118.9,69.72,-135.8
-16,with lag network,126,68.99,-135.0
-16,with lag network,133.4,68.26,-134.3
-16,with lag network,141.3,67.55,-133.6
-16,with lag network,149.7,66.84,-133.0
-16,with lag network,158.6,66.15,-132.4
-16,with lag network,168,65.46,-131.8
-16,with lag network,177.9,64.79,-131.3
-16,with lag network,188.5,64.11,-130.9
-16,with lag network,199.6,63.45,-130.5
-16,with lag network,211.5,62.78,-130.2
-16,with lag network,224,62.12,-130.0
-16,with lag network,237.3,61.46,-129.8
-16,with lag network,251.3,60.81,-129.7
-16,with lag network,266.2,60.15,-129.7
-16,with lag network,282,59.49,-129.7
-16,with lag network,298.7,58.83,-129.8
-16,with lag network,316.4,58.16,-130.0
-16,with lag network,335.2,57.49,-130.2
-16,with lag network,355.1,56.82,-130.5
-16,with lag network,376.1,56.13,-130.9
-16,with lag network,398.4,55.44,-131.3
-16,with lag network,422,54.74,-131.7
-16,with lag network,447,54.04,-132.1
-16,with lag network,473.5,53.32,-132.6
-16,with lag network,501.6,52.59,-133.1
-16,with lag network,531.3,51.85,-133.6
-16,with lag network,562.8,51.11,-134.1
-16,with lag network,596.1,50.35,-134.6
-16,with lag network,631.5,49.58,-135.1
-16,with lag network,668.9,48.8,-135.6
-16,with lag network,708.5,48.01,-136.0
-16,with lag network,750.5,47.22,-136.4
-16,with lag network,795,46.41,-136.8
-16,with lag network,842.1,45.6,-137.1
-16,with lag network,892,44.78,-137.3
-16,with lag network,944.9,43.95,-137.5
-16,with lag network,1001,43.12,-137.6
-16,with lag network,1060,42.28,-137.7
-16,with lag network,1123,41.45,-137.7
-16,with lag network,1190,40.61,-137.6
-16,with lag network,1260,39.77,-137.4
-16,with lag network,1335,38.93,-137.1
-16,with lag network,1414,38.09,-136.8
-16,with lag network,1498,37.25,-136.4
-16,with lag network,1586,36.42,-135.9
-16,with lag network,1680,35.6,-135.4
-16,with lag network,1780,34.78,-134.8
-16,with lag network,1886,33.97,-134.1
-16,with lag network,1997,33.16,-133.3
-16,with lag network,2116,32.37,-132.5
-16,with lag network,2241,31.58,-131.6
-16,with lag network,2374,30.81,-130.7
-16,with lag network,2515,30.05,-129.7
-16,with lag network,2664,29.3,-128.8
-16,with lag network,2821,28.56,-127.7
-16,with lag network,2989,27.83,-126.7
-16,with lag network,3166,27.12,-125.6
-16,with lag network,3353,26.42,-124.6
-16,with lag network,3552,25.73,-123.5
-16,with lag network,3763,25.05,-122.5
-16,with lag network,3986,24.39,-121.4
-16,with lag network,4222,23.73,-120.4
-16,with lag network,4472,23.09,-119.4
-16,with lag network,4737,22.46,-118.4
-16,with lag network,5018,21.84,-117.5
-16,with lag network,5315,21.23,-116.6
-16,with lag network,5630,20.63,-115.8
-16,with lag network,5964,20.04,-114.9
-16,with lag network,6317,19.46,-114.2
-16,with lag network,6692,18.88,-113.4
-16,with lag network,7088,18.31,-112.8
-16,with lag network,7509,17.75,-112.1
-16,with lag network,7954,17.19,-111.6
-16,with lag network,8425,16.64,-111.1
-16,with lag network,8924,16.09,-110.6
-16,with lag network,9453,15.55,-110.2
-16,with lag network,1.001e+04,15.01,-109.8
-16,with lag network,1.061e+04,14.48,-109.5
-16,with lag network,1.124e+04,13.94,-109.3
-16,with lag network,1.19e+04,13.41,-109.1
-16,with lag network,1.261e+04,12.89,-109.0
-16,with lag network,1.335e+04,12.36,-108.9
-16,with lag network,1.415e+04,11.84,-108.9
-16,with lag network,1.498e+04,11.32,-109.0
-16,with lag network,1.587e+04,10.8,-109.1
-16,with lag network,1.681e+04,10.29,-109.2
-16,with lag network,1.781e+04,9.77,-109.5
-16,with lag network,1.886e+04,9.25,-109.8
-16,with lag network,1.998e+04,8.74,-110.1
-16,with lag network,2.117e+04,8.22,-110.5
-16,with lag network,2.242e+04,7.71,-111.0
-16,with lag network,2.375e+04,7.2,-111.6
-16,with lag network,2.516e+04,6.68,-112.2
-16,with lag network,2.665e+04,6.17,-112.9
-16,with lag network,2.823e+04,5.65,-113.7
-16,with lag network,2.99e+04,5.14,-114.6
-16,with lag network,3.167e+04,4.62,-115.5
-16,with lag network,3.355e+04,4.1,-116.5
-16,with lag network,3.554e+04,3.58,-117.6
-16,with lag network,3.764e+04,3.06,-118.9
-16,with lag network,3.987e+04,2.54,-120.2
-16,with lag network,4.224e+04,2.01,-121.6
-16,with lag network,4.474e+04,1.49,-123.1
-16,with lag network,4.739e+04,0.95,-124.7
-16,with lag network,5.02e+04,0.42,-126.4
-16,with lag network,5.318e+04,-0.12,-128.3
-16,with lag network,5.633e+04,-0.66,-130.3
-16,with lag network,5.967e+04,-1.21,-132.4
-16,with lag network,6.32e+04,-1.77,-134.7
-16,with lag network,6.695e+04,-2.33,-137.1
-16,with lag network,7.092e+04,-2.9,-139.7
-16,with lag network,7.512e+04,-3.48,-142.4
-16,with lag network,7.957e+04,-4.07,-145.3
-16,with lag network,8.429e+04,-4.68,-148.4
-16,with lag network,8.928e+04,-5.3,-151.7
-16,with lag network,9.457e+04,-5.93,-155.2
-16,with lag network,1.002e+05,-6.59,-158.9
-16,with lag network,1.061e+05,-7.26,-162.8
-16,with lag network,1.124e+05,-7.96,-166.9
-16,with lag network,1.191e+05,-8.69,-171.2
-16,with lag network,1.261e+05,-9.45,-175.7
-16,with lag network,1.336e+05,-10.25,-180.5
-16,with lag network,1.415e+05,-11.09,-185.5
-16,with lag network,1.499e+05,-11.96,-190.6
-16,with lag network,1.588e+05,-12.89,-196.0
-16,with lag network,1.682e+05,-13.87,-201.5
-16,with lag network,1.782e+05,-14.9,-207.1
-16,with lag network,1.887e+05,-15.99,-212.8
-16,with lag network,1.999e+05,-17.14,-218.6
-16,with lag network,2.118e+05,-18.35,-224.4
-16,with lag network,2.243e+05,-19.62,-230.2
-16,with lag network,2.376e+05,-20.95,-236.0
-16,with lag network,2.517e+05,-22.33,-241.7
-16,with lag network,2.666e+05,-23.77,-247.4
-16,with lag network,2.824e+05,-25.26,-252.9
-16,with lag network,2.991e+05,-26.8,-258.2
-16,with lag network,3.169e+05,-28.39,-263.4
-16,with lag network,3.356e+05,-30.01,-268.5
-16,with lag network,3.555e+05,-31.68,-273.3
-16,with lag network,3.766e+05,-33.38,-278.0
-16,with lag network,3.989e+05,-35.11,-282.5
-16,with lag network,4.226e+05,-36.86,-286.8
-16,with lag network,4.476e+05,-38.65,-290.9
-16,with lag network,4.741e+05,-40.45,-294.9
-16,with lag network,5.022e+05,-42.28,-298.7
-16,with lag network,5.32e+05,-44.12,-302.3
-16,with lag network,5.635e+05,-45.99,-305.8
-16,with lag network,5.969e+05,-47.86,-309.1
-16,with lag network,6.323e+05,-49.76,-312.3
-16,with lag network,6.698e+05,-51.66,-315.3
-16,with lag network,7.095e+05,-53.58,-318.3
-16,with lag network,7.515e+05,-55.5,-321.0
-16,with lag network,7.961e+05,-57.44,-323.7
-16,with lag network,8.433e+05,-59.39,-326.3
-16,with lag network,8.932e+05,-61.34,-328.7
-16,with lag network,9.462e+05,-63.3,-331.1
-16,with lag network,1.002e+06,-65.27,-333.3
-16,with lag network,1.062e+06,-67.24,-335.5
-16,with lag network,1.125e+06,-69.22,-337.6
-16,with lag network,1.191e+06,-71.21,-339.6
-16,with lag network,1.262e+06,-73.2,-341.6
-16,with lag network,1.337e+06,-75.19,-343.5
-16,with lag network,1.416e+06,-77.2,-345.3
-16,with lag network,1.5e+06,-79.2,-347.1
-16,with lag network,1.589e+06,-81.21,-348.8
-16,with lag network,1.683e+06,-83.23,-350.5
-16,with lag network,1.782e+06,-85.25,-352.1
-16,with lag network,1.888e+06,-87.28,-353.7
-16,with lag network,2e+06,-89.31,-355.2
+1.6,divider only,100,70.35,-95.9
+1.6,divider only,106,69.83,-96.4
+1.6,divider only,112.3,69.31,-97.0
+1.6,divider only,118.9,68.79,-97.6
+1.6,divider only,126,68.27,-98.2
+1.6,divider only,133.4,67.75,-98.8
+1.6,divider only,141.3,67.22,-99.5
+1.6,divider only,149.7,66.69,-100.2
+1.6,divider only,158.6,66.15,-100.9
+1.6,divider only,168,65.61,-101.6
+1.6,divider only,177.9,65.07,-102.4
+1.6,divider only,188.5,64.52,-103.1
+1.6,divider only,199.6,63.97,-103.9
+1.6,divider only,211.5,63.41,-104.8
+1.6,divider only,224,62.85,-105.6
+1.6,divider only,237.3,62.28,-106.5
+1.6,divider only,251.3,61.7,-107.4
+1.6,divider only,266.2,61.11,-108.4
+1.6,divider only,282,60.52,-109.3
+1.6,divider only,298.7,59.91,-110.3
+1.6,divider only,316.4,59.3,-111.3
+1.6,divider only,335.2,58.68,-112.3
+1.6,divider only,355.1,58.04,-113.3
+1.6,divider only,376.1,57.4,-114.3
+1.6,divider only,398.4,56.74,-115.4
+1.6,divider only,422,56.08,-116.4
+1.6,divider only,447,55.4,-117.4
+1.6,divider only,473.5,54.71,-118.3
+1.6,divider only,501.6,54.0,-119.3
+1.6,divider only,531.3,53.29,-120.2
+1.6,divider only,562.8,52.56,-121.1
+1.6,divider only,596.1,51.82,-121.9
+1.6,divider only,631.5,51.07,-122.7
+1.6,divider only,668.9,50.31,-123.4
+1.6,divider only,708.5,49.54,-124.1
+1.6,divider only,750.5,48.75,-124.7
+1.6,divider only,795,47.97,-125.2
+1.6,divider only,842.1,47.17,-125.6
+1.6,divider only,892,46.36,-125.9
+1.6,divider only,944.9,45.55,-126.1
+1.6,divider only,1001,44.74,-126.2
+1.6,divider only,1060,43.92,-126.2
+1.6,divider only,1123,43.11,-126.1
+1.6,divider only,1190,42.29,-125.9
+1.6,divider only,1260,41.47,-125.6
+1.6,divider only,1335,40.66,-125.2
+1.6,divider only,1414,39.85,-124.6
+1.6,divider only,1498,39.04,-124.0
+1.6,divider only,1586,38.24,-123.2
+1.6,divider only,1680,37.46,-122.3
+1.6,divider only,1780,36.68,-121.4
+1.6,divider only,1886,35.91,-120.3
+1.6,divider only,1997,35.15,-119.1
+1.6,divider only,2116,34.41,-117.9
+1.6,divider only,2241,33.69,-116.6
+1.6,divider only,2374,32.98,-115.2
+1.6,divider only,2515,32.28,-113.7
+1.6,divider only,2664,31.61,-112.2
+1.6,divider only,2821,30.96,-110.6
+1.6,divider only,2989,30.32,-109.1
+1.6,divider only,3166,29.7,-107.5
+1.6,divider only,3353,29.11,-105.8
+1.6,divider only,3552,28.54,-104.2
+1.6,divider only,3763,27.98,-102.6
+1.6,divider only,3986,27.45,-101.0
+1.6,divider only,4222,26.94,-99.4
+1.6,divider only,4472,26.45,-97.9
+1.6,divider only,4737,25.97,-96.5
+1.6,divider only,5018,25.52,-95.1
+1.6,divider only,5315,25.08,-93.8
+1.6,divider only,5630,24.66,-92.6
+1.6,divider only,5964,24.25,-91.4
+1.6,divider only,6317,23.86,-90.4
+1.6,divider only,6692,23.48,-89.5
+1.6,divider only,7088,23.11,-88.7
+1.6,divider only,7509,22.75,-88.0
+1.6,divider only,7954,22.4,-87.5
+1.6,divider only,8425,22.06,-87.0
+1.6,divider only,8924,21.71,-86.7
+1.6,divider only,9453,21.37,-86.5
+1.6,divider only,1.001e+04,21.04,-86.5
+1.6,divider only,1.061e+04,20.7,-86.6
+1.6,divider only,1.124e+04,20.36,-86.7
+1.6,divider only,1.19e+04,20.02,-87.1
+1.6,divider only,1.261e+04,19.67,-87.5
+1.6,divider only,1.335e+04,19.32,-88.0
+1.6,divider only,1.415e+04,18.96,-88.6
+1.6,divider only,1.498e+04,18.6,-89.4
+1.6,divider only,1.587e+04,18.23,-90.2
+1.6,divider only,1.681e+04,17.86,-91.1
+1.6,divider only,1.781e+04,17.47,-92.1
+1.6,divider only,1.886e+04,17.08,-93.2
+1.6,divider only,1.998e+04,16.68,-94.4
+1.6,divider only,2.117e+04,16.27,-95.6
+1.6,divider only,2.242e+04,15.85,-97.0
+1.6,divider only,2.375e+04,15.43,-98.4
+1.6,divider only,2.516e+04,15.0,-99.8
+1.6,divider only,2.665e+04,14.56,-101.4
+1.6,divider only,2.823e+04,14.11,-103.0
+1.6,divider only,2.99e+04,13.66,-104.7
+1.6,divider only,3.167e+04,13.2,-106.4
+1.6,divider only,3.355e+04,12.73,-108.2
+1.6,divider only,3.554e+04,12.26,-110.2
+1.6,divider only,3.764e+04,11.78,-112.2
+1.6,divider only,3.987e+04,11.29,-114.3
+1.6,divider only,4.224e+04,10.8,-116.4
+1.6,divider only,4.474e+04,10.3,-118.7
+1.6,divider only,4.739e+04,9.79,-121.1
+1.6,divider only,5.02e+04,9.27,-123.6
+1.6,divider only,5.318e+04,8.75,-126.2
+1.6,divider only,5.633e+04,8.22,-129.0
+1.6,divider only,5.967e+04,7.68,-131.8
+1.6,divider only,6.32e+04,7.13,-134.9
+1.6,divider only,6.695e+04,6.57,-138.0
+1.6,divider only,7.092e+04,6.0,-141.4
+1.6,divider only,7.512e+04,5.42,-144.9
+1.6,divider only,7.957e+04,4.82,-148.6
+1.6,divider only,8.429e+04,4.21,-152.5
+1.6,divider only,8.928e+04,3.58,-156.5
+1.6,divider only,9.457e+04,2.93,-160.8
+1.6,divider only,1.002e+05,2.26,-165.3
+1.6,divider only,1.061e+05,1.56,-170.1
+1.6,divider only,1.124e+05,0.84,-175.1
+1.6,divider only,1.191e+05,0.08,-180.3
+1.6,divider only,1.261e+05,-0.71,-185.7
+1.6,divider only,1.336e+05,-1.55,-191.4
+1.6,divider only,1.415e+05,-2.43,-197.3
+1.6,divider only,1.499e+05,-3.35,-203.4
+1.6,divider only,1.588e+05,-4.33,-209.8
+1.6,divider only,1.682e+05,-5.37,-216.3
+1.6,divider only,1.782e+05,-6.47,-222.9
+1.6,divider only,1.887e+05,-7.64,-229.7
+1.6,divider only,1.999e+05,-8.87,-236.6
+1.6,divider only,2.118e+05,-10.17,-243.6
+1.6,divider only,2.243e+05,-11.54,-250.5
+1.6,divider only,2.376e+05,-12.97,-257.5
+1.6,divider only,2.517e+05,-14.48,-264.4
+1.6,divider only,2.666e+05,-16.05,-271.2
+1.6,divider only,2.824e+05,-17.68,-277.9
+1.6,divider only,2.991e+05,-19.37,-284.4
+1.6,divider only,3.169e+05,-21.12,-290.8
+1.6,divider only,3.356e+05,-22.93,-297.1
+1.6,divider only,3.555e+05,-24.78,-303.1
+1.6,divider only,3.766e+05,-26.68,-309.0
+1.6,divider only,3.989e+05,-28.63,-314.6
+1.6,divider only,4.226e+05,-30.62,-320.0
+1.6,divider only,4.476e+05,-32.64,-325.3
+1.6,divider only,4.741e+05,-34.7,-330.3
+1.6,divider only,5.022e+05,-36.8,-335.1
+1.6,divider only,5.32e+05,-38.92,-339.6
+1.6,divider only,5.635e+05,-41.08,-344.0
+1.6,divider only,5.969e+05,-43.26,-348.1
+1.6,divider only,6.323e+05,-45.46,-352.0
+1.6,divider only,6.698e+05,-47.69,-355.7
+1.6,divider only,7.095e+05,-49.94,-359.1
+1.6,divider only,7.515e+05,-52.2,-362.4
+1.6,divider only,7.961e+05,-54.48,-365.4
+1.6,divider only,8.433e+05,-56.78,-368.2
+1.6,divider only,8.932e+05,-59.08,-370.8
+1.6,divider only,9.462e+05,-61.4,-373.2
+1.6,divider only,1.002e+06,-63.73,-375.4
+1.6,divider only,1.062e+06,-66.06,-377.4
+1.6,divider only,1.125e+06,-68.4,-379.2
+1.6,divider only,1.191e+06,-70.75,-380.8
+1.6,divider only,1.262e+06,-73.09,-382.2
+1.6,divider only,1.337e+06,-75.44,-383.5
+1.6,divider only,1.416e+06,-77.78,-384.5
+1.6,divider only,1.5e+06,-80.13,-385.4
+1.6,divider only,1.589e+06,-82.47,-386.2
+1.6,divider only,1.683e+06,-84.8,-386.8
+1.6,divider only,1.782e+06,-87.13,-387.2
+1.6,divider only,1.888e+06,-89.45,-387.5
+1.6,divider only,2e+06,-91.76,-387.6
+1.6,with lag network,100,51.99,-137.6
+1.6,with lag network,106,51.22,-136.7
+1.6,with lag network,112.3,50.47,-135.9
+1.6,with lag network,118.9,49.72,-135.1
+1.6,with lag network,126,48.98,-134.3
+1.6,with lag network,133.4,48.26,-133.6
+1.6,with lag network,141.3,47.55,-132.9
+1.6,with lag network,149.7,46.84,-132.2
+1.6,with lag network,158.6,46.15,-131.5
+1.6,with lag network,168,45.46,-130.9
+1.6,with lag network,177.9,44.78,-130.4
+1.6,with lag network,188.5,44.11,-129.9
+1.6,with lag network,199.6,43.44,-129.4
+1.6,with lag network,211.5,42.78,-129.1
+1.6,with lag network,224,42.12,-128.8
+1.6,with lag network,237.3,41.46,-128.5
+1.6,with lag network,251.3,40.8,-128.3
+1.6,with lag network,266.2,40.14,-128.2
+1.6,with lag network,282,39.48,-128.2
+1.6,with lag network,298.7,38.82,-128.2
+1.6,with lag network,316.4,38.16,-128.2
+1.6,with lag network,335.2,37.49,-128.4
+1.6,with lag network,355.1,36.81,-128.5
+1.6,with lag network,376.1,36.13,-128.7
+1.6,with lag network,398.4,35.44,-129.0
+1.6,with lag network,422,34.74,-129.3
+1.6,with lag network,447,34.03,-129.6
+1.6,with lag network,473.5,33.31,-129.9
+1.6,with lag network,501.6,32.59,-130.2
+1.6,with lag network,531.3,31.85,-130.5
+1.6,with lag network,562.8,31.11,-130.8
+1.6,with lag network,596.1,30.35,-131.1
+1.6,with lag network,631.5,29.58,-131.4
+1.6,with lag network,668.9,28.81,-131.6
+1.6,with lag network,708.5,28.03,-131.8
+1.6,with lag network,750.5,27.24,-132.0
+1.6,with lag network,795,26.44,-132.1
+1.6,with lag network,842.1,25.63,-132.1
+1.6,with lag network,892,24.82,-132.0
+1.6,with lag network,944.9,24.0,-131.9
+1.6,with lag network,1001,23.18,-131.6
+1.6,with lag network,1060,22.36,-131.3
+1.6,with lag network,1123,21.54,-130.9
+1.6,with lag network,1190,20.72,-130.4
+1.6,with lag network,1260,19.9,-129.9
+1.6,with lag network,1335,19.08,-129.2
+1.6,with lag network,1414,18.27,-128.4
+1.6,with lag network,1498,17.46,-127.5
+1.6,with lag network,1586,16.66,-126.5
+1.6,with lag network,1680,15.87,-125.4
+1.6,with lag network,1780,15.09,-124.3
+1.6,with lag network,1886,14.32,-123.0
+1.6,with lag network,1997,13.56,-121.7
+1.6,with lag network,2116,12.82,-120.3
+1.6,with lag network,2241,12.09,-118.8
+1.6,with lag network,2374,11.38,-117.2
+1.6,with lag network,2515,10.69,-115.6
+1.6,with lag network,2664,10.01,-114.0
+1.6,with lag network,2821,9.36,-112.3
+1.6,with lag network,2989,8.72,-110.6
+1.6,with lag network,3166,8.1,-108.8
+1.6,with lag network,3353,7.51,-107.1
+1.6,with lag network,3552,6.94,-105.3
+1.6,with lag network,3763,6.38,-103.6
+1.6,with lag network,3986,5.85,-101.9
+1.6,with lag network,4222,5.34,-100.3
+1.6,with lag network,4472,4.84,-98.6
+1.6,with lag network,4737,4.37,-97.1
+1.6,with lag network,5018,3.92,-95.6
+1.6,with lag network,5315,3.48,-94.2
+1.6,with lag network,5630,3.06,-92.9
+1.6,with lag network,5964,2.65,-91.6
+1.6,with lag network,6317,2.26,-90.5
+1.6,with lag network,6692,1.88,-89.5
+1.6,with lag network,7088,1.51,-88.6
+1.6,with lag network,7509,1.15,-87.8
+1.6,with lag network,7954,0.8,-87.2
+1.6,with lag network,8425,0.45,-86.7
+1.6,with lag network,8924,0.11,-86.2
+1.6,with lag network,9453,-0.23,-86.0
+1.6,with lag network,1.001e+04,-0.57,-85.8
+1.6,with lag network,1.061e+04,-0.9,-85.8
+1.6,with lag network,1.124e+04,-1.24,-85.9
+1.6,with lag network,1.19e+04,-1.58,-86.1
+1.6,with lag network,1.261e+04,-1.93,-86.4
+1.6,with lag network,1.335e+04,-2.28,-86.8
+1.6,with lag network,1.415e+04,-2.64,-87.3
+1.6,with lag network,1.498e+04,-3.0,-87.9
+1.6,with lag network,1.587e+04,-3.37,-88.6
+1.6,with lag network,1.681e+04,-3.74,-89.4
+1.6,with lag network,1.781e+04,-4.13,-90.3
+1.6,with lag network,1.886e+04,-4.52,-91.2
+1.6,with lag network,1.998e+04,-4.92,-92.2
+1.6,with lag network,2.117e+04,-5.32,-93.3
+1.6,with lag network,2.242e+04,-5.74,-94.4
+1.6,with lag network,2.375e+04,-6.16,-95.7
+1.6,with lag network,2.516e+04,-6.59,-96.9
+1.6,with lag network,2.665e+04,-7.03,-98.3
+1.6,with lag network,2.823e+04,-7.47,-99.7
+1.6,with lag network,2.99e+04,-7.92,-101.1
+1.6,with lag network,3.167e+04,-8.38,-102.7
+1.6,with lag network,3.355e+04,-8.85,-104.3
+1.6,with lag network,3.554e+04,-9.32,-105.9
+1.6,with lag network,3.764e+04,-9.79,-107.7
+1.6,with lag network,3.987e+04,-10.28,-109.5
+1.6,with lag network,4.224e+04,-10.77,-111.4
+1.6,with lag network,4.474e+04,-11.26,-113.3
+1.6,with lag network,4.739e+04,-11.76,-115.4
+1.6,with lag network,5.02e+04,-12.27,-117.5
+1.6,with lag network,5.318e+04,-12.79,-119.8
+1.6,with lag network,5.633e+04,-13.31,-122.1
+1.6,with lag network,5.967e+04,-13.84,-124.6
+1.6,with lag network,6.32e+04,-14.38,-127.2
+1.6,with lag network,6.695e+04,-14.93,-129.9
+1.6,with lag network,7.092e+04,-15.48,-132.8
+1.6,with lag network,7.512e+04,-16.05,-135.8
+1.6,with lag network,7.957e+04,-16.63,-138.9
+1.6,with lag network,8.429e+04,-17.23,-142.2
+1.6,with lag network,8.928e+04,-17.84,-145.7
+1.6,with lag network,9.457e+04,-18.46,-149.4
+1.6,with lag network,1.002e+05,-19.11,-153.2
+1.6,with lag network,1.061e+05,-19.78,-157.3
+1.6,with lag network,1.124e+05,-20.47,-161.5
+1.6,with lag network,1.191e+05,-21.2,-166.0
+1.6,with lag network,1.261e+05,-21.95,-170.6
+1.6,with lag network,1.336e+05,-22.74,-175.5
+1.6,with lag network,1.415e+05,-23.58,-180.5
+1.6,with lag network,1.499e+05,-24.45,-185.7
+1.6,with lag network,1.588e+05,-25.37,-191.1
+1.6,with lag network,1.682e+05,-26.35,-196.6
+1.6,with lag network,1.782e+05,-27.38,-202.2
+1.6,with lag network,1.887e+05,-28.47,-207.9
+1.6,with lag network,1.999e+05,-29.61,-213.7
+1.6,with lag network,2.118e+05,-30.82,-219.4
+1.6,with lag network,2.243e+05,-32.08,-225.2
+1.6,with lag network,2.376e+05,-33.4,-230.9
+1.6,with lag network,2.517e+05,-34.79,-236.5
+1.6,with lag network,2.666e+05,-36.22,-242.0
+1.6,with lag network,2.824e+05,-37.71,-247.4
+1.6,with lag network,2.991e+05,-39.24,-252.6
+1.6,with lag network,3.169e+05,-40.82,-257.7
+1.6,with lag network,3.356e+05,-42.44,-262.5
+1.6,with lag network,3.555e+05,-44.1,-267.2
+1.6,with lag network,3.766e+05,-45.79,-271.6
+1.6,with lag network,3.989e+05,-47.51,-275.9
+1.6,with lag network,4.226e+05,-49.26,-279.9
+1.6,with lag network,4.476e+05,-51.03,-283.8
+1.6,with lag network,4.741e+05,-52.83,-287.4
+1.6,with lag network,5.022e+05,-54.64,-290.9
+1.6,with lag network,5.32e+05,-56.47,-294.2
+1.6,with lag network,5.635e+05,-58.32,-297.3
+1.6,with lag network,5.969e+05,-60.18,-300.2
+1.6,with lag network,6.323e+05,-62.06,-302.9
+1.6,with lag network,6.698e+05,-63.94,-305.5
+1.6,with lag network,7.095e+05,-65.83,-307.9
+1.6,with lag network,7.515e+05,-67.73,-310.2
+1.6,with lag network,7.961e+05,-69.64,-312.3
+1.6,with lag network,8.433e+05,-71.55,-314.3
+1.6,with lag network,8.932e+05,-73.47,-316.2
+1.6,with lag network,9.462e+05,-75.39,-317.9
+1.6,with lag network,1.002e+06,-77.31,-319.5
+1.6,with lag network,1.062e+06,-79.24,-321.0
+1.6,with lag network,1.125e+06,-81.16,-322.4
+1.6,with lag network,1.191e+06,-83.09,-323.6
+1.6,with lag network,1.262e+06,-85.01,-324.8
+1.6,with lag network,1.337e+06,-86.93,-325.9
+1.6,with lag network,1.416e+06,-88.85,-326.9
+1.6,with lag network,1.5e+06,-90.77,-327.8
+1.6,with lag network,1.589e+06,-92.68,-328.7
+1.6,with lag network,1.683e+06,-94.58,-329.5
+1.6,with lag network,1.782e+06,-96.48,-330.3
+1.6,with lag network,1.888e+06,-98.37,-331.0
+1.6,with lag network,2e+06,-100.25,-331.6
+3.3,divider only,100,76.31,-104.0
+3.3,divider only,106,75.76,-105.0
+3.3,divider only,112.3,75.2,-106.0
+3.3,divider only,118.9,74.64,-107.0
+3.3,divider only,126,74.07,-108.1
+3.3,divider only,133.4,73.49,-109.2
+3.3,divider only,141.3,72.9,-110.3
+3.3,divider only,149.7,72.31,-111.5
+3.3,divider only,158.6,71.71,-112.7
+3.3,divider only,168,71.09,-113.9
+3.3,divider only,177.9,70.47,-115.1
+3.3,divider only,188.5,69.83,-116.4
+3.3,divider only,199.6,69.19,-117.7
+3.3,divider only,211.5,68.53,-118.9
+3.3,divider only,224,67.86,-120.2
+3.3,divider only,237.3,67.17,-121.5
+3.3,divider only,251.3,66.48,-122.8
+3.3,divider only,266.2,65.77,-124.1
+3.3,divider only,282,65.04,-125.4
+3.3,divider only,298.7,64.31,-126.6
+3.3,divider only,316.4,63.56,-127.9
+3.3,divider only,335.2,62.79,-129.0
+3.3,divider only,355.1,62.01,-130.2
+3.3,divider only,376.1,61.22,-131.3
+3.3,divider only,398.4,60.42,-132.3
+3.3,divider only,422,59.61,-133.3
+3.3,divider only,447,58.78,-134.2
+3.3,divider only,473.5,57.94,-135.1
+3.3,divider only,501.6,57.1,-135.9
+3.3,divider only,531.3,56.24,-136.6
+3.3,divider only,562.8,55.38,-137.2
+3.3,divider only,596.1,54.51,-137.7
+3.3,divider only,631.5,53.63,-138.1
+3.3,divider only,668.9,52.75,-138.4
+3.3,divider only,708.5,51.86,-138.6
+3.3,divider only,750.5,50.97,-138.8
+3.3,divider only,795,50.08,-138.8
+3.3,divider only,842.1,49.19,-138.7
+3.3,divider only,892,48.3,-138.5
+3.3,divider only,944.9,47.4,-138.2
+3.3,divider only,1001,46.51,-137.8
+3.3,divider only,1060,45.63,-137.3
+3.3,divider only,1123,44.74,-136.7
+3.3,divider only,1190,43.87,-136.0
+3.3,divider only,1260,42.99,-135.2
+3.3,divider only,1335,42.13,-134.2
+3.3,divider only,1414,41.28,-133.2
+3.3,divider only,1498,40.43,-132.1
+3.3,divider only,1586,39.6,-130.8
+3.3,divider only,1680,38.77,-129.5
+3.3,divider only,1780,37.97,-128.1
+3.3,divider only,1886,37.17,-126.6
+3.3,divider only,1997,36.39,-125.0
+3.3,divider only,2116,35.63,-123.4
+3.3,divider only,2241,34.89,-121.7
+3.3,divider only,2374,34.16,-119.9
+3.3,divider only,2515,33.46,-118.1
+3.3,divider only,2664,32.77,-116.2
+3.3,divider only,2821,32.11,-114.3
+3.3,divider only,2989,31.47,-112.4
+3.3,divider only,3166,30.85,-110.4
+3.3,divider only,3353,30.25,-108.5
+3.3,divider only,3552,29.67,-106.6
+3.3,divider only,3763,29.12,-104.7
+3.3,divider only,3986,28.59,-102.8
+3.3,divider only,4222,28.08,-101.0
+3.3,divider only,4472,27.59,-99.2
+3.3,divider only,4737,27.12,-97.5
+3.3,divider only,5018,26.68,-95.8
+3.3,divider only,5315,26.25,-94.3
+3.3,divider only,5630,25.84,-92.8
+3.3,divider only,5964,25.44,-91.4
+3.3,divider only,6317,25.06,-90.2
+3.3,divider only,6692,24.7,-89.1
+3.3,divider only,7088,24.35,-88.0
+3.3,divider only,7509,24.01,-87.2
+3.3,divider only,7954,23.67,-86.4
+3.3,divider only,8425,23.35,-85.8
+3.3,divider only,8924,23.03,-85.3
+3.3,divider only,9453,22.71,-85.0
+3.3,divider only,1.001e+04,22.4,-84.8
+3.3,divider only,1.061e+04,22.09,-84.8
+3.3,divider only,1.124e+04,21.77,-84.8
+3.3,divider only,1.19e+04,21.46,-85.1
+3.3,divider only,1.261e+04,21.14,-85.4
+3.3,divider only,1.335e+04,20.82,-85.9
+3.3,divider only,1.415e+04,20.49,-86.4
+3.3,divider only,1.498e+04,20.15,-87.1
+3.3,divider only,1.587e+04,19.81,-87.9
+3.3,divider only,1.681e+04,19.46,-88.9
+3.3,divider only,1.781e+04,19.1,-89.9
+3.3,divider only,1.886e+04,18.74,-91.0
+3.3,divider only,1.998e+04,18.36,-92.2
+3.3,divider only,2.117e+04,17.98,-93.4
+3.3,divider only,2.242e+04,17.58,-94.8
+3.3,divider only,2.375e+04,17.18,-96.2
+3.3,divider only,2.516e+04,16.77,-97.8
+3.3,divider only,2.665e+04,16.35,-99.4
+3.3,divider only,2.823e+04,15.92,-101.0
+3.3,divider only,2.99e+04,15.49,-102.8
+3.3,divider only,3.167e+04,15.04,-104.6
+3.3,divider only,3.355e+04,14.59,-106.5
+3.3,divider only,3.554e+04,14.13,-108.5
+3.3,divider only,3.764e+04,13.66,-110.6
+3.3,divider only,3.987e+04,13.18,-112.8
+3.3,divider only,4.224e+04,12.7,-115.0
+3.3,divider only,4.474e+04,12.2,-117.4
+3.3,divider only,4.739e+04,11.71,-119.9
+3.3,divider only,5.02e+04,11.2,-122.4
+3.3,divider only,5.318e+04,10.68,-125.1
+3.3,divider only,5.633e+04,10.16,-127.9
+3.3,divider only,5.967e+04,9.62,-130.9
+3.3,divider only,6.32e+04,9.08,-134.0
+3.3,divider only,6.695e+04,8.53,-137.2
+3.3,divider only,7.092e+04,7.96,-140.6
+3.3,divider only,7.512e+04,7.38,-144.2
+3.3,divider only,7.957e+04,6.79,-148.0
+3.3,divider only,8.429e+04,6.18,-151.9
+3.3,divider only,8.928e+04,5.55,-156.1
+3.3,divider only,9.457e+04,4.9,-160.4
+3.3,divider only,1.002e+05,4.23,-165.0
+3.3,divider only,1.061e+05,3.54,-169.8
+3.3,divider only,1.124e+05,2.81,-174.8
+3.3,divider only,1.191e+05,2.06,-180.1
+3.3,divider only,1.261e+05,1.27,-185.6
+3.3,divider only,1.336e+05,0.43,-191.3
+3.3,divider only,1.415e+05,-0.45,-197.3
+3.3,divider only,1.499e+05,-1.37,-203.5
+3.3,divider only,1.588e+05,-2.35,-209.9
+3.3,divider only,1.682e+05,-3.39,-216.5
+3.3,divider only,1.782e+05,-4.49,-223.2
+3.3,divider only,1.887e+05,-5.66,-230.1
+3.3,divider only,1.999e+05,-6.89,-237.0
+3.3,divider only,2.118e+05,-8.19,-244.0
+3.3,divider only,2.243e+05,-9.56,-251.0
+3.3,divider only,2.376e+05,-11.0,-258.1
+3.3,divider only,2.517e+05,-12.5,-265.0
+3.3,divider only,2.666e+05,-14.07,-271.9
+3.3,divider only,2.824e+05,-15.7,-278.7
+3.3,divider only,2.991e+05,-17.4,-285.3
+3.3,divider only,3.169e+05,-19.15,-291.8
+3.3,divider only,3.356e+05,-20.96,-298.1
+3.3,divider only,3.555e+05,-22.81,-304.2
+3.3,divider only,3.766e+05,-24.72,-310.2
+3.3,divider only,3.989e+05,-26.66,-315.9
+3.3,divider only,4.226e+05,-28.65,-321.4
+3.3,divider only,4.476e+05,-30.68,-326.8
+3.3,divider only,4.741e+05,-32.75,-331.9
+3.3,divider only,5.022e+05,-34.85,-336.8
+3.3,divider only,5.32e+05,-36.98,-341.4
+3.3,divider only,5.635e+05,-39.14,-345.9
+3.3,divider only,5.969e+05,-41.33,-350.1
+3.3,divider only,6.323e+05,-43.54,-354.2
+3.3,divider only,6.698e+05,-45.77,-358.0
+3.3,divider only,7.095e+05,-48.03,-361.6
+3.3,divider only,7.515e+05,-50.3,-365.0
+3.3,divider only,7.961e+05,-52.59,-368.1
+3.3,divider only,8.433e+05,-54.9,-371.1
+3.3,divider only,8.932e+05,-57.22,-373.9
+3.3,divider only,9.462e+05,-59.55,-376.4
+3.3,divider only,1.002e+06,-61.89,-378.8
+3.3,divider only,1.062e+06,-64.25,-381.0
+3.3,divider only,1.125e+06,-66.6,-382.9
+3.3,divider only,1.191e+06,-68.97,-384.7
+3.3,divider only,1.262e+06,-71.34,-386.3
+3.3,divider only,1.337e+06,-73.71,-387.8
+3.3,divider only,1.416e+06,-76.08,-389.0
+3.3,divider only,1.5e+06,-78.46,-390.1
+3.3,divider only,1.589e+06,-80.83,-391.1
+3.3,divider only,1.683e+06,-83.2,-391.8
+3.3,divider only,1.782e+06,-85.56,-392.4
+3.3,divider only,1.888e+06,-87.92,-392.9
+3.3,divider only,2e+06,-90.28,-393.2
+3.3,with lag network,100,57.96,-145.7
+3.3,with lag network,106,57.15,-145.3
+3.3,with lag network,112.3,56.35,-145.0
+3.3,with lag network,118.9,55.56,-144.6
+3.3,with lag network,126,54.78,-144.3
+3.3,with lag network,133.4,54.0,-144.0
+3.3,with lag network,141.3,53.23,-143.7
+3.3,with lag network,149.7,52.46,-143.5
+3.3,with lag network,158.6,51.7,-143.3
+3.3,with lag network,168,50.94,-143.2
+3.3,with lag network,177.9,50.18,-143.1
+3.3,with lag network,188.5,49.42,-143.1
+3.3,with lag network,199.6,48.66,-143.1
+3.3,with lag network,211.5,47.9,-143.2
+3.3,with lag network,224,47.13,-143.3
+3.3,with lag network,237.3,46.36,-143.5
+3.3,with lag network,251.3,45.58,-143.7
+3.3,with lag network,266.2,44.8,-144.0
+3.3,with lag network,282,44.01,-144.2
+3.3,with lag network,298.7,43.22,-144.5
+3.3,with lag network,316.4,42.41,-144.8
+3.3,with lag network,335.2,41.6,-145.1
+3.3,with lag network,355.1,40.78,-145.4
+3.3,with lag network,376.1,39.95,-145.7
+3.3,with lag network,398.4,39.11,-146.0
+3.3,with lag network,422,38.27,-146.2
+3.3,with lag network,447,37.41,-146.4
+3.3,with lag network,473.5,36.55,-146.6
+3.3,with lag network,501.6,35.68,-146.8
+3.3,with lag network,531.3,34.81,-146.9
+3.3,with lag network,562.8,33.93,-146.9
+3.3,with lag network,596.1,33.04,-146.9
+3.3,with lag network,631.5,32.15,-146.8
+3.3,with lag network,668.9,31.25,-146.6
+3.3,with lag network,708.5,30.36,-146.4
+3.3,with lag network,750.5,29.46,-146.1
+3.3,with lag network,795,28.55,-145.7
+3.3,with lag network,842.1,27.65,-145.2
+3.3,with lag network,892,26.75,-144.6
+3.3,with lag network,944.9,25.85,-144.0
+3.3,with lag network,1001,24.96,-143.3
+3.3,with lag network,1060,24.07,-142.4
+3.3,with lag network,1123,23.18,-141.5
+3.3,with lag network,1190,22.3,-140.5
+3.3,with lag network,1260,21.42,-139.4
+3.3,with lag network,1335,20.55,-138.3
+3.3,with lag network,1414,19.7,-137.0
+3.3,with lag network,1498,18.85,-135.6
+3.3,with lag network,1586,18.01,-134.2
+3.3,with lag network,1680,17.19,-132.6
+3.3,with lag network,1780,16.38,-131.0
+3.3,with lag network,1886,15.58,-129.3
+3.3,with lag network,1997,14.8,-127.6
+3.3,with lag network,2116,14.04,-125.8
+3.3,with lag network,2241,13.29,-123.9
+3.3,with lag network,2374,12.57,-122.0
+3.3,with lag network,2515,11.86,-120.0
+3.3,with lag network,2664,11.18,-118.0
+3.3,with lag network,2821,10.51,-115.9
+3.3,with lag network,2989,9.87,-113.9
+3.3,with lag network,3166,9.25,-111.8
+3.3,with lag network,3353,8.65,-109.8
+3.3,with lag network,3552,8.07,-107.7
+3.3,with lag network,3763,7.52,-105.7
+3.3,with lag network,3986,6.99,-103.7
+3.3,with lag network,4222,6.48,-101.8
+3.3,with lag network,4472,5.99,-99.9
+3.3,with lag network,4737,5.52,-98.0
+3.3,with lag network,5018,5.07,-96.3
+3.3,with lag network,5315,4.64,-94.6
+3.3,with lag network,5630,4.23,-93.1
+3.3,with lag network,5964,3.84,-91.6
+3.3,with lag network,6317,3.46,-90.3
+3.3,with lag network,6692,3.1,-89.1
+3.3,with lag network,7088,2.74,-88.0
+3.3,with lag network,7509,2.4,-87.0
+3.3,with lag network,7954,2.07,-86.1
+3.3,with lag network,8425,1.74,-85.4
+3.3,with lag network,8924,1.43,-84.9
+3.3,with lag network,9453,1.11,-84.4
+3.3,with lag network,1.001e+04,0.8,-84.1
+3.3,with lag network,1.061e+04,0.48,-84.0
+3.3,with lag network,1.124e+04,0.17,-84.0
+3.3,with lag network,1.19e+04,-0.14,-84.1
+3.3,with lag network,1.261e+04,-0.46,-84.3
+3.3,with lag network,1.335e+04,-0.78,-84.6
+3.3,with lag network,1.415e+04,-1.11,-85.1
+3.3,with lag network,1.498e+04,-1.44,-85.7
+3.3,with lag network,1.587e+04,-1.79,-86.3
+3.3,with lag network,1.681e+04,-2.14,-87.1
+3.3,with lag network,1.781e+04,-2.49,-88.0
+3.3,with lag network,1.886e+04,-2.86,-88.9
+3.3,with lag network,1.998e+04,-3.23,-90.0
+3.3,with lag network,2.117e+04,-3.62,-91.1
+3.3,with lag network,2.242e+04,-4.01,-92.3
+3.3,with lag network,2.375e+04,-4.41,-93.5
+3.3,with lag network,2.516e+04,-4.82,-94.9
+3.3,with lag network,2.665e+04,-5.24,-96.3
+3.3,with lag network,2.823e+04,-5.66,-97.8
+3.3,with lag network,2.99e+04,-6.1,-99.3
+3.3,with lag network,3.167e+04,-6.54,-100.9
+3.3,with lag network,3.355e+04,-6.99,-102.6
+3.3,with lag network,3.554e+04,-7.45,-104.3
+3.3,with lag network,3.764e+04,-7.91,-106.1
+3.3,with lag network,3.987e+04,-8.39,-108.0
+3.3,with lag network,4.224e+04,-8.87,-110.0
+3.3,with lag network,4.474e+04,-9.35,-112.0
+3.3,with lag network,4.739e+04,-9.85,-114.1
+3.3,with lag network,5.02e+04,-10.35,-116.4
+3.3,with lag network,5.318e+04,-10.86,-118.7
+3.3,with lag network,5.633e+04,-11.37,-121.1
+3.3,with lag network,5.967e+04,-11.9,-123.7
+3.3,with lag network,6.32e+04,-12.43,-126.3
+3.3,with lag network,6.695e+04,-12.97,-129.1
+3.3,with lag network,7.092e+04,-13.53,-132.0
+3.3,with lag network,7.512e+04,-14.09,-135.1
+3.3,with lag network,7.957e+04,-14.67,-138.3
+3.3,with lag network,8.429e+04,-15.26,-141.7
+3.3,with lag network,8.928e+04,-15.87,-145.3
+3.3,with lag network,9.457e+04,-16.49,-149.0
+3.3,with lag network,1.002e+05,-17.14,-152.9
+3.3,with lag network,1.061e+05,-17.8,-157.0
+3.3,with lag network,1.124e+05,-18.5,-161.3
+3.3,with lag network,1.191e+05,-19.22,-165.8
+3.3,with lag network,1.261e+05,-19.97,-170.5
+3.3,with lag network,1.336e+05,-20.77,-175.4
+3.3,with lag network,1.415e+05,-21.6,-180.5
+3.3,with lag network,1.499e+05,-22.47,-185.8
+3.3,with lag network,1.588e+05,-23.39,-191.2
+3.3,with lag network,1.682e+05,-24.37,-196.8
+3.3,with lag network,1.782e+05,-25.4,-202.5
+3.3,with lag network,1.887e+05,-26.48,-208.2
+3.3,with lag network,1.999e+05,-27.63,-214.1
+3.3,with lag network,2.118e+05,-28.84,-219.9
+3.3,with lag network,2.243e+05,-30.1,-225.7
+3.3,with lag network,2.376e+05,-31.43,-231.5
+3.3,with lag network,2.517e+05,-32.81,-237.2
+3.3,with lag network,2.666e+05,-34.24,-242.8
+3.3,with lag network,2.824e+05,-35.73,-248.2
+3.3,with lag network,2.991e+05,-37.27,-253.5
+3.3,with lag network,3.169e+05,-38.85,-258.6
+3.3,with lag network,3.356e+05,-40.47,-263.5
+3.3,with lag network,3.555e+05,-42.13,-268.3
+3.3,with lag network,3.766e+05,-43.82,-272.8
+3.3,with lag network,3.989e+05,-45.55,-277.2
+3.3,with lag network,4.226e+05,-47.3,-281.3
+3.3,with lag network,4.476e+05,-49.07,-285.3
+3.3,with lag network,4.741e+05,-50.87,-289.0
+3.3,with lag network,5.022e+05,-52.69,-292.6
+3.3,with lag network,5.32e+05,-54.53,-296.0
+3.3,with lag network,5.635e+05,-56.38,-299.2
+3.3,with lag network,5.969e+05,-58.25,-302.2
+3.3,with lag network,6.323e+05,-60.13,-305.1
+3.3,with lag network,6.698e+05,-62.02,-307.8
+3.3,with lag network,7.095e+05,-63.92,-310.4
+3.3,with lag network,7.515e+05,-65.83,-312.8
+3.3,with lag network,7.961e+05,-67.75,-315.1
+3.3,with lag network,8.433e+05,-69.68,-317.2
+3.3,with lag network,8.932e+05,-71.61,-319.2
+3.3,with lag network,9.462e+05,-73.54,-321.1
+3.3,with lag network,1.002e+06,-75.48,-322.9
+3.3,with lag network,1.062e+06,-77.42,-324.6
+3.3,with lag network,1.125e+06,-79.37,-326.1
+3.3,with lag network,1.191e+06,-81.31,-327.6
+3.3,with lag network,1.262e+06,-83.26,-328.9
+3.3,with lag network,1.337e+06,-85.21,-330.2
+3.3,with lag network,1.416e+06,-87.15,-331.4
+3.3,with lag network,1.5e+06,-89.1,-332.5
+3.3,with lag network,1.589e+06,-91.04,-333.5
+3.3,with lag network,1.683e+06,-92.98,-334.5
+3.3,with lag network,1.782e+06,-94.92,-335.4
+3.3,with lag network,1.888e+06,-96.85,-336.3
+3.3,with lag network,2e+06,-98.78,-337.1
+5,divider only,100,79.52,-110.5
+5,divider only,106,78.93,-111.8
+5,divider only,112.3,78.33,-113.0
+5,divider only,118.9,77.72,-114.3
+5,divider only,126,77.09,-115.7
+5,divider only,133.4,76.46,-117.0
+5,divider only,141.3,75.82,-118.4
+5,divider only,149.7,75.16,-119.8
+5,divider only,158.6,74.49,-121.2
+5,divider only,168,73.81,-122.6
+5,divider only,177.9,73.11,-124.0
+5,divider only,188.5,72.4,-125.4
+5,divider only,199.6,71.68,-126.8
+5,divider only,211.5,70.94,-128.2
+5,divider only,224,70.19,-129.6
+5,divider only,237.3,69.42,-130.9
+5,divider only,251.3,68.64,-132.2
+5,divider only,266.2,67.85,-133.5
+5,divider only,282,67.05,-134.7
+5,divider only,298.7,66.23,-135.8
+5,divider only,316.4,65.4,-137.0
+5,divider only,335.2,64.56,-138.0
+5,divider only,355.1,63.7,-139.0
+5,divider only,376.1,62.84,-139.9
+5,divider only,398.4,61.97,-140.7
+5,divider only,422,61.09,-141.5
+5,divider only,447,60.2,-142.2
+5,divider only,473.5,59.3,-142.7
+5,divider only,501.6,58.4,-143.2
+5,divider only,531.3,57.5,-143.7
+5,divider only,562.8,56.58,-144.0
+5,divider only,596.1,55.67,-144.2
+5,divider only,631.5,54.75,-144.3
+5,divider only,668.9,53.83,-144.4
+5,divider only,708.5,52.91,-144.3
+5,divider only,750.5,51.99,-144.1
+5,divider only,795,51.07,-143.9
+5,divider only,842.1,50.15,-143.5
+5,divider only,892,49.23,-143.1
+5,divider only,944.9,48.32,-142.5
+5,divider only,1001,47.41,-141.8
+5,divider only,1060,46.51,-141.1
+5,divider only,1123,45.61,-140.2
+5,divider only,1190,44.72,-139.3
+5,divider only,1260,43.83,-138.2
+5,divider only,1335,42.96,-137.0
+5,divider only,1414,42.09,-135.8
+5,divider only,1498,41.24,-134.4
+5,divider only,1586,40.4,-133.0
+5,divider only,1680,39.57,-131.5
+5,divider only,1780,38.76,-129.9
+5,divider only,1886,37.96,-128.2
+5,divider only,1997,37.18,-126.4
+5,divider only,2116,36.41,-124.6
+5,divider only,2241,35.67,-122.7
+5,divider only,2374,34.94,-120.7
+5,divider only,2515,34.24,-118.7
+5,divider only,2664,33.55,-116.7
+5,divider only,2821,32.89,-114.6
+5,divider only,2989,32.25,-112.5
+5,divider only,3166,31.63,-110.4
+5,divider only,3353,31.04,-108.3
+5,divider only,3552,30.46,-106.2
+5,divider only,3763,29.92,-104.1
+5,divider only,3986,29.39,-102.1
+5,divider only,4222,28.89,-100.1
+5,divider only,4472,28.41,-98.1
+5,divider only,4737,27.95,-96.2
+5,divider only,5018,27.52,-94.4
+5,divider only,5315,27.1,-92.7
+5,divider only,5630,26.7,-91.1
+5,divider only,5964,26.32,-89.6
+5,divider only,6317,25.96,-88.2
+5,divider only,6692,25.61,-86.9
+5,divider only,7088,25.28,-85.7
+5,divider only,7509,24.96,-84.7
+5,divider only,7954,24.65,-83.8
+5,divider only,8425,24.35,-83.1
+5,divider only,8924,24.05,-82.5
+5,divider only,9453,23.76,-82.0
+5,divider only,1.001e+04,23.48,-81.7
+5,divider only,1.061e+04,23.19,-81.5
+5,divider only,1.124e+04,22.91,-81.5
+5,divider only,1.19e+04,22.63,-81.7
+5,divider only,1.261e+04,22.34,-81.9
+5,divider only,1.335e+04,22.05,-82.3
+5,divider only,1.415e+04,21.76,-82.9
+5,divider only,1.498e+04,21.46,-83.5
+5,divider only,1.587e+04,21.15,-84.3
+5,divider only,1.681e+04,20.84,-85.3
+5,divider only,1.781e+04,20.51,-86.3
+5,divider only,1.886e+04,20.18,-87.4
+5,divider only,1.998e+04,19.84,-88.6
+5,divider only,2.117e+04,19.48,-90.0
+5,divider only,2.242e+04,19.12,-91.4
+5,divider only,2.375e+04,18.75,-92.9
+5,divider only,2.516e+04,18.36,-94.5
+5,divider only,2.665e+04,17.97,-96.2
+5,divider only,2.823e+04,17.57,-98.0
+5,divider only,2.99e+04,17.15,-99.8
+5,divider only,3.167e+04,16.73,-101.8
+5,divider only,3.355e+04,16.3,-103.8
+5,divider only,3.554e+04,15.85,-105.9
+5,divider only,3.764e+04,15.4,-108.1
+5,divider only,3.987e+04,14.94,-110.4
+5,divider only,4.224e+04,14.47,-112.7
+5,divider only,4.474e+04,14.0,-115.2
+5,divider only,4.739e+04,13.51,-117.8
+5,divider only,5.02e+04,13.01,-120.5
+5,divider only,5.318e+04,12.51,-123.3
+5,divider only,5.633e+04,11.99,-126.2
+5,divider only,5.967e+04,11.47,-129.3
+5,divider only,6.32e+04,10.93,-132.4
+5,divider only,6.695e+04,10.38,-135.8
+5,divider only,7.092e+04,9.82,-139.3
+5,divider only,7.512e+04,9.25,-143.0
+5,divider only,7.957e+04,8.66,-146.8
+5,divider only,8.429e+04,8.06,-150.8
+5,divider only,8.928e+04,7.43,-155.1
+5,divider only,9.457e+04,6.79,-159.5
+5,divider only,1.002e+05,6.12,-164.2
+5,divider only,1.061e+05,5.43,-169.0
+5,divider only,1.124e+05,4.71,-174.2
+5,divider only,1.191e+05,3.95,-179.5
+5,divider only,1.261e+05,3.16,-185.1
+5,divider only,1.336e+05,2.33,-190.9
+5,divider only,1.415e+05,1.45,-196.9
+5,divider only,1.499e+05,0.53,-203.2
+5,divider only,1.588e+05,-0.45,-209.6
+5,divider only,1.682e+05,-1.49,-216.3
+5,divider only,1.782e+05,-2.59,-223.1
+5,divider only,1.887e+05,-3.75,-230.0
+5,divider only,1.999e+05,-4.98,-237.0
+5,divider only,2.118e+05,-6.28,-244.1
+5,divider only,2.243e+05,-7.65,-251.2
+5,divider only,2.376e+05,-9.09,-258.3
+5,divider only,2.517e+05,-10.59,-265.3
+5,divider only,2.666e+05,-12.17,-272.2
+5,divider only,2.824e+05,-13.8,-279.1
+5,divider only,2.991e+05,-15.49,-285.8
+5,divider only,3.169e+05,-17.25,-292.4
+5,divider only,3.356e+05,-19.05,-298.7
+5,divider only,3.555e+05,-20.91,-305.0
+5,divider only,3.766e+05,-22.82,-311.0
+5,divider only,3.989e+05,-24.77,-316.8
+5,divider only,4.226e+05,-26.76,-322.4
+5,divider only,4.476e+05,-28.79,-327.8
+5,divider only,4.741e+05,-30.86,-333.0
+5,divider only,5.022e+05,-32.96,-338.0
+5,divider only,5.32e+05,-35.09,-342.8
+5,divider only,5.635e+05,-37.26,-347.3
+5,divider only,5.969e+05,-39.45,-351.7
+5,divider only,6.323e+05,-41.66,-355.8
+5,divider only,6.698e+05,-43.9,-359.7
+5,divider only,7.095e+05,-46.16,-363.5
+5,divider only,7.515e+05,-48.44,-367.0
+5,divider only,7.961e+05,-50.74,-370.3
+5,divider only,8.433e+05,-53.06,-373.4
+5,divider only,8.932e+05,-55.39,-376.3
+5,divider only,9.462e+05,-57.73,-379.0
+5,divider only,1.002e+06,-60.08,-381.5
+5,divider only,1.062e+06,-62.44,-383.8
+5,divider only,1.125e+06,-64.81,-386.0
+5,divider only,1.191e+06,-67.19,-387.9
+5,divider only,1.262e+06,-69.58,-389.7
+5,divider only,1.337e+06,-71.97,-391.3
+5,divider only,1.416e+06,-74.36,-392.7
+5,divider only,1.5e+06,-76.75,-394.0
+5,divider only,1.589e+06,-79.15,-395.1
+5,divider only,1.683e+06,-81.55,-396.1
+5,divider only,1.782e+06,-83.94,-396.9
+5,divider only,1.888e+06,-86.33,-397.5
+5,divider only,2e+06,-88.72,-398.0
+5,with lag network,100,61.17,-152.2
+5,with lag network,106,60.32,-152.1
+5,with lag network,112.3,59.48,-152.0
+5,with lag network,118.9,58.64,-151.9
+5,with lag network,126,57.81,-151.8
+5,with lag network,133.4,56.97,-151.8
+5,with lag network,141.3,56.14,-151.8
+5,with lag network,149.7,55.31,-151.8
+5,with lag network,158.6,54.48,-151.8
+5,with lag network,168,53.65,-151.9
+5,with lag network,177.9,52.82,-152.0
+5,with lag network,188.5,51.99,-152.1
+5,with lag network,199.6,51.15,-152.3
+5,with lag network,211.5,50.31,-152.5
+5,with lag network,224,49.46,-152.7
+5,with lag network,237.3,48.61,-152.9
+5,with lag network,251.3,47.75,-153.1
+5,with lag network,266.2,46.89,-153.3
+5,with lag network,282,46.01,-153.5
+5,with lag network,298.7,45.14,-153.7
+5,with lag network,316.4,44.25,-153.9
+5,with lag network,335.2,43.36,-154.1
+5,with lag network,355.1,42.47,-154.2
+5,with lag network,376.1,41.57,-154.3
+5,with lag network,398.4,40.66,-154.4
+5,with lag network,422,39.75,-154.4
+5,with lag network,447,38.83,-154.4
+5,with lag network,473.5,37.91,-154.3
+5,with lag network,501.6,36.99,-154.2
+5,with lag network,531.3,36.06,-154.0
+5,with lag network,562.8,35.13,-153.7
+5,with lag network,596.1,34.2,-153.4
+5,with lag network,631.5,33.27,-153.0
+5,with lag network,668.9,32.33,-152.6
+5,with lag network,708.5,31.4,-152.0
+5,with lag network,750.5,30.47,-151.4
+5,with lag network,795,29.54,-150.8
+5,with lag network,842.1,28.61,-150.0
+5,with lag network,892,27.69,-149.2
+5,with lag network,944.9,26.77,-148.3
+5,with lag network,1001,25.85,-147.3
+5,with lag network,1060,24.94,-146.2
+5,with lag network,1123,24.04,-145.0
+5,with lag network,1190,23.14,-143.8
+5,with lag network,1260,22.26,-142.5
+5,with lag network,1335,21.38,-141.1
+5,with lag network,1414,20.51,-139.6
+5,with lag network,1498,19.66,-138.0
+5,with lag network,1586,18.81,-136.3
+5,with lag network,1680,17.98,-134.6
+5,with lag network,1780,17.17,-132.8
+5,with lag network,1886,16.37,-130.9
+5,with lag network,1997,15.58,-129.0
+5,with lag network,2116,14.82,-126.9
+5,with lag network,2241,14.07,-124.9
+5,with lag network,2374,13.34,-122.8
+5,with lag network,2515,12.64,-120.6
+5,with lag network,2664,11.95,-118.4
+5,with lag network,2821,11.29,-116.2
+5,with lag network,2989,10.65,-114.0
+5,with lag network,3166,10.03,-111.8
+5,with lag network,3353,9.44,-109.5
+5,with lag network,3552,8.86,-107.3
+5,with lag network,3763,8.32,-105.1
+5,with lag network,3986,7.79,-103.0
+5,with lag network,4222,7.29,-100.9
+5,with lag network,4472,6.81,-98.8
+5,with lag network,4737,6.35,-96.8
+5,with lag network,5018,5.91,-94.9
+5,with lag network,5315,5.5,-93.1
+5,with lag network,5630,5.1,-91.4
+5,with lag network,5964,4.72,-89.8
+5,with lag network,6317,4.36,-88.3
+5,with lag network,6692,4.01,-86.9
+5,with lag network,7088,3.68,-85.6
+5,with lag network,7509,3.35,-84.5
+5,with lag network,7954,3.04,-83.5
+5,with lag network,8425,2.74,-82.7
+5,with lag network,8924,2.45,-82.0
+5,with lag network,9453,2.16,-81.4
+5,with lag network,1.001e+04,1.88,-81.0
+5,with lag network,1.061e+04,1.59,-80.8
+5,with lag network,1.124e+04,1.31,-80.6
+5,with lag network,1.19e+04,1.03,-80.7
+5,with lag network,1.261e+04,0.74,-80.8
+5,with lag network,1.335e+04,0.45,-81.1
+5,with lag network,1.415e+04,0.16,-81.5
+5,with lag network,1.498e+04,-0.14,-82.1
+5,with lag network,1.587e+04,-0.45,-82.7
+5,with lag network,1.681e+04,-0.76,-83.5
+5,with lag network,1.781e+04,-1.09,-84.4
+5,with lag network,1.886e+04,-1.42,-85.4
+5,with lag network,1.998e+04,-1.76,-86.4
+5,with lag network,2.117e+04,-2.11,-87.6
+5,with lag network,2.242e+04,-2.47,-88.9
+5,with lag network,2.375e+04,-2.84,-90.2
+5,with lag network,2.516e+04,-3.23,-91.6
+5,with lag network,2.665e+04,-3.62,-93.1
+5,with lag network,2.823e+04,-4.02,-94.7
+5,with lag network,2.99e+04,-4.43,-96.3
+5,with lag network,3.167e+04,-4.85,-98.0
+5,with lag network,3.355e+04,-5.28,-99.8
+5,with lag network,3.554e+04,-5.72,-101.7
+5,with lag network,3.764e+04,-6.17,-103.6
+5,with lag network,3.987e+04,-6.62,-105.6
+5,with lag network,4.224e+04,-7.09,-107.7
+5,with lag network,4.474e+04,-7.56,-109.8
+5,with lag network,4.739e+04,-8.04,-112.1
+5,with lag network,5.02e+04,-8.53,-114.4
+5,with lag network,5.318e+04,-9.03,-116.8
+5,with lag network,5.633e+04,-9.54,-119.4
+5,with lag network,5.967e+04,-10.05,-122.0
+5,with lag network,6.32e+04,-10.58,-124.8
+5,with lag network,6.695e+04,-11.12,-127.7
+5,with lag network,7.092e+04,-11.66,-130.7
+5,with lag network,7.512e+04,-12.22,-133.8
+5,with lag network,7.957e+04,-12.8,-137.2
+5,with lag network,8.429e+04,-13.38,-140.6
+5,with lag network,8.928e+04,-13.99,-144.3
+5,with lag network,9.457e+04,-14.61,-148.1
+5,with lag network,1.002e+05,-15.25,-152.1
+5,with lag network,1.061e+05,-15.91,-156.2
+5,with lag network,1.124e+05,-16.6,-160.6
+5,with lag network,1.191e+05,-17.32,-165.2
+5,with lag network,1.261e+05,-18.08,-170.0
+5,with lag network,1.336e+05,-18.87,-175.0
+5,with lag network,1.415e+05,-19.7,-180.1
+5,with lag network,1.499e+05,-20.57,-185.4
+5,with lag network,1.588e+05,-21.49,-190.9
+5,with lag network,1.682e+05,-22.46,-196.6
+5,with lag network,1.782e+05,-23.49,-202.3
+5,with lag network,1.887e+05,-24.58,-208.2
+5,with lag network,1.999e+05,-25.72,-214.1
+5,with lag network,2.118e+05,-26.93,-220.0
+5,with lag network,2.243e+05,-28.2,-225.9
+5,with lag network,2.376e+05,-29.52,-231.7
+5,with lag network,2.517e+05,-30.9,-237.5
+5,with lag network,2.666e+05,-32.34,-243.1
+5,with lag network,2.824e+05,-33.83,-248.6
+5,with lag network,2.991e+05,-35.36,-254.0
+5,with lag network,3.169e+05,-36.94,-259.2
+5,with lag network,3.356e+05,-38.57,-264.2
+5,with lag network,3.555e+05,-40.23,-269.0
+5,with lag network,3.766e+05,-41.92,-273.6
+5,with lag network,3.989e+05,-43.65,-278.0
+5,with lag network,4.226e+05,-45.4,-282.3
+5,with lag network,4.476e+05,-47.18,-286.3
+5,with lag network,4.741e+05,-48.98,-290.2
+5,with lag network,5.022e+05,-50.8,-293.8
+5,with lag network,5.32e+05,-52.64,-297.3
+5,with lag network,5.635e+05,-54.5,-300.6
+5,with lag network,5.969e+05,-56.37,-303.8
+5,with lag network,6.323e+05,-58.26,-306.8
+5,with lag network,6.698e+05,-60.15,-309.6
+5,with lag network,7.095e+05,-62.06,-312.3
+5,with lag network,7.515e+05,-63.98,-314.8
+5,with lag network,7.961e+05,-65.9,-317.2
+5,with lag network,8.433e+05,-67.83,-319.5
+5,with lag network,8.932e+05,-69.77,-321.6
+5,with lag network,9.462e+05,-71.72,-323.7
+5,with lag network,1.002e+06,-73.67,-325.6
+5,with lag network,1.062e+06,-75.62,-327.4
+5,with lag network,1.125e+06,-77.58,-329.1
+5,with lag network,1.191e+06,-79.54,-330.7
+5,with lag network,1.262e+06,-81.5,-332.2
+5,with lag network,1.337e+06,-83.47,-333.7
+5,with lag network,1.416e+06,-85.43,-335.0
+5,with lag network,1.5e+06,-87.4,-336.3
+5,with lag network,1.589e+06,-89.37,-337.5
+5,with lag network,1.683e+06,-91.33,-338.7
+5,with lag network,1.782e+06,-93.3,-339.8
+5,with lag network,1.888e+06,-95.26,-340.8
+5,with lag network,2e+06,-97.22,-341.8
+12,divider only,100,85.2,-128.8
+12,divider only,106,84.45,-130.4
+12,divider only,112.3,83.69,-132.0
+12,divider only,118.9,82.92,-133.5
+12,divider only,126,82.14,-135.1
+12,divider only,133.4,81.34,-136.6
+12,divider only,141.3,80.52,-138.0
+12,divider only,149.7,79.7,-139.4
+12,divider only,158.6,78.86,-140.8
+12,divider only,168,78.01,-142.1
+12,divider only,177.9,77.14,-143.3
+12,divider only,188.5,76.27,-144.5
+12,divider only,199.6,75.39,-145.6
+12,divider only,211.5,74.5,-146.7
+12,divider only,224,73.59,-147.7
+12,divider only,237.3,72.68,-148.6
+12,divider only,251.3,71.77,-149.5
+12,divider only,266.2,70.84,-150.2
+12,divider only,282,69.91,-151.0
+12,divider only,298.7,68.98,-151.6
+12,divider only,316.4,68.04,-152.1
+12,divider only,335.2,67.09,-152.6
+12,divider only,355.1,66.15,-153.0
+12,divider only,376.1,65.19,-153.3
+12,divider only,398.4,64.24,-153.6
+12,divider only,422,63.28,-153.8
+12,divider only,447,62.33,-153.8
+12,divider only,473.5,61.37,-153.9
+12,divider only,501.6,60.41,-153.8
+12,divider only,531.3,59.45,-153.6
+12,divider only,562.8,58.49,-153.4
+12,divider only,596.1,57.53,-153.1
+12,divider only,631.5,56.57,-152.7
+12,divider only,668.9,55.62,-152.3
+12,divider only,708.5,54.67,-151.7
+12,divider only,750.5,53.72,-151.1
+12,divider only,795,52.77,-150.3
+12,divider only,842.1,51.83,-149.5
+12,divider only,892,50.89,-148.6
+12,divider only,944.9,49.96,-147.7
+12,divider only,1001,49.03,-146.6
+12,divider only,1060,48.11,-145.4
+12,divider only,1123,47.2,-144.2
+12,divider only,1190,46.3,-142.8
+12,divider only,1260,45.41,-141.4
+12,divider only,1335,44.53,-139.9
+12,divider only,1414,43.65,-138.3
+12,divider only,1498,42.79,-136.6
+12,divider only,1586,41.95,-134.8
+12,divider only,1680,41.12,-133.0
+12,divider only,1780,40.3,-131.0
+12,divider only,1886,39.5,-129.0
+12,divider only,1997,38.72,-126.9
+12,divider only,2116,37.96,-124.8
+12,divider only,2241,37.21,-122.6
+12,divider only,2374,36.49,-120.3
+12,divider only,2515,35.79,-118.0
+12,divider only,2664,35.11,-115.6
+12,divider only,2821,34.45,-113.2
+12,divider only,2989,33.82,-110.8
+12,divider only,3166,33.21,-108.4
+12,divider only,3353,32.62,-105.9
+12,divider only,3552,32.06,-103.5
+12,divider only,3763,31.53,-101.1
+12,divider only,3986,31.02,-98.7
+12,divider only,4222,30.53,-96.3
+12,divider only,4472,30.07,-94.0
+12,divider only,4737,29.63,-91.8
+12,divider only,5018,29.22,-89.6
+12,divider only,5315,28.83,-87.5
+12,divider only,5630,28.46,-85.5
+12,divider only,5964,28.11,-83.6
+12,divider only,6317,27.78,-81.8
+12,divider only,6692,27.48,-80.1
+12,divider only,7088,27.18,-78.5
+12,divider only,7509,26.91,-77.1
+12,divider only,7954,26.65,-75.8
+12,divider only,8425,26.4,-74.6
+12,divider only,8924,26.17,-73.6
+12,divider only,9453,25.94,-72.7
+12,divider only,1.001e+04,25.72,-72.0
+12,divider only,1.061e+04,25.52,-71.5
+12,divider only,1.124e+04,25.31,-71.1
+12,divider only,1.19e+04,25.11,-70.9
+12,divider only,1.261e+04,24.91,-70.8
+12,divider only,1.335e+04,24.72,-70.9
+12,divider only,1.415e+04,24.52,-71.1
+12,divider only,1.498e+04,24.32,-71.6
+12,divider only,1.587e+04,24.12,-72.1
+12,divider only,1.681e+04,23.91,-72.9
+12,divider only,1.781e+04,23.7,-73.7
+12,divider only,1.886e+04,23.48,-74.8
+12,divider only,1.998e+04,23.25,-76.0
+12,divider only,2.117e+04,23.01,-77.3
+12,divider only,2.242e+04,22.76,-78.7
+12,divider only,2.375e+04,22.49,-80.3
+12,divider only,2.516e+04,22.22,-82.0
+12,divider only,2.665e+04,21.94,-83.9
+12,divider only,2.823e+04,21.64,-85.8
+12,divider only,2.99e+04,21.33,-87.9
+12,divider only,3.167e+04,21.0,-90.1
+12,divider only,3.355e+04,20.66,-92.4
+12,divider only,3.554e+04,20.31,-94.8
+12,divider only,3.764e+04,19.94,-97.3
+12,divider only,3.987e+04,19.56,-100.0
+12,divider only,4.224e+04,19.17,-102.7
+12,divider only,4.474e+04,18.76,-105.5
+12,divider only,4.739e+04,18.33,-108.5
+12,divider only,5.02e+04,17.9,-111.6
+12,divider only,5.318e+04,17.45,-114.8
+12,divider only,5.633e+04,16.98,-118.1
+12,divider only,5.967e+04,16.51,-121.5
+12,divider only,6.32e+04,16.01,-125.1
+12,divider only,6.695e+04,15.5,-128.8
+12,divider only,7.092e+04,14.98,-132.7
+12,divider only,7.512e+04,14.44,-136.7
+12,divider only,7.957e+04,13.88,-140.9
+12,divider only,8.429e+04,13.3,-145.2
+12,divider only,8.928e+04,12.7,-149.8
+12,divider only,9.457e+04,12.08,-154.6
+12,divider only,1.002e+05,11.43,-159.5
+12,divider only,1.061e+05,10.76,-164.7
+12,divider only,1.124e+05,10.05,-170.1
+12,divider only,1.191e+05,9.31,-175.7
+12,divider only,1.261e+05,8.53,-181.6
+12,divider only,1.336e+05,7.71,-187.7
+12,divider only,1.415e+05,6.85,-194.0
+12,divider only,1.499e+05,5.93,-200.5
+12,divider only,1.588e+05,4.96,-207.2
+12,divider only,1.682e+05,3.93,-214.0
+12,divider only,1.782e+05,2.83,-221.1
+12,divider only,1.887e+05,1.67,-228.2
+12,divider only,1.999e+05,0.45,-235.5
+12,divider only,2.118e+05,-0.85,-242.7
+12,divider only,2.243e+05,-2.21,-250.1
+12,divider only,2.376e+05,-3.65,-257.3
+12,divider only,2.517e+05,-5.15,-264.6
+12,divider only,2.666e+05,-6.72,-271.7
+12,divider only,2.824e+05,-8.35,-278.8
+12,divider only,2.991e+05,-10.05,-285.7
+12,divider only,3.169e+05,-11.8,-292.4
+12,divider only,3.356e+05,-13.6,-299.0
+12,divider only,3.555e+05,-15.46,-305.4
+12,divider only,3.766e+05,-17.37,-311.7
+12,divider only,3.989e+05,-19.32,-317.7
+12,divider only,4.226e+05,-21.31,-323.5
+12,divider only,4.476e+05,-23.35,-329.1
+12,divider only,4.741e+05,-25.42,-334.5
+12,divider only,5.022e+05,-27.52,-339.8
+12,divider only,5.32e+05,-29.66,-344.8
+12,divider only,5.635e+05,-31.83,-349.5
+12,divider only,5.969e+05,-34.02,-354.1
+12,divider only,6.323e+05,-36.24,-358.5
+12,divider only,6.698e+05,-38.49,-362.7
+12,divider only,7.095e+05,-40.76,-366.7
+12,divider only,7.515e+05,-43.05,-370.4
+12,divider only,7.961e+05,-45.35,-374.0
+12,divider only,8.433e+05,-47.68,-377.4
+12,divider only,8.932e+05,-50.02,-380.6
+12,divider only,9.462e+05,-52.37,-383.6
+12,divider only,1.002e+06,-54.74,-386.5
+12,divider only,1.062e+06,-57.12,-389.1
+12,divider only,1.125e+06,-59.51,-391.6
+12,divider only,1.191e+06,-61.91,-394.0
+12,divider only,1.262e+06,-64.31,-396.1
+12,divider only,1.337e+06,-66.73,-398.1
+12,divider only,1.416e+06,-69.15,-400.0
+12,divider only,1.5e+06,-71.57,-401.7
+12,divider only,1.589e+06,-74.0,-403.2
+12,divider only,1.683e+06,-76.44,-404.6
+12,divider only,1.782e+06,-78.88,-405.9
+12,divider only,1.888e+06,-81.31,-407.0
+12,divider only,2e+06,-83.75,-408.0
+12,with lag network,100,66.84,-170.5
+12,with lag network,106,65.84,-170.7
+12,with lag network,112.3,64.85,-170.9
+12,with lag network,118.9,63.85,-171.1
+12,with lag network,126,62.85,-171.2
+12,with lag network,133.4,61.85,-171.3
+12,with lag network,141.3,60.85,-171.4
+12,with lag network,149.7,59.85,-171.4
+12,with lag network,158.6,58.85,-171.4
+12,with lag network,168,57.85,-171.4
+12,with lag network,177.9,56.86,-171.3
+12,with lag network,188.5,55.86,-171.2
+12,with lag network,199.6,54.86,-171.1
+12,with lag network,211.5,53.86,-171.0
+12,with lag network,224,52.87,-170.8
+12,with lag network,237.3,51.87,-170.6
+12,with lag network,251.3,50.87,-170.4
+12,with lag network,266.2,49.88,-170.1
+12,with lag network,282,48.88,-169.8
+12,with lag network,298.7,47.89,-169.5
+12,with lag network,316.4,46.89,-169.1
+12,with lag network,335.2,45.9,-168.7
+12,with lag network,355.1,44.91,-168.2
+12,with lag network,376.1,43.92,-167.7
+12,with lag network,398.4,42.93,-167.2
+12,with lag network,422,41.94,-166.7
+12,with lag network,447,40.96,-166.0
+12,with lag network,473.5,39.98,-165.4
+12,with lag network,501.6,38.99,-164.7
+12,with lag network,531.3,38.01,-163.9
+12,with lag network,562.8,37.04,-163.2
+12,with lag network,596.1,36.06,-162.3
+12,with lag network,631.5,35.09,-161.4
+12,with lag network,668.9,34.12,-160.5
+12,with lag network,708.5,33.16,-159.4
+12,with lag network,750.5,32.2,-158.4
+12,with lag network,795,31.24,-157.2
+12,with lag network,842.1,30.29,-156.0
+12,with lag network,892,29.35,-154.8
+12,with lag network,944.9,28.41,-153.4
+12,with lag network,1001,27.48,-152.0
+12,with lag network,1060,26.55,-150.6
+12,with lag network,1123,25.64,-149.0
+12,with lag network,1190,24.73,-147.4
+12,with lag network,1260,23.83,-145.7
+12,with lag network,1335,22.95,-143.9
+12,with lag network,1414,22.07,-142.1
+12,with lag network,1498,21.21,-140.2
+12,with lag network,1586,20.36,-138.2
+12,with lag network,1680,19.53,-136.1
+12,with lag network,1780,18.71,-134.0
+12,with lag network,1886,17.91,-131.8
+12,with lag network,1997,17.13,-129.5
+12,with lag network,2116,16.36,-127.2
+12,with lag network,2241,15.62,-124.8
+12,with lag network,2374,14.89,-122.4
+12,with lag network,2515,14.19,-119.9
+12,with lag network,2664,13.51,-117.4
+12,with lag network,2821,12.85,-114.8
+12,with lag network,2989,12.22,-112.3
+12,with lag network,3166,11.61,-109.7
+12,with lag network,3353,11.02,-107.2
+12,with lag network,3552,10.46,-104.6
+12,with lag network,3763,9.93,-102.1
+12,with lag network,3986,9.42,-99.6
+12,with lag network,4222,8.93,-97.1
+12,with lag network,4472,8.47,-94.7
+12,with lag network,4737,8.03,-92.4
+12,with lag network,5018,7.62,-90.1
+12,with lag network,5315,7.23,-87.9
+12,with lag network,5630,6.86,-85.8
+12,with lag network,5964,6.51,-83.8
+12,with lag network,6317,6.18,-81.9
+12,with lag network,6692,5.87,-80.1
+12,with lag network,7088,5.58,-78.4
+12,with lag network,7509,5.31,-76.9
+12,with lag network,7954,5.05,-75.5
+12,with lag network,8425,4.8,-74.2
+12,with lag network,8924,4.56,-73.1
+12,with lag network,9453,4.34,-72.1
+12,with lag network,1.001e+04,4.12,-71.3
+12,with lag network,1.061e+04,3.91,-70.7
+12,with lag network,1.124e+04,3.71,-70.2
+12,with lag network,1.19e+04,3.51,-69.8
+12,with lag network,1.261e+04,3.31,-69.7
+12,with lag network,1.335e+04,3.12,-69.6
+12,with lag network,1.415e+04,2.92,-69.8
+12,with lag network,1.498e+04,2.72,-70.1
+12,with lag network,1.587e+04,2.52,-70.5
+12,with lag network,1.681e+04,2.31,-71.1
+12,with lag network,1.781e+04,2.1,-71.9
+12,with lag network,1.886e+04,1.88,-72.7
+12,with lag network,1.998e+04,1.65,-73.8
+12,with lag network,2.117e+04,1.41,-74.9
+12,with lag network,2.242e+04,1.16,-76.2
+12,with lag network,2.375e+04,0.9,-77.6
+12,with lag network,2.516e+04,0.63,-79.1
+12,with lag network,2.665e+04,0.35,-80.8
+12,with lag network,2.823e+04,0.05,-82.6
+12,with lag network,2.99e+04,-0.26,-84.4
+12,with lag network,3.167e+04,-0.58,-86.4
+12,with lag network,3.355e+04,-0.92,-88.4
+12,with lag network,3.554e+04,-1.27,-90.6
+12,with lag network,3.764e+04,-1.63,-92.8
+12,with lag network,3.987e+04,-2.01,-95.2
+12,with lag network,4.224e+04,-2.4,-97.6
+12,with lag network,4.474e+04,-2.8,-100.2
+12,with lag network,4.739e+04,-3.22,-102.8
+12,with lag network,5.02e+04,-3.65,-105.5
+12,with lag network,5.318e+04,-4.09,-108.3
+12,with lag network,5.633e+04,-4.55,-111.2
+12,with lag network,5.967e+04,-5.02,-114.3
+12,with lag network,6.32e+04,-5.5,-117.4
+12,with lag network,6.695e+04,-6.0,-120.7
+12,with lag network,7.092e+04,-6.51,-124.0
+12,with lag network,7.512e+04,-7.03,-127.6
+12,with lag network,7.957e+04,-7.58,-131.2
+12,with lag network,8.429e+04,-8.14,-135.0
+12,with lag network,8.928e+04,-8.72,-139.0
+12,with lag network,9.457e+04,-9.32,-143.1
+12,with lag network,1.002e+05,-9.94,-147.4
+12,with lag network,1.061e+05,-10.59,-151.9
+12,with lag network,1.124e+05,-11.26,-156.6
+12,with lag network,1.191e+05,-11.97,-161.4
+12,with lag network,1.261e+05,-12.71,-166.5
+12,with lag network,1.336e+05,-13.49,-171.7
+12,with lag network,1.415e+05,-14.31,-177.1
+12,with lag network,1.499e+05,-15.17,-182.7
+12,with lag network,1.588e+05,-16.08,-188.5
+12,with lag network,1.682e+05,-17.05,-194.3
+12,with lag network,1.782e+05,-18.07,-200.3
+12,with lag network,1.887e+05,-19.15,-206.4
+12,with lag network,1.999e+05,-20.29,-212.5
+12,with lag network,2.118e+05,-21.5,-218.6
+12,with lag network,2.243e+05,-22.76,-224.7
+12,with lag network,2.376e+05,-24.08,-230.8
+12,with lag network,2.517e+05,-25.46,-236.7
+12,with lag network,2.666e+05,-26.89,-242.6
+12,with lag network,2.824e+05,-28.38,-248.3
+12,with lag network,2.991e+05,-29.92,-253.9
+12,with lag network,3.169e+05,-31.5,-259.3
+12,with lag network,3.356e+05,-33.12,-264.5
+12,with lag network,3.555e+05,-34.78,-269.5
+12,with lag network,3.766e+05,-36.47,-274.3
+12,with lag network,3.989e+05,-38.2,-278.9
+12,with lag network,4.226e+05,-39.96,-283.4
+12,with lag network,4.476e+05,-41.74,-287.6
+12,with lag network,4.741e+05,-43.54,-291.7
+12,with lag network,5.022e+05,-45.37,-295.6
+12,with lag network,5.32e+05,-47.21,-299.3
+12,with lag network,5.635e+05,-49.07,-302.8
+12,with lag network,5.969e+05,-50.95,-306.2
+12,with lag network,6.323e+05,-52.84,-309.5
+12,with lag network,6.698e+05,-54.74,-312.5
+12,with lag network,7.095e+05,-56.65,-315.5
+12,with lag network,7.515e+05,-58.58,-318.3
+12,with lag network,7.961e+05,-60.51,-321.0
+12,with lag network,8.433e+05,-62.45,-323.5
+12,with lag network,8.932e+05,-64.4,-326.0
+12,with lag network,9.462e+05,-66.36,-328.3
+12,with lag network,1.002e+06,-68.33,-330.6
+12,with lag network,1.062e+06,-70.3,-332.7
+12,with lag network,1.125e+06,-72.27,-334.8
+12,with lag network,1.191e+06,-74.25,-336.7
+12,with lag network,1.262e+06,-76.24,-338.6
+12,with lag network,1.337e+06,-78.23,-340.5
+12,with lag network,1.416e+06,-80.23,-342.2
+12,with lag network,1.5e+06,-82.23,-343.9
+12,with lag network,1.589e+06,-84.23,-345.6
+12,with lag network,1.683e+06,-86.24,-347.1
+12,with lag network,1.782e+06,-88.25,-348.7
+12,with lag network,1.888e+06,-90.27,-350.1
+12,with lag network,2e+06,-92.28,-351.6
+16,divider only,100,86.6,-135.5
+16,divider only,106,85.8,-137.0
+16,divider only,112.3,84.99,-138.6
+16,divider only,118.9,84.16,-140.0
+16,divider only,126,83.32,-141.4
+16,divider only,133.4,82.47,-142.8
+16,divider only,141.3,81.6,-144.1
+16,divider only,149.7,80.73,-145.4
+16,divider only,158.6,79.84,-146.6
+16,divider only,168,78.95,-147.7
+16,divider only,177.9,78.04,-148.8
+16,divider only,188.5,77.13,-149.8
+16,divider only,199.6,76.21,-150.7
+16,divider only,211.5,75.29,-151.6
+16,divider only,224,74.35,-152.4
+16,divider only,237.3,73.42,-153.1
+16,divider only,251.3,72.47,-153.8
+16,divider only,266.2,71.52,-154.3
+16,divider only,282,70.57,-154.9
+16,divider only,298.7,69.62,-155.3
+16,divider only,316.4,68.66,-155.7
+16,divider only,335.2,67.7,-156.0
+16,divider only,355.1,66.73,-156.2
+16,divider only,376.1,65.77,-156.3
+16,divider only,398.4,64.8,-156.4
+16,divider only,422,63.84,-156.4
+16,divider only,447,62.87,-156.3
+16,divider only,473.5,61.9,-156.2
+16,divider only,501.6,60.93,-156.0
+16,divider only,531.3,59.97,-155.7
+16,divider only,562.8,59.0,-155.3
+16,divider only,596.1,58.04,-154.9
+16,divider only,631.5,57.07,-154.4
+16,divider only,668.9,56.12,-153.8
+16,divider only,708.5,55.16,-153.1
+16,divider only,750.5,54.2,-152.4
+16,divider only,795,53.26,-151.5
+16,divider only,842.1,52.31,-150.6
+16,divider only,892,51.37,-149.6
+16,divider only,944.9,50.44,-148.5
+16,divider only,1001,49.51,-147.4
+16,divider only,1060,48.59,-146.1
+16,divider only,1123,47.68,-144.8
+16,divider only,1190,46.77,-143.4
+16,divider only,1260,45.88,-141.8
+16,divider only,1335,44.99,-140.2
+16,divider only,1414,44.12,-138.5
+16,divider only,1498,43.26,-136.8
+16,divider only,1586,42.42,-134.9
+16,divider only,1680,41.59,-133.0
+16,divider only,1780,40.77,-130.9
+16,divider only,1886,39.97,-128.8
+16,divider only,1997,39.19,-126.7
+16,divider only,2116,38.43,-124.4
+16,divider only,2241,37.68,-122.1
+16,divider only,2374,36.96,-119.7
+16,divider only,2515,36.26,-117.3
+16,divider only,2664,35.58,-114.9
+16,divider only,2821,34.93,-112.4
+16,divider only,2989,34.3,-109.9
+16,divider only,3166,33.69,-107.3
+16,divider only,3353,33.11,-104.8
+16,divider only,3552,32.55,-102.2
+16,divider only,3763,32.02,-99.7
+16,divider only,3986,31.51,-97.2
+16,divider only,4222,31.03,-94.7
+16,divider only,4472,30.57,-92.3
+16,divider only,4737,30.14,-89.9
+16,divider only,5018,29.74,-87.6
+16,divider only,5315,29.35,-85.4
+16,divider only,5630,28.99,-83.2
+16,divider only,5964,28.65,-81.1
+16,divider only,6317,28.33,-79.2
+16,divider only,6692,28.03,-77.3
+16,divider only,7088,27.75,-75.6
+16,divider only,7509,27.49,-74.0
+16,divider only,7954,27.25,-72.5
+16,divider only,8425,27.01,-71.2
+16,divider only,8924,26.8,-70.0
+16,divider only,9453,26.59,-68.9
+16,divider only,1.001e+04,26.4,-68.0
+16,divider only,1.061e+04,26.21,-67.3
+16,divider only,1.124e+04,26.03,-66.7
+16,divider only,1.19e+04,25.86,-66.3
+16,divider only,1.261e+04,25.69,-66.0
+16,divider only,1.335e+04,25.53,-65.9
+16,divider only,1.415e+04,25.37,-66.0
+16,divider only,1.498e+04,25.2,-66.2
+16,divider only,1.587e+04,25.04,-66.6
+16,divider only,1.681e+04,24.88,-67.1
+16,divider only,1.781e+04,24.71,-67.9
+16,divider only,1.886e+04,24.53,-68.7
+16,divider only,1.998e+04,24.35,-69.8
+16,divider only,2.117e+04,24.17,-71.0
+16,divider only,2.242e+04,23.97,-72.3
+16,divider only,2.375e+04,23.76,-73.8
+16,divider only,2.516e+04,23.55,-75.5
+16,divider only,2.665e+04,23.32,-77.3
+16,divider only,2.823e+04,23.08,-79.2
+16,divider only,2.99e+04,22.83,-81.3
+16,divider only,3.167e+04,22.56,-83.5
+16,divider only,3.355e+04,22.28,-85.8
+16,divider only,3.554e+04,21.98,-88.3
+16,divider only,3.764e+04,21.67,-90.9
+16,divider only,3.987e+04,21.34,-93.6
+16,divider only,4.224e+04,21.0,-96.5
+16,divider only,4.474e+04,20.64,-99.5
+16,divider only,4.739e+04,20.27,-102.6
+16,divider only,5.02e+04,19.88,-105.8
+16,divider only,5.318e+04,19.47,-109.2
+16,divider only,5.633e+04,19.05,-112.7
+16,divider only,5.967e+04,18.61,-116.3
+16,divider only,6.32e+04,18.15,-120.0
+16,divider only,6.695e+04,17.68,-124.0
+16,divider only,7.092e+04,17.18,-128.0
+16,divider only,7.512e+04,16.67,-132.2
+16,divider only,7.957e+04,16.14,-136.6
+16,divider only,8.429e+04,15.58,-141.2
+16,divider only,8.928e+04,15.0,-146.0
+16,divider only,9.457e+04,14.4,-150.9
+16,divider only,1.002e+05,13.77,-156.1
+16,divider only,1.061e+05,13.11,-161.4
+16,divider only,1.124e+05,12.42,-167.0
+16,divider only,1.191e+05,11.69,-172.8
+16,divider only,1.261e+05,10.93,-178.8
+16,divider only,1.336e+05,10.12,-185.1
+16,divider only,1.415e+05,9.26,-191.5
+16,divider only,1.499e+05,8.35,-198.2
+16,divider only,1.588e+05,7.39,-205.0
+16,divider only,1.682e+05,6.37,-212.0
+16,divider only,1.782e+05,5.28,-219.2
+16,divider only,1.887e+05,4.13,-226.5
+16,divider only,1.999e+05,2.91,-233.8
+16,divider only,2.118e+05,1.61,-241.3
+16,divider only,2.243e+05,0.25,-248.7
+16,divider only,2.376e+05,-1.18,-256.1
+16,divider only,2.517e+05,-2.68,-263.4
+16,divider only,2.666e+05,-4.24,-270.7
+16,divider only,2.824e+05,-5.88,-277.8
+16,divider only,2.991e+05,-7.57,-284.9
+16,divider only,3.169e+05,-9.32,-291.7
+16,divider only,3.356e+05,-11.12,-298.4
+16,divider only,3.555e+05,-12.98,-304.9
+16,divider only,3.766e+05,-14.88,-311.2
+16,divider only,3.989e+05,-16.83,-317.3
+16,divider only,4.226e+05,-18.83,-323.3
+16,divider only,4.476e+05,-20.86,-329.0
+16,divider only,4.741e+05,-22.93,-334.5
+16,divider only,5.022e+05,-25.03,-339.8
+16,divider only,5.32e+05,-27.17,-344.9
+16,divider only,5.635e+05,-29.34,-349.8
+16,divider only,5.969e+05,-31.53,-354.4
+16,divider only,6.323e+05,-33.76,-358.9
+16,divider only,6.698e+05,-36.0,-363.2
+16,divider only,7.095e+05,-38.27,-367.3
+16,divider only,7.515e+05,-40.56,-371.1
+16,divider only,7.961e+05,-42.87,-374.8
+16,divider only,8.433e+05,-45.19,-378.3
+16,divider only,8.932e+05,-47.54,-381.6
+16,divider only,9.462e+05,-49.89,-384.7
+16,divider only,1.002e+06,-52.26,-387.7
+16,divider only,1.062e+06,-54.64,-390.5
+16,divider only,1.125e+06,-57.04,-393.1
+16,divider only,1.191e+06,-59.44,-395.5
+16,divider only,1.262e+06,-61.85,-397.8
+16,divider only,1.337e+06,-64.27,-400.0
+16,divider only,1.416e+06,-66.7,-402.0
+16,divider only,1.5e+06,-69.13,-403.8
+16,divider only,1.589e+06,-71.56,-405.5
+16,divider only,1.683e+06,-74.01,-407.1
+16,divider only,1.782e+06,-76.45,-408.5
+16,divider only,1.888e+06,-78.9,-409.8
+16,divider only,2e+06,-81.35,-410.9
+16,with lag network,100,68.25,-177.2
+16,with lag network,106,67.2,-177.4
+16,with lag network,112.3,66.14,-177.5
+16,with lag network,118.9,65.09,-177.6
+16,with lag network,126,64.03,-177.6
+16,with lag network,133.4,62.98,-177.6
+16,with lag network,141.3,61.93,-177.5
+16,with lag network,149.7,60.88,-177.4
+16,with lag network,158.6,59.84,-177.2
+16,with lag network,168,58.8,-177.0
+16,with lag network,177.9,57.76,-176.8
+16,with lag network,188.5,56.72,-176.5
+16,with lag network,199.6,55.69,-176.2
+16,with lag network,211.5,54.65,-175.9
+16,with lag network,224,53.63,-175.5
+16,with lag network,237.3,52.6,-175.1
+16,with lag network,251.3,51.58,-174.7
+16,with lag network,266.2,50.56,-174.2
+16,with lag network,282,49.54,-173.7
+16,with lag network,298.7,48.53,-173.2
+16,with lag network,316.4,47.52,-172.6
+16,with lag network,335.2,46.51,-172.0
+16,with lag network,355.1,45.5,-171.4
+16,with lag network,376.1,44.5,-170.7
+16,with lag network,398.4,43.5,-170.0
+16,with lag network,422,42.5,-169.3
+16,with lag network,447,41.5,-168.5
+16,with lag network,473.5,40.51,-167.7
+16,with lag network,501.6,39.52,-166.9
+16,with lag network,531.3,38.53,-166.0
+16,with lag network,562.8,37.55,-165.1
+16,with lag network,596.1,36.57,-164.1
+16,with lag network,631.5,35.59,-163.1
+16,with lag network,668.9,34.62,-162.0
+16,with lag network,708.5,33.65,-160.9
+16,with lag network,750.5,32.69,-159.7
+16,with lag network,795,31.73,-158.4
+16,with lag network,842.1,30.77,-157.1
+16,with lag network,892,29.83,-155.8
+16,with lag network,944.9,28.89,-154.3
+16,with lag network,1001,27.95,-152.8
+16,with lag network,1060,27.03,-151.2
+16,with lag network,1123,26.11,-149.6
+16,with lag network,1190,25.2,-147.9
+16,with lag network,1260,24.3,-146.1
+16,with lag network,1335,23.42,-144.2
+16,with lag network,1414,22.54,-142.3
+16,with lag network,1498,21.68,-140.3
+16,with lag network,1586,20.83,-138.2
+16,with lag network,1680,20.0,-136.1
+16,with lag network,1780,19.18,-133.8
+16,with lag network,1886,18.38,-131.6
+16,with lag network,1997,17.6,-129.2
+16,with lag network,2116,16.83,-126.8
+16,with lag network,2241,16.09,-124.3
+16,with lag network,2374,15.37,-121.8
+16,with lag network,2515,14.66,-119.2
+16,with lag network,2664,13.98,-116.6
+16,with lag network,2821,13.33,-114.0
+16,with lag network,2989,12.7,-111.4
+16,with lag network,3166,12.09,-108.7
+16,with lag network,3353,11.51,-106.0
+16,with lag network,3552,10.95,-103.4
+16,with lag network,3763,10.42,-100.7
+16,with lag network,3986,9.91,-98.1
+16,with lag network,4222,9.43,-95.5
+16,with lag network,4472,8.97,-93.0
+16,with lag network,4737,8.54,-90.5
+16,with lag network,5018,8.13,-88.1
+16,with lag network,5315,7.75,-85.8
+16,with lag network,5630,7.39,-83.5
+16,with lag network,5964,7.05,-81.3
+16,with lag network,6317,6.73,-79.3
+16,with lag network,6692,6.43,-77.3
+16,with lag network,7088,6.15,-75.5
+16,with lag network,7509,5.89,-73.8
+16,with lag network,7954,5.64,-72.2
+16,with lag network,8425,5.41,-70.8
+16,with lag network,8924,5.19,-69.5
+16,with lag network,9453,4.99,-68.3
+16,with lag network,1.001e+04,4.79,-67.3
+16,with lag network,1.061e+04,4.61,-66.5
+16,with lag network,1.124e+04,4.43,-65.8
+16,with lag network,1.19e+04,4.26,-65.3
+16,with lag network,1.261e+04,4.09,-64.9
+16,with lag network,1.335e+04,3.93,-64.7
+16,with lag network,1.415e+04,3.77,-64.6
+16,with lag network,1.498e+04,3.6,-64.7
+16,with lag network,1.587e+04,3.44,-65.0
+16,with lag network,1.681e+04,3.28,-65.4
+16,with lag network,1.781e+04,3.11,-66.0
+16,with lag network,1.886e+04,2.94,-66.7
+16,with lag network,1.998e+04,2.76,-67.6
+16,with lag network,2.117e+04,2.57,-68.6
+16,with lag network,2.242e+04,2.38,-69.8
+16,with lag network,2.375e+04,2.17,-71.1
+16,with lag network,2.516e+04,1.96,-72.6
+16,with lag network,2.665e+04,1.73,-74.2
+16,with lag network,2.823e+04,1.49,-75.9
+16,with lag network,2.99e+04,1.24,-77.8
+16,with lag network,3.167e+04,0.98,-79.8
+16,with lag network,3.355e+04,0.7,-81.9
+16,with lag network,3.554e+04,0.41,-84.1
+16,with lag network,3.764e+04,0.1,-86.4
+16,with lag network,3.987e+04,-0.22,-88.9
+16,with lag network,4.224e+04,-0.56,-91.4
+16,with lag network,4.474e+04,-0.91,-94.1
+16,with lag network,4.739e+04,-1.28,-96.9
+16,with lag network,5.02e+04,-1.67,-99.7
+16,with lag network,5.318e+04,-2.07,-102.7
+16,with lag network,5.633e+04,-2.48,-105.8
+16,with lag network,5.967e+04,-2.91,-109.0
+16,with lag network,6.32e+04,-3.36,-112.4
+16,with lag network,6.695e+04,-3.82,-115.8
+16,with lag network,7.092e+04,-4.3,-119.4
+16,with lag network,7.512e+04,-4.8,-123.1
+16,with lag network,7.957e+04,-5.32,-127.0
+16,with lag network,8.429e+04,-5.86,-131.0
+16,with lag network,8.928e+04,-6.41,-135.2
+16,with lag network,9.457e+04,-6.99,-139.5
+16,with lag network,1.002e+05,-7.6,-144.0
+16,with lag network,1.061e+05,-8.23,-148.6
+16,with lag network,1.124e+05,-8.89,-153.5
+16,with lag network,1.191e+05,-9.58,-158.5
+16,with lag network,1.261e+05,-10.31,-163.7
+16,with lag network,1.336e+05,-11.08,-169.1
+16,with lag network,1.415e+05,-11.89,-174.7
+16,with lag network,1.499e+05,-12.74,-180.4
+16,with lag network,1.588e+05,-13.65,-186.3
+16,with lag network,1.682e+05,-14.61,-192.3
+16,with lag network,1.782e+05,-15.63,-198.5
+16,with lag network,1.887e+05,-16.7,-204.7
+16,with lag network,1.999e+05,-17.84,-210.9
+16,with lag network,2.118e+05,-19.03,-217.1
+16,with lag network,2.243e+05,-20.29,-223.4
+16,with lag network,2.376e+05,-21.61,-229.5
+16,with lag network,2.517e+05,-22.99,-235.6
+16,with lag network,2.666e+05,-24.42,-241.6
+16,with lag network,2.824e+05,-25.9,-247.4
+16,with lag network,2.991e+05,-27.44,-253.0
+16,with lag network,3.169e+05,-29.01,-258.5
+16,with lag network,3.356e+05,-30.64,-263.8
+16,with lag network,3.555e+05,-32.29,-269.0
+16,with lag network,3.766e+05,-33.99,-273.9
+16,with lag network,3.989e+05,-35.71,-278.6
+16,with lag network,4.226e+05,-37.47,-283.1
+16,with lag network,4.476e+05,-39.25,-287.5
+16,with lag network,4.741e+05,-41.05,-291.6
+16,with lag network,5.022e+05,-42.88,-295.6
+16,with lag network,5.32e+05,-44.72,-299.4
+16,with lag network,5.635e+05,-46.58,-303.1
+16,with lag network,5.969e+05,-48.46,-306.5
+16,with lag network,6.323e+05,-50.35,-309.8
+16,with lag network,6.698e+05,-52.25,-313.0
+16,with lag network,7.095e+05,-54.17,-316.1
+16,with lag network,7.515e+05,-56.09,-319.0
+16,with lag network,7.961e+05,-58.03,-321.8
+16,with lag network,8.433e+05,-59.97,-324.4
+16,with lag network,8.932e+05,-61.92,-327.0
+16,with lag network,9.462e+05,-63.88,-329.4
+16,with lag network,1.002e+06,-65.85,-331.8
+16,with lag network,1.062e+06,-67.82,-334.0
+16,with lag network,1.125e+06,-69.8,-336.2
+16,with lag network,1.191e+06,-71.79,-338.3
+16,with lag network,1.262e+06,-73.78,-340.3
+16,with lag network,1.337e+06,-75.78,-342.3
+16,with lag network,1.416e+06,-77.78,-344.2
+16,with lag network,1.5e+06,-79.78,-346.0
+16,with lag network,1.589e+06,-81.8,-347.8
+16,with lag network,1.683e+06,-83.81,-349.5
+16,with lag network,1.782e+06,-85.83,-351.2
+16,with lag network,1.888e+06,-87.86,-352.9
+16,with lag network,2e+06,-89.89,-354.5

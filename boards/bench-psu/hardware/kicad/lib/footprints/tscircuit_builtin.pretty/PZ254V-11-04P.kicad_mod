@@ -1,7 +1,7 @@
 (footprint "PZ254V-11-04P"
   (layer F.Cu)
   (property "Reference" "REF**"
-    (at 0 -3 270)
+    (at 0 -3 0)
     (layer F.SilkS)
     (hide yes)
     (uuid 7282ec60-6059-4a41-3335-80e20611b783)
@@ -13,7 +13,7 @@
     )
   )
   (property "Value" "PZ254V-11-04P"
-    (at 0 3 270)
+    (at 0 3 0)
     (layer F.Fab)
     (hide yes)
     (uuid 7858e9a0-5d11-cabf-41ca-abde26838cfd)
@@ -25,7 +25,7 @@
     )
   )
   (property "Datasheet" ""
-    (at 0 0 270)
+    (at 0 0 0)
     (layer F.Fab)
     (hide yes)
     (uuid 5521daa0-7dba-5c01-5096-92a22372c943)
@@ -37,7 +37,7 @@
     )
   )
   (property "Description" ""
-    (at 0 0 270)
+    (at 0 0 0)
     (layer F.Fab)
     (hide yes)
     (uuid 5911b700-3397-5781-3fbf-99fe4ce97483)
@@ -49,7 +49,7 @@
     )
   )
   (property "Supplier Part Number" "C492403"
-    (at 0 0 270)
+    (at 0 0 0)
     (layer F.Fab)
     (hide yes)
     (uuid 73c0cff8-29d7-2de8-3890-d438650729a8)
@@ -61,7 +61,7 @@
     )
   )
   (property "MPN" "PZ254V-11-04P"
-    (at 0 0 270)
+    (at 0 0 0)
     (layer F.Fab)
     (hide yes)
     (uuid 7fc28b20-4f3f-ac1f-1ebc-cd1e11c611e3)
@@ -73,7 +73,7 @@
     )
   )
   (fp_text reference "J3"
-    (at -1.555301434917138e-16 -2.539999999999999 0)
+    (at 0 -2.539999999999999 0)
     (layer F.SilkS)
     (effects
       (font
@@ -93,32 +93,32 @@
     (fill no)
   )
   (pad "1" thru_hole rect
-    (at -3.81 2.3329521523757077e-16 0)
+    (at -3.8099999999999987 0 0)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 05c22700-420c-7a9f-7e56-ce3e455ede23)
+    (uuid 480fa3d2-4200-1d0e-33f0-2212561f9ece)
   )
   (pad "2" thru_hole circle
-    (at -1.27 7.776507174585693e-17 270)
+    (at -1.2699999999999996 0 0)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 7107cb3a-2065-07ba-303d-bbc67f1f80ba)
+    (uuid 26707038-639f-50a8-1250-ee7877bed268)
   )
   (pad "3" thru_hole circle
-    (at 1.27 -7.776507174585693e-17 270)
+    (at 1.2699999999999996 0 0)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 38eaa0f0-17b8-2290-685a-e61047025670)
+    (uuid 74ebfe80-2e67-5b61-181d-47be5ea1eadd)
   )
   (pad "4" thru_hole circle
-    (at 3.8100000000000005 -2.332952152375708e-16 270)
+    (at 3.8099999999999987 0 0)
     (size 1.5 1.5)
     (drill 1)
     (layers *.Cu *.Mask)
-    (uuid 66907724-156b-d784-3bb8-c81c73229844)
+    (uuid 57da7e20-1155-db01-352e-c81e7bb36b3d)
   )
   (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/pinrow4_p2.54_nopinlabels.step")
 )

@@ -4,7 +4,7 @@
     (at 0 -3 0)
     (layer F.SilkS)
     (hide yes)
-    (uuid 29f03ea0-5714-07ff-7bc8-2ea24ea46543)
+    (uuid 0f981400-63be-dd7f-28ea-31024a6cc07d)
     (effects
       (font
         (size 1.27 1.27)
@@ -16,7 +16,7 @@
     (at 0 3 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 27d2c6e0-0c8b-a7ff-0ebb-76e22a0295c3)
+    (uuid 76859e40-108a-b77f-5570-2f424494e9fd)
     (effects
       (font
         (size 1.27 1.27)
@@ -28,7 +28,7 @@
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 0c8f2ce0-39b2-f63f-66d6-bf9e6c057703)
+    (uuid 097bccc0-7cd2-be3f-0fd6-50426380a13d)
     (effects
       (font
         (size 1.27 1.27)
@@ -40,7 +40,7 @@
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 340df3c0-589b-1ac1-1abb-d6be71ed37c3)
+    (uuid 34226520-2d82-f6bf-26e3-885e204419fd)
     (effects
       (font
         (size 1.27 1.27)
@@ -52,7 +52,7 @@
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 35392564-685e-d87c-05f6-d65c5c712bc4)
+    (uuid 66b80aa6-30d7-f75a-3798-06a65ff7fb5a)
     (effects
       (font
         (size 1.27 1.27)
@@ -60,7 +60,7 @@
       )
     )
   )
-  (fp_text reference "R1"
+  (fp_text reference "R112"
     (at 0 -1.375 0)
     (layer F.SilkS)
     (effects
@@ -71,8 +71,8 @@
     )
   )
   (fp_line
-    (start -0.23725800000000064 -0.5225000000000009)
-    (end 0.23725800000000064 -0.5225000000000009)
+    (start -0.2372580000000002 -0.5225)
+    (end 0.23725799999999975 -0.5225)
     (stroke
       (width 0.12)
       (type default)
@@ -80,8 +80,8 @@
     (layer F.SilkS)
   )
   (fp_line
-    (start -0.23725800000000064 0.5225000000000009)
-    (end 0.23725800000000064 0.5225000000000009)
+    (start -0.2372580000000002 0.5225)
+    (end 0.23725799999999975 0.5225)
     (stroke
       (width 0.12)
       (type default)
@@ -99,16 +99,16 @@
     (fill no)
   )
   (pad "1" smd rect
-    (at -0.8249999999999993 0 0)
+    (at -0.8250000000000002 0 0)
     (size 0.8 0.95)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 5aef9ac0-531c-1a81-0127-cfc250cc7afd)
+    (uuid 50d0ebe0-0922-7941-6315-de6242f6bc7d)
   )
   (pad "2" smd rect
-    (at 0.8249999999999993 0 0)
+    (at 0.8250000000000002 0 0)
     (size 0.8 0.95)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 4d2d5380-41da-8de0-2f1d-90c05fea50a0)
+    (uuid 187be746-0510-f486-0e59-fe3a21c4f0fa)
   )
   (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/res0603.step")
 )

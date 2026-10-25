@@ -1,11 +1,11 @@
-// VibePCB bench-psu rev C: USB-C PD powered 2-channel programmable bench supply, 1.6..16.5 V / 3 A per channel, CV/CC.
+// VibePCB bench-psu rev C: USB-C PD powered 2-channel programmable bench supply, 1.6..16.6 V / 3 A per channel, CV/CC.
 // 90 x 60 mm, 4 layers. The board is the front panel: TOP = user side (0.96" SSD1306 OLED module on J3, per channel an
 // EC11 encoder (turn: set, push: V <-> I limit) and a 12 mm ON/OFF button, ON / CC LEDs, output terminal, 4 x M3 holes);
 // BOTTOM = all electronics (two-sided JLCPCB assembly; the top carries only the LEDs and their drivers as SMD, the THT
 // front parts are hand-soldered). USB-C at the top edge (bottom side), ESP32 antenna at the right edge.
 // Build with: hatch run pcb all bench-psu
 //
-// Architecture (design decisions; rev B rationale in README "Changed from rev A")
+// Architecture (design decisions; history in README "History")
 // - Parts: all in JLCPCB stock (checked 2026-10-22 against JLCPCB's parts search); basic-library passives wherever a
 //   value exists.
 // - Input: USB-C PD sink (STUSB4500, NVM requests 20 V; written once by the ESP32 over I2C, see README) -> P-FET -> VIN.
@@ -15,9 +15,9 @@
 // - Converter: one LMR33630A (400 kHz, HSOIC-8 + exposed pad with a 2 x 3 thermal via grid, vibepcb.toml) per channel,
 //   15 uH / 7 A sat FXL1040-150 (TI L_MIN 11.6 uH at 16.6 V), 4 x 22 uF output + 100 uF electrolytic
 //   at the terminal (C25 / C26: ceramics derate to ~18 uF at 16 V, the loop gain does not change with Vout), 220 nF
-//   50 V HF input cap. Input never below output (PD 20 V, output <= 16.5 V): a buck is enough.
+//   50 V HF input cap. Input never below output (PD 20 V, output <= 16.6 V): a buck is enough.
 // - Voltage set, fail-safe: Vout = 1 V * (1 + 120k/200k) + 120k * Ic, Ic sunk from FB by an op-amp + NPN current sink,
-//   Ic = Vc / 2.2k, Vc = PWM (2-pole RC) * 10k/120k (R106 + R107 + R108; rev B's 2.4k reached only 15.2 V). PWM 0 V / floating / ESP32 in reset -> 1.6 V; 3.3 V -> 16.6 V (the
+//   Ic = Vc / 2.2k, Vc = PWM (2-pole RC) * 10k/120k (R106 + R107 + R108). PWM 0 V / floating / ESP32 in reset -> 1.6 V; 3.3 V -> 16.6 V (the
 //   hardware maximum). Loop: 6.8k + 220 nF lag network FB-GND (sim/buck_loop.cir: phase margin 52..75 deg).
 //   The lag capacitor is pre-charged (~1.1 V via 1N4148W + 100k from the discharge gate node) while the channel is
 //   off: otherwise the soft start charges it through the 120k top resistor and every start overshoots to ~7.7 V

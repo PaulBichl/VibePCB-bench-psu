@@ -1,7 +1,7 @@
-"""Plot the bench-psu DC/DC simulation results (results/*.csv) into plots/*.png.
+"""Plot the bench-psu control-loop results (results/*.csv from export_loop.py) into plots/*.png.
 
 Run: python boards/bench-psu/sim/plot.py   (needs matplotlib; not part of the hatch env)
-The CSVs come from ngspice runs of buck_loadpoints.cir and buck_loop.cir (see README.md).
+The CSVs come from ngspice runs of buck_loop.cir (export_loop.py).
 """
 
 from __future__ import annotations
@@ -22,7 +22,6 @@ VOUTS = ["1.6", "3.3", "5", "12", "16"]
 COL = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6"]
 CRIT = "#d03b3b"
 REF = "#898781"
-LIMIT_TJ = 125.0  # LMR33630 operating junction temperature limit
 ISC_MIN = 3.85  # high-side (peak) current limit, datasheet minimum
 ILIMIT_MIN = 2.9  # low-side (valley) current limit, datasheet minimum
 
@@ -39,56 +38,6 @@ def style() -> None:
         "axes.titlesize": 10, "axes.titleweight": "bold", "legend.frameon": False, "lines.linewidth": 2,
         "lines.solid_capstyle": "round",
     })
-
-
-def loadpoints() -> None:
-    r = rows("loadpoints")
-    fig, ax = plt.subplots(2, 2, figsize=(11, 7.5))
-    for i, v in enumerate(VOUTS):
-        pts = sorted((float(x["iout"]), x) for x in r if x["vout_set"] == v)
-        io = [p[0] for p in pts]
-        ax[0, 0].plot(io, [float(p[1]["efficiency_pct"]) for p in pts], "o-", color=COL[i], label=f"{v} V", ms=5)
-        ax[0, 1].plot(io, [float(p[1]["p_ic_w"]) for p in pts], "o-", color=COL[i], label=f"{v} V", ms=5)
-    ax[0, 0].set(title="Efficiency", xlabel="Iout (A)", ylabel="%")
-    ax[0, 1].set(title="Power dissipated in the LMR33630", xlabel="Iout (A)", ylabel="W")
-    ax[0, 0].legend(title="Vout", ncol=5, loc="lower right")
-    ax[0, 1].legend(title="Vout", loc="upper left")
-
-    full = [next(x for x in r if x["vout_set"] == v and x["iout"] == "3") for v in VOUTS]
-    xs = range(len(VOUTS))
-    w = 0.36
-    tv = [float(x["tj_with_vias_c"]) for x in full]
-    tn = [float(x["tj_no_vias_c"]) for x in full]
-    ax[1, 0].bar([x - w / 2 for x in xs], tv, w, color=COL[0], label="with thermal vias (RthJA 43 C/W)")
-    ax[1, 0].bar([x + w / 2 for x in xs], tn, w, color=[CRIT if t > LIMIT_TJ else COL[1] for t in tn],
-                 label="without thermal vias (est. 75 C/W)")
-    ax[1, 0].axhline(LIMIT_TJ, color=REF, ls="--", lw=1)
-    ax[1, 0].text(len(VOUTS) - 0.5, LIMIT_TJ + 2, "125 C limit", ha="right", color=REF)
-    for x, a, b in zip(xs, tv, tn, strict=True):
-        ax[1, 0].text(x - w / 2, a + 2, f"{a:.0f}", ha="center", fontsize=8)
-        ax[1, 0].text(x + w / 2, b + 2, f"{b:.0f}", ha="center", fontsize=8)
-    ax[1, 0].set(title="Junction temperature at 3 A, 25 C ambient", ylabel="C", ylim=(0, 145),
-                 xticks=list(xs), xticklabels=[f"{v} V" for v in VOUTS])
-    ax[1, 0].grid(axis="x", visible=False)
-    ax[1, 0].legend(loc="upper left")
-
-    pk = [float(x["il_peak_a"]) for x in full]
-    va = [float(x["il_valley_a"]) for x in full]
-    ax[1, 1].vlines(list(xs), va, pk, color=COL[0], lw=7)
-    for x, a, b in zip(xs, va, pk, strict=True):
-        ax[1, 1].text(x + 0.12, b, f"{b:.2f}", va="center", fontsize=8)
-        ax[1, 1].text(x + 0.12, a, f"{a:.2f}", va="center", fontsize=8)
-    ax[1, 1].axhline(ISC_MIN, color=REF, ls="--", lw=1)
-    ax[1, 1].axhline(ILIMIT_MIN, color=REF, ls="--", lw=1)
-    ax[1, 1].text(-0.4, ISC_MIN + 0.04, "high-side limit (peak), min 3.85 A", ha="left", color=REF)
-    ax[1, 1].text(-0.4, ILIMIT_MIN + 0.04, "low-side limit (valley), min 2.9 A", ha="left", color=REF)
-    ax[1, 1].set(title="Inductor current at 3 A: valley to peak", ylabel="A", ylim=(2.0, 4.2), xlim=(-0.45, len(VOUTS) - 0.55),
-                 xticks=list(xs), xticklabels=[f"{v} V" for v in VOUTS])
-    ax[1, 1].grid(axis="x", visible=False)
-    fig.suptitle("bench-psu channel (LMR33630A, 20 V in, 400 kHz): load points", fontweight="bold")
-    fig.tight_layout()
-    fig.savefig(OUT / "loadpoints.png")
-    plt.close(fig)
 
 
 def loop() -> None:
@@ -172,30 +121,7 @@ def loop() -> None:
     plt.close(fig)
 
 
-def switching() -> None:
-    r = rows("switching")
-    cases = list(dict.fromkeys(x["load_point"] for x in r))
-    fig, ax = plt.subplots(3, len(cases), figsize=(12, 7), sharex="col")
-    for c, case in enumerate(cases):
-        pts = [x for x in r if x["load_point"] == case]
-        t = [float(x["t_us"]) for x in pts]
-        ax[0, c].plot(t, [float(x["il_a"]) for x in pts], color=COL[0], lw=1.2)
-        ax[1, c].plot(t, [float(x["vsw_v"]) for x in pts], color=COL[1], lw=1.2)
-        ax[2, c].plot(t, [float(x["vout_ripple_mv"]) for x in pts], color=COL[2], lw=1.2)
-        ax[0, c].set_title(case)
-        ax[2, c].set_xlabel("t (us)")
-    ax[0, 0].set_ylabel("inductor current (A)")
-    ax[1, 0].set_ylabel("switch node (V)")
-    ax[2, 0].set_ylabel("Vout ripple (mV)")
-    fig.suptitle("Switching waveforms, five periods in steady state", fontweight="bold")
-    fig.tight_layout()
-    fig.savefig(OUT / "switching.png")
-    plt.close(fig)
-
-
 if __name__ == "__main__":
     style()
     OUT.mkdir(exist_ok=True)
-    loadpoints()
     loop()
-    switching()

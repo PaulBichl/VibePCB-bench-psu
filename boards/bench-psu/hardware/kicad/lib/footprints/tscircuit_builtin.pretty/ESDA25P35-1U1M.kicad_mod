@@ -1,10 +1,10 @@
-(footprint "resistor_res2512"
+(footprint "ESDA25P35-1U1M"
   (layer F.Cu)
   (property "Reference" "REF**"
     (at 0 -3 0)
     (layer F.SilkS)
     (hide yes)
-    (uuid 53ff4800-38a9-c681-3aad-2afe51fbe383)
+    (uuid 79b414c0-4c90-4b61-1f6c-82020db7475d)
     (effects
       (font
         (size 1.27 1.27)
@@ -12,11 +12,11 @@
       )
     )
   )
-  (property "Value" "resistor_res2512"
+  (property "Value" "ESDA25P35-1U1M"
     (at 0 3 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 6931ea40-0337-037f-62c3-e342374135fd)
+    (uuid 39ca7d00-5511-9be1-7058-bac27460265d)
     (effects
       (font
         (size 1.27 1.27)
@@ -28,7 +28,7 @@
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 6d1328c0-1f95-e5c1-53c1-0bbe38e802c3)
+    (uuid 68ead980-69f1-5d21-3ccd-93c20fa9ca63)
     (effects
       (font
         (size 1.27 1.27)
@@ -40,7 +40,7 @@
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 4bd9b6e0-5279-2541-5918-93a25fb80203)
+    (uuid 21f450a0-6ab4-bde1-08a2-339e7bf9251d)
     (effects
       (font
         (size 1.27 1.27)
@@ -48,11 +48,11 @@
       )
     )
   )
-  (property "Supplier Part Number" "C105360"
+  (property "Supplier Part Number" "C1974707"
     (at 0 0 0)
     (layer F.Fab)
     (hide yes)
-    (uuid 11f8959a-5677-6866-4118-999a27576466)
+    (uuid 119854c2-7400-56e2-2997-a6fe38d05b22)
     (effects
       (font
         (size 1.27 1.27)
@@ -60,37 +60,31 @@
       )
     )
   )
-  (fp_text reference "R101"
-    (at 0 -2.575 0)
-    (layer F.SilkS)
+  (property "MPN" "ESDA25P35-1U1M"
+    (at 0 0 0)
+    (layer F.Fab)
+    (hide yes)
+    (uuid 556459c0-24e1-7abf-0ba1-64423c244343)
     (effects
       (font
-        (size 0.4 0.4)
+        (size 1.27 1.27)
         (thickness 0.15)
       )
     )
   )
-  (fp_line
-    (start -2.177064 -1.7100000000000009)
-    (end 2.177064 -1.7100000000000009)
-    (stroke
-      (width 0.12)
-      (type default)
-    )
+  (fp_text reference "D2"
+    (at 0 -1.25 0)
     (layer F.SilkS)
-  )
-  (fp_line
-    (start -2.177064 1.7100000000000009)
-    (end 2.177064 1.7100000000000009)
-    (stroke
-      (width 0.12)
-      (type default)
+    (effects
+      (font
+        (size 0.6000000000000001 0.6000000000000001)
+        (thickness 0.15)
+      )
     )
-    (layer F.SilkS)
   )
   (fp_rect
-    (start -3.83 -1.93)
-    (end 3.83 1.93)
+    (start -1.0749 -0.75)
+    (end 1.0749 0.75)
     (layer F.CrtYd)
     (stroke
       (width 0.05)
@@ -99,16 +93,23 @@
     (fill no)
   )
   (pad "1" smd rect
-    (at -2.9625 0 0)
-    (size 1.225 3.35)
+    (at -0.5248999999999988 0 0)
+    (size 0.6 0.9)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 6bff5bbc-038f-5dbc-64e0-a04432af61bc)
+    (uuid 761e1276-7676-faca-630c-080a4fa1154a)
   )
   (pad "2" smd rect
-    (at 2.9625 0 0)
-    (size 1.225 3.35)
+    (at 0.5248999999999988 0 0)
+    (size 0.6 0.9)
     (layers F.Cu F.Paste F.Mask)
-    (uuid 7ec956c0-6961-98bf-53f9-dabe3e921cbd)
+    (uuid 2bd7ca20-261c-809f-7810-cb5e35fae9e3)
   )
-  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/res2512.step")
+  (model "${KIPRJMOD}/3dmodels/tscircuit_builtin.3dshapes/C1974707.step"
+    (offset
+      (xyz 0 -0.0000762000000804619 0.02)
+    )
+    (rotate
+      (xyz 0 0 0)
+    )
+  )
 )

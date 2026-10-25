@@ -1,0 +1,10 @@
+(footprint "hole_circle_holeDiameter3.2mm"
+  (layer F.Cu)
+  (pad "" np_thru_hole circle
+    (at 0 0 0)
+    (size 3.2 3.2)
+    (drill 3.2)
+    (layers *.Cu *.Mask)
+    (uuid bd1c56d7-427d-452f-a0c1-c3ad22110088)
+  )
+)

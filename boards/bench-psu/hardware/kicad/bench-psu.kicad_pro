@@ -4,8 +4,8 @@
     "generator": "circuit-json-to-kicad",
     "generator_version": "0.0.1",
     "project_name": "bench-psu",
-    "created": "2026-10-22T17:42:28.024Z",
-    "modified": "2026-10-22T17:42:28.024Z"
+    "created": "2026-10-25T11:08:27.691Z",
+    "modified": "2026-10-25T11:08:27.691Z"
   },
   "meta": {
     "version": 1
@@ -39,6 +39,21 @@
         "via_diameter": 0.5,
         "via_drill": 0.3,
         "clearance": 0.1
+      },
+      {
+        "name": "USB",
+        "track_width": 0.15,
+        "via_diameter": 0.5,
+        "via_drill": 0.3,
+        "clearance": 0.1,
+        "diff_pair_gap": 0.2,
+        "diff_pair_width": 0.319
+      }
+    ],
+    "netclass_patterns": [
+      {
+        "netclass": "USB",
+        "pattern": "USB_D*"
       }
     ]
   },
@@ -69,7 +84,8 @@
         "min_clearance": 0.1,
         "min_hole_to_hole": 0.2,
         "min_copper_edge_clearance": 0.2,
-        "min_text_thickness": 0.15
+        "min_text_thickness": 0.15,
+        "min_text_height": 0.65
       },
       "rule_severities": {
         "track_dangling": "error",
@@ -81,7 +97,7 @@
   },
   "sheets": [
     [
-      "b934358a-3cf9-458c-a242-3525f3a43a40",
+      "6c552b75-1e90-4386-ba95-683ee66355bb",
       "Root"
     ]
   ]
